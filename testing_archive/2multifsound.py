@@ -8,7 +8,7 @@ BOREALISPATH = os.environ['BOREALISPATH']
 
 #import test
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiments.test_decimation_schemes import *
+from borealis_experiments.test_decimation_schemes import *
 
 class TwoMultifsound(ExperimentPrototype):
 

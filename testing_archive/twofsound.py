@@ -10,7 +10,7 @@ BOREALISPATH = os.environ['BOREALISPATH']
 #import test
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from experiment_prototype.decimation_scheme.decimation_scheme import DecimationStage, DecimationScheme
-from experiments.test_decimation_schemes import *
+from borealis_experiments.test_decimation_schemes import *
 
 class Twofsound(ExperimentPrototype):
 

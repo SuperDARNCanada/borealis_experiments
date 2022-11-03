@@ -6,7 +6,7 @@ import numpy as np
 
 # write an experiment that creates a new control program.
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-import experiments.superdarn_common_fields as scf
+import borealis_experiments.superdarn_common_fields as scf
 
 
 def phase_encode(beam_iter, sequence_num, num_pulses, num_samples):

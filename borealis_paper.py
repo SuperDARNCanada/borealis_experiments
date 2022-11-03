@@ -8,7 +8,7 @@ import sys
 import copy
 import numpy as np
 
-import experiments.superdarn_common_fields as scf
+import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 

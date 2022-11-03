@@ -7,7 +7,7 @@ import sys
 import copy
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-import experiments.superdarn_common_fields as scf
+import borealis_experiments.superdarn_common_fields as scf
 
 
 class ThemisScan(ExperimentPrototype):
