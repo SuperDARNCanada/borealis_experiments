@@ -3,8 +3,6 @@
 import os
 import sys
 
-sys.path.append(os.environ['BOREALISPATH'])
-
 from experiment_prototype.decimation_scheme.decimation_scheme import DecimationStage, DecimationScheme, \
     create_firwin_filter_by_num_taps, create_firwin_filter_by_attenuation
 

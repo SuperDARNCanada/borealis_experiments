@@ -6,9 +6,6 @@ import sys
 import os
 import copy
 
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
-
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
