@@ -26,7 +26,7 @@ class PowerMeterMode(ExperimentPrototype):
 
         if scf.opts.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.opts.site_id in ["sas", "pgr"]:
+        if scf.opts.site_id in ["sas", "pgr", "lab"]:
             num_ranges = scf.STD_NUM_RANGES
 
         # default frequency set here

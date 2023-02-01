@@ -21,7 +21,7 @@ class Twofsound(ExperimentPrototype):
 
         if scf.opts.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.opts.site_id in ["sas", "pgr"]:
+        if scf.opts.site_id in ["sas", "pgr", "lab"]:
             num_ranges = scf.STD_NUM_RANGES
 
         tx_freq_1 = scf.COMMON_MODE_FREQ_1
