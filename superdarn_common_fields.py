@@ -2,7 +2,7 @@ import sys
 import os
 import numpy as np
 
-from utils.options.options import Options
+from utils.options import Options
 options = Options()
 
 # TODO: We should protect these values from changing, I noticed during testing that I used a
