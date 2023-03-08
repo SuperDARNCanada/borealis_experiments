@@ -29,7 +29,7 @@ class FullFOV2Freq(ExperimentPrototype):
         super().__init__(cpid)
 
         num_ranges = scf.STD_NUM_RANGES
-        if scf.opts.site_id in ["cly", "rkn", "inv"]:
+        if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
 
         tx_freq_1 = scf.COMMON_MODE_FREQ_1
@@ -42,7 +42,7 @@ class FullFOV2Freq(ExperimentPrototype):
             if 'freq2' in kwargs.keys():
                 tx_freq_2 = int(kwargs['freq2'])
 
-        num_antennas = scf.opts.main_antenna_count
+        num_antennas = scf.options.main_antenna_count
 
         # This slice uses the left half of the array to transmit on one frequency.
         slice_0 = {

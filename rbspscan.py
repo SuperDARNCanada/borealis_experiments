@@ -60,24 +60,24 @@ class RBSPScan(ExperimentPrototype):
         else:
             beams_to_use = reverse_beams
 
-        if scf.opts.site_id in ["sas"]:
+        if scf.options.site_id in ["sas"]:
             westbm = 2
             meridonalbm = 3
             eastbm = 5
-        if scf.opts.site_id in ["pgr"]:
+        if scf.options.site_id in ["pgr"]:
             westbm = 12
             meridonalbm = 13
             eastbm = 15
-        if scf.opts.site_id in ["inv", "rkn", "cly"]:
+        if scf.options.site_id in ["inv", "rkn", "cly"]:
             westbm = 6
             meridonalbm = 7
             eastbm = 9
 
-        if scf.opts.site_id in ["sas", "pgr", "cly"]:
+        if scf.options.site_id in ["sas", "pgr", "cly"]:
             freq = 10500
-        if scf.opts.site_id in ["rkn"]:
+        if scf.options.site_id in ["rkn"]:
             freq = 12200
-        if scf.opts.site_id in ["inv"]:
+        if scf.options.site_id in ["inv"]:
             freq = 12100
 
         beams_to_use = [westbm if bm == "westbm" else bm for bm in beams_to_use]

@@ -29,25 +29,25 @@ class ThemisScan(ExperimentPrototype):
         else:
             beams_to_use = reverse_beams
 
-        if scf.opts.site_id in ["sas", "inv", "cly"]:
+        if scf.options.site_id in ["sas", "inv", "cly"]:
             camp = 6
-        if scf.opts.site_id in ["pgr"]:
+        if scf.options.site_id in ["pgr"]:
             camp = 12
-        if scf.opts.site_id in ["rkn"]:
+        if scf.options.site_id in ["rkn"]:
             camp = 7
 
-        if scf.opts.site_id in ["sas", "pgr", "cly"]:
+        if scf.options.site_id in ["sas", "pgr", "cly"]:
             freq = 10500
-        if scf.opts.site_id in ["rkn"]:
+        if scf.options.site_id in ["rkn"]:
             freq = 12200
-        if scf.opts.site_id in ["inv"]:
+        if scf.options.site_id in ["inv"]:
             freq = 12100
 
         beams_to_use = [camp if bm == "camp" else bm for bm in beams_to_use]
 
-        if scf.opts.site_id in ["cly", "rkn", "inv"]:
+        if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.opts.site_id in ["sas", "pgr",]:
+        if scf.options.site_id in ["sas", "pgr",]:
             num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, the first slice

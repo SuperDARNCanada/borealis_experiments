@@ -27,9 +27,9 @@ class Tauscan(ExperimentPrototype):
         else:
             beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
 
-        if scf.opts.site_id == "sas":
+        if scf.options.site_id == "sas":
             freq = 13200
-        elif scf.opts.site_id == "pgr":
+        elif scf.options.site_id == "pgr":
             freq = 13100
         else:
             freq = 13500
