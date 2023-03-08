@@ -117,7 +117,7 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
     that illuminates the full FOV. Only 8 or 16 antennas at common frequencies are supported.
     """
     if antenna_spacing_m != 15.24:
-        raise ValueError("Antenna spacing must be 15.24m. Given value: {}".format(antenna_spacing_m))
+        raise ValueError(f"Antenna spacing must be 15.24m. Given value: {antenna_spacing_m}")
 
     cached_values_16_antennas = {
         10400: [0., 33.21168501, 63.39856497, 133.51815213, 232.59694556, 287.65482653, 299.43588532, 313.30394893,
@@ -170,6 +170,5 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
             phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_8_antennas[frequency_khz]))
             return phases.reshape(1, num_antennas)
     # If you get this far, the number of antennas or frequency is not supported for this function.
-    raise ValueError("Invalid parameters for easy_widebeam(): tx_antennas: {}, frequency_khz: {}, "
-                     "main_antenna_count: {}"
-                     "".format(tx_antennas, frequency_khz, num_antennas))
+    raise ValueError(f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "
+                     f"frequency_khz: {frequency_khz}, main_antenna_count: {num_antennas}")
