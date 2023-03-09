@@ -11,7 +11,6 @@ sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from utils.options.experimentoptions import ExperimentOptions as eo
 from experiment_prototype.decimation_scheme.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
 
@@ -81,7 +80,7 @@ class TestExperiment(ExperimentPrototype):
         self.add_slice(copy.deepcopy(slice_1),interfacing_dict={1: 'AVEPERIOD'})
         self.add_slice(copy.deepcopy(slice_1),interfacing_dict={0: 'SCAN'}) 
         slices = []
-        max_num_slices = int(eo().max_number_of_filter_taps_per_stage/longest_filter_num_taps)
+        max_num_slices = int(scf.options.max_filter_taps_per_stage/longest_filter_num_taps)
         #print("Longest filter: {} taps. Max concurrent slices: {}".format(longest_filter_num_taps, 
         #    max_num_slices))
         for i in range(max_num_slices):

@@ -10,7 +10,6 @@ sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from utils.options.experimentoptions import ExperimentOptions as eo
 from experiment_prototype.decimation_scheme.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
 
@@ -19,7 +18,7 @@ class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
         cpid = 1
-        super(TestExperiment, self).__init__(cpid, output_rx_rate=1+eo().max_output_sample_rate)
+        super(TestExperiment, self).__init__(cpid, output_rx_rate=1+scf.options.max_output_sample_rate)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
