@@ -17,7 +17,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 def boresight(frequency_khz, tx_antennas, antenna_spacing_m):
     """tx_antenna_pattern function for boresight transmission."""
-    num_antennas = scf.opts.main_antenna_count
+    num_antennas = scf.options.main_antenna_count
     pattern = np.zeros((1, num_antennas), dtype=np.complex64)
     pattern[0, tx_antennas] = 1.0 + 0.0j
     return pattern
@@ -35,7 +35,7 @@ class FullFOVComparison(ExperimentPrototype):
         super().__init__(cpid)
 
         num_ranges = scf.STD_NUM_RANGES
-        if scf.opts.site_id in ["cly", "rkn", "inv"]:
+        if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
 
         # default frequency set here

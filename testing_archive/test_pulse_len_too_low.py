@@ -10,7 +10,6 @@ sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from utils.options.experimentoptions import ExperimentOptions as eo
 from experiment_prototype.decimation_scheme.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
 
@@ -45,15 +44,15 @@ class TestExperiment(ExperimentPrototype):
         else:
             beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
 
-        if scf.opts.site_id in ["cly", "rkn", "inv"]:
+        if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.opts.site_id in ["sas", "pgr"]:
+        if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": int(eo().pulse_ramp_time * 2 * 1e6),  # Too small, should fail. Note that the output rx rate needs to be 50kHz for a 20us pulse length.
+            "pulse_len": int(scf.options.pulse_ramp_time * 2 * 1e6),  # Too small, should fail. Note that the output rx rate needs to be 50kHz for a 20us pulse length.
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms

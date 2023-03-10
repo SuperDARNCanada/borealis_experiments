@@ -21,9 +21,9 @@ class TwoMultifsound(ExperimentPrototype):
 
         freqs = (scf.COMMON_MODE_FREQ_1, scf.COMMON_MODE_FREQ_2)
 
-        if scf.opts.site_id in ["cly", "rkn", "inv"]:
+        if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.opts.site_id in ["sas", "pgr", "lab"]:
+        if scf.options.site_id in ["sas", "pgr", "lab"]:
             num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, the first slice

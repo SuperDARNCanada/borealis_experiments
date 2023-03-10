@@ -72,7 +72,7 @@ class FullFOV15Km(ExperimentPrototype):
 
         self.printing('Frequency set to {}'.format(freq))
 
-        num_antennas = scf.opts.main_antenna_count
+        num_antennas = scf.options.main_antenna_count
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

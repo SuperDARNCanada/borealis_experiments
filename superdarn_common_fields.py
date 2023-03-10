@@ -2,8 +2,8 @@ import sys
 import os
 import numpy as np
 
-from utils.options.experimentoptions import ExperimentOptions
-opts = ExperimentOptions()
+from utils.options import Options
+options = Options()
 
 # TODO: We should protect these values from changing, I noticed during testing that I used a
 # TODO: call to reverse() on one and it affected the rest of the testing afterwards
@@ -48,7 +48,7 @@ STD_8P_LAG_TABLE = [[0, 0],
 PULSE_LEN_45KM = 300  # us
 PULSE_LEN_15KM = 100  # us
 
-STD_16_BEAM_ANGLE = [(float(opts.beam_sep) * (beam_dir - 15/2)) for beam_dir in range(0, 16)]
+STD_16_BEAM_ANGLE = [(float(options.beam_sep) * (beam_dir - 15/2)) for beam_dir in range(0, 16)]
 
 STD_NUM_RANGES = 75
 POLARDARN_NUM_RANGES = 75
@@ -59,26 +59,26 @@ STD_16_REVERSE_BEAM_ORDER = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 
 
 # Scanning directions here for now.
 IS_FORWARD_RADAR = IS_REVERSE_RADAR = False
-if opts.site_id in ["sas", "rkn", "inv"]:
+if options.site_id in ["sas", "rkn", "inv"]:
     IS_FORWARD_RADAR = True
 
-if opts.site_id in ["cly", "pgr"]:
+if options.site_id in ["cly", "pgr"]:
     IS_REVERSE_RADAR = True
 
 # set common mode operating frequencies with a slight offset.
-if opts.site_id == "sas":
+if options.site_id == "sas":
     COMMON_MODE_FREQ_1 = 10800
     COMMON_MODE_FREQ_2 = 13000
-elif opts.site_id == "pgr":
+elif options.site_id == "pgr":
     COMMON_MODE_FREQ_1 = 10900
     COMMON_MODE_FREQ_2 = 13100
-elif opts.site_id == "rkn":
+elif options.site_id == "rkn":
     COMMON_MODE_FREQ_1 = 10600
     COMMON_MODE_FREQ_2 = 12300
-elif opts.site_id == "inv":
+elif options.site_id == "inv":
     COMMON_MODE_FREQ_1 = 10500
     COMMON_MODE_FREQ_2 = 12200
-elif opts.site_id == "cly":
+elif options.site_id == "cly":
     COMMON_MODE_FREQ_1 = 10700
     COMMON_MODE_FREQ_2 = 12500
 else:
@@ -97,15 +97,15 @@ def easy_scanbound(intt, beams):
 
 
 # set sounding frequencies
-if opts.site_id == "sas":
+if options.site_id == "sas":
     SOUNDING_FREQS = [9690, 10500, 11000, 11700, 12400, 12900, 13150]
-elif opts.site_id == "pgr":
+elif options.site_id == "pgr":
     SOUNDING_FREQS = [9600, 10590, 11050, 11750, 13090, 12850, 12400]
-elif opts.site_id == "rkn":
+elif options.site_id == "rkn":
     SOUNDING_FREQS = [11100, 9600, 10500, 12400, 11800, 13090, 12825]
-elif opts.site_id == "inv":
+elif options.site_id == "inv":
     SOUNDING_FREQS = [11150, 9690, 12400, 10590, 11850, 12800, 13100]
-elif opts.site_id == "cly":
+elif options.site_id == "cly":
     SOUNDING_FREQS = [11900, 12400, 11100, 10400, 9600, 12800, 13050]
 else:
     SOUNDING_FREQS = [10600, 11250, 11950, 13150]
@@ -117,7 +117,7 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
     that illuminates the full FOV. Only 8 or 16 antennas at common frequencies are supported.
     """
     if antenna_spacing_m != 15.24:
-        raise ValueError("Antenna spacing must be 15.24m. Given value: {}".format(antenna_spacing_m))
+        raise ValueError(f"Antenna spacing must be 15.24m. Given value: {antenna_spacing_m}")
 
     cached_values_16_antennas = {
         10400: [0., 33.21168501, 63.39856497, 133.51815213, 232.59694556, 287.65482653, 299.43588532, 313.30394893,
@@ -159,7 +159,7 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
         13100: [0., 43.20693263, 84.14234248, 175.38631445, 175.38631445, 84.14234248, 43.20693263, 0.],
         13200: [0., 43.42908842, 84.21675093, 174.68458927, 174.68458927, 84.21675093, 43.42908842, 0.]
     }
-    num_antennas = opts.main_antenna_count
+    num_antennas = options.main_antenna_count
     phases = np.zeros(num_antennas, dtype=np.complex64)
     if len(tx_antennas) == 16:
         if frequency_khz in cached_values_16_antennas.keys():
@@ -170,6 +170,5 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
             phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_8_antennas[frequency_khz]))
             return phases.reshape(1, num_antennas)
     # If you get this far, the number of antennas or frequency is not supported for this function.
-    raise ValueError("Invalid parameters for easy_widebeam(): tx_antennas: {}, frequency_khz: {}, "
-                     "main_antenna_count: {}"
-                     "".format(tx_antennas, frequency_khz, num_antennas))
+    raise ValueError(f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "
+                     f"frequency_khz: {frequency_khz}, main_antenna_count: {num_antennas}")

@@ -25,7 +25,7 @@ class FullFOV(ExperimentPrototype):
         super().__init__(cpid)
 
         num_ranges = scf.STD_NUM_RANGES
-        if scf.opts.site_id in ["cly", "rkn", "inv"]:
+        if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
 
         # default frequency set here
@@ -37,7 +37,7 @@ class FullFOV(ExperimentPrototype):
 
         self.printing('Frequency set to {}'.format(freq))
 
-        num_antennas = scf.opts.main_antenna_count
+        num_antennas = scf.options.main_antenna_count
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

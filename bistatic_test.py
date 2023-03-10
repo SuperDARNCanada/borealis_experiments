@@ -42,7 +42,7 @@ class BistaticTest(ExperimentPrototype):
         }
 
         # default frequency set here
-        listen_to = kwargs.get('listen_to', scf.opts.site_id)   # If 'listen_to' specified, tune in to that radar
+        listen_to = kwargs.get('listen_to', scf.options.site_id)   # If 'listen_to' specified, tune in to that radar
         if listen_to not in common_freqs.keys():
             raise ValueError('Not a valid site ID: {}'.format(listen_to))
 
@@ -87,7 +87,7 @@ class BistaticTest(ExperimentPrototype):
             rx_beam_order = [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]] * len(tx_beam_order)
             slice_0['rx_beam_order'] = rx_beam_order    # Must have same first dimension as tx_beam_order
 
-        elif listen_to == scf.opts.site_id:
+        elif listen_to == scf.options.site_id:
             slice_0['rx_beam_order'] = [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]]
             print('Defaulting to rx_only mode, "listen_to" set to this radar')
             comment_str = 'Widebeam listening mode'
