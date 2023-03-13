@@ -12,7 +12,7 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
-def phase_encode(beam_iter, sequence_num, num_pulses, num_samples):
+def phase_encode(beam_iter, sequence_num, num_pulses):
     return np.array([ 125.73471064,   60.71636783,  120.78349373,   84.34937441,
         135.91385006, -160.56231581,  129.70333278,  -61.5067707 ])
 

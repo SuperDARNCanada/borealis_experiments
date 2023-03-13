@@ -4,6 +4,7 @@
 
 import sys
 import os
+import numpy as np
 
 BOREALISPATH = os.environ['BOREALISPATH']
 sys.path.append(BOREALISPATH)
@@ -11,6 +12,12 @@ sys.path.append(BOREALISPATH)
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
+def tx_antenna_pattern(tx_freq_khz, tx_antennas, antenna_spacing):
+    """tx_antenna_pattern function for boresight transmission."""
+    num_antennas = scf.options.main_antenna_count
+    pattern = np.zeros((1, num_antennas), dtype=np.complex64)
+    pattern[0, tx_antennas] = 1.0 + 0.0j
+    return pattern
 
 class TestExperiment(ExperimentPrototype):
 
@@ -35,8 +42,9 @@ class TestExperiment(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,  # beam_order dne
+            "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+            "tx_antenna_pattern": tx_antenna_pattern, # beam_order dne
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
