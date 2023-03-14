@@ -18,8 +18,8 @@ class FullScanStepMode(ExperimentPrototype):
     def __init__(self):
         cpid = 3561
 
-        top = 15000
-        bottom = 10000
+        top = 14000
+        bottom = 11000
         step = 500
         all_steps = list(range(bottom, top, step))
 

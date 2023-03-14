@@ -99,7 +99,7 @@ class IBCollabMode(ExperimentPrototype):
         sum_of_freq = 0
         for slice in list_of_slices:
             # kHz, oscillator mixer frequency on the USRP for TX
-            sum_of_freq += slice['txfreq']
+            sum_of_freq += slice['freq']
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
 
         super(IBCollabMode, self).__init__(

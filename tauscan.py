@@ -28,11 +28,11 @@ class Tauscan(ExperimentPrototype):
             beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
 
         if scf.options.site_id == "sas":
-            freq = 13200
+            freq = 13150
         elif scf.options.site_id == "pgr":
             freq = 13100
         else:
-            freq = 13500
+            freq = 13650
 
         slice_1 = {
             "pulse_sequence": [0, 10, 13, 14, 19, 21, 31, 33, 38, 39, 42],
