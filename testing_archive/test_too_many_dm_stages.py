@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Too many decimation stages
+Expected exception:
+    Number of decimation stages .* is greater than max available .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -17,7 +16,7 @@ class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
         cpid = 1
-        #  Number of decimation stages is greater than options.max_number_of_filtering_stages
+        ### Number of decimation stages is greater than options.max_filtering_stages
         rates = [5.0e6, 1.0e6, 500.0e3, 250.0e3, 125.0e3, 62.5e3, 31.25e3 ] # 7 stages, greater than max of 6
         dm_rates = [5, 2, 2, 2, 2, 2, 2]
         transition_widths = [150.0e3, 80.0e3, 40.0e3, 20.0e3, 10.0e3, 5.0e3, 1.0e3]

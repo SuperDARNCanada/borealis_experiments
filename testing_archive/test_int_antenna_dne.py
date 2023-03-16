@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    rx_int_antennas specify an antenna that doesn't exist
+Expected exception:
+    Slice .* specifies interferometer array antenna numbers over config max .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -43,6 +42,6 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rx_int_antennas": [0,1,2,18]  # int antenna 18 DNE, should fail
+            "rx_int_antennas": [0,1,2,18]  ### int antenna 18 DNE, should fail
         }
         self.add_slice(slice_1)

@@ -1,9 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    No intt or intn
+Expected exception:
+    Slice .* has transmission but no intt or intn
 
-import sys
-import os
+NOTE: test appears to be a duplicate of another test in experiment_prototype.py
+check_slice_minimum_requirements(...)
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -31,9 +36,7 @@ class TestExperiment(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,  # duration of an integration, in ms
-            "intn": 10,  # Both intt and intn, should fail
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "beam_angle": scf.STD_16_BEAM_ANGLE,  # intt and intn dne
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan

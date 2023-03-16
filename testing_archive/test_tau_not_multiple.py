@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    tau_spacing not multiple of output rx sampling period
+Expected exception:
+    Slice .* correlation lags will be off because tau_spacing .* us is not a multiple of the output
+    rx sampling period \(1\/output_rx_rate .* Hz\).
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -30,7 +30,7 @@ class TestExperiment(ExperimentPrototype):
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P + 7,  # Should fail due to not being a multiple of output rx sampling period 
+            "tau_spacing": scf.TAU_SPACING_7P + 7,  ### Should fail due to not being a multiple of output rx sampling period 
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,

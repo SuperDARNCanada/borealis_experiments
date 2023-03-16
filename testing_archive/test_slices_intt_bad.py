@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    Interfacing slices have different intt
+Expected exception:
+    Slices .* and .* are SEQUENCE or CONCURRENT interfaced and do not have the same Averaging Period
+    duration intt
+"""
 
-import sys
-import os
 import copy
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -55,6 +56,6 @@ class TestExperiment(ExperimentPrototype):
         except:
             pass
         slice_2['intt'] = 3500
-        slice_1['intt'] = 3490  # Different intt durations, should fail
+        slice_1['intt'] = 3490  ### Different intt durations, should fail
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0:'CONCURRENT'})

@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    rx_bandwidth too large
+Expected exception:
+    Experiment's receive bandwidth is too large
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -17,7 +16,7 @@ class TestExperiment(ExperimentPrototype):
     def __init__(self):
         cpid = 1
 
-        # Should fail due to being too large
+        ### Should fail due to being too large
         super(TestExperiment, self).__init__(cpid, rx_bandwidth=scf.options.usrp_master_clock_rate/4)
 
         if scf.IS_FORWARD_RADAR:

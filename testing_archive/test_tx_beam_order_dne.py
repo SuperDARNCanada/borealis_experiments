@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault:
+    tx_beam_order not specified alongside tx_antenna_pattern
+Expected exception:
+    tx_beam_order must be specified if tx_antenna_pattern specified. Slice .*
+"""
 
-import sys
-import os
 import numpy as np
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -44,7 +44,8 @@ class TestExperiment(ExperimentPrototype):
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            "tx_antenna_pattern": tx_antenna_pattern, # beam_order dne
+            ### tx_beam_order dne
+            "tx_antenna_pattern": tx_antenna_pattern, 
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,

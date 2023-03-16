@@ -1,20 +1,19 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+Experiment fault:
+    tx_antenna_pattern dimension mismatch with number of main antennas
+Expected exception:
+    Slice .* tx antenna pattern return 2nd dimension \(.*\) must be equal to number of main antennas \(.*\)
+"""
 
-import sys
-import os
 import numpy as np
-from scipy.constants import speed_of_light
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
-# pattern second dimension is not equal to num_main_antennas, this will fail in check_slice()
-# of ExperimentPrototype
+### pattern second dimension is not equal to num_main_antennas, this will fail in check_slice()
+### of ExperimentPrototype
 def tx_antenna_pattern(tx_freq_khz, tx_antennas, antenna_spacing):
     """Sets the amplitude and phase weighting for each tx antenna"""
     pattern = np.array([1.0 for _ in range(len(tx_antennas)-1)]).reshape((1, len(tx_antennas)-1))

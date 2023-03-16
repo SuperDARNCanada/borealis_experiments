@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    pulse_len not an integer
+Expected exception:
+    Slice must specify pulse_len in us that must be an integer
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -31,7 +30,7 @@ class TestExperiment(ExperimentPrototype):
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": float(scf.PULSE_LEN_45KM) + 0.451,  #Not an int
+            "pulse_len": float(scf.PULSE_LEN_45KM) + 0.451,  ### Not an int
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms

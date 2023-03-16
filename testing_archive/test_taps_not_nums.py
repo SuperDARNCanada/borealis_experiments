@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Decimation stage filter taps not numbers
+Expected exception:
+    Filter tap .* is not numeric in decimation stage .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -32,7 +31,7 @@ class TestExperiment(ExperimentPrototype):
                     rates[stage], transition_widths[stage], cutoffs[stage],
                     ripple_dbs[stage]))
             all_stages.append(DecimationStage(stage, rates[stage],
-                              dm_rates[stage], [str(x) for x in filter_taps]))  # filter_taps are not floats/ints
+                              dm_rates[stage], [str(x) for x in filter_taps]))  ### filter_taps are not floats/ints
 
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))

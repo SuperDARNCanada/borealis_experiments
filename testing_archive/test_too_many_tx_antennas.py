@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    tx_antennas specifies too many channels
+Expected exception:
+    Slice .* has too many main TX antenna channels .* greater than config .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -43,6 +42,6 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "tx_antennas": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]  # One too many antennas, should fail
+            "tx_antennas": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]  ### One too many antennas, should fail
         }
         self.add_slice(slice_1)

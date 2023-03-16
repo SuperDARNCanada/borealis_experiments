@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    tx_beam_order not integer values in list
+Expected exception:
+    tx_beam_order must be a list of ints corresponding to the order of the angles in the beam_angle
+    list or an array of phases in the tx_antenna_pattern return. Slice: .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -37,7 +37,7 @@ class TestExperiment(ExperimentPrototype):
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": [0, 1, 2],
-            "tx_beam_order": ['0', 1.05, 'hahha'],     # entries not integers
+            "tx_beam_order": ['0', 1.05, 'hahha'],  ### entries not integers
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,

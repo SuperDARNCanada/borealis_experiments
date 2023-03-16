@@ -1,17 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    tx_bandwidth not divisor of usrp clock rate
+Expected exception:
+    Experiment's transmit bandwidth .* is not possible as it must be an integer divisor of USRP master clock rate
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import \
-    DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
 
 
 class TestExperiment(ExperimentPrototype):
@@ -19,7 +16,7 @@ class TestExperiment(ExperimentPrototype):
     def __init__(self):
         cpid = 1
 
-        # should fail due to not being integer divisor of usrp master clock rate
+        ### should fail due to not being integer divisor of usrp master clock rate
         super(TestExperiment, self).__init__(cpid, tx_bandwidth=3.14159e6)
 
         if scf.IS_FORWARD_RADAR:

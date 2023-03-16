@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Building decimation stage with bad output rate
+Expected exception: 
+    Last decimation stage .* does not have output rate .* equal to
+    requested output data rate .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -18,7 +18,8 @@ class TestExperiment(ExperimentPrototype):
     def __init__(self):
         cpid = 1
         
-        # Last decimation stage output_rate is not equal to output_sample_rate, made sure to change pulse length below to 600us so we pass that check
+        ### Last decimation stage output_rate is not equal to output_sample_rate, made sure to change
+        ### pulse length below to 600us so we pass that check
         rates = [5.0e6, 500.0e3, 100.0e3, 50.0e3/3]
         dm_rates = [10, 5, 6, 5]  
         transition_widths = [150.0e3, 40.0e3, 15.0e3, 1.0e3]

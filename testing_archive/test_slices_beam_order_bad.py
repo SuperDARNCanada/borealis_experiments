@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    invalid beam_order for slice interfacing
+Expected exception:
+    Slices .* and .* are SEQUENCE or CONCURRENT interfaced but do not have the same number of
+    averaging periods in their beam order
+"""
 
-import sys
-import os
 import copy
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -45,7 +46,7 @@ class TestExperiment(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
         }
         slice_2 = copy.deepcopy(slice_1)
-        slice_2['rx_beam_order'] = [0, 1, 2, 3, 4, 5, 6, 7] # Only half of the beams, should fail
+        slice_2['rx_beam_order'] = [0, 1, 2, 3, 4, 5, 6, 7] ### Only half of the beams, should fail
         slice_2['tx_beam_order'] = [0, 1, 2, 3, 4, 5, 6, 7]
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0:'CONCURRENT'})

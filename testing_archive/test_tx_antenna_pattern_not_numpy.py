@@ -1,20 +1,17 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
-
-import sys
-import os
-import numpy as np
-from scipy.constants import speed_of_light
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    tx_antenna_pattern returns non-numpy array
+Expected exception:
+    Slice .* tx antenna pattern return is not a numpy array
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
-# pattern returned by tx_antenna_pattern is not a numpy array, but a list
-# this will fail in check_slice() of ExperimentPrototype
+### pattern returned by tx_antenna_pattern is not a numpy array, but a list
+### this will fail in check_slice() of ExperimentPrototype
 def tx_antenna_pattern(tx_freq_khz, tx_antennas, antenna_spacing):
     """Sets the amplitude and phase weighting for each tx antenna"""
     pattern = [1.0 for _ in range(len(tx_antennas))]

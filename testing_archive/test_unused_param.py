@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Slice has specified unused parameter
+Expected exception:
+    Slice .* has a parameter that is not used: .* = .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -43,6 +42,6 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "UNUSED": "it's a me-a, Mario",  # Unused param, should fail
+            "UNUSED": "it's a me-a, Mario",  ### Unused param, should fail
         }
         self.add_slice(slice_1)

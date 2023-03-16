@@ -1,9 +1,15 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault:
+    freq not a number
+Expected exception:
+    freq must be a number \(kHz\) between tx min and max frequencies .* and rx min and max
+    frequencies .* for the radar license and be within range given center frequencies \(.* kHz\),
+    sampling rates \(.* kHz\), and transition band \(.* kHz\)
 
-import sys
-import os
+NOTE: This test is covered by test_rxfreq_not_num.py since rxfreq and txfreq were combined to freq
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -33,10 +39,10 @@ class TestExperiment(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [0,1,2,3,4,5,22,6,7,8,9,10,11,12,13,14],  # beam 22 doesn't exist, should fail
-            "tx_beam_order": [0, 1, 2, 3, 4, 5, 22, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+            "rx_beam_order": beams_to_use,
+            "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
+            "freq" : '13005', ### Not a number
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

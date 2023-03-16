@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    interfacing slices have different intn
+Expected exception:
+    Slices .* and .* are SEQUENCE or CONCURRENT interfaced and do not have the same NAVE goal intn
+"""
 
-import sys
-import os
 import copy
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -48,6 +48,6 @@ class TestExperiment(ExperimentPrototype):
         del slice_2['intt']
         del slice_1['intt']
         slice_2['intn'] = 10
-        slice_1['intn'] = 9  # Different intn targets, should fail
+        slice_1['intn'] = 9  ### Different intn targets, should fail
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0:'CONCURRENT'})

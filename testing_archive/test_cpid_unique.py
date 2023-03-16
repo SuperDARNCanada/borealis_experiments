@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault: 
+    cpid non unique integer
+Expected exception:
+    CPID must be unique. .* is in use by another local experiment
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -12,7 +14,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
-        cpid = 151  # This is not a unique number 
+        cpid = 151  ### This is not a unique number (normalscan is 151)
         super(TestExperiment, self).__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:

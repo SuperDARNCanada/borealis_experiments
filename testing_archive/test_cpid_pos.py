@@ -1,9 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault: 
+    cpid negative integer
+Expected exception:
+    The CPID should be a positive number in the experiment. Borealis will determine if it should be
+    negative based on the scheduling mode. Only experiments run during discretionary time will have
+    negative CPIDs.
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -12,7 +16,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
-        cpid = -1
+        cpid = -1   ### Should fail
         super(TestExperiment, self).__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:

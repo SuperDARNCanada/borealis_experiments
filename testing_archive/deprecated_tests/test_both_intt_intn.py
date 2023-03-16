@@ -1,15 +1,18 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    both intt and intn set
+Expected exception:
+    Slice .* choose either intn or intt to be the limit for number of integrations in an integration period.
 
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+NOTE: The following test doesn't appear to fail, and the radar operates with the message: "intn is
+set in experiment slice but will not be used due to intt No Self Check Errors."
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+
 
 class TestExperiment(ExperimentPrototype):
 
@@ -34,11 +37,12 @@ class TestExperiment(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
+            "intn": 10,  # Both intt and intn, should fail
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : scf.options.max_freq + 1,  # Too high
+            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

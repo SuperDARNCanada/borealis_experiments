@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    No pulse_sequence specified
+Expected exception:
+    Slice must specify pulse_sequence that must be a list of integers
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -29,7 +28,8 @@ class TestExperiment(ExperimentPrototype):
             num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, there is only one slice.
-            "tau_spacing": scf.TAU_SPACING_7P,  # Missing pulse_sequence, should fail
+            # Missing pulse_sequence, should fail
+            "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,

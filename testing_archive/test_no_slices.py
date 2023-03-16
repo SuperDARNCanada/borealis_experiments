@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Experiment has no slices
+Expected exception:
+    Invalid num_slices less than 1
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -27,4 +27,4 @@ class TestExperiment(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
 
-        # Don't add any slices
+        ### Don't add any slices

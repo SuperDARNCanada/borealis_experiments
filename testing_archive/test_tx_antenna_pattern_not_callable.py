@@ -1,20 +1,17 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
-
-import sys
-import os
-import numpy as np
-from scipy.constants import speed_of_light
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    tx_antenna_pattern not a function
+Expected exception:
+    Slice .* tx antenna pattern must be a function
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
-# tx_antenna_pattern is not a callable function.
-# this will fail in check_slice() of ExperimentPrototype
+### tx_antenna_pattern is not a callable function.
+### this will fail in check_slice() of ExperimentPrototype
 
 
 class TxAntennaPatternTest(ExperimentPrototype):

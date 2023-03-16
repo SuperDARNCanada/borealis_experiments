@@ -1,17 +1,16 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    File contains two classes
+Expected exception:
+    You have more than one experiment class in your experiment file - exiting
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
-class TestExperiment2(ExperimentPrototype):
+class TestExperiment2(ExperimentPrototype): ### First class
 
     def __init__(self):
         cpid = 2
@@ -46,7 +45,7 @@ class TestExperiment2(ExperimentPrototype):
         self.add_slice(slice_1)
 
 
-class TestExperiment(ExperimentPrototype):
+class TestExperiment(ExperimentPrototype):  ### Second class
 
     def __init__(self):
         cpid = 1

@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Slice has no freq or clrfrqrange
+Expected exception:
+    A freq or clrfrqrange must be specified in a slice
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -44,7 +43,7 @@ class TestExperiment(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
         }
 
-        # No freq or clrfrqrange
+        ### No freq or clrfrqrange
         try:
             del slice_1['freq']
         except:

@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    pulse_sequence not increasing
+Expected exception:
+    Slice .* pulse_sequence not increasing
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -29,7 +28,7 @@ class TestExperiment(ExperimentPrototype):
             num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, there is only one slice.
-            "pulse_sequence": [14, 0, 19, 21, 40],  # Not increasing order, should fail
+            "pulse_sequence": [14, 0, 19, 21, 40],  ### Not increasing order, should fail
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,

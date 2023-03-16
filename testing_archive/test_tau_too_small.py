@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    tau_spacing too smal
+Expected exception:
+    Slice .* multi-pulse increment too small
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -29,7 +28,7 @@ class TestExperiment(ExperimentPrototype):
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": int(scf.options.min_tau_spacing_length - 1),  # too small, should fail
+            "tau_spacing": int(scf.options.min_tau_spacing_length - 1),  ### too small, should fail
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,

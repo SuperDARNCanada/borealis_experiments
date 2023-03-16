@@ -1,13 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import copy
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    Removing a slice that doesn't exist
+Expected exception:
+    Cannot remove slice id .* : it does not exist in slice dictionary
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -46,5 +44,5 @@ class TestExperiment(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
         }
         self.add_slice(slice_1)
-        self.del_slice(7)  # Non-existent slice ID should fail
+        self.del_slice(7)  ### Non-existent slice ID should fail
         

@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    clrfrqrange is within restricted range
+Expected exception:
+    clrfrqrange is entirely within restricted range .*
 
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+NOTE: Test is superceded by more specific clrfrqrange tests
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -34,11 +35,13 @@ class TestExperiment(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,  # intt and intn dne
+            "intt": 3500,  # duration of an integration, in ms
+            "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
+            ### These should be within a sas restricted frequencies range
+            "clrfrqrange": [scf.options.restricted_ranges[0][0] + 1, scf.options.restricted_ranges[0][1] - 1],
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

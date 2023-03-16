@@ -1,21 +1,20 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    Experiment isn't a class
+Expected exception:
+    No experiment classes are present that are built from parent class ExperimentPrototype - exiting
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 
 
-#class TestExperiment(ExperimentPrototype):
+### class TestExperiment(ExperimentPrototype):
 
 def __init__(self):
     cpid = 1
-    super(TestExperiment, self).__init__(cpid)
+    # super(TestExperiment, self).__init__(cpid)
 
     if scf.IS_FORWARD_RADAR:
         beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
