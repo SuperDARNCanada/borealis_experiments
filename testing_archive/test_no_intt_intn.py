@@ -5,9 +5,6 @@ Experiment fault:
     No intt or intn
 Expected exception:
     Slice .* has transmission but no intt or intn
-
-NOTE: test appears to be a duplicate of another test in experiment_prototype.py
-check_slice_minimum_requirements(...)
 """
 
 import borealis_experiments.superdarn_common_fields as scf
