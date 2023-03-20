@@ -40,8 +40,7 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            ### These should be within a sas restricted frequencies range
-            "clrfrqrange": [scf.options.restricted_ranges[0][0] + 1, scf.options.restricted_ranges[0][1] - 1],
+            "clrfrqrange": [13400, 13415],  ### These should be within a sas restricted frequencies range
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

@@ -37,7 +37,7 @@ class TestExperiment(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
-            "intn": 10,  # Both intt and intn, should fail
+            "intn": 10,  ### Both intt and intn, should fail
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,

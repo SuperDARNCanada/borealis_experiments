@@ -44,6 +44,6 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "wavetype": 'SIGN',  # if you can't read the signs, you're gonna fail
+            "wavetype": 'SIGN',  ### if you can't read the signs, you're gonna fail
         }
         self.add_slice(slice_1)

@@ -28,7 +28,7 @@ class TestExperiment(ExperimentPrototype):
             num_ranges = scf.POLARDARN_NUM_RANGES
         if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
-        # No sequence, should fail
+        ### No sequence, should fail
         slice_1 = {  # slice_id = 0, there is only one slice.
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM, 

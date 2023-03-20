@@ -29,7 +29,7 @@ class TestExperiment(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
 
-        # slice is missing a necessary parameter 
+        ### slice is missing a necessary parameter 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
