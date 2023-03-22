@@ -5,7 +5,7 @@
     ~~~~~~~~~~~~~~~~
     normalscan but with COMMON_MODE_FREQ_2 instead
 
-    last ran 20200421 at all sites
+    last scheduled 2020-04-21 at all sites
 
     :copyright: 2020 SuperDARN Canada
     :author: Marci Detwiller

@@ -6,6 +6,8 @@
     A 11-pulse sequence that consists of a single pulse pulse followed by a back to back 5-pulse
     Farley sequence. The analysis produces a 12-pulse ACF with no missing lags.
 
+    Last scheduled 2020-07-13
+
     :copyright: 2020 SuperDARN Canada
     :author: Keith Kotyk
 """

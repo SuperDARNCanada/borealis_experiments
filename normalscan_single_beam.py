@@ -4,6 +4,10 @@
     normalscan_single_beam
     ~~~~~~~~~~~~~~~~~~~~~~
     normalscan but only using beam 3
+
+    last scheduled 2019-12-03
+
+    :copyright: 2019 SuperDARN Canada
 """
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype

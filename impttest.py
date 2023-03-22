@@ -5,7 +5,7 @@
     ~~~~~~~~
     Incoherent Multiple Pulse Sequence Testing
 
-    Last ran 20220207 at rkn and inv
+    Last scheduled 2022-02-07
 
     :copyright: 2019 SuperDARN Canada
     :author: Ashton Reimer

@@ -35,6 +35,8 @@
     that ST-APOG can have its lag to first range and range gate size adjusted to
     best match any apogee passes.
 
+    Last scheduled 2019-12-24
+
     :copyright: 2019 SuperDARN Canada
 """
 

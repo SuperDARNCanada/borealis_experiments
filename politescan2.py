@@ -8,6 +8,8 @@
     normalscan and listen has an appended listening integration time at the end of a full scan.
     integration times are reduced to 3s to allow time for this listening integration time. 
 
+    last scheduled 2020-04-22
+
     :copyright: 2019 SuperDARN Canada
     :author: Marci Detwiller
 """

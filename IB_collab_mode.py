@@ -4,6 +4,11 @@
     IB_collab_mode
     ~~~~~~~~~~~~~~
     IB collab mode written by Devin Huyghebaert 20200609
+
+    Last scheduled 2020-08-10
+
+    :copyright: 2020 SuperDARN Canada
+    :author: Devin Huyghebaert
 """
 
 import datetime

@@ -3,11 +3,11 @@
 """
     2multifsound
     ~~~~~~~~~~~~
+    Twofsound but transmitting two frequencies concurrently instead of alternating.
 
     :copyright: 2019 SuperDARN Canada
     :author: Keith Kotyk
 """
-
 
 import copy
 

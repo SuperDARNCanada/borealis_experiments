@@ -8,6 +8,8 @@
     at the frequency using 8 pulse sequence, followed by one integration time of a 7 pulse sequence
     at the frequency before moving on to the next frequency. 
 
+    Last scheduled 2020-07-15
+
     :copyright: 2020 SuperDARN Canada
     :author: Keith Kotyk
 """

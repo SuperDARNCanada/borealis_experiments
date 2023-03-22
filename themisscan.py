@@ -5,6 +5,8 @@
     ~~~~~~~~~~
     notes on ThemisScan purpose here TODO
 
+    last scheduled 2019-12-29
+
     :copyright: 2019 SuperDARN Canada
 """
 

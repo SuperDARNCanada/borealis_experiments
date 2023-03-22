@@ -5,6 +5,8 @@
     ~~~~~~~~~~~~~~~
     Interleavesound is a modified version of Interleavedscan with added sounding frequency data.
 
+    Last scheduled 2020-09-09
+
     :copyright: 2020 SuperDARN Canada
     :author: Marci Detwiller
 """
