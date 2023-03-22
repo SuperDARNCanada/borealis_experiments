@@ -1,8 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
-import os
-import sys
+"""
+    twofsound
+    ~~~~~~~~~
+    Standard operating Borealis experiment. Alternates transmitting in two different frequencies.
+
+    :copyright: 2023 SuperDARN Canada
+"""
+
 import copy
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype

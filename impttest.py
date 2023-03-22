@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
-# Updated 4 July 2019
-# Incoherent Multiple Pulse Sequence Testing
-#
-# Ashton Reimer
+"""
+    impttest
+    ~~~~~~~~
+    Incoherent Multiple Pulse Sequence Testing
 
-# Updated 23 March 2020
+    Last ran 20220207 at rkn and inv
 
+    :copyright: 2019 SuperDARN Canada
+    :author: Ashton Reimer
+"""
 
-# write an experiment that creates a new control program.
-import os
-import sys
 import copy
 import numpy as np
 

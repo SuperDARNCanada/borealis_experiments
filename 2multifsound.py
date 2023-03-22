@@ -1,8 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
-import os
-import sys
+"""
+    2multifsound
+    ~~~~~~~~~~~~
+
+    :copyright: 2019 SuperDARN Canada
+    :author: Keith Kotyk
+"""
+
+
 import copy
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype

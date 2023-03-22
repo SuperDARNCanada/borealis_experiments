@@ -1,7 +1,13 @@
 #!/usr/bin/python
 
-import sys
-import os
+"""
+    power_meter_mode
+    ~~~~~~~~~~~~~~~~
+    For testing transmitters with Bird power meter
+
+    :copyright: 2021 SuperDARN Canada
+    :author: Kevin Krieger
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -18,16 +24,6 @@ class PowerMeterMode(ExperimentPrototype):
         """
         cpid = 3580
         super(PowerMeterMode, self).__init__(cpid)
-
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
-
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr", "lab"]:
-            num_ranges = scf.STD_NUM_RANGES
 
         # default frequency set here
         freq = scf.COMMON_MODE_FREQ_1

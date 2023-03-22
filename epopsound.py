@@ -1,30 +1,25 @@
 """
-Copyright SuperDARN Canada 2020
+    epopsound
+    ~~~~~~~~~
+    Experiment for conjunction with EPOP RRI. This mode creates a transmission that is received by
+    RRI. 
 
-Keith Kotyk
+    Up to 4 frequencies can be used, and given a certain beam range the beams will be cycled through
+    at the frequency using 8 pulse sequence, followed by one integration time of a 7 pulse sequence
+    at the frequency before moving on to the next frequency. 
+
+    :copyright: 2020 SuperDARN Canada
+    :author: Keith Kotyk
 """
 
 import copy
 import math
-import os
-import sys
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
 class Epopsound(ExperimentPrototype):
-    """
-    Experiment for conjunction with EPOP RRI. 
-    This mode creates a transmission that is received
-    by RRI. 
-
-    Up to 4 frequencies can be used, and given a certain
-    beam range the beams will be cycled through at the 
-    frequency using 8 pulse sequence, followed by one 
-    integration time of a 7 pulse sequence at the frequency
-    before moving on to the next frequency. 
-    """
 
     def __init__(self, **kwargs):
         cpid = 3371

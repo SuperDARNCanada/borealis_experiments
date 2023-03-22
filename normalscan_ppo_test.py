@@ -1,9 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+    normalscan_ppo_test
+    ~~~~~~~~~~~~~~~~~~~
+    normalscan but pulse phase offset is modified
 
-import sys
-import os
+    :copyright: 2022 SuperDARN Canada
+"""
+
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf

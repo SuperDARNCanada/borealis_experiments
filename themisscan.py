@@ -1,17 +1,18 @@
 #!/usr/bin/python3
 
-#Copyright SuperDARN Canada 2019
+"""
+    themisscan
+    ~~~~~~~~~~
+    notes on ThemisScan purpose here TODO
 
-import os
-import sys
-import copy
+    :copyright: 2019 SuperDARN Canada
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
 class ThemisScan(ExperimentPrototype):
-    """notes on ThemisScan purpose here TODO"""
     def __init__(self,):
         cpid = 3300
 

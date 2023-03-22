@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+    normalscan_aligned
+    ~~~~~~~~~~~~~~~~~~
+    normalscan but align_sequences is true
 
-import sys
-import os
+    :copyright: 2022 SuperDARN Canada
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

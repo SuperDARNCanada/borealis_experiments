@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 
-# politescan
-# Marci Detwiller Jan 7/2019
-# Adapted from ROS politescan (Dieter Andre, Kevin Krieger)
-import os
-import sys
+"""
+    politescan
+    ~~~~~~~~~~
+    Adapted from ROS politescan (Dieter Andre, Kevin Krieger)
+
+    :copyright: 2019 SuperDARN Canada
+    :author: Marci Detwiller
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf

@@ -1,10 +1,15 @@
 #!/usr/bin/python
 
-# A one-off experiment for a collaboration with HAARP.
-# Run beams 2, 3, 4, 5, 6 at Clyde. Beam 4 range gate 72 overlaps with Gakona, AK
+"""
+    haarpscan
+    ~~~~~~~~~
+    A one-off experiment for a collaboration with HAARP ran June 2021 at CLY.
+    Run beams 2, 3, 4, 5, 6 at Clyde. Beam 4 range gate 72 overlaps with Gakona, AK
 
-import sys
-import os
+    :copyright: 2021 SuperDARN Canada
+    :author: Kevin Krieger
+"""
+
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

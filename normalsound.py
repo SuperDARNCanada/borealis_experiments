@@ -1,19 +1,19 @@
 #!/usr/bin/python3
 
-#Copyright SuperDARN Canada 2021
+"""
+    normalsound
+    ~~~~~~~~~~~
+    Modified version of normalscan with added frequency sounding
 
-import os
-import sys
-import copy
+    :copyright: 2021 SuperDARN Canada
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
 class NormalSound(ExperimentPrototype):
-    """NormalSound is a modified version of normalscan with added frequency sounding.
 
-    """
     def __init__(self):
         cpid = 157
 

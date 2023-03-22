@@ -1,10 +1,11 @@
 #!/usr/bin/python
 
-""" 
-IB collab mode written by Devin Huyghebaert 20200609
 """
-import os
-import sys
+    IB_collab_mode
+    ~~~~~~~~~~~~~~
+    IB collab mode written by Devin Huyghebaert 20200609
+"""
+
 import datetime
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype

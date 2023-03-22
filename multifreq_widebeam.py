@@ -1,17 +1,20 @@
 #!/usr/bin/python
 
-# Copyright SuperDARN Canada 2022
-# A simultaneous multifrequency widebeam mode.
-# This experiment uses two pairs of adjacent antennas for transmitting,
-# with each pair operating on its own frequency.
-# The mode has zero phase (no beams) and receives on all antennas.
-# There is no scan boundary, it simply sounds for 3.5 seconds at a time.
-# It does not generate correlations and only produces antennas_iq data.
+"""
+    multifreq_widebeam
+    ~~~~~~~~~~~~~~~~~~
+    A simultaneous multifrequency widebeam mode.
 
-# Requested by Dr. Pasha Ponomarenko April 2022
+    This experiment uses two pairs of adjacent antennas for transmitting, with each pair operating
+    on its own frequency. The mode has zero phase (no beams) and receives on all antennas. There is
+    no scan boundary, it simply sounds for 3.5 seconds at a time. It does not generate correlations
+    and only produces antennas_iq data.
+
+    :copyright: 2022 SuperDARN Canada
+    :author: Remington Rohel, on behalf of Dr. Pasha Ponomarenko
+"""
+
 import copy
-import sys
-import os
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

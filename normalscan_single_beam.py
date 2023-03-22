@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-import os
-import sys
+"""
+    normalscan_single_beam
+    ~~~~~~~~~~~~~~~~~~~~~~
+    normalscan but only using beam 3
+"""
 
-# write an experiment that creates a new control program.
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 

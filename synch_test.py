@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
-import os
-import sys
+"""
+    synch_test
+    ~~~~~~~~~~
 
-# write an experiment that creates a new control program.
+    :copyright: 2022 SuperDARN Canada
+"""
+
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 

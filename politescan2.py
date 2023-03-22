@@ -1,14 +1,16 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+    politescan2
+    ~~~~~~~~~~~
+    Politescan on two frequencies simultaneously
 
-# normalscan and listen has an appended listening integration time 
-# at the end of a full scan. 
-# integration times are reduced to 3s to allow time for this listening
-# integration time. 
+    normalscan and listen has an appended listening integration time at the end of a full scan.
+    integration times are reduced to 3s to allow time for this listening integration time. 
 
-import sys
-import os
+    :copyright: 2019 SuperDARN Canada
+    :author: Marci Detwiller
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

@@ -1,16 +1,9 @@
 #!/usr/bin/python3
 
-#Copyright SuperDARN Canada 2019
-
-import os
-import sys
-
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-import borealis_experiments.superdarn_common_fields as scf
-
-
-class RBSPScan(ExperimentPrototype):
-    """rbspscan was first run in 2012 to support the Van Allen probes satellite mission
+"""
+    rbspscan
+    ~~~~~~~~
+    rbspscan was first run in 2012 to support the Van Allen probes satellite mission
     (initially called the RBSP mission or Radiation Belt Storm Probes). It had a trigger mode
     where the DST (Disturbance Storm Time) index would be checked every 30 minutes, and if it
     went below a threshold, then rbspscan would trigger for at least 30 minutes. This was
@@ -18,7 +11,6 @@ class RBSPScan(ExperimentPrototype):
     scheduler for qnx4 was upgraded to allow this to happen. Both duration and priority of a
     particularly scheduled radar control program were capabilities added to the scheduler, so
     that a PI group could prioritize any discretionary time modes over rbspscan if they wanted to
-
 
 
     Tim Yeoman - Fri Sept 21st, 2012
@@ -42,7 +34,15 @@ class RBSPScan(ExperimentPrototype):
     In the first instance, CT-TRIG and ST-APOG can be the same. The idea is
     that ST-APOG can have its lag to first range and range gate size adjusted to
     best match any apogee passes.
-    """
+
+    :copyright: 2019 SuperDARN Canada
+"""
+
+from experiment_prototype.experiment_prototype import ExperimentPrototype
+import borealis_experiments.superdarn_common_fields as scf
+
+
+class RBSPScan(ExperimentPrototype):
     def __init__(self,):
         cpid = 200
 

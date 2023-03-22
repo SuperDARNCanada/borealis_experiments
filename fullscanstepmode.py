@@ -1,19 +1,21 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
-import os
-import sys
+"""
+    fullscanstepmode
+    ~~~~~~~~~~~~~~~~
+    Scan beam by beam while stepping in frequency within a band. If a step is within a restricted
+    band, it will be moved to the closest available unrestricted frequency. An averaging period of
+    each frequency is run on each beam before switching to the next beam.
+
+    :copyright: 2020 SuperDARN Canada
+    :author: Keith Kotyk
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
 class FullScanStepMode(ExperimentPrototype):
-    """
-    Scan beam by beam while stepping in frequency within a band. If a step is within a restricted
-    band, it will be moved to the closest available unrestricted frequency. An averaging period of
-    each frequency is run on each beam before switching to the next beam.
-    """
 
     def __init__(self):
         cpid = 3561
