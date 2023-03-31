@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault: 
+    Adding a slice that isn't a dictionary of parameters
+Expected exception:
+    Attempt to add a slice failed - .* is not a dictionary of slice parameters
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -25,5 +27,5 @@ class TestExperiment(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
 
-        # exp_slice is not a dictionary of slice parameters
+        ### exp_slice is not a dictionary of slice parameters
         self.add_slice('garbage')

@@ -1,23 +1,21 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    output_rx_rate higher than max sample rate
+Expected exception:
+    Experiment's output sample rate is too high
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import \
-    DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
 
 
 class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
         cpid = 1
+        ### output_rx_rate too high
         super(TestExperiment, self).__init__(cpid, output_rx_rate=1+scf.options.max_output_sample_rate)
 
         if scf.IS_FORWARD_RADAR:

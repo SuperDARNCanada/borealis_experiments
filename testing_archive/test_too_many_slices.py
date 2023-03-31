@@ -1,13 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault:
+    Too many slices created
+Expected exception:
+    Length of filter taps once zero-padded \(.*\) in decimation stage .* with this many slices
+    \(.*\) is too large for GPU max .*
+"""
 
 import copy
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

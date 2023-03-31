@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    pulse_len invalid
+Expected exception:
+    For an experiment slice with real-time acfs, pulse length must be equal \(within 1 us\) to
+    1\/output_rx_rate to make acfs valid. Current pulse length is .* us, output rate is .* Hz
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -31,7 +31,7 @@ class TestExperiment(ExperimentPrototype):
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": int(1/self.output_rx_rate) + 1,  # pulse_len must be the same as 1/output_rx_rate (within floating point error)
+            "pulse_len": int(1/self.output_rx_rate) + 1,  ### pulse_len must be the same as 1/output_rx_rate (within floating point error)
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms

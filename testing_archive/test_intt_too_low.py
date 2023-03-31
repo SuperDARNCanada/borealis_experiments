@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    intt too low for pulse sequence length
+Expected exception:
+    Slice .* : pulse sequence is too long for integration time given
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -34,7 +33,8 @@ class TestExperiment(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": (max(scf.SEQUENCE_7P) * scf.TAU_SPACING_7P * 1e-3) - 10,  # duration of an integration, in ms, too low given the sequence and tau values, should fail
+            ### duration of an integration, in ms, too low given the sequence and tau values, should fail
+            "intt": (max(scf.SEQUENCE_7P) * scf.TAU_SPACING_7P * 1e-3) - 10,
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,

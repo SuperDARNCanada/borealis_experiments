@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Decimation stage 0 invalid input rate
+Expected exception:
+    Decimation stage 0 does not have input rate .* equal to USRP sampling rate .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -32,7 +31,7 @@ class TestExperiment(ExperimentPrototype):
             all_stages.append(DecimationStage(stage, rates[stage],
                               dm_rates[stage], filter_taps))
 
-        # input rate for the decimation scheme is 5.2e6, not 5.1e6 as it shoudl be 
+        ### input rate for the decimation scheme is 5.2e6, not 5.1e6 as it should be 
         decimation_scheme = (DecimationScheme(5.2e6, rates[-1]/dm_rates[-1], stages=all_stages))
         super(TestExperiment, self).__init__(
             cpid, output_rx_rate=decimation_scheme.output_sample_rate,

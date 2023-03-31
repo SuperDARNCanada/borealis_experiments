@@ -46,9 +46,9 @@ class PowerMeterMode(ExperimentPrototype):
             "first_range": 0,
             "intt": 4000,  # duration of an integration, in ms
             "beam_angle": [0.0],
-            "beam_order": [0],
+            "rx_beam_order": [0],
             #"scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "txfreq" : freq, #kHz
+            "freq" : freq, #kHz
             "acf": False,
             "xcf": False,  # cross-correlation processing
             "acfint": False,  # interferometer acfs

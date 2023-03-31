@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault: 
+    No beam_angle set in slice
+Expected exception:
+    Slice must specify beam_angle that must be a list of numbers \(ints or floats\) which are angles of degrees off boresight \(positive E of N\)
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -32,7 +34,8 @@ class TestExperiment(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
-            "rx_beam_order": beams_to_use,  # beam_angle dne
+            ### beam_angle dne
+            "rx_beam_order": beams_to_use,  
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz

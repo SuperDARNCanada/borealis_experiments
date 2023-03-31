@@ -1,13 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import copy
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Editing a slice that doesn't exist
+Expected exception:
+    Trying to edit .* but it does not exist in Slice_IDs list
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -46,5 +44,5 @@ class TestExperiment(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
         }
         self.add_slice(slice_1)
-        self.edit_slice(7, freq=scf.COMMON_MODE_FREQ_2)  # Non-existent slice ID should fail
+        self.edit_slice(7, freq=scf.COMMON_MODE_FREQ_2)  ### Non-existent slice ID should fail
         

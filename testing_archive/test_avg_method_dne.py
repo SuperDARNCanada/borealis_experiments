@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault:
+    Setting averaging_method to an invalid method
+Expected exception:
+    Averaging method .* not valid method. Possible methods are .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -40,6 +42,6 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "averaging_method": 'not_a_method',  # This is not a valid method
+            "averaging_method": 'not_a_method',  ### This is not a valid method
         }
         self.add_slice(slice_1)

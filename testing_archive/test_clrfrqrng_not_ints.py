@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault:
+    clrfrqrange list of non-integers
+Expected exception:
+    clrfrqrange must be an integer list of length = 2
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -36,7 +38,7 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": [12005.2, 12358.9],  # not ints
+            "clrfrqrange": [12005.2, 12358.9],  ### not ints
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

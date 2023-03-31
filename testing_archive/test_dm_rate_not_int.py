@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    Non-integer decimation rate
+Expected exception:
+    Decimation rate is not an integer
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -17,9 +16,9 @@ class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
         cpid = 1
-        # dm_rate is not an integer
+        ### dm_rate is not an integer
         rates = [5.0e6, 500.0e3, 100.0e3, 50.0e3/3]
-        dm_rates = [10.1, 5, 6, 5] # 10.1 is not an integer, should fail
+        dm_rates = [10.1, 5, 6, 5] ### 10.1 is not an integer, should fail
         transition_widths = [150.0e3, 40.0e3, 15.0e3, 1.0e3]
         cutoffs = [20.0e3, 10.0e3, 10.0e3, 5.0e3]
         ripple_dbs = [150.0, 80.0, 35.0, 9.0]

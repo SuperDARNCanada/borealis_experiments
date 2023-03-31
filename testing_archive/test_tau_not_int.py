@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    tau_spacing not an integer
+Expected exception:
+    Slice must specify tau_spacing in us that must be an integer
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -30,7 +29,7 @@ class TestExperiment(ExperimentPrototype):
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": float(scf.TAU_SPACING_7P),  # not an int
+            "tau_spacing": float(scf.TAU_SPACING_7P),  ### not an int
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,

@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault: 
+    beam_angle not all numbers
+Expected exception:
+    .*Slice must specify beam_angle that must be a list of numbers \(ints or floats\) which are
+    angles of degrees off boresight \(positive E of N\)
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

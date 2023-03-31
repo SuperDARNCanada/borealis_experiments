@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault:
+    scanbound longer than beam_order
+Expected exception:
+    None thrown currently
 
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+NOTE: This experiment not currently run, as no exception is thrown
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -38,7 +39,8 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use) + 1)],  # one element larger than beam_order, should fail
+            ### one element larger than beam_order, should fail
+            "scanbound": [i * 3.5 for i in range(len(beams_to_use) + 1)],
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing

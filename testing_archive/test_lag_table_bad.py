@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault:
+    Adding a pulse that doesn't exist to lag table
+Expected exception:
+    Lag .* not valid; One of the pulses does not exist in the sequence
+"""
 
-import sys
-import os
 import itertools
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -49,7 +49,7 @@ class TestExperiment(ExperimentPrototype):
         lag_table = list(itertools.combinations(slice_1['pulse_sequence'], 2))
         lag_table.append([slice_1['pulse_sequence'][0], slice_1[
             'pulse_sequence'][0]])  # lag 0
-        lag_table.append([99,0]) # Should fail on this!!
+        lag_table.append([99,0]) ### Should fail on this!!
         # sort by lag number
         lag_table = sorted(lag_table, key=lambda x: x[1] - x[0])
         lag_table.append([slice_1['pulse_sequence'][-1], slice_1[

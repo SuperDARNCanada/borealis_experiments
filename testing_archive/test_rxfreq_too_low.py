@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    freq below min freq
+Expected exception:
+    freq must be a number \(kHz\) between rx min and max frequencies .* for the radar license and be
+    within range given center frequency .* kHz, sampling rate .* kHz, and transition band .* kHz
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -37,7 +37,7 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : scf.options.min_freq - 1, # Below the min freq
+            "freq" : scf.options.min_freq - 1, ### Below the min freq
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

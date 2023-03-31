@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault:
+    Interfacing two slices with an invalid interface type
+Expected exception:
+    Interface value with slice .* not valid. Types available are
+"""
 
-import sys
-import os
 import copy
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -45,7 +48,7 @@ class TestExperiment(ExperimentPrototype):
         self.add_slice(slice_1)
         slice_2 = copy.deepcopy(slice_1)
         slice_2['freq'] = scf.COMMON_MODE_FREQ_2
-        # Interface value from one slice to another is not a valid type from interface_types
-        # Interface type is not in the interface_types list
+        ### Interface value from one slice to another is not a valid type from interface_types
+        ### Interface type is not in the interface_types list
         self.add_slice(slice_2, interfacing_dict={0:'THISWILLBREAK'})
 

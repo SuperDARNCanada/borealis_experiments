@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    Editing slice with invalid parameter
+Expected exception:
+    Cannot edit slice ID .*: .* is not a valid slice parameter
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -45,5 +44,5 @@ class TestExperiment(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
         }
         self.add_slice(slice_1)
-        self.edit_slice(0, tx_freak=scf.COMMON_MODE_FREQ_2)  # Non-existent param should fail
+        self.edit_slice(0, tx_freak=scf.COMMON_MODE_FREQ_2)  ### Non-existent param should fail
         

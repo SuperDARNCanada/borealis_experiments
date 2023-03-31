@@ -1,22 +1,22 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+Experiment fault: 
+    tx_antenna_pattern magnitude too large
+Expected exception:
+    Slice .* tx antenna pattern return must not have any values with a magnitude greater than 1
+"""
 
-import sys
-import os
 import numpy as np
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
-# One of the pattern's elements' magnitudes is > 1.0, this will fail in check_slice()
-# of ExperimentPrototype
-def tx_antenna_pattern(tx_freq_khz, tx_antenna_count, antenna_spacing):
+### One of the pattern's elements' magnitudes is > 1.0, this will fail in check_slice()
+### of ExperimentPrototype
+def tx_antenna_pattern(tx_freq_khz, tx_antennas, antenna_spacing):
     """Sets the amplitude and phase weighting for each tx antenna"""
-    pattern = np.array([1.0 for _ in range(tx_antenna_count)]).reshape((1, tx_antenna_count))
+    pattern = np.array([1.0 for _ in range(len(tx_antennas))]).reshape((1, len(tx_antennas)))
     pattern[0, 0] = 1.01
     return pattern
 
@@ -30,7 +30,7 @@ class TxAntennaPatternTest(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 12345601
+        cpid = 12345
         super().__init__(cpid)
 
         beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

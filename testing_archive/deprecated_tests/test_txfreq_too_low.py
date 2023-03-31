@@ -1,13 +1,18 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    freq too low
+Expected exception:
+    freq must be a number \(kHz\) between tx min and max frequencies .* and rx min and max
+    frequencies .* for the radar license and be within range given center frequencies \(.* kHz\),
+    sampling rates \(.* kHz\), and transition band \(.* kHz\)
 
-import sys
-import os
+NOTE: This test is covered by test_rxfreq_not_num.py since rxfreq and txfreq were combined to freq
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-
 
 class TestExperiment(ExperimentPrototype):
 
@@ -36,7 +41,7 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": [13400, 13415],  # These should be within a sas restricted frequencies range
+            "freq" : scf.options.min_freq - 1,  ### Too low
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

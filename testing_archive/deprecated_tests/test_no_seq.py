@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    No pulse sequence defined
+Expected exception:
+    Slice .* has transmission frequency but no pulse sequence defined
 
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+NOTE: Test is superceded by a test in experiment_prototype.py in check_slice_minimum_requirements
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -27,7 +28,7 @@ class TestExperiment(ExperimentPrototype):
             num_ranges = scf.POLARDARN_NUM_RANGES
         if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
-        # No sequence, should fail
+        ### No sequence, should fail
         slice_1 = {  # slice_id = 0, there is only one slice.
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM, 

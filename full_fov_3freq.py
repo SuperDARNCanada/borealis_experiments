@@ -70,7 +70,7 @@ class FullFOV3Freq(ExperimentPrototype):
         slice_1['tx_antennas'] = [i + (num_antennas // 2) for i in range(num_antennas // 2)]
 
         slice_2 = copy.deepcopy(slice_0)
-        slice_2['freq'] = 10400
+        slice_2['freq'] = 10500
         slice_2['tx_antennas'] = [i for i in range(num_antennas)]
 
         self.add_slice(slice_0)

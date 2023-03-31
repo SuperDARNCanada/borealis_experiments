@@ -1,9 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    rx_beam_order too long for scanbound
+Expected exception:
+    Slice .* beam order too long for scanbound
 
-import sys
-import os
+NOTE: I'm not sure how to test this right now
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -35,7 +39,7 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use + beams_to_use,
             "tx_beam_order": beams_to_use + beams_to_use,
-            "scanbound": [i * 3.5 for i in range(2 * len(beams_to_use))],  # I'm not sure how to test this right now
+            "scanbound": [i * 3.5 for i in range(2 * len(beams_to_use))],
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing

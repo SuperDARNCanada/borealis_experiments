@@ -1,13 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-import copy
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    scanbound not specified for all slices
+Expected exception:
+    If one slice has a scanbound, they all must to avoid up to minute-long downtimes.
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -55,11 +53,12 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
+            ### No scanbound
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
         }
         self.add_slice(slice_1)
-        self.add_slice(slice_2, interfacing_dict={0: 'SCAN'})  # no scanbound on second slice, shoul fail
+        self.add_slice(slice_2, interfacing_dict={0: 'SCAN'})  ### no scanbound on second slice, should fail
 

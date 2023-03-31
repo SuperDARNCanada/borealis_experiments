@@ -1,9 +1,12 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault: 
+    rx_beam_order list values not lists or integers
+Expected exception:
+    Slice must specify rx_beam_order that must be a list of ints or lists \(of ints\) corresponding
+    to the order of the angles in the beam_angle list
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -33,7 +36,7 @@ class TestExperiment(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": ['0', '1', '2', '3'],  # not list of lists or list of integers
+            "rx_beam_order": ['0', '1', '2', '3'],  ### not list of lists or list of integers
             "tx_beam_order": [0, 1, 2, 3],
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz

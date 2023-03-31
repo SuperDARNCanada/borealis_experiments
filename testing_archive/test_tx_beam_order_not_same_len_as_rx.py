@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    tx_beam_order different length from rx_beam_order
+Expected exception:
+    tx_beam_order does not have same length as rx_beam_order. Slice: .*
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -36,7 +35,7 @@ class TestExperiment(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "tx_beam_order": [0, 1, 2, 3],  # Longer than rx_beam_order
+            "tx_beam_order": [0, 1, 2, 3],  ### Longer than rx_beam_order
             "rx_beam_order": [0, 1, 2],
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz

@@ -1,9 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
+"""
+Experiment fault: 
+    cpid not an integer
+Expected exception:
+    CPID must be a unique int
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -12,7 +14,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
-        cpid = "Not an integer" 
+        cpid = "Not an integer" ### Should fail
         super(TestExperiment, self).__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:

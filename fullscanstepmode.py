@@ -4,7 +4,7 @@
 import os
 import sys
 
-from experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
@@ -18,8 +18,8 @@ class FullScanStepMode(ExperimentPrototype):
     def __init__(self):
         cpid = 3561
 
-        top = 15000
-        bottom = 10000
+        top = 14000
+        bottom = 11000
         step = 500
         all_steps = list(range(bottom, top, step))
 

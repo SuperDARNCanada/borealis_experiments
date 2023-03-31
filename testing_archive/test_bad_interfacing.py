@@ -1,10 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault:
+    Invalid interfacing between three different slices
+Expected exception:
+    The interfacing values of new slice cannot be reconciled. Interfacing with slice .* and with
+    slice .* does not make sense with existing interface between slices of .*
+"""
 
 import copy
-import sys
-import os
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -43,8 +47,8 @@ class TestExperiment(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
         }
         self.add_slice(slice_1)
-        # Interfacing between slices is not internally consistent. Here we add slice_2 and slice_3,
-        # with CONCURRENT interfacing to slice_1, but then try to interface 2 and 3 together as SCAN.
+        ### Interfacing between slices is not internally consistent. Here we add slice_2 and slice_3,
+        ### with CONCURRENT interfacing to slice_1, but then try to interface 2 and 3 together as SCAN.
         slice_2 = copy.deepcopy(slice_1)
         slice_3 = copy.deepcopy(slice_1)
         slice_3['freq'] = scf.COMMON_MODE_FREQ_2 + 1

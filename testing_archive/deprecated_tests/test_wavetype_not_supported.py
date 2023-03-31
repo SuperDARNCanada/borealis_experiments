@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
+"""
+Experiment fault: 
+    wavetype not supported
+Expected exception:
+    Slice .* wavetype of .* currently not supported
 
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+NOTE: test seems to be superceded by sample_building.py: get_wavetables(...)
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -28,7 +29,6 @@ class TestExperiment(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
 
-        # slice is missing a necessary parameter 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -40,6 +40,10 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq": 12996,
+            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
+            "acf": True,
+            "xcf": True,  # cross-correlation processing
+            "acfint": True,  # interferometer acfs
+            "wavetype": 'SIGN',  ### if you can't read the signs, you're gonna fail
         }
         self.add_slice(slice_1)

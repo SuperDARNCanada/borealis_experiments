@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault:
+    wavetype not defined
+Expected exception:
+    Wavetype .* not defined
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -43,6 +42,6 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "wavetype": 'SIGN',  # if you can't read the signs, you're gonna fail
+            "wavetype": 'SIGN',  ### if you can't read the signs, you're gonna fail
         }
         self.add_slice(slice_1)

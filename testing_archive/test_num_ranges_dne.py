@@ -1,12 +1,11 @@
 #!/usr/bin/python
 
-# write an experiment that raises an exception
-
-import sys
-import os
-
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
+"""
+Experiment fault: 
+    num_ranges not set in slice
+Expected exception:
+    Slice must specify num_ranges that must be an integer
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -32,7 +31,8 @@ class TestExperiment(ExperimentPrototype):
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
-            "first_range": scf.STD_FIRST_RANGE,  # num_ranges removed
+            ### num_ranges dne
+            "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
