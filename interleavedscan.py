@@ -1,22 +1,24 @@
 #!/usr/bin/python3
 
-#Copyright SuperDARN Canada 2019
+"""
+    interleavedscan
+    ~~~~~~~~~~~~~~~
+    Interleavedscan was requested in 2016 by Tomo Hori to support the ERG mission. On September
+    13th, 2016 Tomo and Evan sent emails to the darn-swg mailing list regarding this request. It was
+    requested to run starting Nov 2016 with the launch of the ERG Japanese satellite. It interleaves
+    the beam number, for example a 16-beam radar would proceed like: 0-4-8-12 - 2-6-10-14 - 1-5-9-13
+    - 3-711-15 for the forward, and the reverse of that for the backward. They were looking to
+    capture doppler velocity oscillations related to Pc3 geomagnetic pulsations near the cusp.
 
-import os
-import sys
+    :copyright: 2019 SuperDARN Canada
+    :author: Keith Kotyk
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
 class InterleavedScan(ExperimentPrototype):
-    """Interleavedscan was requested in 2016 by Tomo Hori to support the ERG mission.
-    On September 13th, 2016 Tomo and Evan sent emails to the darn-swg mailing list regarding
-    this request. It was requested to run starting Nov 2016 with the launch of the ERG Japanese
-    satellite. It interleaves the beam number, for example a 16-beam radar would proceed like:
-    0-4-8-12 - 2-6-10-14 - 1-5-9-13 - 3-711-15 for the forward, and the reverse of that for the
-    backward. They were looking to capture doppler velocity oscillations related to Pc3
-    geomagnetic pulsations near the cusp."""
     def __init__(self):
         cpid = 191
 
@@ -46,6 +48,6 @@ class InterleavedScan(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
             "lag_table": scf.STD_8P_LAG_TABLE, # lag table needed for 8P since not all lags used.
         }
-        super(InterleavedScan, self).__init__(cpid)
+        super().__init__(cpid)
 
         self.add_slice(slice_1)

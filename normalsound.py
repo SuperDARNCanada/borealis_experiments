@@ -1,19 +1,19 @@
 #!/usr/bin/python3
 
-#Copyright SuperDARN Canada 2021
+"""
+    normalsound
+    ~~~~~~~~~~~
+    Modified version of normalscan with added frequency sounding
 
-import os
-import sys
-import copy
+    :copyright: 2021 SuperDARN Canada
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
 class NormalSound(ExperimentPrototype):
-    """NormalSound is a modified version of normalscan with added frequency sounding.
 
-    """
     def __init__(self):
         cpid = 157
 
@@ -72,7 +72,7 @@ class NormalSound(ExperimentPrototype):
                 "lag_table": scf.STD_8P_LAG_TABLE, # lag table needed for 8P since not all lags used.
                 })
 
-        super(NormalSound, self).__init__(cpid, txctrfreq=centerfreq, rxctrfreq=centerfreq, comment_string=NormalSound.__doc__)
+        super().__init__(cpid, txctrfreq=centerfreq, rxctrfreq=centerfreq, comment_string=NormalSound.__doc__)
 
         self.add_slice(slices[0])
         self.add_slice(slices[1], {0:'SCAN'})

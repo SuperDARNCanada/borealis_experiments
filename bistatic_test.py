@@ -1,14 +1,16 @@
 #!/usr/bin/python
 
-# Copyright SuperDARN Canada 2022
-# The mode transmits with a pre-calculated phase progression across
-# the array which illuminates the full FOV, and receives on all antennas.
-# The first pulse in each sequence starts on the 0.1 second boundaries,
-# to enable bistatic listening on other radars.
-# This mode also chooses a frequency from another radar to listen in on,
-# also across the entire FOV simultaneously.
-import sys
-import os
+"""
+    bistatic_test
+    ~~~~~~~~~~~~~
+    The mode transmits with a pre-calculated phase progression across the array which illuminates
+    the full FOV, and receives on all antennas. The first pulse in each sequence starts on the 0.1
+    second boundaries, to enable bistatic listening on other radars. This mode also chooses a
+    frequency from another radar to listen in on, also across the entire FOV simultaneously.
+
+    :copyright: 2022 SuperDARN Canada
+    :author: Remington Rohel
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

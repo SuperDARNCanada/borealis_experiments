@@ -1,8 +1,14 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
-import os
-import sys
+"""
+    2multifsound
+    ~~~~~~~~~~~~
+    Twofsound but transmitting two frequencies concurrently instead of alternating.
+
+    :copyright: 2019 SuperDARN Canada
+    :author: Keith Kotyk
+"""
+
 import copy
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -53,7 +59,7 @@ class TwoMultifsound(ExperimentPrototype):
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
 
 
-        super(TwoMultifsound, self).__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
+        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
                 comment_string='Twofsound simultaneous in-sequence')
 
         self.add_slice(slice_1)

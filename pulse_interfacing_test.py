@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
 """
-Copyright SuperDARN Canada 2022
-Author: Remington Rohel
+    pulse_interfacing_test
+    ~~~~~~~~~~~~~~~~~~~~~~
+    This experiment is to test the various features of PULSE interfacing, and to verify the correct
+    output waveforms are generated.
 
-This experiment is to test the various features of PULSE interfacing, and
-to verify the correct output waveforms are generated.
+    :copyright: 2022 SuperDARN Canada
+    :author: Remington Rohel
 """
 
-import sys
-import os
 import copy
 
 import borealis_experiments.superdarn_common_fields as scf

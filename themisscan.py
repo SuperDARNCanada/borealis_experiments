@@ -1,17 +1,20 @@
 #!/usr/bin/python3
 
-#Copyright SuperDARN Canada 2019
+"""
+    themisscan
+    ~~~~~~~~~~
+    notes on ThemisScan purpose here TODO
 
-import os
-import sys
-import copy
+    last scheduled 2019-12-29
+
+    :copyright: 2019 SuperDARN Canada
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
 class ThemisScan(ExperimentPrototype):
-    """notes on ThemisScan purpose here TODO"""
     def __init__(self,):
         cpid = 3300
 
@@ -66,6 +69,6 @@ class ThemisScan(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
         }
-        super(ThemisScan, self).__init__(cpid)
+        super().__init__(cpid)
 
         self.add_slice(slice_1)

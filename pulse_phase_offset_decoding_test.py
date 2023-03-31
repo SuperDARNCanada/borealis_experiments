@@ -1,10 +1,15 @@
 #!/usr/bin/python
 
-import os
-import sys
+"""
+    pulse_phase_offset_decoding_test
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Testing Pulse Phase Offset removal in ACF Generation
+
+    :copyright: 2022 SuperDARN Canada
+"""
+
 import numpy as np
 
-# write an experiment that creates a new control program.
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 

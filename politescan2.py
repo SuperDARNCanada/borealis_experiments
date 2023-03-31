@@ -1,14 +1,18 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+    politescan2
+    ~~~~~~~~~~~
+    Politescan on two frequencies simultaneously
 
-# normalscan and listen has an appended listening integration time 
-# at the end of a full scan. 
-# integration times are reduced to 3s to allow time for this listening
-# integration time. 
+    normalscan and listen has an appended listening integration time at the end of a full scan.
+    integration times are reduced to 3s to allow time for this listening integration time. 
 
-import sys
-import os
+    last scheduled 2020-04-22
+
+    :copyright: 2019 SuperDARN Canada
+    :author: Marci Detwiller
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -18,10 +22,7 @@ class Politescan2(ExperimentPrototype):
 
     def __init__(self):
         cpid = 3383
-        super(Politescan2, 
-              self).__init__(
-                  cpid, comment_string='Politescan on two frequencies '
-                                       'simultaneously.')
+        super().__init__(cpid, comment_string='Politescan on two frequencies simultaneously.')
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

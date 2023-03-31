@@ -1,8 +1,13 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
-import os
-import sys
+"""
+    twofsound
+    ~~~~~~~~~
+    Standard operating Borealis experiment. Alternates transmitting in two different frequencies.
+
+    :copyright: 2023 SuperDARN Canada
+"""
+
 import copy
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -61,7 +66,7 @@ class Twofsound(ExperimentPrototype):
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
 
 
-        super(Twofsound, self).__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
+        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
                 comment_string='Twofsound classic scan-by-scan')
 
         self.add_slice(slice_1)

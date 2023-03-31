@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
-# Updated 4 July 2019
-# Incoherent Multiple Pulse Sequence Testing
-#
-# Ashton Reimer
+"""
+    impttest
+    ~~~~~~~~
+    Incoherent Multiple Pulse Sequence Testing
 
-# Updated 23 March 2020
+    Last scheduled 2022-02-07
 
+    :copyright: 2019 SuperDARN Canada
+    :author: Ashton Reimer
+"""
 
-# write an experiment that creates a new control program.
-import os
-import sys
 import copy
 import numpy as np
 
@@ -42,7 +42,7 @@ class ImptTest(ExperimentPrototype):
         impt_slice = copy.deepcopy(default_slice)
         impt_slice['pulse_phase_offset'] = phase_encode
 
-        super(ImptTest, self).__init__(cpid, comment_string="Reimer IMPT Experiment")
+        super().__init__(cpid, comment_string="Reimer IMPT Experiment")
 
         self.add_slice(default_slice)
 

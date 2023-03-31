@@ -1,13 +1,17 @@
 #!/usr/bin/python
+
 """
-Copyright SuperDARN Canada 2022
-This mode is a comparison between the transmission characteristics of full_fov.py and normalscan.py,
-running on one frequency but interleaving the two transmissions each averaging period.
-The first pulse in each sequence starts on the 0.1 second boundaries, to enable bistatic listening on other radars.
+    narrow_wide_comparison
+    ~~~~~~~~~~~~~~~~~~~~~~
+    This mode is a comparison between the transmission characteristics of full_fov.py and
+    normalscan.py, running on one frequency but interleaving the two transmissions each averaging
+    period. The first pulse in each sequence starts on the 0.1 second boundaries, to enable bistatic
+    listening on other radars.
+
+    :copyright: 2022 SuperDARN Canada
+    :author: Remington Rohel
 """
 
-import sys
-import os
 import copy
 import numpy as np
 

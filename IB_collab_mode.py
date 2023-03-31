@@ -1,10 +1,16 @@
 #!/usr/bin/python
 
-""" 
-IB collab mode written by Devin Huyghebaert 20200609
 """
-import os
-import sys
+    IB_collab_mode
+    ~~~~~~~~~~~~~~
+    IB collab mode written by Devin Huyghebaert 20200609
+
+    Last scheduled 2020-08-10
+
+    :copyright: 2020 SuperDARN Canada
+    :author: Devin Huyghebaert
+"""
+
 import datetime
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -102,7 +108,7 @@ class IBCollabMode(ExperimentPrototype):
             sum_of_freq += slice['freq']
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
 
-        super(IBCollabMode, self).__init__(
+        super().__init__(
             cpid, txctrfreq=txctrfreq,
             output_rx_rate=decimation_scheme.output_sample_rate,
             rxctrfreq=rxctrfreq, decimation_scheme=decimation_scheme,

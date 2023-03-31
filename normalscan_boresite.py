@@ -1,7 +1,12 @@
 #!/usr/bin/python
 
-import os
-import sys
+"""
+    normalscan_boresite
+    ~~~~~~~~~~~~~~~~~~~
+    normalscan but only looking boresite
+
+    :copyright: 2022 SuperDARN Canada
+"""
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
@@ -12,7 +17,7 @@ class NormalscanBoresite(ExperimentPrototype):
     def __init__(self):
         cpid = 32000
 
-        super(NormalscanBoresite, self).__init__(cpid)
+        super().__init__(cpid)
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

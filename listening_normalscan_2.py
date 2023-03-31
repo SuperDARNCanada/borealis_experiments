@@ -1,14 +1,17 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+    listening_normalscan_2
+    ~~~~~~~~~~~~~~~~~~~~~~
+    normalscan and listen has an appended listening integration time at the end of a full scan.
+    integration times are reduced to 3s to allow time for this listening integration time.
 
-# normalscan and listen has an appended listening integration time
-# at the end of a full scan.
-# integration times are reduced to 3s to allow time for this listening
-# integration time.
+    Normalscan with a second slice for listening on a separate frequency simultaneously. The beam
+    direction of the receive frequency is always offset from the transmit frequency
 
-import sys
-import os
+    :copyright: 2020 SuperDARN Canada
+    :author: Marci Detwiller
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -18,13 +21,10 @@ class ListeningNormalscan2(ExperimentPrototype):
 
     def __init__(self):
         cpid = 3382
-        super(ListeningNormalscan2,
-              self).__init__(
-                  cpid, comment_string='Normalscan with a second slice for'
-                                       ' listening on a separate frequency'
-                                       ' simultaneously. The beam direction'
-                                       ' of the receive frequency is always'
-                                       ' offset from the transmit frequency.')
+        super().__init__(cpid, comment_string='Normalscan with a second slice for listening on a '
+                                              'separate frequency simultaneously. The beam '
+                                              'direction of the receive frequency is always offset '
+                                              'from the transmit frequency.')
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

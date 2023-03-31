@@ -1,17 +1,18 @@
 #!/usr/bin/python
 
-# Copyright SuperDARN Canada 2022
-# This mode transmits two frequencies simultaneously across the entire FOV.
-# The mode transmits with a pre-calculated phase progression across
-# half the array for each frequency, so each antenna only transmits a
-# single frequency, and receives on all antennas.
-# The first pulse in each sequence starts on the 0.1 second boundaries,
-# to enable bistatic listening on other radars.
+"""
+    full_fov_3freq
+    ~~~~~~~~~~~~~~
+    This mode transmits three frequencies simultaneously across the entire FOV. The mode transmits
+    with a pre-calculated phase progression across half the array for each frequency, so each
+    antenna only transmits a single frequency, and receives on all antennas. The first pulse in each
+    sequence starts on the 0.1 second boundaries, to enable bistatic listening on other radars.
 
-import sys
-import os
+    :copyright: 2022 SuperDARN Canada
+    :author: Remington Rohel
+"""
+
 import copy
-import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype

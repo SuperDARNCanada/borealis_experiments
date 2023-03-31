@@ -1,9 +1,15 @@
 #!/usr/bin/python
 
-# write an experiment that creates a new control program.
+"""
+    normalscan_13MHz
+    ~~~~~~~~~~~~~~~~
+    normalscan but with COMMON_MODE_FREQ_2 instead
 
-import sys
-import os
+    last scheduled 2020-04-21 at all sites
+
+    :copyright: 2020 SuperDARN Canada
+    :author: Marci Detwiller
+"""
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -13,7 +19,7 @@ class Normalscan(ExperimentPrototype):
 
     def __init__(self):
         cpid = 150
-        super(Normalscan, self).__init__(cpid)
+        super().__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
