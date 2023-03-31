@@ -102,6 +102,6 @@ class RBSPScan(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
         }
-        super(RBSPScan, self).__init__(cpid)
+        super().__init__(cpid)
 
         self.add_slice(slice_1)

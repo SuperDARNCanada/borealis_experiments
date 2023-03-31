@@ -66,7 +66,7 @@ class Twofsound(ExperimentPrototype):
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
 
 
-        super(Twofsound, self).__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
+        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
                 comment_string='Twofsound classic scan-by-scan')
 
         self.add_slice(slice_1)

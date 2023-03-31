@@ -23,7 +23,7 @@ class PowerMeterMode(ExperimentPrototype):
 
         """
         cpid = 3580
-        super(PowerMeterMode, self).__init__(cpid)
+        super().__init__(cpid)
 
         # default frequency set here
         freq = scf.COMMON_MODE_FREQ_1

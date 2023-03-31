@@ -27,7 +27,7 @@ class Widebeam_3tx(ExperimentPrototype):
 
         """
         cpid = 3710
-        super(Widebeam_3tx, self).__init__(cpid)
+        super().__init__(cpid)
 
         if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES

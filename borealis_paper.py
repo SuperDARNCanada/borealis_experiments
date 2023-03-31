@@ -43,7 +43,7 @@ class BorealisPaper(ExperimentPrototype):
         slice2 = copy.deepcopy(default_slice)
         slice2['pulse_phase_offset'] = phase_encode
 
-        super(BorealisPaper, self).__init__(cpid, comment_string="Phase encoding test for borealis paper")
+        super().__init__(cpid, comment_string="Phase encoding test for borealis paper")
 
         self.add_slice(default_slice)
 

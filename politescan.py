@@ -17,7 +17,7 @@ class Politescan(ExperimentPrototype):
 
     def __init__(self):
         cpid = 3380
-        super(Politescan, self).__init__(cpid)
+        super().__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

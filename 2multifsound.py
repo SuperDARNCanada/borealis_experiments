@@ -59,7 +59,7 @@ class TwoMultifsound(ExperimentPrototype):
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
 
 
-        super(TwoMultifsound, self).__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
+        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
                 comment_string='Twofsound simultaneous in-sequence')
 
         self.add_slice(slice_1)

@@ -21,13 +21,10 @@ class ListeningNormalscan2(ExperimentPrototype):
 
     def __init__(self):
         cpid = 3382
-        super(ListeningNormalscan2,
-              self).__init__(
-                  cpid, comment_string='Normalscan with a second slice for'
-                                       ' listening on a separate frequency'
-                                       ' simultaneously. The beam direction'
-                                       ' of the receive frequency is always'
-                                       ' offset from the transmit frequency.')
+        super().__init__(cpid, comment_string='Normalscan with a second slice for listening on a '
+                                              'separate frequency simultaneously. The beam '
+                                              'direction of the receive frequency is always offset '
+                                              'from the transmit frequency.')
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

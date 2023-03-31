@@ -22,10 +22,7 @@ class Politescan2(ExperimentPrototype):
 
     def __init__(self):
         cpid = 3383
-        super(Politescan2, 
-              self).__init__(
-                  cpid, comment_string='Politescan on two frequencies '
-                                       'simultaneously.')
+        super().__init__(cpid, comment_string='Politescan on two frequencies simultaneously.')
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

@@ -24,7 +24,7 @@ class HAARPScan(ExperimentPrototype):
 
         """
         cpid = 3530
-        super(HAARPScan, self).__init__(cpid)
+        super().__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = [2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2]

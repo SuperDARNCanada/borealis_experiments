@@ -72,7 +72,7 @@ class NormalSound(ExperimentPrototype):
                 "lag_table": scf.STD_8P_LAG_TABLE, # lag table needed for 8P since not all lags used.
                 })
 
-        super(NormalSound, self).__init__(cpid, txctrfreq=centerfreq, rxctrfreq=centerfreq, comment_string=NormalSound.__doc__)
+        super().__init__(cpid, txctrfreq=centerfreq, rxctrfreq=centerfreq, comment_string=NormalSound.__doc__)
 
         self.add_slice(slices[0])
         self.add_slice(slices[1], {0:'SCAN'})

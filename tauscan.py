@@ -21,7 +21,7 @@ class Tauscan(ExperimentPrototype):
     def __init__(self):
         cpid = 503
 
-        super(Tauscan, self).__init__(cpid, comment_string=Tauscan.__doc__)
+        super().__init__(cpid, comment_string=Tauscan.__doc__)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

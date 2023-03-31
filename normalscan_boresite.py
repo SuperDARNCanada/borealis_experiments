@@ -17,7 +17,7 @@ class NormalscanBoresite(ExperimentPrototype):
     def __init__(self):
         cpid = 32000
 
-        super(NormalscanBoresite, self).__init__(cpid)
+        super().__init__(cpid)
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

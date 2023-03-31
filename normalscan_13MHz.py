@@ -19,7 +19,7 @@ class Normalscan(ExperimentPrototype):
 
     def __init__(self):
         cpid = 150
-        super(Normalscan, self).__init__(cpid)
+        super().__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

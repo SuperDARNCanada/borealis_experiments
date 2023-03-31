@@ -20,11 +20,8 @@ class ListeningNormalscan1(ExperimentPrototype):
 
     def __init__(self):
         cpid = 3381
-        super(ListeningNormalscan1,
-              self).__init__(
-                  cpid, comment_string='Normalscan with a second slice for'
-                                       ' listening on the same frequency at'
-                                       ' the end of the scan.')
+        super().__init__(cpid, comment_string='Normalscan with a second slice for listening on '
+                                              'the same frequency at the end of the scan.')
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

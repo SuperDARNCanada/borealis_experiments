@@ -80,7 +80,7 @@ class InterleaveSound(ExperimentPrototype):
             sum_of_freq += slice['freq']  # kHz, oscillator mixer frequency on the USRP for TX
         rxctrfreq = txctrfreq = int(sum_of_freq / len(slices))
 
-        super(InterleaveSound, self).__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
+        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
                                               comment_string=InterleaveSound.__doc__)
 
         self.add_slice(slices[0])

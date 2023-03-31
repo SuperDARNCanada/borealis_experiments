@@ -42,7 +42,7 @@ class ImptTest(ExperimentPrototype):
         impt_slice = copy.deepcopy(default_slice)
         impt_slice['pulse_phase_offset'] = phase_encode
 
-        super(ImptTest, self).__init__(cpid, comment_string="Reimer IMPT Experiment")
+        super().__init__(cpid, comment_string="Reimer IMPT Experiment")
 
         self.add_slice(default_slice)
 

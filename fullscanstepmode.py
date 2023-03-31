@@ -97,7 +97,7 @@ class FullScanStepMode(ExperimentPrototype):
         rxctrfreq = txctrfreq = sum(all_steps)/len(all_steps)
 
 
-        super(FullScanStepMode, self).__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
+        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
                 comment_string=FullScanStepMode.__doc__)
 
 

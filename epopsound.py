@@ -105,7 +105,7 @@ class Epopsound(ExperimentPrototype):
                     })
                 slices.append(slice_1)
 
-        super(Epopsound, self).__init__(cpid=cpid, txctrfreq=freq, rxctrfreq=freq,
+        super().__init__(cpid=cpid, txctrfreq=freq, rxctrfreq=freq,
                                         comment_string=Epopsound.__doc__)
 
         self.add_slice(slices[0])

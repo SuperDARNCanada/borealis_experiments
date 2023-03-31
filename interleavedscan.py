@@ -48,6 +48,6 @@ class InterleavedScan(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
             "lag_table": scf.STD_8P_LAG_TABLE, # lag table needed for 8P since not all lags used.
         }
-        super(InterleavedScan, self).__init__(cpid)
+        super().__init__(cpid)
 
         self.add_slice(slice_1)
