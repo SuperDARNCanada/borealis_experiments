@@ -37,6 +37,7 @@ class NormalSound(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": common_intt_ms,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "tx_beam_order": beams_to_use,
             "rx_beam_order": beams_to_use,
             # this scanbound will be aligned because len(beam_order) = len(scanbound)
             "scanbound" : [i * common_scanbound_spacing for i in range(len(beams_to_use))],
@@ -63,6 +64,7 @@ class NormalSound(ExperimentPrototype):
                 "first_range": scf.STD_FIRST_RANGE,
                 "intt": sounding_intt_ms,  # duration of an integration, in ms
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "tx_beam_order": sounding_beams,
                 "rx_beam_order": sounding_beams,
                 "scanbound" : sounding_scanbound,
                 "freq" : freq,

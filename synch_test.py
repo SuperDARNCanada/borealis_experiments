@@ -26,6 +26,7 @@ class SynchTest(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": [0.0],    # boresite
+            "tx_beam_order": [0]*16, 
             "rx_beam_order": [0]*16, 
             "scanbound": [3.55*i for i in range(16)],
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz

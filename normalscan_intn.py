@@ -52,6 +52,7 @@ class Normalscan(ExperimentPrototype):
             "intn": 1,
             #"intt": scf.INTT_7P,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "tx_beam_order": beams_to_use,
             "rx_beam_order": beams_to_use,
             #"scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use), #1 min scan
             "freq" : freq, #kHz
