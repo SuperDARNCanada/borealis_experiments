@@ -13,6 +13,7 @@
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class InterleaveSound(ExperimentPrototype):
@@ -50,6 +51,7 @@ class InterleaveSound(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "lag_table": scf.STD_8P_LAG_TABLE,  # lag table needed for 8P since not all lags used.
+            "decimation_scheme": create_default_scheme(),
         })
 
         sounding_scanbound_spacing = 1.5  # seconds
@@ -73,15 +75,16 @@ class InterleaveSound(ExperimentPrototype):
                 "xcf": True,  # cross-correlation processing
                 "acfint": True,  # interferometer acfs
                 "lag_table": scf.STD_8P_LAG_TABLE,  # lag table needed for 8P since not all lags used
+                "decimation_scheme": create_default_scheme(),
                 })
 
         sum_of_freq = 0
+        all_freqs = []
         for slice in slices:
-            sum_of_freq += slice['freq']  # kHz, oscillator mixer frequency on the USRP for TX
-        rxctrfreq = txctrfreq = int(sum_of_freq / len(slices))
+            all_freqs.append(slice['freq'])  # kHz, oscillator mixer frequency on the USRP for TX
+        rxctrfreq = txctrfreq = int((max(all_freqs) + min(all_freqs)) / 2)
 
-        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
-                                              comment_string=InterleaveSound.__doc__)
+        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq, comment_string=InterleaveSound.__doc__)
 
         self.add_slice(slices[0])
         self.add_slice(slices[1], {0: 'SCAN'})

@@ -15,6 +15,7 @@
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class Tauscan(ExperimentPrototype):
@@ -50,7 +51,8 @@ class Tauscan(ExperimentPrototype):
             "acf" : True,
             "xcf" : True,
             "acfint" : True,
-            "comment" : Tauscan.__doc__
+            "comment" : Tauscan.__doc__,
+            "decimation_scheme": create_default_scheme(),
         }
 
         self.add_slice(slice_1)

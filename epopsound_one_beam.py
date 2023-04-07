@@ -19,6 +19,7 @@ import math
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class Epopsound(ExperimentPrototype):
@@ -45,9 +46,7 @@ class Epopsound(ExperimentPrototype):
             if 'marker_period' in kwargs.keys():
                 marker_period = int(kwargs['marker_period'])
 
-        self.printing('Freqs (kHz): {}, Beam: {}, '
-                      'Marker Period: {}'
-                .format(freqs, beam, marker_period))
+        print('Freqs (kHz): {}, Beam: {}, Marker Period: {}'.format(freqs, beam, marker_period))    # TODO: Log
 
         center_freq = int(sum(freqs)/len(freqs))
 
@@ -67,7 +66,8 @@ class Epopsound(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "acf": True,
             "xcf": True,
-            "acfint": True
+            "acfint": True,
+            "decimation_scheme": create_default_scheme(),
         }
 
         for num, freq in enumerate(freqs):
@@ -95,8 +95,7 @@ class Epopsound(ExperimentPrototype):
 
             slices.append(new_slice)
 
-        super().__init__(cpid=cpid, txctrfreq=center_freq, rxctrfreq=center_freq,
-                                        comment_string=Epopsound.__doc__)
+        super().__init__(cpid=cpid, txctrfreq=center_freq, rxctrfreq=center_freq, comment_string=Epopsound.__doc__)
 
         self.add_slice(slices[0])
         if len(slices) > 1:

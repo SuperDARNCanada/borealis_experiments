@@ -14,6 +14,7 @@
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class BistaticTest(ExperimentPrototype):
@@ -61,7 +62,8 @@ class BistaticTest(ExperimentPrototype):
             "freq": freq,  # kHz
             "scanbound": [i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))],  # align each aveperiod to 3.7s boundary
             "wait_for_first_scanbound": False,
-            "align_sequences": True     # align start of sequence to tenths of a second
+            "align_sequences": True,     # align start of sequence to tenths of a second
+            "decimation_scheme": create_default_scheme(),
         }
 
         if 'listen_to' in kwargs.keys() and 'beam_order' in kwargs.keys():  # Mutually exclusive arguments

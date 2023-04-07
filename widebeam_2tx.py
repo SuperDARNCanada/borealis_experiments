@@ -15,6 +15,7 @@
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class Widebeam_2tx(ExperimentPrototype):
@@ -41,7 +42,7 @@ class Widebeam_2tx(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
 
-        self.printing('Frequency set to {}'.format(freq))
+        print('Frequency set to {}'.format(freq))   # TODO: Log
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -57,5 +58,6 @@ class Widebeam_2tx(ExperimentPrototype):
             "tx_antennas": [7, 8],  # Using two tx antennas from the middle of array
             "align_sequences": True,
             "scanbound": [i * scf.INTT_7P * 1e-3 for i in range(len(scf.STD_16_BEAM_ANGLE))],
+            "decimation_scheme": create_default_scheme(),
         })
 

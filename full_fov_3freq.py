@@ -16,6 +16,7 @@ import copy
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class FullFOV3Freq(ExperimentPrototype):
@@ -62,7 +63,8 @@ class FullFOV3Freq(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "align_sequences": True  # align start of sequence to tenths of a second
+            "align_sequences": True,  # align start of sequence to tenths of a second
+            "decimation_scheme": create_default_scheme(),
         }
 
         # Transmit on the second frequency on the right half of the array

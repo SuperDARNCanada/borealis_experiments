@@ -60,7 +60,7 @@ class FullFOV15Km(ExperimentPrototype):
         cpid = 3801
         decimation_scheme = create_15km_scheme()
 
-        super().__init__(cpid, output_rx_rate=decimation_scheme.output_sample_rate, decimation_scheme=decimation_scheme,
+        super().__init__(cpid, output_rx_rate=decimation_scheme.output_sample_rate,
                          comment_string='Full FOV 15km Resolution Experiment')
 
         num_ranges = scf.STD_NUM_RANGES * 3     # Each range is a third of the usual size, want same spatial extent
@@ -72,7 +72,7 @@ class FullFOV15Km(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
 
-        self.printing('Frequency set to {}'.format(freq))
+        print('Frequency set to {}'.format(freq))   # TODO: Log
 
         num_antennas = scf.options.main_antenna_count
 
@@ -88,5 +88,6 @@ class FullFOV15Km(ExperimentPrototype):
             "tx_beam_order": [0],   # only one pattern
             "tx_antenna_pattern": scf.easy_widebeam,
             "freq": freq,  # kHz
+            "decimation_scheme": create_15km_scheme(),
         })
 

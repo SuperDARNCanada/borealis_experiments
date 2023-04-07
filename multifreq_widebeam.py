@@ -18,6 +18,7 @@ import copy
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class MultifreqWidebeam(ExperimentPrototype):
@@ -61,6 +62,7 @@ class MultifreqWidebeam(ExperimentPrototype):
             "tx_antennas": [6, 7],  # Using two tx antennas from the middle of array
             "align_sequences": True,
             "scanbound": [i * scf.INTT_7P * 1e-3 for i in range(len(scf.STD_16_BEAM_ANGLE))],
+            "decimation_scheme": create_default_scheme(),
         }
 
         slice_2 = copy.deepcopy(slice_1)    # slice_id = 1, the second slice

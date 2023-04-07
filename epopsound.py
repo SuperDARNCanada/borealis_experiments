@@ -19,6 +19,7 @@ import math
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class Epopsound(ExperimentPrototype):
@@ -47,9 +48,8 @@ class Epopsound(ExperimentPrototype):
             if 'marker_period' in kwargs.keys():
                 marker_period = int(kwargs['marker_period'])
 
-        self.printing('Freqs (kHz): {}, Start Beam: {}, Stop Beam: {}, '
-                      'Marker Period: {}, '
-                .format(freqs, startbeam, stopbeam, marker_period))
+        print('Freqs (kHz): {}, Start Beam: {}, Stop Beam: {}, Marker Period: {}, '     # TODO: Log
+              .format(freqs, startbeam, stopbeam, marker_period))
 
         if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
@@ -84,7 +84,8 @@ class Epopsound(ExperimentPrototype):
             "tx_beam_order": beams_to_use,
             "acf": True,
             "xcf": True,
-            "acfint": True
+            "acfint": True,
+            "decimation_scheme": create_default_scheme(),
         }
         
         for freq in freqs:

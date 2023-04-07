@@ -9,6 +9,7 @@
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class SynchTest(ExperimentPrototype):
@@ -33,4 +34,5 @@ class SynchTest(ExperimentPrototype):
             "acf": False,
             "xcf": False,  # cross-correlation processing
             "acfint": False,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         })
