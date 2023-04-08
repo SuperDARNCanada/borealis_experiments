@@ -10,6 +10,9 @@ Expected exception:
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
+
 
 class TestExperiment(ExperimentPrototype):
 
@@ -37,9 +40,16 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : '12005', ### not an int or float
+            "freq" : 'twelve thousand', ### not an int or float
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
+            "rxonly": True,
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "freq\n" \
+                                "  value is not a valid float \(type=type_error.float\)"

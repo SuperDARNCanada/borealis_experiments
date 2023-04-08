@@ -12,6 +12,8 @@ import copy
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -45,6 +47,7 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
         ### Interfacing between slices is not internally consistent. Here we add slice_2 and slice_3,
@@ -55,3 +58,8 @@ class TestExperiment(ExperimentPrototype):
         self.add_slice(slice_2, interfacing_dict={0:'CONCURRENT'})
         self.add_slice(slice_3, interfacing_dict={0:'CONCURRENT', 1:'SCAN'})
 
+    @classmethod
+    def error_message(cls):
+        return ExperimentException,\
+            "The interfacing values of new slice cannot be reconciled. Interfacing with slice 0: CONCURRENT and " \
+            "with slice 1: SCAN does not make sense with existing interface between slices of None: CONCURRENT"

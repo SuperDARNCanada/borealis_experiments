@@ -11,6 +11,8 @@ Expected exception:
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -44,5 +46,14 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "clrfrqrange\n" \
+                                "  clrfrqrange must be between min and max tx frequencies \(10250000.01117587, " \
+                                "13750000.01117587\) and rx frequencies \(10250000.01117587, 13750000.01117587\)" \
+                                " according to license and/or center frequencies / sampling rates / transition " \
+                                "bands, and must have lower frequency first. \(type=value_error\)"

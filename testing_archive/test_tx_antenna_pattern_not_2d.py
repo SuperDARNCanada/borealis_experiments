@@ -10,6 +10,9 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
+
 
 ### pattern returned is only one dimensional, but is required to be 2-dimensional
 ### this will fail in check_slice() of ExperimentPrototype
@@ -45,8 +48,6 @@ class TxAntennaPatternTest(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
 
-        self.printing('Frequency set to {}'.format(freq))
-
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -62,4 +63,9 @@ class TxAntennaPatternTest(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         })
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "Slice 0 tx antenna pattern return shape \(16,\) must be 2-dimensional"

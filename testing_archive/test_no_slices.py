@@ -9,6 +9,8 @@ Expected exception:
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -28,3 +30,7 @@ class TestExperiment(ExperimentPrototype):
             num_ranges = scf.STD_NUM_RANGES
 
         ### Don't add any slices
+
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, "Invalid num_slices less than 1"

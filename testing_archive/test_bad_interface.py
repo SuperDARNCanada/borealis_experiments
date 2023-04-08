@@ -11,6 +11,9 @@ import copy
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -44,6 +47,7 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
         slice_2 = copy.deepcopy(slice_1)
@@ -52,3 +56,7 @@ class TestExperiment(ExperimentPrototype):
         ### Interface type is not in the interface_types list
         self.add_slice(slice_2, interfacing_dict={0:'THISWILLBREAK'})
 
+    @classmethod
+    def error_message(cls):
+        return ExperimentException,\
+            "Interface value with slice 0: THISWILLBREAK not valid. Types available are: \('SCAN', 'AVEPERIOD', 'SEQUENCE', 'CONCURRENT'\)"

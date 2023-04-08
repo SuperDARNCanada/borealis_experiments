@@ -9,6 +9,8 @@ Expected exception:
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,5 +45,12 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "beam_angle\n" \
+                                "  not increasing: \[26.25, 22.75, 19.25, 15.75, 12.25, 8.75, 5.25, 1.75, -1.75, " \
+                                "-5.25, -8.75, -12.25, -15.75, -19.25, -22.75, -26.25\] \(type=value_error\)"
