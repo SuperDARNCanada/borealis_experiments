@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     rx_int_antennas contain duplicate antenna numbers
-Expected exception:
-    Slice .* RX main antennas has duplicate antennas
 """
 
 import borealis_experiments.superdarn_common_fields as scf

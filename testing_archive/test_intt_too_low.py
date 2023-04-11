@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     intt too low for pulse sequence length
-Expected exception:
-    Slice .* : pulse sequence is too long for integration time given
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -40,7 +38,6 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
@@ -53,6 +50,4 @@ class TestExperiment(ExperimentPrototype):
     def error_message(cls):
         return ValidationError, "intt\n" \
                                 "  Slice 0: pulse sequence is too long for integration time given " \
-                                "\(type=value_error\)\n" \
-                                "scanbound\n" \
-                                "  Slice 0 must have intt enabled to use scanbound \(type=value_error\)"
+                                "\(type=value_error\)"

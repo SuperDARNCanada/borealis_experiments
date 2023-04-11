@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     Experiment doesn't inherit from ExperimentPrototype
-Expected exception:
-    No experiment classes are present that are built from parent class ExperimentPrototype - exiting
 """
 
 import borealis_experiments.superdarn_common_fields as scf

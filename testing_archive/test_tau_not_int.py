@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     tau_spacing not an integer
-Expected exception:
-    Slice must specify tau_spacing in us that must be an integer
 """
 
 import borealis_experiments.superdarn_common_fields as scf

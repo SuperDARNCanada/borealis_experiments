@@ -3,8 +3,6 @@
 """
 Experiment fault:
     clrfrqrange list of non-integers
-Expected exception:
-    clrfrqrange must be an integer list of length = 2
 """
 
 import borealis_experiments.superdarn_common_fields as scf

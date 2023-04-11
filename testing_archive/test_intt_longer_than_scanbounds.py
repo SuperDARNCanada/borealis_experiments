@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     intt longer than one of multiple scanbound times
-Expected exception:
-    Slice .* intt .*ms longer than one of the scanbound times
 """
 
 import borealis_experiments.superdarn_common_fields as scf

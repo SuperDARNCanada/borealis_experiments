@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     beam_angle not increasing
-Expected exception:
-    Slice .* beam_angle not increasing clockwise \(E of N is positive\)
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -28,7 +26,8 @@ class TestExperiment(ExperimentPrototype):
             num_ranges = scf.POLARDARN_NUM_RANGES
         if scf.options.site_id in ["sas", "pgr"]:
             num_ranges = scf.STD_NUM_RANGES
-        reversedlist = [-26.25, -22.75, -19.25, -15.75, -12.25, -8.75,-5.25, -1.75, 1.75, 5.25, 8.75, 12.25, 15.75, 19.25, 22.75, 26.25]
+        reversedlist = [-26.25, -22.75, -19.25, -15.75, -12.25, -8.75, -5.25, -1.75,
+                        1.75, 5.25, 8.75, 12.25, 15.75, 19.25, 22.75, 26.25]
         reversedlist.reverse()
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

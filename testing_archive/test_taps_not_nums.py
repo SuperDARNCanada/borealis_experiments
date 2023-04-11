@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Decimation stage filter taps not numbers
-Expected exception:
-    Filter tap .* is not numeric in decimation stage .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

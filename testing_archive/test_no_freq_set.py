@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Slice has no freq or clrfrqrange
-Expected exception:
-    A freq or clrfrqrange must be specified in a slice
 """
 
 import borealis_experiments.superdarn_common_fields as scf

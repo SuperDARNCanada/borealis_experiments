@@ -3,8 +3,6 @@
 """
 Experiment fault:
     num_ranges not an integer
-Expected exception:
-    Slice must specify num_ranges that must be an integer
 """
 
 import borealis_experiments.superdarn_common_fields as scf

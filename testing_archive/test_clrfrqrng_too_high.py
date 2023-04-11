@@ -3,10 +3,6 @@
 """
 Experiment fault:
     clrfrqrange too high
-Expected exception:
-    clrfrqrange must be between min and max tx frequencies .* and rx frequencies .* according to
-    license and/or center frequencies / sampling rates / transition bands, and must have lower
-    frequency first
 """
 
 import borealis_experiments.superdarn_common_fields as scf

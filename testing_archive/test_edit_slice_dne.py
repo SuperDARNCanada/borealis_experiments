@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Editing a slice that doesn't exist
-Expected exception:
-    Trying to edit .* but it does not exist in Slice_IDs list
 """
 
 import borealis_experiments.superdarn_common_fields as scf

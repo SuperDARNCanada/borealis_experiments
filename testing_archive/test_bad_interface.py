@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Interfacing two slices with an invalid interface type
-Expected exception:
-    Interface value with slice .* not valid. Types available are
 """
 
 import copy

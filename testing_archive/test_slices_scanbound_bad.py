@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Interfacing slices have different scanbound values
-Expected exception:
-    Scan boundary not the same between slices .* and .* for AVEPERIOD or CONCURRENT interfaced slices
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -8,7 +8,7 @@ Expected exception:
     frequencies .* for the radar license and be within range given center frequencies \(.* kHz\),
     sampling rates \(.* kHz\), and transition band \(.* kHz\)
 
-NOTE: This test is covered by test_rxfreq_not_num.py since rxfreq and txfreq were combined to freq
+NOTE: This test is covered by test_freq_not_num.py since rxfreq and txfreq were combined to freq
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     intt not a number
-Expected exception:
-    intt must be a number
 """
 
 import borealis_experiments.superdarn_common_fields as scf

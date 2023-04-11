@@ -3,9 +3,6 @@
 """
 Experiment fault: 
     rx_beam_order list values not integers
-Expected exception:
-    Slice must specify rx_beam_order that must be a list of ints or lists \(of ints\) corresponding
-    to the order of the angles in the beam_angle list
 """
 
 import borealis_experiments.superdarn_common_fields as scf

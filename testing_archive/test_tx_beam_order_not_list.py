@@ -3,9 +3,6 @@
 """
 Experiment fault: 
     tx_beam_order not a list
-Expected exception:
-    tx_beam_order must be a list of ints corresponding to the order of the angles in the beam_angle
-    list or an array of phases in the tx_antenna_pattern return. Slice: .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

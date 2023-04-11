@@ -3,10 +3,6 @@
 """
 Experiment fault: 
     cpid negative integer
-Expected exception:
-    The CPID should be a positive number in the experiment. Borealis will determine if it should be
-    negative based on the scheduling mode. Only experiments run during discretionary time will have
-    negative CPIDs.
 """
 
 import borealis_experiments.superdarn_common_fields as scf

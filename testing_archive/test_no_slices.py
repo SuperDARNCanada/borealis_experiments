@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Experiment has no slices
-Expected exception:
-    Invalid num_slices less than 1
 """
 
 import borealis_experiments.superdarn_common_fields as scf

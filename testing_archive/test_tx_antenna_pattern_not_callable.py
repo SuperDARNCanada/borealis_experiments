@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_antenna_pattern not a function
-Expected exception:
-    Slice .* tx antenna pattern must be a function
 """
 
 import borealis_experiments.superdarn_common_fields as scf

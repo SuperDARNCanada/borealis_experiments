@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Decimation stage filter taps not a list
-Expected exception:
-    Filter taps .* of type .* must be a list in decimation stage .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     interfacing slices have different intn
-Expected exception:
-    Slices .* and .* are SEQUENCE or CONCURRENT interfaced and do not have the same NAVE goal intn
 """
 
 import copy

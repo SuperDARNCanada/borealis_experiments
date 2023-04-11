@@ -3,8 +3,6 @@
 """
 Experiment fault:
     scanbound specified by not intt
-Expected exception:
-    Slice .* must have intt enabled to use scanbound
 """
 
 import borealis_experiments.superdarn_common_fields as scf

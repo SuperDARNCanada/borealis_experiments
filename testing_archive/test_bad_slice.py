@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     Adding a slice that isn't a dictionary of parameters
-Expected exception:
-    Attempt to add a slice failed - .* is not a dictionary of slice parameters
 """
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from experiment_prototype.experiment_exception import ExperimentException

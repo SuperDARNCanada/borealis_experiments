@@ -3,8 +3,6 @@
 """
 Experiment fault:
     pulse_len not specified in slice
-Expected exception:
-    Slice must specify pulse_len in us that must be an integer
 """
 
 import borealis_experiments.superdarn_common_fields as scf

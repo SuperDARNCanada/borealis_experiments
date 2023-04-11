@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Editing slice with invalid parameter
-Expected exception:
-    Cannot edit slice ID .*: .* is not a valid slice parameter
 """
 
 import borealis_experiments.superdarn_common_fields as scf

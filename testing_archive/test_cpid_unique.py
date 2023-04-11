@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     cpid non unique integer
-Expected exception:
-    CPID must be unique. .* is in use by another local experiment
 """
 
 import borealis_experiments.superdarn_common_fields as scf

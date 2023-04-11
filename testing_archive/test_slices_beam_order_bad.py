@@ -3,9 +3,6 @@
 """
 Experiment fault: 
     invalid beam_order for slice interfacing
-Expected exception:
-    Slices .* and .* are SEQUENCE or CONCURRENT interfaced but do not have the same number of
-    averaging periods in their beam order
 """
 
 import copy

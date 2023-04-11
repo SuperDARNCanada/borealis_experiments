@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Slice has specified unused parameter
-Expected exception:
-    Slice .* has a parameter that is not used: .* = .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

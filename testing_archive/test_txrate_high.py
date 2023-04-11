@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_bandwidth too high
-Expected exception:
-    Experiment's transmit bandwidth is too large
 """
 
 import borealis_experiments.superdarn_common_fields as scf

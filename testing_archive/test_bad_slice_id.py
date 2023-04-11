@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     Interfacing between two slices with an unknown slice ID
-Expected exception:
-    Cannot add slice: the interfacing_dict set interfacing to an unknown slice .* not in slice ids
 """
 
 import copy

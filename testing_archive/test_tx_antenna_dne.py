@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_antenna specifies antenna that doesn't exist
-Expected exception:
-    Slice .* specifies TX main array antenna numbers over config max .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

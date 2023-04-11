@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     No beam_angle set in slice
-Expected exception:
-    Slice must specify beam_angle that must be a list of numbers \(ints or floats\) which are angles of degrees off boresight \(positive E of N\)
 """
 
 import borealis_experiments.superdarn_common_fields as scf

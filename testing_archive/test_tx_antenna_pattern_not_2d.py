@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_antenna_pattern not 2d
-Expected exception:
-    Slice .* tx antenna pattern return shape .* must be 2-dimensional
 """
 import numpy as np
 

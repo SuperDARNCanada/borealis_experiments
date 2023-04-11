@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     Non-integer decimation rate
-Expected exception:
-    Decimation rate is not an integer
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -1,11 +1,8 @@
 #!/usr/bin/python
 
 """
-Experiment fault: 
-    freq set to a non-number
-Expected exception:
-    freq must be a number \(kHz\) between rx min and max frequencies .* for the radar license and be
-    within range given center frequency .* kHz, sampling rate .* kHz, and transition band .* kHz
+Experiment fault:
+    freq within restricted range
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -39,17 +36,17 @@ class TestExperiment(ExperimentPrototype):
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
+            "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : 'twelve thousand', ### not an int or float
+            ### TODO: Make this site agnostic
+            "freq" : 13400,  ### This should be in a restricted range for the Saskatoon radar
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "decimation_scheme": create_default_scheme(),
-            "rxonly": True,
         }
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "freq\n" \
-                                "  value is not a valid float \(type=type_error.float\)"
+        return ValidationError, "freq is within a restricted frequency range \(13155, 13617\)"

@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     beam_angle contains duplicates
-Expected exception:
-    Slice .* beam angles has duplicate directions
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_beam_order not specified alongside tx_antenna_pattern
-Expected exception:
-    tx_beam_order must be specified if tx_antenna_pattern specified. Slice .*
 """
 
 import numpy as np

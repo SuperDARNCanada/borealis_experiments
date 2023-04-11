@@ -3,8 +3,6 @@
 """
 Experiment fault:
     pulse_sequence containing non-integer values
-Expected exception:
-    Slice must specify pulse_sequence that must be a list of integers
 """
 
 import borealis_experiments.superdarn_common_fields as scf

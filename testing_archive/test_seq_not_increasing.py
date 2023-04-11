@@ -3,8 +3,6 @@
 """
 Experiment fault:
     pulse_sequence not increasing
-Expected exception:
-    Slice .* pulse_sequence not increasing
 """
 
 import borealis_experiments.superdarn_common_fields as scf

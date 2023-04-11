@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     first_range not specified in slice
-Expected exception:
-    Slice must specify first_range in km that must be a number
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     rx_bandwidth too large
-Expected exception:
-    Experiment's receive bandwidth is too large
 """
 
 import borealis_experiments.superdarn_common_fields as scf

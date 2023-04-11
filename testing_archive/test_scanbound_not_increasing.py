@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     scanbound non-increasing values
-Expected exception:
-    Slice .* scanbound times must be increasing
 """
 
 import borealis_experiments.superdarn_common_fields as scf

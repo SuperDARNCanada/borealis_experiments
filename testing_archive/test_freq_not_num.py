@@ -2,10 +2,7 @@
 
 """
 Experiment fault: 
-    freq above max freq
-Expected exception:
-    freq must be a number \(kHz\) between rx min and max frequencies .* for the radar license and be
-    within range given center frequency .* kHz, sampling rate .* kHz, and transition band .* kHz
+    freq set to a non-number
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -40,7 +37,7 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : scf.options.max_freq + 1, ### Above the max freq
+            "freq" : 'twelve thousand', ### not an int or float
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -52,5 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "freq\n" \
-                                "  ensure this value is less than or equal to 20000.0 " \
-                                "\(type=value_error.number.not_le; limit_value=20000.0\)"
+                                "  value is not a valid float \(type=type_error.float\)"

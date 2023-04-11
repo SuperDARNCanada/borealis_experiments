@@ -3,9 +3,6 @@
 """
 Experiment fault: 
     pulse_len invalid
-Expected exception:
-    For an experiment slice with real-time acfs, pulse length must be equal \(within 1 us\) to
-    1\/output_rx_rate to make acfs valid. Current pulse length is .* us, output rate is .* Hz
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -18,23 +15,15 @@ class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
         cpid = 1
-        super(TestExperiment, self).__init__(cpid)
+        super().__init__(cpid)
 
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
-
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr"]:
-            num_ranges = scf.STD_NUM_RANGES
+        beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": int(1/self.output_rx_rate) + 1,  ### pulse_len must be the same as 1/output_rx_rate (within floating point error)
-            "num_ranges": num_ranges,
+            "pulse_len": int(1/self.output_rx_rate*1e6) + 1,  ### pulse_len must be the same as 1/output_rx_rate (within floating point error)
+            "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
@@ -51,6 +40,6 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "pulse_len\n" \
-                                "  ensure this value is greater than or equal to 100.0 " \
-                                "\(type=value_error.number.not_ge; limit_value=100.0\)"
+        return ValidationError, "For an experiment slice with real-time acfs, pulse length must be equal \(within 1 " \
+                                "us\) to 1/output_rx_rate to make acfs valid. Current pulse length is 301 us, output" \
+                                " rate is 3333.3333333333335 Hz. Slice: 0 \(type=value_error\)"

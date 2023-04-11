@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     cpid not an integer
-Expected exception:
-    CPID must be a unique int
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Adding a pulse that doesn't exist to lag table
-Expected exception:
-    Lag .* not valid; One of the pulses does not exist in the sequence
 """
 
 import itertools
@@ -13,7 +11,6 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 from pydantic import ValidationError
-
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,8 +39,8 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
+            "scanbound": [i * 3.5 for i in range(len(beams_to_use))],   # 1 min scan
+            "freq" : scf.COMMON_MODE_FREQ_1,    # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -51,17 +48,15 @@ class TestExperiment(ExperimentPrototype):
         }
 
         lag_table = list(itertools.combinations(slice_1['pulse_sequence'], 2))
-        lag_table.append([slice_1['pulse_sequence'][0], slice_1[
-            'pulse_sequence'][0]])  # lag 0
-        lag_table.append([99,0]) ### Should fail on this!!
+        lag_table.append([slice_1['pulse_sequence'][0], slice_1['pulse_sequence'][0]])  # lag 0
+        lag_table.append([99, 0]) ### Should fail on this!!
         # sort by lag number
         lag_table = sorted(lag_table, key=lambda x: x[1] - x[0])
-        lag_table.append([slice_1['pulse_sequence'][-1], slice_1[
-            'pulse_sequence'][-1]])  # alternate lag 0
+        lag_table.append([slice_1['pulse_sequence'][-1], slice_1['pulse_sequence'][-1]])  # alternate lag 0
         slice_1['lag_table'] = lag_table
         
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Lag \[99, 0\] not valid; One of the pulses does not exist in the sequence. Slice 0"
+        return ValidationError, "Lag \[99, 0\] not valid; One of the pulses does not exist in the sequence. Slice: 0"

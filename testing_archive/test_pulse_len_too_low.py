@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     pulse_len too small
-Expected exception:
-    Slice .* pulse length too small
 """
 
 import borealis_experiments.superdarn_common_fields as scf

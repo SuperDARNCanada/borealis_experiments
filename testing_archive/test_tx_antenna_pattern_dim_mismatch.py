@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_antenna_pattern dimension mismatch with number of main antennas
-Expected exception:
-    Slice .* tx antenna pattern return 2nd dimension \(.*\) must be equal to number of main antennas \(.*\)
 """
 
 import numpy as np

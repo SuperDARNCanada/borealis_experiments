@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     tx_bandwidth not divisor of usrp clock rate
-Expected exception:
-    Experiment's transmit bandwidth .* is not possible as it must be an integer divisor of USRP master clock rate
 """
 
 import borealis_experiments.superdarn_common_fields as scf

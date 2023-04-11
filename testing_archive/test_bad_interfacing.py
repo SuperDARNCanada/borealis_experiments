@@ -3,9 +3,6 @@
 """
 Experiment fault:
     Invalid interfacing between three different slices
-Expected exception:
-    The interfacing values of new slice cannot be reconciled. Interfacing with slice .* and with
-    slice .* does not make sense with existing interface between slices of .*
 """
 
 import copy

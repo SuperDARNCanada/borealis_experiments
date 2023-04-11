@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     scanbound not specified for all slices
-Expected exception:
-    If one slice has a scanbound, they all must to avoid up to minute-long downtimes.
 """
 
 import borealis_experiments.superdarn_common_fields as scf

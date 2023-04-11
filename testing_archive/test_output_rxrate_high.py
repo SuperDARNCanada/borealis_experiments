@@ -3,8 +3,6 @@
 """
 Experiment fault:
     output_rx_rate higher than max sample rate
-Expected exception:
-    Experiment's output sample rate is too high
 """
 
 import borealis_experiments.superdarn_common_fields as scf

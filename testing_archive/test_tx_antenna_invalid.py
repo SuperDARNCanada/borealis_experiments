@@ -2,9 +2,7 @@
 
 """
 Experiment fault:
-    freq within restricted range
-Expected exception:
-    freq is within a restricted frequency range .*
+    tx_antennas has invalid values (above and below the allowed range)
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -17,17 +15,10 @@ class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
         cpid = 1
-        super(TestExperiment, self).__init__(cpid)
+        super().__init__(cpid)
 
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
-
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr"]:
-            num_ranges = scf.STD_NUM_RANGES
+        beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
+        num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -39,16 +30,16 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            ### TODO: Make this site agnostic
-            "freq" : 13400,  ### This should be in a restricted range for the Saskatoon radar
-            "acf": True,
-            "xcf": True,  # cross-correlation processing
-            "acfint": True,  # interferometer acfs
+            "freq": scf.COMMON_MODE_FREQ_1, #kHz
+            "tx_antennas": [-1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16],  ### antenna -1 and 16 are out of range
             "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "freq is within a restricted frequency range \(13155, 13617\)"
+        return ValidationError, "tx_antennas -> 0\n" \
+                                "  ensure this value is greater than or equal to 0 \(type=value_error.number.not_ge; " \
+                                "limit_value=0\)\n" \
+                                "tx_antennas -> 15\n" \
+                                "  ensure this value is less than 16 \(type=value_error.number.not_lt; limit_value=16\)"

@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_antenna_pattern returns non-numpy array
-Expected exception:
-    Slice .* tx antenna pattern return is not a numpy array
 """
 
 import borealis_experiments.superdarn_common_fields as scf

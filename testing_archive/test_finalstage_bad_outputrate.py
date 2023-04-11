@@ -3,9 +3,6 @@
 """
 Experiment fault:
     Building decimation stage with bad output rate
-Expected exception: 
-    Last decimation stage .* does not have output rate .* equal to
-    requested output data rate .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

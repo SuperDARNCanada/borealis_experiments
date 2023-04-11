@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     Decimation stage x invalid output rate
-Expected exception:
-    Decimation stage .* output rate .* does not equal next stage .* input rate .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

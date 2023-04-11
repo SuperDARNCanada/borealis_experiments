@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     pulse_len too high
-Expected exception:
-    Slice .* pulse length greater than tau_spacing
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,9 +3,6 @@
 """
 Experiment fault: 
     Interfacing slices have different intt
-Expected exception:
-    Slices .* and .* are SEQUENCE or CONCURRENT interfaced and do not have the same Averaging Period
-    duration intt
 """
 
 import copy

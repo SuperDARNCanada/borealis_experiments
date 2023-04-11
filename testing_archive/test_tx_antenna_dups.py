@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_antennas has duplicate values
-Expected exception:
-    Slice .* TX main antennas has duplicate antennas
 """
 
 import borealis_experiments.superdarn_common_fields as scf

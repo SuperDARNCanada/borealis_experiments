@@ -2,9 +2,7 @@
 
 """
 Experiment fault: 
-    tau_spacing too smal
-Expected exception:
-    Slice .* multi-pulse increment too small
+    tau_spacing too small
 """
 
 import borealis_experiments.superdarn_common_fields as scf

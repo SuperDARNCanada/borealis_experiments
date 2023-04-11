@@ -3,8 +3,6 @@
 """
 Experiment fault:
     scanbound containing negative values
-Expected exception:
-    Slice .* scanbound times must be non-negative
 """
 
 import borealis_experiments.superdarn_common_fields as scf

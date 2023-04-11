@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     tx_antenna_pattern magnitude too large
-Expected exception:
-    Slice .* tx antenna pattern return must not have any values with a magnitude greater than 1
 """
 
 import numpy as np

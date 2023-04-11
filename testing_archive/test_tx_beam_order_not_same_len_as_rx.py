@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_beam_order different length from rx_beam_order
-Expected exception:
-    tx_beam_order does not have same length as rx_beam_order. Slice: .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

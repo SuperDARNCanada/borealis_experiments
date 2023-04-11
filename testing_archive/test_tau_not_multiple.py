@@ -3,9 +3,6 @@
 """
 Experiment fault: 
     tau_spacing not multiple of output rx sampling period
-Expected exception:
-    Slice .* correlation lags will be off because tau_spacing .* us is not a multiple of the output
-    rx sampling period \(1\/output_rx_rate .* Hz\).
 """
 
 import borealis_experiments.superdarn_common_fields as scf

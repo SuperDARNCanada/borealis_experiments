@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Setting averaging_method to an invalid method
-Expected exception:
-    Averaging method .* not valid method. Possible methods are .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

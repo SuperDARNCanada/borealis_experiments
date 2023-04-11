@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     rx_int_antennas specify an antenna that doesn't exist
-Expected exception:
-    Slice .* specifies interferometer array antenna numbers over config max .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,9 +3,6 @@
 """
 Experiment fault: 
     tx_beam_order not integer values in list
-Expected exception:
-    tx_beam_order must be a list of ints corresponding to the order of the angles in the beam_angle
-    list or an array of phases in the tx_antenna_pattern return. Slice: .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -51,16 +48,10 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "6 validation errors for ExperimentSlice\n" \
+        return ValidationError, "3 validation errors for ExperimentSlice\n" \
                                 "tx_beam_order -> 0\n" \
                                 "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "tx_beam_order -> 0\n" \
-                                "  value is not a valid list \(type=type_error.list\)\n" \
                                 "tx_beam_order -> 1\n" \
                                 "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "tx_beam_order -> 1\n" \
-                                "  value is not a valid list \(type=type_error.list\)\n" \
                                 "tx_beam_order -> 2\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "tx_beam_order -> 2\n" \
-                                "  value is not a valid list \(type=type_error.list\)"
+                                "  value is not a valid integer \(type=type_error.integer\)"

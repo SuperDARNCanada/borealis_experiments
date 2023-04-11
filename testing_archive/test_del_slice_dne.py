@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     Removing a slice that doesn't exist
-Expected exception:
-    Cannot remove slice id .* : it does not exist in slice dictionary
 """
 
 import borealis_experiments.superdarn_common_fields as scf

@@ -3,8 +3,6 @@
 """
 Experiment fault:
     tx_antennas specifies too many channels
-Expected exception:
-    Slice .* has too many main TX antenna channels .* greater than config .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

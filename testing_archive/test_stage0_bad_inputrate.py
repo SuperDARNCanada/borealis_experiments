@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Decimation stage 0 invalid input rate
-Expected exception:
-    Decimation stage 0 does not have input rate .* equal to USRP sampling rate .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

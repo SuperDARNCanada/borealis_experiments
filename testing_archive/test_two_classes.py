@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     File contains two classes
-Expected exception:
-    You have more than one experiment class in your experiment file - exiting
 """
 
 import borealis_experiments.superdarn_common_fields as scf

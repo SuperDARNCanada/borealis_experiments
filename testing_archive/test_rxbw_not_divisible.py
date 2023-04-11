@@ -3,8 +3,6 @@
 """
 Experiment fault:
     rx_bandwidth not divisible by usrp clock rate
-Expected exception:
-    Experiment's receive bandwidth .* is not possible as it must be an integer divisor of USRP master clock rate
 """
 
 import borealis_experiments.superdarn_common_fields as scf

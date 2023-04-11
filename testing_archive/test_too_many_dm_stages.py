@@ -3,8 +3,6 @@
 """
 Experiment fault:
     Too many decimation stages
-Expected exception:
-    Number of decimation stages .* is greater than max available .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf

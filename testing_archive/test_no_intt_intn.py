@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     No intt or intn
-Expected exception:
-    Slice .* has transmission but no intt or intn
 """
 
 import borealis_experiments.superdarn_common_fields as scf

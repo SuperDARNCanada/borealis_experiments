@@ -3,8 +3,6 @@
 """
 Experiment fault:
     wait_for_first_scanbound not a boolean value
-Expected exception:
-    Slice .* wait_for_first_scanbound must be True or False, got .* instead 
 """
 
 import borealis_experiments.superdarn_common_fields as scf

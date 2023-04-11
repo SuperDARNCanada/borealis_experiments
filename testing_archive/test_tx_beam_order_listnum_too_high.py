@@ -3,8 +3,6 @@
 """
 Experiment fault: 
     tx_beam_order specifies beam that doesn't exist
-Expected exception:
-    Beam number .* in tx_beam_order could not index in beam_angle list of length .*. Slice: .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf
