@@ -19,7 +19,6 @@ import math
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class Epopsound(ExperimentPrototype):
@@ -85,7 +84,6 @@ class Epopsound(ExperimentPrototype):
             "acf": True,
             "xcf": True,
             "acfint": True,
-            "decimation_scheme": create_default_scheme(),
         }
         
         for freq in freqs:

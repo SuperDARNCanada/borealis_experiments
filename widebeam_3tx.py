@@ -15,7 +15,6 @@
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class Widebeam_3tx(ExperimentPrototype):
@@ -56,6 +55,5 @@ class Widebeam_3tx(ExperimentPrototype):
             "tx_beam_order": [0],
             "freq": freq,  # kHz
             "tx_antennas": [6, 7, 8],  # Using three tx antennas from near the middle of array
-            "decimation_scheme": create_default_scheme(),
         })
 

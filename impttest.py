@@ -16,11 +16,11 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 def phase_encode(beam_iter, sequence_num, num_pulses):
     return np.random.uniform(-180.0, 180, num_pulses)
+
 
 class ImptTest(ExperimentPrototype):
 
@@ -38,7 +38,6 @@ class ImptTest(ExperimentPrototype):
             "rx_beam_order": [0],
             "tx_beam_order": [0],
             "freq" : 13100,
-            "decimation_scheme": create_default_scheme(),
         }
 
         impt_slice = copy.deepcopy(default_slice)

@@ -11,7 +11,6 @@
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 class Politescan(ExperimentPrototype):
@@ -39,6 +38,5 @@ class Politescan(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "decimation_scheme": create_default_scheme(),
             "rxonly": True,
         })

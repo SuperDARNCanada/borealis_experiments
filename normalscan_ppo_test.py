@@ -12,7 +12,6 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
 
 
 def phase_encode(beam_iter, sequence_num, num_pulses):
@@ -66,6 +65,5 @@ class Normalscan_PPO_Test(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "pulse_phase_offset": phase_encode,
-            "decimation_scheme": create_default_scheme(),
         })
 
