@@ -9,7 +9,7 @@ Expected exception:
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
 from experiment_prototype.experiment_exception import ExperimentException
 
 

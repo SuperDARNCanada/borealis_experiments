@@ -7,7 +7,7 @@ Experiment fault:
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import \
+from experiment_prototype.experiment_utils.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
 from experiment_prototype.experiment_exception import ExperimentException
 
