@@ -24,8 +24,8 @@ class EEAAO(ExperimentPrototype):
     def __init__(self, **kwargs):
         """
         kwargs:
-            tx_freqs: str, frequencies in kHz to transmit on. E.g. "10500,12000"
-            rx_freqs: str, frequencies in kHz to receive on. E.g. "10500,12000"
+            tx_freqs: str, list of frequencies in kHz to transmit on. Format as "[10500 12000]"
+            rx_freqs: str, list of frequencies in kHz to receive on. Format as "[10600 12200]"
         """
         cpid = 3777
 
@@ -40,9 +40,9 @@ class EEAAO(ExperimentPrototype):
         tx_freqs = parse_freqs_from_string(kwargs.get('tx_freqs', ''))  # Default to no frequencies specified
         rx_freqs = parse_freqs_from_string(kwargs.get('rx_freqs', ''))  # Default to no frequencies specified
 
-        if len(set(tx_freqs)) != len(kwargs.get('tx_freqs', '').split(',')):
+        if len(set(tx_freqs)) != len(kwargs.get('tx_freqs', '').split(' ')):
             raise ValueError(f"Duplicate TX frequencies specified: {kwargs.get('tx_freqs', '')}")
-        if len(set(rx_freqs)) != len(kwargs.get('rx_freqs', '').split(',')):
+        if len(set(rx_freqs)) != len(kwargs.get('rx_freqs', '').split(' ')):
             raise ValueError(f"Duplicate RX frequencies specified: {kwargs.get('rx_freqs', '')}")
 
         all_freqs = set(tx_freqs).union(set(rx_freqs))
@@ -66,7 +66,7 @@ class EEAAO(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": scf.INTT_7P,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [[i for i in range(scf.STD_16_BEAM_ANGLE)]],   # All beams
+            "rx_beam_order": [scf.STD_16_FORWARD_BEAM_ORDER],   # All beams
             "scanbound": [i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))],  # align each aveperiod to 3.7s boundary
             "wait_for_first_scanbound": False,
             "align_sequences": True,     # align start of sequence to tenths of a second
