@@ -5,14 +5,9 @@ This mode was made for collaboration with the RRI instrument on the CASSIOPE sat
 by request of Dr. Kuldeep Pandey in February 2023.
 """
 
-import sys
-import os
 import numpy as np
 
-BOREALISPATH = os.environ['BOREALISPATH']
-sys.path.append(BOREALISPATH)
-
-import experiments.superdarn_common_fields as scf
+import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
