@@ -41,7 +41,7 @@ class Epop2023(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = int(kwargs['freq'])
 
-        self.printing('Frequency set to {}'.format(freq))
+        print('Frequency set to {}'.format(freq))
 
         slice_0 = {  # slice_id = 0
             "pulse_sequence": scf.SEQUENCE_7P,
