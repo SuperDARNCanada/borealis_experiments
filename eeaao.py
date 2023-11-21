@@ -24,30 +24,31 @@ class EEAAO(ExperimentPrototype):
     def __init__(self, **kwargs):
         """
         kwargs:
-            tx_freqs: str, list of frequencies in kHz to transmit on. Format as "[10500 12000]"
-            rx_freqs: str, list of frequencies in kHz to receive on. Format as "[10600 12200]"
+            tx_freqs: str, list of frequencies in kHz to transmit on. Format as "[10500,12000]"
+            rx_freqs: str, list of frequencies in kHz to receive on. Format as "[10600,12200]"
         """
         cpid = 3777
 
-        num_ranges = scf.STD_NUM_RANGES
-
         def parse_freqs_from_string(freqs):
             freq_list = []
-            for freq in freqs.split(','):
-                freq_list.append(int(freq))
+            if freqs:
+                for f in freqs.strip('[]').split(','):
+                    freq_list.append(int(f))
             return freq_list
 
         tx_freqs = parse_freqs_from_string(kwargs.get('tx_freqs', ''))  # Default to no frequencies specified
         rx_freqs = parse_freqs_from_string(kwargs.get('rx_freqs', ''))  # Default to no frequencies specified
 
-        if len(set(tx_freqs)) != len(kwargs.get('tx_freqs', '').split(' ')):
-            raise ValueError(f"Duplicate TX frequencies specified: {kwargs.get('tx_freqs', '')}")
-        if len(set(rx_freqs)) != len(kwargs.get('rx_freqs', '').split(' ')):
-            raise ValueError(f"Duplicate RX frequencies specified: {kwargs.get('rx_freqs', '')}")
-
         all_freqs = set(tx_freqs).union(set(rx_freqs))
         if len(all_freqs) == 0:
-            raise ValueError("No RX or TX frequencies specified")
+            raise ValueError(f"No RX or TX frequencies specified.\t"
+                             f"tx_freqs: {kwargs.get('tx_freqs', '')}\t"
+                             f"rx_freqs: {kwargs.get('rx_freqs', '')}")
+
+        if len(set(tx_freqs)) != len(tx_freqs):
+            raise ValueError(f"Duplicate TX frequencies specified: {tx_freqs}")
+        if len(set(rx_freqs)) != len(rx_freqs):
+            raise ValueError(f"Duplicate RX frequencies specified: {rx_freqs}")
 
         # Calculate center frequency
         max_freq = max(all_freqs)
@@ -62,7 +63,7 @@ class EEAAO(ExperimentPrototype):
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": num_ranges,
+            "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": scf.INTT_7P,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
