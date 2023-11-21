@@ -24,8 +24,8 @@ class EEAAO(ExperimentPrototype):
     def __init__(self, **kwargs):
         """
         kwargs:
-            tx_freqs: str, list of frequencies in kHz to transmit on. Format as "[10500,12000]"
-            rx_freqs: str, list of frequencies in kHz to receive on. Format as "[10600,12200]"
+            tx_freqs: str, list of frequencies in kHz to transmit on. Format as "[10500,12000]" or "10500,12000"
+            rx_freqs: str, list of frequencies in kHz to receive on. Format as "[10600,12200]" or "10600,12200"
         """
         cpid = 3777
 
