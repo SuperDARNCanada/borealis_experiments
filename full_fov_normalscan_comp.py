@@ -26,7 +26,7 @@ class FullFOVNormalscanComparison(ExperimentPrototype):
         freq: int, kHz
 
         """
-        cpid = 3813
+        cpid = 3814
         super().__init__(cpid)
 
         num_ranges = scf.STD_NUM_RANGES
