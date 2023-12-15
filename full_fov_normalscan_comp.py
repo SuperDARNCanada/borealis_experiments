@@ -53,6 +53,7 @@ class FullFOVNormalscanComparison(ExperimentPrototype):
 
         slice_1 = copy.deepcopy(slice_0)
         slice_1.pop('tx_antenna_pattern')
+        slice_1['rx_beam_order'] = [i for i in range(len(scf.STD_16_BEAM_ANGLE))]
         slice_1['tx_beam_order'] = [i for i in range(len(scf.STD_16_BEAM_ANGLE))]
 
         self.add_slice(slice_0)
