@@ -163,11 +163,12 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
     phases = np.zeros(num_antennas, dtype=np.complex64)
     if len(tx_antennas) == 16:
         if frequency_khz in cached_values_16_antennas.keys():
-            phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_16_antennas[frequency_khz]))
+            # Multiply by 0.99 to avoid magnitude exceeding 1 by floating point error
+            phases[tx_antennas] = 0.99 * np.exp(1j * np.pi/180. * np.array(cached_values_16_antennas[frequency_khz]))
             return phases.reshape(1, num_antennas)
     elif len(tx_antennas) == 8:
         if frequency_khz in cached_values_8_antennas.keys():
-            phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_8_antennas[frequency_khz]))
+            phases[tx_antennas] = 0.99 * np.exp(1j * np.pi/180. * np.array(cached_values_8_antennas[frequency_khz]))
             return phases.reshape(1, num_antennas)
     # If you get this far, the number of antennas or frequency is not supported for this function.
     raise ValueError(f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "
