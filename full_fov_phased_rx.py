@@ -18,7 +18,7 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
-def rx_phase_pattern(freq_khz, antenna_count, antenna_spacing, offset=0.0):
+def rx_phase_pattern(beam_angle, freq_khz, antenna_count, antenna_spacing, offset=0.0):
 
     xcf_directions = {
         10400: [-28.8, -23.96, -19.92, -14.68, -11.24, -7.4, -3.48, -1.36,
@@ -45,9 +45,9 @@ def rx_phase_pattern(freq_khz, antenna_count, antenna_spacing, offset=0.0):
                 2.12, 4.93, 7.55, 11.34, 14.48, 17.82, 22.96, 29.7],
         13200: [-29.6, -23.06, -17.92, -14.48, -11.24, -7.6, -4.96, -2.12,
                 2.12, 4.96, 7.6, 11.24, 14.48, 17.92, 23.06, 29.7],
-    }
+        }
 
-    return get_phase_shift(xcf_directions[freq_khz], freq_khz, antenna_count,
+    return get_phase_shift(xcf_directions[int(freq_khz)], freq_khz, antenna_count,
                            antenna_spacing, offset)
 
 
