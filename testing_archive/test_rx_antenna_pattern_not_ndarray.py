@@ -11,6 +11,7 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from pydantic import ValidationError
 
 ### Method returns a list which will fail in check_slice()
 ### of ExperimentPrototype
@@ -63,3 +64,7 @@ class RxAntennaPatternTest(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
         })
 
+    @classmethod
+    def error_message(cls):
+        return ValidationError, \
+               "Slice rx antenna pattern return must be an ndarray"
