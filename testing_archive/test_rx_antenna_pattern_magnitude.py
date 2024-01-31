@@ -22,7 +22,7 @@ def rx_antenna_pattern(beam_angle, freq, rx_antennas, rx_spacing, offset=0.0):
     return pattern
 
 
-class TxAntennaPatternTest(ExperimentPrototype):
+class RxAntennaPatternTest(ExperimentPrototype):
 
     def __init__(self, **kwargs):
         """
@@ -47,8 +47,6 @@ class TxAntennaPatternTest(ExperimentPrototype):
         if kwargs:
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
-
-        self.printing('Frequency set to {}'.format(freq))
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

@@ -2,25 +2,15 @@
 
 """
 Experiment fault: 
-    rx_antenna_pattern interferometer array is the wrong shape
+    rx_antenna_pattern not a function
 Expected exception:
-    Slice .* rx antenna pattern interferometer array must be the same shape as [beam_angle, antenna_count]
+    Slice .* rx antenna pattern must be a function
 """
 
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-
-### Method returns a list which will fail in check_slice()
-### of ExperimentPrototype
-def rx_antenna_pattern(beam_angle, freq, rx_antennas, rx_spacing, offset=0.0):
-    """Sets the amplitude and phase weighting for each tx antenna as a list"""
-    beam_angle_num = len(beam_angle) + int(abs(offset))
-    pattern = np.array([1.0 for _ in range(len(rx_antennas) * beam_angle_num)])
-    pattern = pattern.reshape((beam_angle_num, len(rx_antennas)))
-    return pattern
-
 
 class RxAntennaPatternTest(ExperimentPrototype):
 
@@ -58,7 +48,7 @@ class RxAntennaPatternTest(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": [beams_to_use],
             "tx_beam_order": [0],
-            "rx_antenna_pattern": rx_antenna_pattern,
+            "rx_antenna_pattern": 'rx_antenna_pattern',
             "freq": freq,  # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
