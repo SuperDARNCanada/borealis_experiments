@@ -11,7 +11,7 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_exception import ExperimentException
+from pydantic import ValidationError
 
 ### One of the pattern's elements' magnitudes is > 1.0, this will fail in check_slice()
 ### of ExperimentPrototype
@@ -68,5 +68,5 @@ class RxAntennaPatternTest(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, \
-            "Slice rx antenna pattern return must not have any values with a magnitude greater than 1"
+        return ValidationError, \
+            "Slice 0 main array rx antenna pattern return must not have any values with a magnitude greater than 1"

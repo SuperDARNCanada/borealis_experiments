@@ -7,11 +7,9 @@ Expected exception:
     Slice .* rx antenna pattern must be a function
 """
 
-import numpy as np
-
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_exception import ExperimentException
+from pydantic import ValidationError
 
 class RxAntennaPatternTest(ExperimentPrototype):
 
@@ -58,4 +56,4 @@ class RxAntennaPatternTest(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, "pattern is not callable \(type=type_error.callable; value=pattern\)"
+        return ValidationError, "rx_antenna_pattern is not callable"

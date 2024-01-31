@@ -11,7 +11,7 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_exception import ExperimentException
+from pydantic import ValidationError
 
 ### Method returns a list which will fail in check_slice()
 ### of ExperimentPrototype
@@ -66,5 +66,5 @@ class RxAntennaPatternTest(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, \
-               "Slice rx antenna pattern return must be of the shape and size [beam_angle, antenna_number]"
+        return ValidationError, \
+               "Slice 0 main array must be the same shape as \(\[beam angle\], \[antenna_count\]\)"
