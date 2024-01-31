@@ -16,8 +16,8 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 ### of ExperimentPrototype
 def rx_antenna_pattern(beam_angle, freq, rx_antennas, rx_spacing, offset=0.0):
     """Sets the amplitude and phase weighting for each tx antenna"""
-    pattern = np.array([1.0 for _ in range(len(rx_antennas) * len(beam_angle))])
-    pattern = pattern.reshape((len(beam_angle), len(rx_antennas)))
+    pattern = np.array([1.0 for _ in range(rx_antennas * len(beam_angle))])
+    pattern = pattern.reshape((len(beam_angle), rx_antennas))
     pattern[0, 0] = 1.01
     return pattern
 
