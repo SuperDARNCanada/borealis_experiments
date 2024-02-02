@@ -48,7 +48,7 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_count, antenna_spacing, offse
         }
 
     return get_phase_shift(xcf_directions[int(freq_khz)], freq_khz, antenna_count,
-                           antenna_spacing, offset)
+                           antenna_spacing, offset) * 0.9999999
 
 
 class FullFOV(ExperimentPrototype):
