@@ -47,8 +47,8 @@ class Twofsound(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound" : scf.easy_scanbound(scf.INTT_7P, beams_to_use),
-            "freq" : tx_freq,     # kHz
+            "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),
+            "freq": tx_freq,     # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -58,7 +58,7 @@ class Twofsound(ExperimentPrototype):
 
 
         super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
-                comment_string='Twofsound classic scan-by-scan')
+                lo_lock_wait=True, comment_string='Twofsound classic scan-by-scan')
 
         self.add_slice(slice_1)
 
