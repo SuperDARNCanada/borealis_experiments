@@ -38,8 +38,6 @@ class TuningSound(ExperimentPrototype):
             if 'freq2' in kwargs.keys():
                 tx_freq_2 = int(kwargs['freq2'])
 
-        rxctrfreq = txctrfreq = (tx_freq_1 + tx_freq_2) / 2
-
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -55,15 +53,16 @@ class TuningSound(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "tuning_freq": [tx_freq_1, tx_freq_1]
+            "rxctrfreq": tx_freq_1,
+            "txctrfreq": tx_freq_1
         }
 
         slice_2 = copy.deepcopy(slice_1)
         slice_2['freq'] = tx_freq_2
-        slice_2['tuning_freq'] = [tx_freq_2, tx_freq_2]
+        slice_2['rxctrfreq'] = tx_freq_2
+        slice_2['txctrfreq'] = tx_freq_2
 
-        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
-                         comment_string='A re-tuning (large freq diff) twofsound style experiment')
+        super().__init__(cpid, comment_string='A re-tuning (large freq diff) twofsound style experiment')
 
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0: 'SCAN'})
