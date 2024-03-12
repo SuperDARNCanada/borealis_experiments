@@ -36,7 +36,7 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "txctrfreq": 10000.0,  # RxCtrFreq defaults to 12MHZ
-            "freq" : 13300.0,  # Above txctrfreq
+            "freq" : 13100.0,  # Above txctrfreq
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -45,8 +45,9 @@ class TestExperiment(ExperimentPrototype):
         }
         self.add_slice(slice_1)
 
+    
+
     @classmethod
     def error_message(cls):
         return ValidationError, \
-            (f"chosen freq above acceptable band around txctrfreq. Lower frequency "
-             f"or increase center freq (default center freq is 12.0 MHz")
+            f"Slice frequency is outside bandwidth around tx center frequency 10000"

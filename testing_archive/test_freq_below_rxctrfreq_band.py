@@ -48,5 +48,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, \
-            (f"chosen freq below acceptable band around rxctrfreq. Increase frequency "
-             f"or lower center freq (default center freq is 12.0 MHz")
+            f"Slice frequency is outside bandwidth around rx center frequency 14000"
