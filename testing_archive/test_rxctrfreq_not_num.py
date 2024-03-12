@@ -47,6 +47,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, \
-            (f"rxctrfreq must be a number in kHz between {scf.options.min_freq}"
-             f" and {scf.options.max_freq}")
+        return ValidationError, "rxctrfreq\n" \
+                                "  value is not a valid float \(type=type_error.float\)"

@@ -35,7 +35,7 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "rxctrfreq": scf.options.max_freq + 1,  # Too large
+            "rxctrfreq": scf.options.max_freq / 1000 + 1,  # Too large
             "freq": scf.COMMON_MODE_FREQ_2,
             "acf": True,
             "xcf": True,  # cross-correlation processing
@@ -47,5 +47,6 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, \
-            f"rxctrfreq cannot be greater than {scf.options.max_freq}"
+        return ValidationError, "rxctrfreq\n" \
+                                "  ensure this value is less than or equal to 20000.0 " \
+                                "\(type=value_error.number.not_le; limit_value=20000.0\)"
