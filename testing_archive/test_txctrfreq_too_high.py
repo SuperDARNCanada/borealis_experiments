@@ -1,8 +1,6 @@
-#!/usr/bin/python
-
 """
-Experiment fault: 
-    clrfrqrange not increasing
+Experiment fault:
+    txctrfreq is above max freq
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -36,19 +34,20 @@ class TestExperiment(ExperimentPrototype):
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
-            "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": [12350, 12000],  ### not increasing
+            "txctrfreq": scf.options.max_freq / 1000 + 1,  # Too large
+            "freq": scf.COMMON_MODE_FREQ_2,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "decimation_scheme": create_default_scheme(),
+            "rxonly": True,
         }
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "clrfrqrange\n" \
-                                "  Slice 0 clrfrqrange must be between min and max tx frequencies " \
-                                "and rx frequencies according to license and/or center frequencies / sampling rates " \
-                                "/ transition bands, and must have lower frequency first. \(type=value_error\)"
+        return ValidationError, "txctrfreq\n" \
+                                "  ensure this value is less than or equal to 20000.0 " \
+                                "\(type=value_error.number.not_le; limit_value=20000.0\)"
+

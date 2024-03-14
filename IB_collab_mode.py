@@ -94,23 +94,16 @@ class IBCollabMode(ExperimentPrototype):
             "tx_beam_order": beams_arr,
             "scanbound": [i * 2.0 for i in range(len(beams_arr))],
             "freq": freq,  # kHz
+            "txctrfreq": freq,
+            "rxctrfreq": freq,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "decimation_scheme": decimation_scheme,
         }
 
-        list_of_slices = [slice_1]
-        sum_of_freq = 0
-        for slice in list_of_slices:
-            # kHz, oscillator mixer frequency on the USRP for TX
-            sum_of_freq += slice['freq']
-        rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
-
         super().__init__(
-            cpid, txctrfreq=txctrfreq,
-            output_rx_rate=decimation_scheme.output_sample_rate,
-            rxctrfreq=rxctrfreq,
+            cpid, output_rx_rate=decimation_scheme.output_sample_rate,
             comment_string='ICEBEAR, 5 beam, 2s integration, 15 km')
 
         self.add_slice(slice_1)
