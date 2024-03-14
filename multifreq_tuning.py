@@ -30,13 +30,26 @@ class TuningSound(ExperimentPrototype):
             num_ranges = scf.STD_NUM_RANGES
 
         tx_freq_1 = scf.COMMON_MODE_FREQ_1
-        tx_freq_2 = scf.COMMON_MODE_FREQ_2
+        tx_freq_2 = scf.COMMON_MODE_FREQ_1 - 1900
+        tx_freq_3 = scf.COMMON_MODE_FREQ_2
+        tx_freq_4 = scf.COMMON_MODE_FREQ_2 + 2500
 
         if kwargs:
             if 'freq1' in kwargs.keys():
                 tx_freq_1 = int(kwargs['freq1'])
             if 'freq2' in kwargs.keys():
                 tx_freq_2 = int(kwargs['freq2'])
+            if 'freq3' in kwargs.keys():
+                tx_freq_3 = int(kwargs['freq3'])
+            if 'freq4' in kwargs.keys():
+                tx_freq_4 = int(kwargs['freq4'])
+
+        freqs = [tx_freq_1, tx_freq_2, tx_freq_3, tx_freq_4]
+        freqs.sort()
+        freq1, freq2, freq3, freq4 = freqs
+
+        center_freq1 = (freq1 + freq2) / 2
+        center_freq2 = (freq3 + freq4) / 2
 
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -49,22 +62,30 @@ class TuningSound(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),
-            "freq": tx_freq_1,     # kHz
+            "freq": freq1,     # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rxctrfreq": tx_freq_1,
-            "txctrfreq": tx_freq_1
+            "rxctrfreq": center_freq1,
+            "txctrfreq": center_freq1
         }
 
         slice_2 = copy.deepcopy(slice_1)
-        slice_2['freq'] = tx_freq_2
-        slice_2['rxctrfreq'] = tx_freq_2
-        slice_2['txctrfreq'] = tx_freq_2
+        slice_2['freq'] = freq2
+
+        slice_3 = copy.deepcopy(slice_1)
+        slice_3['freq'] = freq3
+        slice_3['rxctrfreq'] = center_freq2
+        slice_3['txctrfreq'] = center_freq2
+
+        slice_4 = copy.deepcopy(slice_3)
+        slice_4['freq'] = freq4
 
         super().__init__(cpid, comment_string='A re-tuning (large freq diff) twofsound style experiment')
 
         self.add_slice(slice_1)
-        self.add_slice(slice_2, interfacing_dict={0: 'SCAN'})
+        self.add_slice(slice_3, interfacing_dict={0: 'AVEPERIOD'})
+        self.add_slice(slice_2, interfacing_dict={0: 'SCAN', 1:'SCAN'})
+        self.add_slice(slice_4, interfacing_dict={0:'SCAN', 1:'SCAN', 2:'AVEPERIOD'})
 
 
