@@ -43,7 +43,7 @@ class HAARPScan(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
         
-        self.printing('Frequency set to {}'.format(freq))
+        print('Frequency set to {}'.format(freq))   # TODO: Log
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

@@ -63,7 +63,7 @@ class FullFOV2Freq(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "align_sequences": True  # align start of sequence to tenths of a second
+            "align_sequences": True,  # align start of sequence to tenths of a second
         }
 
         # Transmit on the second frequency on the right half of the array

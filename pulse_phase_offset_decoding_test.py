@@ -39,5 +39,5 @@ class PulsePhaseOffsetDecodingTest(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "pulse_phase_offset": phase_encode
+            "pulse_phase_offset": phase_encode,
         })

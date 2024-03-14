@@ -3,12 +3,13 @@
 """
 Experiment fault:
     wait_for_first_scanbound not a boolean value
-Expected exception:
-    Slice .* wait_for_first_scanbound must be True or False, got .* instead 
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,5 +44,13 @@ class TestExperiment(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "wait_for_first_scanbound": 0,  ### Not boolean, should fail
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, \
+            '1 validation error for ExperimentSlice\n' \
+            'wait_for_first_scanbound\n' \
+            '  value is not a valid boolean \(type=value_error.strictbool\)'

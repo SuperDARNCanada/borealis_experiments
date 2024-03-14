@@ -50,7 +50,7 @@ class Tauscan(ExperimentPrototype):
             "acf" : True,
             "xcf" : True,
             "acfint" : True,
-            "comment" : Tauscan.__doc__
+            "comment" : Tauscan.__doc__,
         }
 
         self.add_slice(slice_1)

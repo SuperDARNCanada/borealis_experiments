@@ -47,7 +47,7 @@ class Normalscan_PPO_Test(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
         
-        self.printing('Frequency set to {}'.format(freq))
+        print('Frequency set to {}'.format(freq))   # TODO: Log
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -64,6 +64,6 @@ class Normalscan_PPO_Test(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "pulse_phase_offset": phase_encode
+            "pulse_phase_offset": phase_encode,
         })
 

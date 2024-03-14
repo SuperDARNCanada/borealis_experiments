@@ -2,13 +2,17 @@
 
 """
 Experiment fault: 
-    clrfrqrange not a list
+    rx_beam_order too long for scanbound
 Expected exception:
-    clrfrqrange must be an integer list of length = 2
+    Slice .* beam order too long for scanbound
+
+NOTE: I'm not sure how to test this right now
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -35,12 +39,17 @@ class TestExperiment(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": beams_to_use,
-            "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": (12500, 12800),  ### not a list
+            "rx_beam_order": beams_to_use + beams_to_use,
+            "tx_beam_order": beams_to_use + beams_to_use,
+            "scanbound": [i * 3.5 for i in range(2 * len(beams_to_use))],
+            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "pass"

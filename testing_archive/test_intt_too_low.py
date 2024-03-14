@@ -3,12 +3,12 @@
 """
 Experiment fault: 
     intt too low for pulse sequence length
-Expected exception:
-    Slice .* : pulse sequence is too long for integration time given
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -38,10 +38,16 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "intt\n" \
+                                "  Slice 0: pulse sequence is too long for integration time given " \
+                                "\(type=value_error\)"

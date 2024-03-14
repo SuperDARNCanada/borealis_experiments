@@ -3,12 +3,12 @@
 """
 Experiment fault:
     scanbound containing negative values
-Expected exception:
-    Slice .* scanbound times must be non-negative
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,5 +42,54 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "scanbound -> 1\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 2\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 3\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 4\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 5\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 6\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 7\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 8\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 9\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 10\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 11\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 12\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 13\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 14\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)\n" \
+                                "scanbound -> 15\n" \
+                                "  ensure this value is greater than or equal to 0 " \
+                                "\(type=value_error.number.not_ge; limit_value=0\)"

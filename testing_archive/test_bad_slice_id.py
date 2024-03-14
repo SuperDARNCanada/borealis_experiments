@@ -3,14 +3,14 @@
 """
 Experiment fault: 
     Interfacing between two slices with an unknown slice ID
-Expected exception:
-    Cannot add slice: the interfacing_dict set interfacing to an unknown slice .* not in slice ids
 """
 
 import copy
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -44,9 +44,15 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
         slice_2 = copy.deepcopy(slice_1)
         slice_2['freq'] = scf.COMMON_MODE_FREQ_2
         ### Interfacing dict has interfacing set to an unknown sibling slice ID
         self.add_slice(slice_2, interfacing_dict={99:'SCAN'})
+
+    @classmethod
+    def error_message(cls):
+        return ExperimentException,\
+            "Cannot add slice: the interfacing_dict set interfacing to an unknown slice 99 not in slice ids \[0\]"

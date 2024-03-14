@@ -3,12 +3,12 @@
 """
 Experiment fault:
     tx_antenna specifies antenna that doesn't exist
-Expected exception:
-    Slice .* specifies TX main array antenna numbers over config max .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,6 +42,11 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "tx_antennas": [0,1,2,3,4,5,23]  ### antenna 23 doesn't exist, should fail
+            "tx_antennas": [0,1,2,3,4,5,23],  ### antenna 23 doesn't exist, should fail
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "ensure this value is less than 16 \(type=value_error.number.not_lt; limit_value=16\)"

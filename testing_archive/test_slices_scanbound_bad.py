@@ -3,12 +3,12 @@
 """
 Experiment fault:
     Interfacing slices have different scanbound values
-Expected exception:
-    Scan boundary not the same between slices .* and .* for AVEPERIOD or CONCURRENT interfaced slices
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,6 +42,7 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         slice_2 = {  # slice_id = 1
             "pulse_sequence": scf.SEQUENCE_8P,
@@ -59,7 +60,12 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0: 'CONCURRENT'})
 
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, \
+            "Scan boundary not the same between slices 0 and 1 for AVEPERIOD or CONCURRENT interfaced slices"

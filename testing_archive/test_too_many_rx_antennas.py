@@ -3,12 +3,12 @@
 """
 Experiment fault:
     rx_main_antennas specifies too many channels
-Expected exception:
-    Slice .* has too many main RX antenna channels .* greater than config .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,6 +42,12 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rx_main_antennas": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]  ### One too many antennas, should fail
+            "rx_main_antennas": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],  ### One too many antennas, should fail
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "ensure this value has at most 16 items " \
+                                "\(type=value_error.list.max_items; limit_value=16\)"

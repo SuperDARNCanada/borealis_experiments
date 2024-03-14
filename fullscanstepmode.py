@@ -89,7 +89,7 @@ class FullScanStepMode(ExperimentPrototype):
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
                 "acfint" : True,  # interferometer acfs
-                "comment" : FullScanStepMode.__doc__
+                "comment" : FullScanStepMode.__doc__,
             }
             slices.append(s)
 

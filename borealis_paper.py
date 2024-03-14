@@ -37,7 +37,8 @@ class BorealisPaper(ExperimentPrototype):
             "rx_beam_order": [0],
             "tx_beam_order": [0],
             "freq" : 13100,
-            "acf" : True
+            "acf" : True,
+
         }
 
         slice2 = copy.deepcopy(default_slice)

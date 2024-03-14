@@ -3,12 +3,12 @@
 """
 Experiment fault:
     Editing slice with invalid parameter
-Expected exception:
-    Cannot edit slice ID .*: .* is not a valid slice parameter
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,7 +42,11 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
         self.edit_slice(0, tx_freak=scf.COMMON_MODE_FREQ_2)  ### Non-existent param should fail
         
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, "Cannot edit slice ID 0: tx_freak is not a valid slice parameter"

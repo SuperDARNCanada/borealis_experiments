@@ -38,4 +38,5 @@ class Politescan(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "rxonly": True,
         })

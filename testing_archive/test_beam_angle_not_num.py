@@ -3,13 +3,12 @@
 """
 Experiment fault: 
     beam_angle not all numbers
-Expected exception:
-    .*Slice must specify beam_angle that must be a list of numbers \(ints or floats\) which are
-    angles of degrees off boresight \(positive E of N\)
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,5 +42,13 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "beam_angle -> 2\n" \
+                                "  value is not a valid float \(type=type_error.float\)\n" \
+                                "beam_angle -> 2\n" \
+                                "  value is not a valid integer \(type=type_error.integer\)"

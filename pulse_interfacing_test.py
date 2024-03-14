@@ -35,7 +35,7 @@ class PulseInterfacingTest(ExperimentPrototype):
             "beam_angle": [0.0],
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "freq" : 10500    # kHz
+            "freq" : 10500,    # kHz
         }
 
         slice_1 = copy.deepcopy(slice_0)

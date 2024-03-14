@@ -3,12 +3,12 @@
 """
 Experiment fault: 
     cpid not an integer
-Expected exception:
-    CPID must be a unique int
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,5 +42,10 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, "CPID must be a unique int"

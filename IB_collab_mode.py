@@ -15,7 +15,7 @@ import datetime
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.decimation_scheme.decimation_scheme import \
+from experiment_prototype.experiment_utils.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
 
 
@@ -68,14 +68,12 @@ class IBCollabMode(ExperimentPrototype):
         if kwargs:
             if 'freq' in kwargs.keys():
                 freq = int(kwargs['freq'])
-                self.printing('Using frequency scheduled for {date}: {freq} kHz'
-                              .format(date=datetime.datetime.utcnow().strftime('%Y%m%d %H:%M'), freq=freq))
+                print('Using frequency scheduled for {date}: {freq} kHz'    # TODO: Log
+                      .format(date=datetime.datetime.utcnow().strftime('%Y%m%d %H:%M'), freq=freq))
             else:
-                self.printing('Frequency not found: using default frequency {freq} kHz'
-                              .format(freq=freq))
+                print('Frequency not found: using default frequency {freq} kHz'.format(freq=freq))  # TODO: Log
         else:
-            self.printing('Frequency not found: using default frequency {freq} kHz'
-                          .format(freq=freq))
+            print('Frequency not found: using default frequency {freq} kHz'.format(freq=freq))  # TODO: Log
 
         decimation_scheme = create_15km_scheme()
 
@@ -99,6 +97,7 @@ class IBCollabMode(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": decimation_scheme,
         }
 
         list_of_slices = [slice_1]
@@ -111,7 +110,7 @@ class IBCollabMode(ExperimentPrototype):
         super().__init__(
             cpid, txctrfreq=txctrfreq,
             output_rx_rate=decimation_scheme.output_sample_rate,
-            rxctrfreq=rxctrfreq, decimation_scheme=decimation_scheme,
+            rxctrfreq=rxctrfreq,
             comment_string='ICEBEAR, 5 beam, 2s integration, 15 km')
 
         self.add_slice(slice_1)

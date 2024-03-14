@@ -3,11 +3,10 @@
 """
 Experiment fault: 
     Experiment isn't a class
-Expected exception:
-    No experiment classes are present that are built from parent class ExperimentPrototype - exiting
 """
 
 import borealis_experiments.superdarn_common_fields as scf
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
 
 
 ### class TestExperiment(ExperimentPrototype):
@@ -41,5 +40,6 @@ def __init__(self):
         "acf": True,
         "xcf": True,  # cross-correlation processing
         "acfint": True,  # interferometer acfs
+        "decimation_scheme": create_default_scheme(),
     }
     self.add_slice(slice_1)

@@ -3,13 +3,12 @@
 """
 Experiment fault: 
     rx_beam_order list values not lists or integers
-Expected exception:
-    Slice must specify rx_beam_order that must be a list of ints or lists \(of ints\) corresponding
-    to the order of the angles in the beam_angle list
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,5 +42,25 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "rx_beam_order -> 0\n" \
+                                "  value is not a valid list \(type=type_error.list\)\n" \
+                                "rx_beam_order -> 0\n" \
+                                "  value is not a valid integer \(type=type_error.integer\)\n" \
+                                "rx_beam_order -> 1\n" \
+                                "  value is not a valid list \(type=type_error.list\)\n" \
+                                "rx_beam_order -> 1\n" \
+                                "  value is not a valid integer \(type=type_error.integer\)\n" \
+                                "rx_beam_order -> 2\n" \
+                                "  value is not a valid list \(type=type_error.list\)\n" \
+                                "rx_beam_order -> 2\n" \
+                                "  value is not a valid integer \(type=type_error.integer\)\n" \
+                                "rx_beam_order -> 3\n" \
+                                "  value is not a valid list \(type=type_error.list\)\n" \
+                                "rx_beam_order -> 3\n" \
+                                "  value is not a valid integer \(type=type_error.integer\)"

@@ -3,12 +3,12 @@
 """
 Experiment fault: 
     Removing a slice that doesn't exist
-Expected exception:
-    Cannot remove slice id .* : it does not exist in slice dictionary
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,7 +42,11 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
         self.del_slice(7)  ### Non-existent slice ID should fail
         
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, "Cannot remove slice id 7 : it does not exist in slice dictionary"

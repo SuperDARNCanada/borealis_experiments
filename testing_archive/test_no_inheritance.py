@@ -3,11 +3,11 @@
 """
 Experiment fault: 
     Experiment doesn't inherit from ExperimentPrototype
-Expected exception:
-    No experiment classes are present that are built from parent class ExperimentPrototype - exiting
 """
 
 import borealis_experiments.superdarn_common_fields as scf
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(): ### Doesn't inherit from ExperimentPrototype
@@ -41,5 +41,10 @@ class TestExperiment(): ### Doesn't inherit from ExperimentPrototype
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, "pass"

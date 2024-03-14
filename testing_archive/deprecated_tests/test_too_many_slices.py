@@ -12,8 +12,10 @@ import copy
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.decimation_scheme.decimation_scheme import \
+from experiment_prototype.experiment_utils.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
+from experiment_prototype.experiment_exception import ExperimentException
+
 
 class TestExperiment(ExperimentPrototype):
 
@@ -40,9 +42,7 @@ class TestExperiment(ExperimentPrototype):
 
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
-        super(TestExperiment, self).__init__(
-            cpid, output_rx_rate=decimation_scheme.output_sample_rate,
-            decimation_scheme=decimation_scheme)
+        super(TestExperiment, self).__init__(cpid, output_rx_rate=decimation_scheme.output_sample_rate)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
@@ -69,6 +69,7 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": decimation_scheme,
         }
         # The check for too many slices is like so:
         # effective_length = 2^x => the next power of two for how many taps there are in a stage
@@ -102,3 +103,7 @@ class TestExperiment(ExperimentPrototype):
         self.add_slice(copy.deepcopy(slice_1),interfacing_dict={0: 'SCAN'}) 
         self.add_slice(copy.deepcopy(slice_1),interfacing_dict={0: 'SCAN'}) 
         self.add_slice(copy.deepcopy(slice_1),interfacing_dict={0: 'SCAN'}) 
+
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, "pass"

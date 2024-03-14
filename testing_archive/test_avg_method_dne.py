@@ -3,12 +3,12 @@
 """
 Experiment fault:
     Setting averaging_method to an invalid method
-Expected exception:
-    Averaging method .* not valid method. Possible methods are .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,5 +43,13 @@ class TestExperiment(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "averaging_method": 'not_a_method',  ### This is not a valid method
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, \
+            "averaging_method\n" \
+            "  unexpected value; permitted: 'mean', 'median' " \
+            "\(type=value_error.const; given=not_a_method; permitted=\('mean', 'median'\)\)"

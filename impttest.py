@@ -21,6 +21,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 def phase_encode(beam_iter, sequence_num, num_pulses):
     return np.random.uniform(-180.0, 180, num_pulses)
 
+
 class ImptTest(ExperimentPrototype):
 
     def __init__(self):

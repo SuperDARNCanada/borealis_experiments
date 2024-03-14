@@ -3,14 +3,14 @@
 """
 Experiment fault: 
     interfacing slices have different intn
-Expected exception:
-    Slices .* and .* are SEQUENCE or CONCURRENT interfaced and do not have the same NAVE goal intn
 """
 
 import copy
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,6 +43,7 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         slice_2 = copy.deepcopy(slice_1)
         del slice_2['intt']
@@ -51,3 +52,8 @@ class TestExperiment(ExperimentPrototype):
         slice_1['intn'] = 9  ### Different intn targets, should fail
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0:'CONCURRENT'})
+
+    @classmethod
+    def error_message(cls):
+        return ExperimentException, \
+            "Slices 0 and 1 are SEQUENCE or CONCURRENT interfaced and do not have the same NAVE goal intn"

@@ -49,6 +49,7 @@ class Politescan2(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "rxonly": True,
         })
 
         self.add_slice({  # slice_id = 1, receive only
@@ -66,4 +67,5 @@ class Politescan2(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "rxonly": True,
         }, interfacing_dict={0: 'CONCURRENT'})

@@ -3,12 +3,12 @@
 """
 Experiment fault:
     Slice has no freq or clrfrqrange
-Expected exception:
-    A freq or clrfrqrange must be specified in a slice
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -41,6 +41,7 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
 
         ### No freq or clrfrqrange
@@ -57,3 +58,7 @@ class TestExperiment(ExperimentPrototype):
         except:
             pass
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "A freq or clrfrqrange must be specified in a slice. Slice: 0 \(type=value_error\)"

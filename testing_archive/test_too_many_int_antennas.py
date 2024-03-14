@@ -3,12 +3,12 @@
 """
 Experiment fault:
     rx_int_antennas specifies too many channels
-Expected exception:
-    Slice .* has too many RX interferometer antenna channels .* greater than config .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -42,6 +42,13 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rx_int_antennas": [0,1,2,3,4]  ### One too many antennas, should fail
+            "rx_int_antennas": [0,1,2,3,4],  ### One too many antennas, should fail
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "rx_int_antennas\n" \
+                                "  ensure this value has at most 4 items " \
+                                "\(type=value_error.list.max_items; limit_value=4\)"

@@ -3,12 +3,12 @@
 """
 Experiment fault: 
     beam_angle contains duplicates
-Expected exception:
-    Slice .* beam angles has duplicate directions
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,5 +43,11 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "beam_angle\n" \
+                                "  the list has duplicated items \(type=value_error.list.unique_items\)"

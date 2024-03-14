@@ -3,13 +3,12 @@
 """
 Experiment fault: 
     tx_beam_order not a list
-Expected exception:
-    tx_beam_order must be a list of ints corresponding to the order of the angles in the beam_angle
-    list or an array of phases in the tx_antenna_pattern return. Slice: .*
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -43,5 +42,11 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "tx_beam_order\n" \
+                                "  value is not a valid list \(type=type_error.list\)"

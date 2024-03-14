@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
 """
-Experiment fault:
-    freq within restricted range
-Expected exception:
-    freq is within a restricted frequency range .*
+Experiment fault: 
+    freq above max freq
 """
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -36,12 +36,18 @@ class TestExperiment(ExperimentPrototype):
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
-            "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            ### TODO: Make this site agnostic
-            "freq" : 13400,  ### This should be in a restricted range for the Saskatoon radar
+            "freq" : scf.options.max_freq + 1, ### Above the max freq
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
+            "rxonly": True,
         }
         self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, "freq\n" \
+                                "  ensure this value is less than or equal to 20000.0 " \
+                                "\(type=value_error.number.not_le; limit_value=20000.0\)"

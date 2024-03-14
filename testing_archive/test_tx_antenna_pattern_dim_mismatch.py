@@ -3,14 +3,15 @@
 """
 Experiment fault:
     tx_antenna_pattern dimension mismatch with number of main antennas
-Expected exception:
-    Slice .* tx antenna pattern return 2nd dimension \(.*\) must be equal to number of main antennas \(.*\)
 """
 
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
+from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from pydantic import ValidationError
+
 
 ### pattern second dimension is not equal to num_main_antennas, this will fail in check_slice()
 ### of ExperimentPrototype
@@ -46,8 +47,6 @@ class TxAntennaPatternTest(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
 
-        self.printing('Frequency set to {}'.format(freq))
-
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -63,4 +62,10 @@ class TxAntennaPatternTest(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
+            "decimation_scheme": create_default_scheme(),
         })
+
+    @classmethod
+    def error_message(cls):
+        return ValidationError, \
+            "Slice 0 tx antenna pattern return 2nd dimension \(15\) must be equal to number of main antennas \(16\)"

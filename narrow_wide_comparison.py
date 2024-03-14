@@ -49,7 +49,7 @@ class FullFOVComparison(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
 
-        self.printing('Frequency set to {}'.format(freq))
+        print('Frequency set to {}'.format(freq))   # TODO: Log
 
         slice_0 = {  # slice_id = 0
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -65,7 +65,7 @@ class FullFOVComparison(ExperimentPrototype):
             "freq": freq,  # kHz
             "align_sequences": True,  # align start of sequence to tenths of a second
             "scanbound": scf.easy_scanbound(scf.INTT_7P, scf.STD_16_BEAM_ANGLE),
-            "wait_for_first_scanbound": False
+            "wait_for_first_scanbound": False,
         }
 
         slice_1 = copy.deepcopy(slice_0)
