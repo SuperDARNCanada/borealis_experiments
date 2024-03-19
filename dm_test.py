@@ -80,10 +80,11 @@ def two_stage_flatpass_v2():
     ripple_db = [115, 50]
     """
     sample_rate = 5e6                    # 5 MHz
-    dm_rate = [50, 30]                   # downsampling rates after filters
+    dm_rate = [30, 50]                   # downsampling rates after filters
     transition_width = [150e3, 30e3]     # transition from passband to stopband
     cutoff_hz = [10e3, 5e3]              # bandwidth for output of filter
     ripple_db = [115, 50]                # dB between passband and stopband
+    scaling_factors = [1000., 10000.]    # Multiplicative factors for the filter
 
     dm_rate_so_far = 1
     stages = []
@@ -92,7 +93,7 @@ def two_stage_flatpass_v2():
         taps = decimation.create_firwin_filter_by_attenuation(rate,
                                                               transition_width[i],
                                                               cutoff_hz[i],
-                                                              ripple_db[i])
+                                                              ripple_db[i]) * scaling_factors[i]
         stages.append(decimation.DecimationStage(i, rate, dm_rate[i], taps.tolist()))
         dm_rate_so_far *= dm_rate[i]
 
