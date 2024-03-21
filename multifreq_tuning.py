@@ -14,10 +14,10 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
-class TuningSound(ExperimentPrototype):
+class TuningTest(ExperimentPrototype):
 
     def __init__(self, **kwargs):
-        cpid = 404  # Tune not found
+        cpid = 3504  # Tune not found
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
@@ -29,27 +29,12 @@ class TuningSound(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr", "lab"]:
             num_ranges = scf.STD_NUM_RANGES
 
-        tx_freq_1 = scf.COMMON_MODE_FREQ_1
-        tx_freq_2 = scf.COMMON_MODE_FREQ_1 - 1900
-        tx_freq_3 = scf.COMMON_MODE_FREQ_2
-        tx_freq_4 = scf.COMMON_MODE_FREQ_2 + 2500
+        tx_freq = scf.COMMON_MODE_FREQ_1
+        center_freq = tx_freq - 1500
 
         if kwargs:
-            if 'freq1' in kwargs.keys():
-                tx_freq_1 = int(kwargs['freq1'])
-            if 'freq2' in kwargs.keys():
-                tx_freq_2 = int(kwargs['freq2'])
-            if 'freq3' in kwargs.keys():
-                tx_freq_3 = int(kwargs['freq3'])
-            if 'freq4' in kwargs.keys():
-                tx_freq_4 = int(kwargs['freq4'])
-
-        freqs = [tx_freq_1, tx_freq_2, tx_freq_3, tx_freq_4]
-        freqs.sort()
-        freq1, freq2, freq3, freq4 = freqs
-
-        center_freq1 = (freq1 + freq2) / 2
-        center_freq2 = (freq3 + freq4) / 2
+            if 'freq' in kwargs.keys():
+                tx_freq = int(kwargs['freq'])
 
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -58,34 +43,47 @@ class TuningSound(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": beams_to_use,
-            "tx_beam_order": beams_to_use,
-            "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),
-            "freq": freq1,     # kHz
+            "beam_angle": [0.0],
+            "rx_beam_order": [0],
+            "tx_beam_order": [0],
+            "freq": tx_freq,     # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rxctrfreq": center_freq1,
-            "txctrfreq": center_freq1
+            "rxctrfreq": center_freq,
+            "txctrfreq": center_freq,
         }
 
-        slice_2 = copy.deepcopy(slice_1)
-        slice_2['freq'] = freq2
+        super().__init__(cpid, comment_string='An N200 re-tuning test')
 
-        slice_3 = copy.deepcopy(slice_1)
-        slice_3['freq'] = freq3
-        slice_3['rxctrfreq'] = center_freq2
-        slice_3['txctrfreq'] = center_freq2
+        slice_list = []
+        freq_offsets = [-1500, -500, -250, -100, -50, 0, 50, 100, 250, 500]
 
-        slice_4 = copy.deepcopy(slice_3)
-        slice_4['freq'] = freq4
+        # Move only tx center freq
+        for offset in freq_offsets:
+            new_slice = copy.deepcopy(slice_1)
+            new_slice['txctrfreq'] = tx_freq + offset
+            slice_list.append(new_slice)
 
-        super().__init__(cpid, comment_string='A re-tuning (large freq diff) twofsound style experiment')
+        # Move only rx center freq
+        for offset in freq_offsets:
+            new_slice = copy.deepcopy(slice_1)
+            new_slice['rxctrfreq'] = tx_freq + offset
+            slice_list.append(new_slice)
 
-        self.add_slice(slice_1)
-        self.add_slice(slice_3, interfacing_dict={0: 'AVEPERIOD'})
-        self.add_slice(slice_2, interfacing_dict={0: 'SCAN', 1:'SCAN'})
-        self.add_slice(slice_4, interfacing_dict={0:'SCAN', 1:'SCAN', 2:'AVEPERIOD'})
+        # Move both center freqs
+        for offset in freq_offsets:
+            new_slice = copy.deepcopy(slice_1)
+            new_slice['txctrfreq'] = tx_freq + offset
+            new_slice['rxctrfreq'] = tx_freq + offset
+            slice_list.append(new_slice)
+
+        interfacing_dict = {}
+        for ind in range(len(slice_list)):
+            if ind == 0:
+                self.add_slice(slice_list[ind])
+            else:
+                interfacing_dict[int(ind - 1)] = 'AVEPERIOD'
+                self.add_slice(slice_list[ind], interfacing_dict=interfacing_dict)
 
 
