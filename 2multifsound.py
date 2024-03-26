@@ -33,6 +33,11 @@ class TwoMultifsound(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr", "lab"]:
             num_ranges = scf.STD_NUM_RANGES
 
+        sum_of_freqs = 0
+        for val in freqs:
+            sum_of_freqs += val
+        rxctrfreq = txctrfreq = int(sum_of_freqs / len(freqs))
+
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -43,7 +48,9 @@ class TwoMultifsound(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "freq" : freqs[0], #kHz
+            "freq": freqs[0],  # kHz
+            "txctrfreq": txctrfreq,
+            "rxctrfreq": rxctrfreq,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -52,15 +59,7 @@ class TwoMultifsound(ExperimentPrototype):
         slice_2 = copy.deepcopy(slice_1)
         slice_2['freq'] = freqs[1]
 
-        list_of_slices = [slice_1, slice_2]
-        sum_of_freq = 0
-        for slice in list_of_slices:
-            sum_of_freq += slice['freq']# kHz, oscillator mixer frequency on the USRP for TX
-        rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
-
-
-        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
-                comment_string='Twofsound simultaneous in-sequence')
+        super().__init__(cpid, comment_string='Twofsound simultaneous in-sequence')
 
         self.add_slice(slice_1)
 

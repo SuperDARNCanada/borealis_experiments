@@ -66,6 +66,8 @@ class Epopsound(ExperimentPrototype):
             "acf": True,
             "xcf": True,
             "acfint": True,
+            "txctrfreq": center_freq + 100,
+            "rxctrfreq": center_freq + 100,
         }
 
         for num, freq in enumerate(freqs):
@@ -93,7 +95,7 @@ class Epopsound(ExperimentPrototype):
 
             slices.append(new_slice)
 
-        super().__init__(cpid=cpid, txctrfreq=center_freq, rxctrfreq=center_freq, comment_string=Epopsound.__doc__)
+        super().__init__(cpid=cpid, comment_string=Epopsound.__doc__)
 
         self.add_slice(slices[0])
         if len(slices) > 1:

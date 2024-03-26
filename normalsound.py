@@ -24,6 +24,9 @@ class NormalSound(ExperimentPrototype):
         else:
             beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
 
+        freqrange = (max(scf.SOUNDING_FREQS) - min(scf.SOUNDING_FREQS)) / 2
+        centerfreq = min(scf.SOUNDING_FREQS) + freqrange
+
         slices = []
         
         common_scanbound_spacing = 3.0 # seconds
@@ -41,7 +44,9 @@ class NormalSound(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             # this scanbound will be aligned because len(beam_order) = len(scanbound)
             "scanbound" : [i * common_scanbound_spacing for i in range(len(beams_to_use))],
-            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
+            "freq": scf.COMMON_MODE_FREQ_1, #kHz
+            "txctrfreq": centerfreq,
+            "rxctrfreq": centerfreq,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -50,9 +55,6 @@ class NormalSound(ExperimentPrototype):
 
         sounding_scanbound_spacing = 1.5 # seconds
         sounding_intt_ms = sounding_scanbound_spacing * 1.0e3 - 250
-        
-        freqrange = (max(scf.SOUNDING_FREQS) - min(scf.SOUNDING_FREQS)) / 2
-        centerfreq = min(scf.SOUNDING_FREQS) + freqrange
 
         sounding_scanbound = [48 + i * sounding_scanbound_spacing for i in range(8)]
         for num, freq in enumerate(scf.SOUNDING_FREQS):
@@ -66,15 +68,17 @@ class NormalSound(ExperimentPrototype):
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "tx_beam_order": sounding_beams,
                 "rx_beam_order": sounding_beams,
-                "scanbound" : sounding_scanbound,
-                "freq" : freq,
+                "scanbound": sounding_scanbound,
+                "freq": freq,
+                "txctrfreq": centerfreq,
+                "rxctrfreq": centerfreq,
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
                 "acfint": True,  # interferometer acfs
                 "lag_table": scf.STD_8P_LAG_TABLE, # lag table needed for 8P since not all lags used.
                 })
 
-        super().__init__(cpid, txctrfreq=centerfreq, rxctrfreq=centerfreq, comment_string=NormalSound.__doc__)
+        super().__init__(cpid, comment_string=NormalSound.__doc__)
 
         self.add_slice(slices[0])
         self.add_slice(slices[1], {0:'SCAN'})

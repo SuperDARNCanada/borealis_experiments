@@ -72,6 +72,8 @@ class FullScanStepMode(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr", "lab"]:
             num_ranges = scf.STD_NUM_RANGES
 
+        rxctrfreq = txctrfreq = sum(all_steps) / len(all_steps)
+
         slices = []
         for step in all_steps:
             s = {
@@ -84,21 +86,18 @@ class FullScanStepMode(ExperimentPrototype):
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": beams_to_use,
                 "tx_beam_order": beams_to_use,
-                "scanbound" : [i * (3.5 * len(all_steps)) for i in range(len(beams_to_use))],
-                "freq" : step, #kHz
+                "scanbound": [i * (3.5 * len(all_steps)) for i in range(len(beams_to_use))],
+                "freq": step, #kHz
+                "txctrfreq": txctrfreq,
+                "rxctrfreq": rxctrfreq,
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
-                "acfint" : True,  # interferometer acfs
-                "comment" : FullScanStepMode.__doc__,
+                "acfint": True,  # interferometer acfs
+                "comment": FullScanStepMode.__doc__,
             }
             slices.append(s)
 
-
-        rxctrfreq = txctrfreq = sum(all_steps)/len(all_steps)
-
-
-        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
-                comment_string=FullScanStepMode.__doc__)
+        super().__init__(cpid, comment_string=FullScanStepMode.__doc__)
 
 
         self.add_slice(slices[0])

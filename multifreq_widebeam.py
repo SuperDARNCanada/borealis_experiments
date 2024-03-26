@@ -47,6 +47,8 @@ class MultifreqWidebeam(ExperimentPrototype):
             if 'freq2' in kwargs.keys():
                 tx_freq_2 = int(kwargs['freq2'])
 
+        rxctrfreq = txctrfreq = int((tx_freq_1 + tx_freq_2) / 2)
+
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -58,6 +60,8 @@ class MultifreqWidebeam(ExperimentPrototype):
             "rx_beam_order": [0],
             "tx_beam_order": [0],
             "freq": tx_freq_1,  # kHz
+            "txctrfreq": txctrfreq,
+            "rxctrfreq": rxctrfreq,
             "tx_antennas": [6, 7],  # Using two tx antennas from the middle of array
             "align_sequences": True,
             "scanbound": [i * scf.INTT_7P * 1e-3 for i in range(len(scf.STD_16_BEAM_ANGLE))],
@@ -67,14 +71,7 @@ class MultifreqWidebeam(ExperimentPrototype):
         slice_2['freq'] = tx_freq_2
         slice_2['tx_antennas'] = [8, 9]     # Use separate pair of antennas near middle of array
 
-        list_of_slices = [slice_1, slice_2]
-        sum_of_freq = 0
-        for slice in list_of_slices:
-            sum_of_freq += slice['freq']  # kHz, oscillator mixer frequency on the USRP for TX
-        rxctrfreq = txctrfreq = int(sum_of_freq / len(list_of_slices))
-
-        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq,
-                         comment_string='Simultaneous multifrequency widebeam')
+        super().__init__(cpid, comment_string='Simultaneous multifrequency widebeam')
 
         self.add_slice(slice_1)
 

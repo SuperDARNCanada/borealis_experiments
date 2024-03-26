@@ -89,7 +89,9 @@ class Epopsound(ExperimentPrototype):
         for freq in freqs:
             # for each freq add 
             base_slice.update({
-                "freq": freq
+                "freq": freq,
+                "txctrfreq": freq + 100,
+                "rxctrfreq": freq + 100
                 })
             slices.append(base_slice)
 
@@ -104,8 +106,7 @@ class Epopsound(ExperimentPrototype):
                     })
                 slices.append(slice_1)
 
-        super().__init__(cpid=cpid, txctrfreq=freq, rxctrfreq=freq,
-                                        comment_string=Epopsound.__doc__)
+        super().__init__(cpid=cpid, comment_string=Epopsound.__doc__)
 
         self.add_slice(slices[0])
         if len(slices) > 1:
