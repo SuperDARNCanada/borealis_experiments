@@ -57,7 +57,7 @@ class TuningTest(ExperimentPrototype):
         super().__init__(cpid, comment_string='An N200 re-tuning test')
 
         slice_list = []
-        freq_offsets = [-1500, -500, -250, -100, -50, 0, 50, 100, 250, 500]
+        freq_offsets = [500]
 
         # Move only tx center freq
         for offset in freq_offsets:
