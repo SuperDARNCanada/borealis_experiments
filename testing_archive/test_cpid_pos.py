@@ -49,6 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ExperimentException,\
-            "The CPID should be a positive number in the experiment. Borealis will determine if it should be " \
-            "negative based on the scheduling mode. Only experiments run during discretionary time will have " \
-            "negative CPIDs."
+            "The CPID should be a positive number in the experiment."

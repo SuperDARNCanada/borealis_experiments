@@ -9,7 +9,7 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from experiment_prototype.experiment_utils.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
-from experiment_prototype.experiment_exception import ExperimentException
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -35,8 +35,7 @@ class TestExperiment(ExperimentPrototype):
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
         super(TestExperiment, self).__init__(
-            cpid, output_rx_rate=decimation_scheme.output_sample_rate,
-            decimation_scheme=decimation_scheme)
+            cpid, output_rx_rate=decimation_scheme.output_sample_rate)
 
 
         if scf.IS_FORWARD_RADAR:
@@ -72,4 +71,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, "Number of decimation stages \(7\) is greater than max available 6"
+        return ValidationError, "Number of decimation stages \(7\) is greater than max available 6"
