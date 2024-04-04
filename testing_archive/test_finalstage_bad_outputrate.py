@@ -9,7 +9,6 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from experiment_prototype.experiment_utils.decimation_scheme import \
     DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
-from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
@@ -71,6 +70,6 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, \
+        return ValueError, \
             "Last decimation stage 3 does not have output rate 3333.3333333333335 equal to requested output data " \
             "rate 20000.0"
