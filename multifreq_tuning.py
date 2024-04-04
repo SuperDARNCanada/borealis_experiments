@@ -29,12 +29,17 @@ class TuningTest(ExperimentPrototype):
         if scf.options.site_id in ["sas", "pgr", "lab"]:
             num_ranges = scf.STD_NUM_RANGES
 
-        tx_freq = scf.COMMON_MODE_FREQ_1
-        center_freq = tx_freq - 1500
+        tx_freq_1 = scf.COMMON_MODE_FREQ_1
+        tx_freq_2 = scf.COMMON_MODE_FREQ_2
+        center_freq_1 = tx_freq_1 - 500
+        center_freq_2 = tx_freq_2 - 500
 
         if kwargs:
-            if 'freq' in kwargs.keys():
-                tx_freq = int(kwargs['freq'])
+            if 'freq1' in kwargs.keys():
+                tx_freq_1 = int(kwargs['freq1'])
+
+            if 'freq2' in kwargs.keys():
+                tx_freq_2 = int(kwargs['freq2'])
 
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -43,47 +48,25 @@ class TuningTest(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": [0.0],
-            "rx_beam_order": [0],
-            "tx_beam_order": [0],
-            "freq": tx_freq,     # kHz
+            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "rx_beam_order": beams_to_use,
+            "tx_beam_order": beams_to_use,
+            "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),
+            "freq": tx_freq_1,  # kHz
+            "txctrfreq": center_freq_1,
+            "rxctrfreq": center_freq_1,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rxctrfreq": center_freq,
-            "txctrfreq": center_freq,
         }
 
-        super().__init__(cpid, comment_string='An N200 re-tuning test')
+        slice_2 = copy.deepcopy(slice_1)
+        slice_2['freq'] = tx_freq_2
+        slice_2['txctrfreq'] = center_freq_2
+        slice_2['rxctrfreq'] = center_freq_2
 
-        slice_list = []
-        freq_offsets = [500]
+        super().__init__(cpid, comment_string='Twofsound classic scan-by-scan')
 
-        # Move only tx center freq
-        for offset in freq_offsets:
-            new_slice = copy.deepcopy(slice_1)
-            new_slice['txctrfreq'] = tx_freq + offset
-            slice_list.append(new_slice)
+        self.add_slice(slice_1)
 
-        # Move only rx center freq
-        for offset in freq_offsets:
-            new_slice = copy.deepcopy(slice_1)
-            new_slice['rxctrfreq'] = tx_freq + offset
-            slice_list.append(new_slice)
-
-        # Move both center freqs
-        for offset in freq_offsets:
-            new_slice = copy.deepcopy(slice_1)
-            new_slice['txctrfreq'] = tx_freq + offset
-            new_slice['rxctrfreq'] = tx_freq + offset
-            slice_list.append(new_slice)
-
-        interfacing_dict = {}
-        for ind in range(len(slice_list)):
-            if ind == 0:
-                self.add_slice(slice_list[ind])
-            else:
-                interfacing_dict[int(ind - 1)] = 'AVEPERIOD'
-                self.add_slice(slice_list[ind], interfacing_dict=interfacing_dict)
-
-
+        self.add_slice(slice_2, interfacing_dict={0: 'SCAN'})
