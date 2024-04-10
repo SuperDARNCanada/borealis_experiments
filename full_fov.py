@@ -10,9 +10,9 @@
     :copyright: 2022 SuperDARN Canada
     :author: Remington Rohel
 """
+import numpy as np
 
 from utils.signals import get_phase_shift
-
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
