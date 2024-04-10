@@ -49,4 +49,6 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ExperimentException,\
-            "The CPID should be a positive number in the experiment."
+            'The CPID should be a positive number in the experiment. If the embargo'\
+            ' flag is set, then borealis will configure the CPID to be negative to .'\
+            ' indicate the data is to be embargoed for one year.'

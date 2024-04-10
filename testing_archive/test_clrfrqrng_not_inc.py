@@ -50,6 +50,5 @@ class TestExperiment(ExperimentPrototype):
     def error_message(cls):
         return ValidationError, "clrfrqrange\n" \
                                 "  Slice 0 clrfrqrange must be between min and max tx frequencies " \
-                                "\(10250000.01117587, 13750000.01117587\) and rx frequencies \(10250000.01117587, " \
-                                "13750000.01117587\) according to license and/or center frequencies / sampling rates " \
+                                "and rx frequencies according to license and/or center frequencies / sampling rates " \
                                 "/ transition bands, and must have lower frequency first. \(type=value_error\)"
