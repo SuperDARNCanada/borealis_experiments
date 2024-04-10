@@ -33,6 +33,12 @@ class InterleaveSound(ExperimentPrototype):
         common_scanbound_spacing = 3.0  # seconds
         common_intt_ms = common_scanbound_spacing * 1.0e3 - 100  # reduce by 100 ms for processing
 
+        freq_list = [scf.COMMON_MODE_FREQ_1]
+        for freq in scf.SOUNDING_FREQS:
+            freq_list.append(freq)
+        rxctrfreq = txctrfreq = int((max(freq_list) + min(freq_list)) / 2)
+
+
         slices.append({  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_8P,
             "tau_spacing": scf.TAU_SPACING_8P,
@@ -44,8 +50,10 @@ class InterleaveSound(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             # this scanbound will be aligned because len(beam_order) = len(scanbound)
-            "scanbound" : [i * common_scanbound_spacing for i in range(len(beams_to_use))],
-            "freq" : scf.COMMON_MODE_FREQ_1, # kHz
+            "scanbound": [i * common_scanbound_spacing for i in range(len(beams_to_use))],
+            "freq": scf.COMMON_MODE_FREQ_1,  # kHz
+            "txctrfreq": txctrfreq,
+            "rxctrfreq": rxctrfreq,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -67,21 +75,17 @@ class InterleaveSound(ExperimentPrototype):
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": sounding_beams,
                 "tx_beam_order": sounding_beams,
-                "scanbound" : sounding_scanbound,
+                "scanbound": sounding_scanbound,
                 "freq": freq,
+                "txctrfreq": txctrfreq,
+                "rxctrfreq": rxctrfreq,
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
                 "acfint": True,  # interferometer acfs
                 "lag_table": scf.STD_8P_LAG_TABLE,  # lag table needed for 8P since not all lags used
                 })
 
-        sum_of_freq = 0
-        all_freqs = []
-        for slice in slices:
-            all_freqs.append(slice['freq'])  # kHz, oscillator mixer frequency on the USRP for TX
-        rxctrfreq = txctrfreq = int((max(all_freqs) + min(all_freqs)) / 2)
-
-        super().__init__(cpid, txctrfreq=txctrfreq, rxctrfreq=rxctrfreq, comment_string=InterleaveSound.__doc__)
+        super().__init__(cpid, comment_string=InterleaveSound.__doc__)
 
         self.add_slice(slices[0])
         self.add_slice(slices[1], {0: 'SCAN'})

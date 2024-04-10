@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 """
     full_fov
     ~~~~~~~~
@@ -9,9 +7,12 @@
 
     :copyright: 2022 SuperDARN Canada
     :author: Remington Rohel
+
+    :Draven added retuning for testing of the borelalis retuning capability
 """
 
 import numpy as np
+import copy 
 from experiment_prototype.experiment_utils.sample_building import get_phase_shift
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -69,7 +70,7 @@ class FullFOV(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3800
+        cpid = 3802
         super().__init__(cpid)
 
         num_ranges = scf.STD_NUM_RANGES
@@ -83,11 +84,14 @@ class FullFOV(ExperimentPrototype):
             if 'freq' in kwargs.keys():
                 freq = kwargs['freq']
 
+        txctrfreq_1 = rxctrfreq_1 = freq + 500
+        txctrfreq_2 = rxctrfreq_2 = freq - 500
+
         print('Frequency set to {}'.format(freq))   # TODO: Log
 
         num_antennas = scf.options.main_antenna_count
 
-        self.add_slice({  # slice_id = 0, there is only one slice.
+        slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
@@ -100,8 +104,21 @@ class FullFOV(ExperimentPrototype):
             "tx_antenna_pattern": scf.easy_widebeam,
             "rx_antenna_pattern": rx_phase_pattern,
             "freq": freq,  # kHz
+            "txctrfreq": txctrfreq_1,
+            "rxctrfreq": rxctrfreq_1,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            #"align_sequences": True,     # align start of sequence to tenths of a second
-        })
+            "align_sequences": True,     # align start of sequence to tenths of a second
+        }
+
+        slice_2 = copy.deepcopy(slice_1)
+        slice_2['txctrfreq'] = txctrfreq_2
+        slice_2['rxctrfreq'] = rxctrfreq_2
+
+        print(f"{txctrfreq_1} {txctrfreq_2} {rxctrfreq_1} {rxctrfreq_2}")
+
+
+        self.add_slice(slice_1)
+
+        self.add_slice(slice_2, interfacing_dict={0: 'SCAN'})
