@@ -42,12 +42,12 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rx_int_antennas": [0,1,2,18],  ### int antenna 18 DNE, should fail
+            "rx_intf_antennas": [0,1,2,18],  ### int antenna 18 DNE, should fail
             "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rx_int_antennas -> 3\n" \
+        return ValidationError, "rx_intf_antennas -> 3\n" \
                                 "  ensure this value is less than 4 \(type=value_error.number.not_lt; limit_value=4\)"

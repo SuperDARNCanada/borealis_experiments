@@ -2,7 +2,7 @@
 
 """
 Experiment fault:
-    tx_antennas has invalid values (above and below the allowed range)
+    rx_main_antennas is empty
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -15,10 +15,17 @@ class TestExperiment(ExperimentPrototype):
 
     def __init__(self):
         cpid = 1
-        super().__init__(cpid)
+        super(TestExperiment, self).__init__(cpid)
 
-        beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        num_ranges = scf.STD_NUM_RANGES
+        if scf.IS_FORWARD_RADAR:
+            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
+        else:
+            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
+
+        if scf.options.site_id in ["cly", "rkn", "inv"]:
+            num_ranges = scf.POLARDARN_NUM_RANGES
+        if scf.options.site_id in ["sas", "pgr"]:
+            num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -30,16 +37,17 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "freq": scf.COMMON_MODE_FREQ_1, #kHz
-            "rx_intf_antennas": [-1, 1, 2, 4],  ### antenna -1 and 4 are out of range
+            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
+            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
+            "acf": True,
+            "xcf": True,  # cross-correlation processing
+            "acfint": True,  # interferometer acfs
+            "rx_main_antennas": [],  # List is empty, should fail
             "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rx_intf_antennas -> 0\n" \
-                                "  ensure this value is greater than or equal to 0 \(type=value_error.number.not_ge; " \
-                                "limit_value=0\)\n" \
-                                "rx_intf_antennas -> 3\n" \
-                                "  ensure this value is less than 4 \(type=value_error.number.not_lt; limit_value=4\)"
+        return ValidationError, "rx_main_antennas\n" \
+                                "  Must have at least one main antenna for RX"
