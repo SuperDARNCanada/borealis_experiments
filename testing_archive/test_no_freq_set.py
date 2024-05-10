@@ -2,7 +2,7 @@
 
 """
 Experiment fault:
-    Slice has no freq or clrfrqrange
+    Slice has no freq or cfs_range
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -44,7 +44,7 @@ class TestExperiment(ExperimentPrototype):
             "decimation_scheme": create_default_scheme(),
         }
 
-        ### No freq or clrfrqrange
+        ### No freq or cfs_range
         try:
             del slice_1['freq']
         except:
@@ -54,11 +54,11 @@ class TestExperiment(ExperimentPrototype):
         except:
             pass
         try:
-            del slice_1['clrfrqrange']
+            del slice_1['cfs_range']
         except:
             pass
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "A freq or clrfrqrange must be specified in a slice. Slice: 0 \(type=value_error\)"
+        return ValidationError, "A freq or cfs_range must be specified in a slice. Slice: 0 \(type=value_error\)"
