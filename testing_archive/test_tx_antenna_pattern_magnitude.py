@@ -8,8 +8,8 @@ Experiment fault:
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from borealis import ExperimentPrototype
+from borealis import decimation_scheme as dm
 from pydantic import ValidationError
 
 
@@ -63,7 +63,7 @@ class TxAntennaPatternTest(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "decimation_scheme": create_default_scheme(),
+            "decimation_scheme": dm.create_default_scheme(),
         })
 
     @classmethod

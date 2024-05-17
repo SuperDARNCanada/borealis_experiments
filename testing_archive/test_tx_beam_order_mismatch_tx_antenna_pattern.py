@@ -8,8 +8,8 @@ Experiment fault:
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from borealis import ExperimentPrototype
+from borealis import decimation_scheme as dm
 from pydantic import ValidationError
 
 
@@ -51,7 +51,7 @@ class TxAntennaPatternTest(ExperimentPrototype):
             "rx_beam_order": [beams_to_use, beams_to_use],
             "tx_beam_order": [0, 1],        # tx_antenna_pattern returns array with only one row
             "freq": freq,  # kHz
-            "decimation_scheme": create_default_scheme(),
+            "decimation_scheme": dm.create_default_scheme(),
         })
 
     @classmethod

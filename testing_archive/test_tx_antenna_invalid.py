@@ -6,8 +6,8 @@ Experiment fault:
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from borealis import ExperimentPrototype
+from borealis import decimation_scheme as dm
 from pydantic import ValidationError
 
 
@@ -32,7 +32,7 @@ class TestExperiment(ExperimentPrototype):
             "tx_beam_order": beams_to_use,
             "freq": scf.COMMON_MODE_FREQ_1, #kHz
             "tx_antennas": [-1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16],  ### antenna -1 and 16 are out of range
-            "decimation_scheme": create_default_scheme(),
+            "decimation_scheme": dm.create_default_scheme(),
         }
         self.add_slice(slice_1)
 

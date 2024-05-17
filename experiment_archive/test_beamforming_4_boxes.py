@@ -4,7 +4,7 @@ import os
 import sys
 
 # write an experiment that creates a new control program.
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from borealis import ExperimentPrototype
 
 
 class OneBox(ExperimentPrototype):

@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 # write an experiment that creates a new control program.
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_utils.decimation_scheme import DecimationStage, DecimationScheme
+from borealis import ExperimentPrototype
+from borealis import decimation_scheme as dm
 from borealis_experiments.test_decimation_schemes import *
 
 class Normalscan(ExperimentPrototype):

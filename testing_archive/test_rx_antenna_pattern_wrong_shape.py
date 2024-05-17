@@ -10,7 +10,7 @@ Expected exception:
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from borealis import ExperimentPrototype
 from pydantic import ValidationError
 
 ### Method returns a list which will fail in check_slice()

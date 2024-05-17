@@ -6,9 +6,8 @@ Experiment fault:
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_utils.decimation_scheme import \
-    DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
+from borealis import ExperimentPrototype
+from borealis import decimation_scheme as dm
 from pydantic import ValidationError
 
 
@@ -26,14 +25,14 @@ class TestExperiment(ExperimentPrototype):
         all_stages = []
         for stage in range(0, len(rates)):
             filter_taps = list(
-                scaling_factors[stage] * create_firwin_filter_by_attenuation(
+                scaling_factors[stage] * dm.create_firwin_filter_by_attenuation(
                     rates[stage], transition_widths[stage], cutoffs[stage],
                     ripple_dbs[stage]))
-            all_stages.append(DecimationStage(stage, rates[stage],
+            all_stages.append(dm.DecimationStage(stage, rates[stage],
                               dm_rates[stage], filter_taps))
 
         # changed from 10e3/3->10e3
-        decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
+        decimation_scheme = (dm.DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
         super(TestExperiment, self).__init__(cpid, output_rx_rate=decimation_scheme.output_sample_rate)
 
         if scf.IS_FORWARD_RADAR:

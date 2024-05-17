@@ -4,7 +4,7 @@
 import os
 
 #import test
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from borealis import ExperimentPrototype
 from borealis_experiments.test_decimation_schemes import *
 
 class TwoMultifsound(ExperimentPrototype):

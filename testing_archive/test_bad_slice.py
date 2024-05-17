@@ -4,8 +4,8 @@
 Experiment fault: 
     Adding a slice that isn't a dictionary of parameters
 """
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_exception import ExperimentException
+from borealis import ExperimentPrototype
+from borealis.experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):

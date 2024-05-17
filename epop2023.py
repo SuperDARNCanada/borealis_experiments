@@ -8,7 +8,7 @@ by request of Dr. Kuldeep Pandey in February 2023.
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from borealis import ExperimentPrototype
 
 
 def boresight(frequency_khz, tx_antennas, antenna_spacing_m):

@@ -9,8 +9,8 @@ Experiment fault:
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from borealis import ExperimentPrototype
+from borealis import decimation_scheme as dm
 from pydantic import ValidationError
 
 
@@ -30,7 +30,7 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
             "freq": scf.COMMON_MODE_FREQ_1,    # kHz
-            "decimation_scheme": create_default_scheme(),
+            "decimation_scheme": dm.create_default_scheme(),
         }
         self.add_slice(slice_1)
 

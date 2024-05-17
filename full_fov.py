@@ -12,9 +12,9 @@
 """
 import numpy as np
 
-from utils.signals import get_phase_shift
+from borealis.utils.signals import get_phase_shift
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from borealis import ExperimentPrototype
 
 
 def rx_phase_pattern(beam_angle, freq_khz, antenna_count, antenna_spacing, offset=0.0):

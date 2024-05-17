@@ -3,7 +3,7 @@
 import os
 import sys
 
-from experiment_prototype.experiment_utils.decimation_scheme import DecimationStage, DecimationScheme, \
+from borealis import decimation_scheme as dm
     create_firwin_filter_by_num_taps, create_firwin_filter_by_attenuation
 
 
@@ -24,9 +24,9 @@ from experiment_prototype.experiment_utils.decimation_scheme import DecimationSt
 #   all_stages = []
 #   for stage in range(0,4):
 #       filter_taps = list(create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
-#       all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+#       all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-#   return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+#   return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 # def create_test_scheme_2():
@@ -45,9 +45,9 @@ from experiment_prototype.experiment_utils.decimation_scheme import DecimationSt
 
 #   for stage in range(0,4):
 #       filter_taps = list(create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
-#       all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+#       all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-#   return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+#   return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 # def create_test_scheme_3(): # tested Feb 11 1800 UTC to 2321 - way too large of filter order 
@@ -65,9 +65,9 @@ from experiment_prototype.experiment_utils.decimation_scheme import DecimationSt
 #   all_stages = []
 #   for stage in range(0,4):
 #       filter_taps = list(create_firwin_filter_by_num_taps(rates[stage], transition_widths[stage], cutoffs[stage], num_taps[stage]))
-#       all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+#       all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-#   return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+#   return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 # def create_test_scheme_4(): # tested Feb 11 2321 UTC to Feb 12 1700 UTC - way too large of filter order 
@@ -85,9 +85,9 @@ from experiment_prototype.experiment_utils.decimation_scheme import DecimationSt
 #   all_stages = []
 #   for stage in range(0,4):
 #       filter_taps = list(create_firwin_filter_by_num_taps(rates[stage], transition_widths[stage], cutoffs[stage], num_taps[stage]))
-#       all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+#       all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-#   return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+#   return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 # def create_test_scheme_5():
@@ -106,9 +106,9 @@ from experiment_prototype.experiment_utils.decimation_scheme import DecimationSt
 
 #   for stage in range(0,4):
 #       filter_taps = list(create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
-#       all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+#       all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-#   return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+#   return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 def create_test_scheme_6(): # tested Feb 12 1800 - looks ~ 10 dB SNR? 
@@ -127,10 +127,10 @@ def create_test_scheme_6(): # tested Feb 12 1800 - looks ~ 10 dB SNR?
 
     for stage in range(0,3):
         filter_taps = list(create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
-        all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+        all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-    all_stages.append(DecimationStage(3, rates[3], dm_rates[3], [1.0]))
-    return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+    all_stages.append(dm.DecimationStage(3, rates[3], dm_rates[3], [1.0]))
+    return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 def create_test_scheme_7(): 
@@ -149,9 +149,9 @@ def create_test_scheme_7():
 
     for stage in range(0,4):
         filter_taps = list(create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
-        all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+        all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-    return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+    return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 def create_test_scheme_8(): 
@@ -170,9 +170,9 @@ def create_test_scheme_8():
 
     for stage in range(0,4):
         filter_taps = list(create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
-        all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+        all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-    return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+    return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 
 
 def create_test_scheme_9(): 
@@ -194,8 +194,8 @@ def create_test_scheme_9():
     all_stages = []
 
     for stage in range(0,4):
-        filter_taps = list(scaling_factors[stage] * create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
-        all_stages.append(DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
+        filter_taps = list(scaling_factors[stage] * dm.create_firwin_filter_by_attenuation(rates[stage], transition_widths[stage], cutoffs[stage], ripple_dbs[stage]))
+        all_stages.append(dm.DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps))
 
-    return (DecimationScheme(5.0e6, 10.0e3/3, stages=all_stages))
+    return (dm.DecimationStage(5.0e6, 10.0e3/3, stages=all_stages))
 

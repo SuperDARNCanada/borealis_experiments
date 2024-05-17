@@ -10,7 +10,7 @@ NOTE: Test is superceded by a test in experiment_prototype.py in check_slice_min
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from borealis import ExperimentPrototype
 
 
 class TestExperiment(ExperimentPrototype):

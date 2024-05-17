@@ -17,7 +17,7 @@
 import copy
 import math
 
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from borealis import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
