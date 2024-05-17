@@ -67,6 +67,9 @@ class NoiseSearch(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
+            "acf": True,
+            "xcf": True,
+            "acfint": True,
         }
 
         interfacing_dict = None
@@ -85,6 +88,9 @@ class NoiseSearch(ExperimentPrototype):
             high_bandwidth_tx_slice["decimation_scheme"] = wideband_scheme()  # Use a high bandwidth filter scheme
             high_bandwidth_tx_slice.pop("intt")
             high_bandwidth_tx_slice["intn"] = 1  # Only run for 1 sequence
+            high_bandwidth_tx_slice.pop("acf")
+            high_bandwidth_tx_slice.pop("xcf")
+            high_bandwidth_tx_slice.pop("acfint")
             self.add_slice(high_bandwidth_tx_slice, interfacing_dict=interfacing_dict)
 
             high_bandwidth_rx_slice = copy.deepcopy(high_bandwidth_tx_slice)
