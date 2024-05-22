@@ -60,8 +60,7 @@ class FullFOV15Km(ExperimentPrototype):
         cpid = 3801
         decimation_scheme = create_15km_scheme()
 
-        super().__init__(cpid, output_rx_rate=decimation_scheme.output_sample_rate,
-                         comment_string='Full FOV 15km Resolution Experiment')
+        super().__init__(cpid, comment_string='Full FOV 15km Resolution Experiment')
 
         num_ranges = scf.STD_NUM_RANGES * 3     # Each range is a third of the usual size, want same spatial extent
 

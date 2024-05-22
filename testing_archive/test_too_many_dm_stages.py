@@ -34,8 +34,7 @@ class TestExperiment(ExperimentPrototype):
 
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
-        super(TestExperiment, self).__init__(
-            cpid, output_rx_rate=decimation_scheme.output_sample_rate)
+        super(TestExperiment, self).__init__(cpid)
 
 
         if scf.IS_FORWARD_RADAR:

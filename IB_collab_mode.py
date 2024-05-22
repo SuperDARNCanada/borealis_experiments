@@ -103,7 +103,8 @@ class IBCollabMode(ExperimentPrototype):
         }
 
         super().__init__(
-            cpid, output_rx_rate=decimation_scheme.output_sample_rate,
-            comment_string='ICEBEAR, 5 beam, 2s integration, 15 km')
+            cpid,
+            comment_string='ICEBEAR, 5 beam, 2s integration, 15 km'
+        )
 
         self.add_slice(slice_1)

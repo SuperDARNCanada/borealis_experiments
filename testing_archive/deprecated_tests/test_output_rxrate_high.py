@@ -16,7 +16,7 @@ class TestExperiment(ExperimentPrototype):
     def __init__(self):
         cpid = 1
         ### output_rx_rate too high
-        super(TestExperiment, self).__init__(cpid, output_rx_rate=1+scf.options.max_output_sample_rate)
+        super(TestExperiment, self).__init__(cpid)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
