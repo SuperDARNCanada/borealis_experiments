@@ -2,7 +2,7 @@
 
 """
 Experiment fault:
-    decimation scheme not set for unstandard width
+    cfs listening duration is too short
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -38,16 +38,15 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))],  # 1 min scan
-            "cfs_range": [12000, 12400],  # non standard
+            "cfs_range": [11000, 11100],
+            "cfs_duration": 5,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "CFS slice 0 does not have the default 300kHz width. You must "\
-                                "define a custom decimation scheme to match the 400kHz width or adjust the "\
-                                "cfs_range values of the experiment."
+        return ValidationError, "Clear frequency search duration of 5 ms is too short. "\
+                                "Must be at least 10 ms long"
