@@ -102,7 +102,7 @@ if options.site_id == "sas":
 elif options.site_id == "pgr":
     SOUNDING_FREQS = [9600, 10590, 11050, 11750, 13090, 12850, 12400]
 elif options.site_id == "rkn":
-    SOUNDING_FREQS = [11100, 9600, 10500, 12400, 11800, 13090, 12825]
+    SOUNDING_FREQS = [11100, 9600, 10500, 12350, 11800, 13090, 12850]
 elif options.site_id == "inv":
     SOUNDING_FREQS = [11150, 9690, 12400, 10590, 11850, 12800, 13100]
 elif options.site_id == "cly":
@@ -164,11 +164,11 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
     if len(tx_antennas) == 16:
         if frequency_khz in cached_values_16_antennas.keys():
             phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_16_antennas[frequency_khz]))
-            return phases.reshape(1, num_antennas)
+            return phases.reshape(1, num_antennas) * 0.999999
     elif len(tx_antennas) == 8:
         if frequency_khz in cached_values_8_antennas.keys():
             phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_8_antennas[frequency_khz]))
-            return phases.reshape(1, num_antennas)
+            return phases.reshape(1, num_antennas) * 0.999999
     # If you get this far, the number of antennas or frequency is not supported for this function.
     raise ValueError(f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "
                      f"frequency_khz: {frequency_khz}, main_antenna_count: {num_antennas}")

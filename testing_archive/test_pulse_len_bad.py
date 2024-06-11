@@ -22,7 +22,7 @@ class TestExperiment(ExperimentPrototype):
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": int(1/self.output_rx_rate*1e6) + 1,  ### pulse_len must be the same as 1/output_rx_rate (within floating point error)
+            "pulse_len": scf.PULSE_LEN_45KM + 1,  ### pulse_len must be the same as 1/output_rx_rate (within floating point error)
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
@@ -42,4 +42,4 @@ class TestExperiment(ExperimentPrototype):
     def error_message(cls):
         return ValidationError, "For an experiment slice with real-time acfs, pulse length must be equal \(within 1 " \
                                 "us\) to 1/output_rx_rate to make acfs valid. Current pulse length is 301 us, output" \
-                                " rate is 3333.3333333333335 Hz. Slice: 0 \(type=value_error\)"
+                                " rate is 3333.333 Hz. Slice: 0 \(type=value_error\)"
