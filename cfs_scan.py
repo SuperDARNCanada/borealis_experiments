@@ -47,9 +47,13 @@ class cfs_scan(ExperimentPrototype):
         }
 
         slice_2 = copy.deepcopy(slice_1)
+        slice_3 = copy.deepcopy(slice_1)
+        slice_2['cfs_range'] = [11500, 11700]
+        slice_3['cfs_range'] = [11000, 11100]
 
         super().__init__(cpid, comment_string='Test clear frequency search experiment')
 
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0: 'CONCURRENT'})
+        self.add_slice(slice_3, interfacing_dict={0: 'CONCURRENT', 1: 'CONCURRENT'})
 
