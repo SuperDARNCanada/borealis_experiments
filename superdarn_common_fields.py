@@ -102,7 +102,7 @@ if options.site_id == "sas":
 elif options.site_id == "pgr":
     SOUNDING_FREQS = [9600, 10590, 11050, 11750, 13090, 12850, 12400]
 elif options.site_id == "rkn":
-    SOUNDING_FREQS = [11100, 9600, 10500, 12400, 11800, 13090, 12825]
+    SOUNDING_FREQS = [11100, 9600, 10500, 12350, 11800, 13090, 12850]
 elif options.site_id == "inv":
     SOUNDING_FREQS = [11150, 9690, 12400, 10590, 11850, 12800, 13100]
 elif options.site_id == "cly":
