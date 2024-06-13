@@ -2,11 +2,11 @@
 
 """
 Experiment fault: 
-    clrfrqrange is within restricted range
+    cfs_range is within restricted range
 Expected exception:
-    clrfrqrange is entirely within restricted range .*
+    cfs_range is entirely within restricted range .*
 
-NOTE: Test is superceded by more specific clrfrqrange tests
+NOTE: Test is superceded by more specific cfs_range tests
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -40,7 +40,7 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": [13400, 13415],  ### These should be within a sas restricted frequencies range
+            "cfs_range": [13400, 13415],  ### These should be within a sas restricted frequencies range
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

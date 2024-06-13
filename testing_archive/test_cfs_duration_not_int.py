@@ -2,7 +2,7 @@
 
 """
 Experiment fault:
-    Slice has no freq or cfs_range
+    cfs listening duration is not an integer
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -37,28 +37,16 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
+            "scanbound": [i * 3.5 for i in range(len(beams_to_use))],  # 1 min scan
+            "cfs_range": [11000, 11300],
+            "cfs_duration": 24.315,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "decimation_scheme": create_default_scheme(),
         }
-
-        ### No freq or cfs_range
-        try:
-            del slice_1['freq']
-        except:
-            pass
-        try:
-            del slice_1['freq']
-        except:
-            pass
-        try:
-            del slice_1['cfs_range']
-        except:
-            pass
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "A freq or cfs_range must be specified in a slice. Slice: 0 \(type=value_error\)"
+        return ValidationError, "cfs_duration\n" \
+                                "  value is not a valid integer \(type=type_error.integer\)"

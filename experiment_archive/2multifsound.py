@@ -37,10 +37,10 @@ class TwoMultifsound(ExperimentPrototype):
             "tx_beam_order": [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
             #"scanboundflag": True,  # there is a scan boundary
             #"scanbound": 60000,  # ms
-            #"clrfrqflag": True,  # search for clear frequency before transmitting
-            #"clrfrqrange": [13100, 13400],  # frequency range for clear frequency search,
+            #"cfs_flag": True,  # search for clear frequency before transmitting
+            #"cfs_range": [13100, 13400],  # frequency range for clear frequency search,
             "freq" : 10500,
-            # kHz including a clrfrqrange overrides freq so these are no
+            # kHz including a cfs_range overrides freq so these are no
             # longer necessary as they will be set by the frequency chosen from the
             # range.
             "acf": True,
@@ -66,8 +66,8 @@ class TwoMultifsound(ExperimentPrototype):
             "tx_beam_order": [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
             #"scanboundflag": True,  # there is a scan boundary
             #"scanbound": 60000,  # ms
-            #"clrfrqflag": True,  # search for clear frequency before transmitting
-            #"clrfrqrange": [10200, 10500],  # range for clear frequency search, kHz
+            #"cfs_flag": True,  # search for clear frequency before transmitting
+            #"cfs_range": [10200, 10500],  # range for clear frequency search, kHz
             "freq": 13000,
             "acf": True,
             "xcf": True,  # cross-correlation processing

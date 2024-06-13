@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 """
-Experiment fault: 
-    clrfrqrange not increasing
+Experiment fault:
+    decimation scheme not set for non-standard cfs range
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -37,8 +37,8 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": [12350, 12000],  ### not increasing
+            "scanbound": [i * 3.5 for i in range(len(beams_to_use))],  # 1 min scan
+            "cfs_range": [12000, 12400],  # non standard
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -48,7 +48,6 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "clrfrqrange\n" \
-                                "  Slice 0 clrfrqrange must be between min and max tx frequencies " \
-                                "and rx frequencies according to license and/or center frequencies / sampling rates " \
-                                "/ transition bands, and must have lower frequency first. \(type=value_error\)"
+        return ValidationError, f"CFS slice 0 range is greater than the default 300kHz width. "\
+                                f"You must define a custom decimation scheme to match the 400kHz width or "\
+                                f"adjust the cfs_range values of the experiment."

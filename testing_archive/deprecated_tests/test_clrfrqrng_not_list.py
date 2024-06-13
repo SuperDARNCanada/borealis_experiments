@@ -2,9 +2,9 @@
 
 """
 Experiment fault: 
-    clrfrqrange not a list
+    cfs_range not a list
 Expected exception:
-    clrfrqrange must be an integer list of length = 2
+    cfs_range must be an integer list of length = 2
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -40,7 +40,7 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": (12500, 12800),  ### not a list
+            "cfs_range": (12500, 12800),  ### not a list
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

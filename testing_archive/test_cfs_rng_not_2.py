@@ -2,7 +2,7 @@
 
 """
 Experiment fault:
-    clrfrqrange too high
+    cfs_range not a range of length 2
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -38,7 +38,7 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": [20100, 20400],  ### Too high
+            "cfs_range": [12387],  ### not length 2
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -48,9 +48,6 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "clrfrqrange -> 0\n" \
-                                "  ensure this value is less than or equal to 20000.0 " \
-                                "\(type=value_error.number.not_le; limit_value=20000.0\)\n" \
-                                "clrfrqrange -> 1\n" \
-                                "  ensure this value is less than or equal to 20000.0 " \
-                                "\(type=value_error.number.not_le; limit_value=20000.0\)"
+        return ValidationError, "cfs_range\n" \
+                                "  ensure this value has at least 2 items " \
+                                "\(type=value_error.list.min_items; limit_value=2\)"

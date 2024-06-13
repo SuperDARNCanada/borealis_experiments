@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 """
-Experiment fault:
-    Slice has no freq or cfs_range
+Experiment fault: 
+    cfs_range too low
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -38,27 +38,19 @@ class TestExperiment(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
+            "cfs_range": [7500, 7800],  ### too low
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "decimation_scheme": create_default_scheme(),
         }
-
-        ### No freq or cfs_range
-        try:
-            del slice_1['freq']
-        except:
-            pass
-        try:
-            del slice_1['freq']
-        except:
-            pass
-        try:
-            del slice_1['cfs_range']
-        except:
-            pass
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "A freq or cfs_range must be specified in a slice. Slice: 0 \(type=value_error\)"
+        return ValidationError, "cfs_range -> 0\n" \
+                                "  ensure this value is greater than or equal to 8000.0 " \
+                                "\(type=value_error.number.not_ge; limit_value=8000.0\)\n" \
+                                "cfs_range -> 1\n" \
+                                "  ensure this value is greater than or equal to 8000.0 " \
+                                "\(type=value_error.number.not_ge; limit_value=8000.0\)"

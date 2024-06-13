@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 """
-Experiment fault:
-    clrfrqrange not a range of length 2
+Experiment fault: 
+    cfs_range too low
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -37,8 +37,9 @@ class TestExperiment(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
-            "clrfrqrange": [12387],  ### not length 2
+            "scanbound": [i * 3.5 for i in range(len(beams_to_use))],  # 1 min scan
+            "cfs_range": [11000, 11300],
+            "txctrfreq": 14000,  # Khz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -48,6 +49,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "clrfrqrange\n" \
-                                "  ensure this value has at least 2 items " \
-                                "\(type=value_error.list.min_items; limit_value=2\)"
+        return ValidationError, "Slice 0 cfs_range minimum value needs to be equal to or greater than the tx "\
+                                "and rx minimum operating frequencies: 12250.000013038516 and 10250.00001117587"

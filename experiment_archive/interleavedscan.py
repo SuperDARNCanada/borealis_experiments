@@ -28,9 +28,9 @@ class Interleavedscan(ExperimentPrototype):
             "tx_beam_order": [0, 4, 8, 12, 2, 6, 10, 14, 1, 5, 9, 13, 3, 7, 11, 15],
             "scanboundflag": True,  # there is a scan boundary
             "scanbound": 60000,  # ms
-            "clrfrqflag": True,  # search for clear frequency before transmitting
-            "clrfrqrange": [12200, 12500],  # frequency range for clear frequency search, kHz
-            # including a clrfrqrange overrides freq so these are no longer necessary
+            "cfs_flag": True,  # search for clear frequency before transmitting
+            "cfs_range": [12200, 12500],  # frequency range for clear frequency search, kHz
+            # including a cfs_range overrides freq so these are no longer necessary
             # as they will be set by the frequency chosen from the range.
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
