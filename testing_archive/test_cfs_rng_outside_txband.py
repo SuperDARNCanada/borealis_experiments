@@ -50,4 +50,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "Slice 0 cfs_range minimum value needs to be equal to or greater than the tx "\
-                                "and rx minimum operating frequencies: 12250.000013038516 and 10250.00001117587"
+                                "and rx minimum operating frequencies: 12250.000013038516 and 8000"
