@@ -11,15 +11,16 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from pydantic import ValidationError
+from pydantic.v1.error_wrappers import ValidationError
 
-### Method returns a list which will fail in check_slice()
-### of ExperimentPrototype
-def rx_antenna_pattern(beam_angle, freq, rx_antennas, rx_spacing, offset=0.0):
+
+def rx_antenna_pattern(beam_angle, freq, rx_locations, offset=(0.0, 0.0, 0.0)):
     """Sets the amplitude and phase weighting for each tx antenna as a list"""
-    beam_angle_num = len(beam_angle) + int(abs(offset))
-    pattern = np.array([1.0 for _ in range(rx_antennas * beam_angle_num)])
-    pattern = pattern.reshape((beam_angle_num, rx_antennas))
+    beam_angle_num = len(beam_angle)
+    if len(rx_locations) == 4:  # break for intf array
+        beam_angle_num += 1
+    pattern = np.array([1.0 for _ in range(len(rx_locations) * beam_angle_num)])
+    pattern = pattern.reshape((beam_angle_num, len(rx_locations)))
     return pattern
 
 

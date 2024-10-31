@@ -19,7 +19,7 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
-def rx_phase_pattern(beam_angle, freq_khz, antenna_count, antenna_spacing, offset=0.0):
+def rx_phase_pattern(beam_angle, freq_khz, antenna_locations, offset=(0.0, 0.0, 0.0)):
     window = [0.08081232549588463, 0.12098514265395757, 0.23455777475180511, 0.4018918165398586,
               0.594054435182454, 0.7778186328978896, 0.9214100134552521, 1.0,
               1.0, 0.9214100134552521, 0.7778186328978896, 0.594054435182454,
@@ -52,11 +52,10 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_count, antenna_spacing, offse
                 2.12, 4.96, 7.6, 11.24, 14.48, 17.92, 23.06, 29.7],
         }
 
-    shift = get_phase_shift(xcf_directions[int(freq_khz)], freq_khz, antenna_count,
-                            antenna_spacing, offset) * 0.9999999
+    shift = get_phase_shift(xcf_directions[int(freq_khz)], freq_khz, antenna_locations, offset) * 0.9999999
 
     # Apply a Hamming window to the antenna data streams of the main array
-    if antenna_count == 16:
+    if len(antenna_locations) == 16:
         shift = np.einsum('ij,j->ij', shift, np.array(window, dtype=np.float32))
 
     return shift

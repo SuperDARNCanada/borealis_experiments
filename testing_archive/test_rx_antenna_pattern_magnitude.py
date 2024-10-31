@@ -11,14 +11,14 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from pydantic import ValidationError
+from pydantic.v1.error_wrappers import ValidationError
 
 ### One of the pattern's elements' magnitudes is > 1.0, this will fail in check_slice()
 ### of ExperimentPrototype
-def rx_antenna_pattern(beam_angle, freq, rx_antennas, rx_spacing, offset=0.0):
+def rx_antenna_pattern(beam_angle, freq, rx_locations, offset=0.0):
     """Sets the amplitude and phase weighting for each tx antenna"""
-    pattern = np.array([1.0 for _ in range(rx_antennas * len(beam_angle))])
-    pattern = pattern.reshape((len(beam_angle), rx_antennas))
+    pattern = np.array([1.0 for _ in range(len(rx_locations) * len(beam_angle))])
+    pattern = pattern.reshape((len(beam_angle), len(rx_locations)))
     pattern[0, 0] = 1.01
     return pattern
 
