@@ -12,6 +12,7 @@
     :author: Remington Rohel
 """
 
+import copy
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_utils import decimation_scheme as dm
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -84,7 +85,7 @@ class ConcurrentBistatic(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "tx_antenna_pattern": scf.easy_widebeam,
             "tx_beam_order": [0],
-            "rx_beam_order": [[i for i in range(len(scd.STD_16_BEAM_ANGLE))],
+            "rx_beam_order": [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]],
             "freq": common_freqs.get(scf.options.site_id)[0],
             "scanbound": [i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))],  # align each aveperiod to 3.7s boundary
             "wait_for_first_scanbound": False,
