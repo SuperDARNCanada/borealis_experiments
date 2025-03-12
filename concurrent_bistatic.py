@@ -101,8 +101,8 @@ class ConcurrentBistatic(ExperimentPrototype):
                 raise ValueError("A radar can't listen to itself!")
             else:
                 slice_1 = copy.deepcopy(slice_0)
-                slice_1.pop("tx_antenna_pattern")
-                slice_1["rx_only"] = True
+                slice_1.pop("tx_beam_order")
+                slice_1["rxonly"] = True
                 slice_1["freq"] = common_freqs.get(listen_to)[0]
                 comment_str = 'Concurrent bistatic mode - listening to {}'.format(listen_to)
 
