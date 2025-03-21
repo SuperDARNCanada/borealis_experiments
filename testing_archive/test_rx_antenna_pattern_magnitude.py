@@ -11,7 +11,7 @@ import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
-from pydantic import ValidationError
+from pydantic.v1.error_wrappers import ValidationError
 
 ### One of the pattern's elements' magnitudes is > 1.0, this will fail in check_slice()
 ### of ExperimentPrototype
