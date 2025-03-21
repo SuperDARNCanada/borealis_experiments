@@ -48,6 +48,5 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "txctrfreq\n" \
-                                "  ensure this value is less than or equal to 20000.0 " \
-                                "\(type=value_error.number.not_le; limit_value=20000.0\)"
+                                "  Input should be less than or equal to 20000"
 

@@ -48,6 +48,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Slice 0 correlation lags will be off because tau_spacing 2407 us is not a " \
-                                "multiple of the output rx sampling period \(1/output_rx_rate " \
-                                "3333.333 Hz\). \(type=value_error\)"
+        return ValidationError, "1 validation error for ExperimentSlice\n" \
+                                "decimation_scheme"

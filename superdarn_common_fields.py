@@ -111,12 +111,13 @@ else:
     SOUNDING_FREQS = [10600, 11250, 11950, 13150]
 
 
-def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
+def easy_widebeam(frequency_khz, tx_antennas, antenna_locations):
     """
     Returns phases in degrees for each antenna in the main array that will generate a wide beam pattern
     that illuminates the full FOV. Only 8 or 16 antennas at common frequencies are supported.
     """
-    if antenna_spacing_m != 15.24:
+    antenna_spacing_m = antenna_locations[1, 0] - antenna_locations[0, 0]  # difference in x-position of first two antennas
+    if not np.isclose(antenna_spacing_m, 15.24):
         raise ValueError(f"Antenna spacing must be 15.24m. Given value: {antenna_spacing_m}")
 
     cached_values_16_antennas = {
@@ -163,11 +164,11 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
     phases = np.zeros(num_antennas, dtype=np.complex64)
     if len(tx_antennas) == 16:
         if frequency_khz in cached_values_16_antennas.keys():
-            phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_16_antennas[frequency_khz]))
+            phases[tx_antennas] = np.exp(1j * np.deg2rad(cached_values_16_antennas[frequency_khz]))
             return phases.reshape(1, num_antennas) * 0.999999
     elif len(tx_antennas) == 8:
         if frequency_khz in cached_values_8_antennas.keys():
-            phases[tx_antennas] = np.exp(1j * np.pi/180. * np.array(cached_values_8_antennas[frequency_khz]))
+            phases[tx_antennas] = np.exp(1j * np.deg2rad(cached_values_8_antennas[frequency_khz]))
             return phases.reshape(1, num_antennas) * 0.999999
     # If you get this far, the number of antennas or frequency is not supported for this function.
     raise ValueError(f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "

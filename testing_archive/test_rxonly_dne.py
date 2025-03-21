@@ -36,5 +36,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "__root__\n" \
-                                "  rxonly specified as False but tx_beam_order not given. Slice: 0 \(type=value_error\)"
+        return ValidationError, "Value error, rxonly specified as False but tx_beam_order not given"

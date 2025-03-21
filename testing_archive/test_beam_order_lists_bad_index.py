@@ -49,6 +49,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rx_beam_order -> 0\n" \
-                                "  Beam number 55 could not index in beam_angle list of length 16. Slice: 0 " \
-                                "\(type=value_error\)"
+        return ValidationError, "rx_beam_order\n" \
+                                "  Value error, Beam number 55 could not index in beam_angle list of length 16. Slice: 0"

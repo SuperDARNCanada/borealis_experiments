@@ -49,4 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "tau_spacing\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)"
+                                "  Input should be a valid integer"

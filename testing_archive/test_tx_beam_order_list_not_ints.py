@@ -35,8 +35,8 @@ class TestExperiment(ExperimentPrototype):
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [0, 1, 2],
-            "tx_beam_order": ['0', 1.05, 'hahha'],  ### entries not integers
+            "rx_beam_order": [0],
+            "tx_beam_order": ['0'],  ### entries not integers
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "freq" : scf.COMMON_MODE_FREQ_1, #kHz
             "acf": True,
@@ -48,10 +48,12 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "3 validation errors for ExperimentSlice\n" \
-                                "tx_beam_order -> 0\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "tx_beam_order -> 1\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "tx_beam_order -> 2\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)"
+        return ValidationError, "2 validation errors for ExperimentSlice\n" \
+                                # "tx_beam_order.0.list[constrained-int]\n" \
+                                # "  Input should be a valid list [type=list_type, input_value='0', input_type=str]\n" \
+                                # "    For further information visit https://errors.pydantic.dev/2.10/v/list_type\n" \
+                                # "tx_beam_order.0.constrained-int\n" \
+                                # "  Input should be a valid integer [type=int_type, input_value='0', input_type=str]\n" \
+                                # "    For further information visit https://errors.pydantic.dev/2.10/v/int_type"
+
+

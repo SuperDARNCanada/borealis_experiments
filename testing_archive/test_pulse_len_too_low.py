@@ -70,5 +70,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "pulse_len\n" \
-                                "  ensure this value is greater than or equal to 100.0 " \
-                                "\(type=value_error.number.not_ge; limit_value=100.0\)"
+                                "  Input should be greater than or equal to 100"

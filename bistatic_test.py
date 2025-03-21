@@ -93,7 +93,7 @@ class BistaticTest(ExperimentPrototype):
             "freq": freq,  # kHz
             "scanbound": [i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))],  # align each aveperiod to 3.7s boundary
             "wait_for_first_scanbound": False,
-            "decimation_scheme": two_stage_filter,
+            "decimation_scheme": two_stage_filter(),
             "align_sequences": True,     # align start of sequence to tenths of a second
         }
 

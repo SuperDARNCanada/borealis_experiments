@@ -34,6 +34,7 @@ class TestExperiment(ExperimentPrototype):
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
+            "tx_beam_order": beams_to_use,
             "scanbound": [i * 3.5 for i in range(len(beams_to_use))], #1 min scan
             "txctrfreq": 13125.0,  # RxCtrFreq defaults to 12MHZ
             "freq" : 13100.0,  # To close to tx center freq
@@ -41,7 +42,7 @@ class TestExperiment(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
             "decimation_scheme": create_default_scheme(),
-            "rxonly": True,
+            "rxonly": False,
         }
         self.add_slice(slice_1)
 

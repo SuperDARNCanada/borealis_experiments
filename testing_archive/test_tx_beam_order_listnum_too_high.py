@@ -49,4 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, \
-            "Beam number 22 in tx_beam_order could not index in beam_angle list of length 16. Slice: 0"
+            "tx_beam_order\n  Value error, Slice 0 scan tx beam number 22 DNE"

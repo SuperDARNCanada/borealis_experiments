@@ -48,4 +48,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, \
-            f"Slice frequency is outside bandwidth around rx center frequency 10000"
+            f"Slice frequency is outside rx frequency bounds"

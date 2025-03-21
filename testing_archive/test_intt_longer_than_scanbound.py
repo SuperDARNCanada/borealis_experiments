@@ -49,4 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "scanbound\n" \
-                                "  Slice 0 intt 3600.0ms longer than scanbound time 3.5s \(type=value_error\)"
+                                "  Value error, Slice 0 intt 3600.0ms longer than scanbound time 3.5s"

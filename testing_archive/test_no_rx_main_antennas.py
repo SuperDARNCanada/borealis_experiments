@@ -50,4 +50,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "rx_main_antennas\n" \
-                                "  Must have at least one main antenna for RX"
+                                "  Value error, Must have at least one main antenna for RX"

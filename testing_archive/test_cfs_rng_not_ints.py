@@ -48,7 +48,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "cfs_range -> 0\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "cfs_range -> 1\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)"
+        return ValidationError, "cfs_range.0\n" \
+                                "  Input should be a valid integer"

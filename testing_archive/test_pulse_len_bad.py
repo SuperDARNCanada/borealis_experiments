@@ -40,6 +40,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "For an experiment slice with real-time acfs, pulse length must be equal \(within 1 " \
-                                "us\) to 1/output_rx_rate to make acfs valid. Current pulse length is 301 us, output" \
-                                " rate is 3333.333 Hz. Slice: 0 \(type=value_error\)"
+        return ValidationError, "For an experiment slice with real-time acfs, pulse length must be equal"

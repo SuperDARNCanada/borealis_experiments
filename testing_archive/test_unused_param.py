@@ -8,7 +8,7 @@ Experiment fault:
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
-from experiment_prototype.experiment_exception import ExperimentException
+from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
@@ -49,4 +49,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return TypeError, "__init__\(\) got an unexpected keyword argument 'UNUSED'"
+        return ValidationError, "UNUSED\n  Unexpected keyword argument"

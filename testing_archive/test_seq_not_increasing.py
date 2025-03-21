@@ -49,4 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "pulse_sequence\n" \
-                                "  not increasing: \[14, 0, 19, 21, 40\] \(type=value_error\)"
+                                "  Value error, List must have increasing values"

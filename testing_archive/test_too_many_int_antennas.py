@@ -50,5 +50,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "rx_intf_antennas\n" \
-                                "  ensure this value has at most 4 items " \
-                                "\(type=value_error.list.max_items; limit_value=4\)"
+                                "  List should have at most 4 items after validation, not 5"

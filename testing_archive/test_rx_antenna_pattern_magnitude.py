@@ -15,10 +15,10 @@ from pydantic import ValidationError
 
 ### One of the pattern's elements' magnitudes is > 1.0, this will fail in check_slice()
 ### of ExperimentPrototype
-def rx_antenna_pattern(beam_angle, freq, rx_antennas, rx_spacing, offset=0.0):
+def rx_antenna_pattern(beam_angle, freq, antenna_locations):
     """Sets the amplitude and phase weighting for each tx antenna"""
-    pattern = np.array([1.0 for _ in range(rx_antennas * len(beam_angle))])
-    pattern = pattern.reshape((len(beam_angle), rx_antennas))
+    pattern = np.array([1.0 for _ in range(len(beam_angle) * antenna_locations.shape[0])])
+    pattern = pattern.reshape((len(beam_angle), antenna_locations.shape[0]))
     pattern[0, 0] = 1.01
     return pattern
 

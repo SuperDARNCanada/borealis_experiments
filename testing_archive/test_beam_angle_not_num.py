@@ -48,7 +48,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "beam_angle -> 2\n" \
-                                "  value is not a valid float \(type=type_error.float\)\n" \
-                                "beam_angle -> 2\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)"
+        return ValidationError, "beam_angle.2\n" \
+                                "  Input should be a valid number"

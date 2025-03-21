@@ -60,4 +60,4 @@ class TxAntennaPatternTest(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "pattern is not callable \(type=type_error.callable; value=pattern\)"
+        return ValidationError, "Input should be callable"

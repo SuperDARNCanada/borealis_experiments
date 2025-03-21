@@ -50,7 +50,7 @@ class Widebeam_3tx(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
-            "beam_angle": [0],
+            "beam_angle": [0.0],
             "rx_beam_order": [0],
             "tx_beam_order": [0],
             "freq": freq,  # kHz

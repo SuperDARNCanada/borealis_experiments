@@ -17,7 +17,7 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
-def rx_phase_pattern(beam_angle, freq_khz, antenna_count, antenna_spacing, offset=0.0):
+def rx_phase_pattern(beam_angle, freq_khz, antenna_locations):
     # Chebyshev 30-dB window
     window = [0.2910, 0.3173, 0.4557, 0.6018, 0.7424, 0.8637, 0.9528, 1.0000,
               1.0000, 0.9528, 0.8637, 0.7424, 0.6018, 0.4557, 0.3173, 0.2910]
@@ -49,11 +49,10 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_count, antenna_spacing, offse
                 2.2, 4.6, 8.4, 11.7, 14., 18.4, 21.6, 24.8],
     }
 
-    shift = get_phase_shift(adjusted_rx_beam_directions[int(freq_khz)], freq_khz, antenna_count,
-                            antenna_spacing, offset) * 0.9999999
+    shift = get_phase_shift(adjusted_rx_beam_directions[int(freq_khz)], freq_khz, antenna_locations[:, 0]) * 0.9999999
 
     # Apply a window to the antenna data streams of the main array
-    if antenna_count == 16:
+    if antenna_locations.shape[0] == 16:
         shift = np.einsum('ij,j->ij', shift, np.array(window, dtype=np.float32))
 
     return shift

@@ -48,6 +48,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "intt\n" \
-                                "  Slice 0: pulse sequence is too long for integration time given " \
-                                "\(type=value_error\)"
+        return ValidationError, "Value error, Slice 0: pulse sequence is too long for integration time given"

@@ -44,4 +44,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "pulse_phase_offset\n" \
-                                "  Slice 0 Phase encoding return must be 1 dimensional \(type=value_error\)"
+                                "  Value error, Slice 0 Phase encoding return must be 1 dimensional"

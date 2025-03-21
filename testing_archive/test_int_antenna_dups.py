@@ -42,7 +42,7 @@ class TestExperiment(ExperimentPrototype):
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
-            "rx_intf_antennas": [0,0,1,2,3],  ### 0 duplicated, should fail
+            "rx_intf_antennas": [0,0,1,2],  ### 0 duplicated, should fail
             "decimation_scheme": create_default_scheme(),
         }
         self.add_slice(slice_1)
@@ -50,6 +50,5 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "rx_intf_antennas\n" \
-                                "  ensure this value has at most 4 items " \
-                                "\(type=value_error.list.max_items; limit_value=4\)"
+                                "  Value error, List must be unique"
 

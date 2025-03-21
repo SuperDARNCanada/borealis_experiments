@@ -17,12 +17,13 @@ from utils.signals import get_phase_shift
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
-def sixty_deg_widebeam(frequency_khz, tx_antennas, antenna_spacing_m):
+def sixty_deg_widebeam(frequency_khz, tx_antennas, antenna_locations):
     """
     Returns phases in degrees for each antenna in the main array that will generate a wide beam pattern
     that illuminates a 60-degree FOV. Only 16 antennas at common frequencies is supported.
     """
-    if antenna_spacing_m != 15.24:
+    antenna_spacing_m = antenna_locations[1, 0] - antenna_locations[0, 0]
+    if not np.isclose(antenna_spacing_m, 15.24):
         raise ValueError(f"Antenna spacing must be 15.24m. Given value: {antenna_spacing_m}")
 
     cached_values_16_antennas = {

@@ -38,8 +38,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "tx_antennas -> 0\n" \
-                                "  ensure this value is greater than or equal to 0 \(type=value_error.number.not_ge; " \
-                                "limit_value=0\)\n" \
-                                "tx_antennas -> 15\n" \
-                                "  ensure this value is less than 16 \(type=value_error.number.not_lt; limit_value=16\)"
+        return ValidationError, "tx_antennas.0\n" \
+                                "  Input should be greater than or equal to 0"

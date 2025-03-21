@@ -44,5 +44,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "pulse_phase_offset\n" \
-                                "  Slice 0 Phase encoding return dimension must be equal to number of pulses " \
-                                "\(type=value_error\)"
+                                "  Value error, Slice 0 Phase encoding return dimension must be equal to number of pulses"

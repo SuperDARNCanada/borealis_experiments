@@ -15,11 +15,13 @@ from pydantic import ValidationError
 
 ### Method returns a list which will fail in check_slice()
 ### of ExperimentPrototype
-def rx_antenna_pattern(beam_angle, freq, rx_antennas, rx_spacing, offset=0.0):
+def rx_antenna_pattern(beam_angle, freq, antenna_locations):
     """Sets the amplitude and phase weighting for each tx antenna as a list"""
-    beam_angle_num = len(beam_angle) + int(abs(offset))
-    pattern = np.array([1.0 for _ in range(rx_antennas * beam_angle_num)])
-    pattern = pattern.reshape((beam_angle_num, rx_antennas))
+    beam_angle_num = len(beam_angle)
+    if antenna_locations.shape[0] == 4:
+        beam_angle_num = len(beam_angle) + 1
+    pattern = np.array([1.0 for _ in range(antenna_locations.shape[0] * beam_angle_num)])
+    pattern = pattern.reshape((beam_angle_num, antenna_locations.shape[0]))
     return pattern
 
 
