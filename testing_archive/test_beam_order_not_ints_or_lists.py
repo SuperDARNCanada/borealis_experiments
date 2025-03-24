@@ -48,19 +48,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rx_beam_order -> 0\n" \
-                                "  value is not a valid list \(type=type_error.list\)\n" \
-                                "rx_beam_order -> 0\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "rx_beam_order -> 1\n" \
-                                "  value is not a valid list \(type=type_error.list\)\n" \
-                                "rx_beam_order -> 1\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "rx_beam_order -> 2\n" \
-                                "  value is not a valid list \(type=type_error.list\)\n" \
-                                "rx_beam_order -> 2\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)\n" \
-                                "rx_beam_order -> 3\n" \
-                                "  value is not a valid list \(type=type_error.list\)\n" \
-                                "rx_beam_order -> 3\n" \
-                                "  value is not a valid integer \(type=type_error.integer\)"
+        return ValidationError, "Input should be a valid list"

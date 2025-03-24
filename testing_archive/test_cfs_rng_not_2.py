@@ -49,5 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "cfs_range\n" \
-                                "  ensure this value has at least 2 items " \
-                                "\(type=value_error.list.min_items; limit_value=2\)"
+                                "  List should have at least 2 items after validation, not 1"

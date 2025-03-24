@@ -49,4 +49,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "ensure this value is less than 16 \(type=value_error.number.not_lt; limit_value=16\)"
+        return ValidationError, "tx_antennas.6\n" \
+                                "  Input should be less than 16"

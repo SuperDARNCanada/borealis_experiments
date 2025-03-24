@@ -49,5 +49,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "ensure this value has at most 16 items " \
-                                "\(type=value_error.list.max_items; limit_value=16\)"
+        return ValidationError, "tx_antennas\n" \
+                                "  List should have at most 16 items after validation, not 17"

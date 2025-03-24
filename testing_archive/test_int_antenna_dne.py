@@ -49,5 +49,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rx_intf_antennas -> 3\n" \
-                                "  ensure this value is less than 4 \(type=value_error.number.not_lt; limit_value=4\)"
+        return ValidationError, "rx_intf_antennas.3\n" \
+                                "  Input should be less than 16"

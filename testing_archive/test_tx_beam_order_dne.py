@@ -58,4 +58,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rxonly specified as False but tx_beam_order not given. Slice: 0"
+        return ValidationError, "1 validation error for ExperimentSlice\n" \
+                                "  Value error, tx_beam_order must be specified if tx_antenna_pattern specified."

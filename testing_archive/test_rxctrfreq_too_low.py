@@ -48,6 +48,5 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "rxctrfreq\n" \
-                                "  ensure this value is greater than or equal to 8000.0 " \
-                                "\(type=value_error.number.not_ge; limit_value=8000.0\)"
+                                "  Input should be greater than or equal to 8000"
 

@@ -48,4 +48,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Slice 0 scanbound times must be increasing"
+        return ValidationError, "scanbound\n  Value error, List must have increasing values"

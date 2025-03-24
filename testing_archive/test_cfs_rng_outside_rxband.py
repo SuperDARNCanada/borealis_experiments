@@ -49,5 +49,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Slice 0 cfs_range maximum value needs to be equal to or less than the tx and "\
-                                "rx maximum operating frequencies: 20000 and 11750.000009313226"
+        return ValidationError, "Value error, Slice 0 cfs_range maximum value needs to be equal to or less than the tx and "\
+                                "rx maximum operating frequencies: 20000.0 and 11750.000009313226"

@@ -61,4 +61,4 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "A freq or cfs_range must be specified in a slice. Slice: 0 \(type=value_error\)"
+        return ValidationError, "Value error, A freq or cfs_range must be specified in a slice. Slice: 0 "

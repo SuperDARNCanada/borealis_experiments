@@ -50,4 +50,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "beam_angle\n" \
-                                "  the list has duplicated items \(type=value_error.list.unique_items\)"
+                                "  Value error, List must have increasing values"

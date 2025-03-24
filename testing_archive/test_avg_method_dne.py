@@ -51,5 +51,4 @@ class TestExperiment(ExperimentPrototype):
     def error_message(cls):
         return ValidationError, \
             "averaging_method\n" \
-            "  unexpected value; permitted: 'mean', 'median' " \
-            "\(type=value_error.const; given=not_a_method; permitted=\('mean', 'median'\)\)"
+            "  Input should be 'mean' or 'median'"

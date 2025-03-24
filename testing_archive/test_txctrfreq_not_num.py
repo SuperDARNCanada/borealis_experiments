@@ -48,5 +48,5 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "txctrfreq\n" \
-                                "  value is not a valid float \(type=type_error.float\)"
+                                "  Input should be a valid number"
 

@@ -15,7 +15,7 @@ from pydantic.v1.error_wrappers import ValidationError
 
 ### pattern second dimension is not equal to num_main_antennas, this will fail in check_slice()
 ### of ExperimentPrototype
-def tx_antenna_pattern(tx_freq_khz, tx_antennas, antenna_spacing):
+def tx_antenna_pattern(tx_freq_khz, tx_antennas, antenna_locations):
     """Sets the amplitude and phase weighting for each tx antenna"""
     pattern = np.array([1.0 for _ in range(len(tx_antennas))]).reshape((1, len(tx_antennas)))
     return pattern
@@ -57,4 +57,4 @@ class TxAntennaPatternTest(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "tx_beam_order\n" \
-                                "  Slice 0 scan tx beam number 1 DNE \(type=value_error\)"
+                                "  Value error, Slice 0 scan tx beam number 1 DNE"

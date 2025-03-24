@@ -56,4 +56,5 @@ class RxAntennaPatternTest(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rx_antenna_pattern is not callable"
+        return ValidationError, "rx_antenna_pattern\n" \
+                                "  Input should be callable"

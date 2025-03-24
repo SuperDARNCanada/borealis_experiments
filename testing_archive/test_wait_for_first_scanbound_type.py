@@ -52,4 +52,4 @@ class TestExperiment(ExperimentPrototype):
         return ValidationError, \
             '1 validation error for ExperimentSlice\n' \
             'wait_for_first_scanbound\n' \
-            '  value is not a valid boolean \(type=value_error.strictbool\)'
+            '  Input should be a valid boolean'

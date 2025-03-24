@@ -50,4 +50,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "scanbound\n" \
-                                "  Slice 0 must have intt enabled to use scanbound \(type=value_error\)"
+                                "  Value error, Slice 0 must have intt enabled to use scanbound"

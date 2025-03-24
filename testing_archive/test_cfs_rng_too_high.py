@@ -48,9 +48,5 @@ class TestExperiment(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "cfs_range -> 0\n" \
-                                "  ensure this value is less than or equal to 20000.0 " \
-                                "\(type=value_error.number.not_le; limit_value=20000.0\)\n" \
-                                "cfs_range -> 1\n" \
-                                "  ensure this value is less than or equal to 20000.0 " \
-                                "\(type=value_error.number.not_le; limit_value=20000.0\)"
+        return ValidationError, "cfs_range.0\n" \
+                                "  Input should be less than or equal to 20000"

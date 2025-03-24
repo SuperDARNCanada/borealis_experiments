@@ -49,4 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "rx_beam_order\n" \
-                                "  value is not a valid list \(type=type_error.list\)"
+                                "  Input should be a valid list"

@@ -15,9 +15,9 @@ from pydantic.v1.error_wrappers import ValidationError
 
 ### Method returns a list which will fail in check_slice()
 ### of ExperimentPrototype
-def rx_antenna_pattern(beam_angle, freq, rx_locations, offset=(0.0, 0.0, 0.0)):
+def rx_antenna_pattern(beam_angle, freq, antenna_locations):
     """Sets the amplitude and phase weighting for each tx antenna as a list"""
-    pattern = np.array([1.0 for _ in range(len(rx_locations))]).reshape((1, len(rx_locations)))
+    pattern = np.array([1.0 for _ in range(antenna_locations.shape[0])]).reshape((1, antenna_locations.shape[0]))
     return pattern
 
 

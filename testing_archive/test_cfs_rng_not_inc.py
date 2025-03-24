@@ -49,6 +49,4 @@ class TestExperiment(ExperimentPrototype):
     @classmethod
     def error_message(cls):
         return ValidationError, "cfs_range\n" \
-                                "  Slice 0 cfs_range must be between min and max tx frequencies " \
-                                "and rx frequencies according to license and/or center frequencies / sampling rates " \
-                                "/ transition bands, and must have lower frequency first. \(type=value_error\)"
+                                "  Value error, List must have increasing values"
