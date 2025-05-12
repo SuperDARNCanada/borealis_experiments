@@ -66,5 +66,7 @@ class FullFOV15Km(ExperimentPrototype):
             "tx_antenna_pattern": scf.easy_widebeam,
             "freq": scf.COMMON_MODE_FREQ_1,  # kHz
             "decimation_scheme": filter_15km_mode(),
+            "acf": True,
+            "xcf": True,
         })
 
