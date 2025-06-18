@@ -80,9 +80,9 @@ class FullFOVInterleaved(ExperimentPrototype):
             "tx_beam_order": [0],   # only one pattern
             "tx_antenna_pattern": sixty_deg_widebeam,
             "freq": freq,  # kHz
-            "acf": True,
-            "xcf": True,  # cross-correlation processing
-            "acfint": True,  # interferometer acfs
+            "acf": False,
+            # "xcf": True,  # cross-correlation processing
+            # "acfint": True,  # interferometer acfs
             #"align_sequences": True,     # align start of sequence to tenths of a second
         }
 
