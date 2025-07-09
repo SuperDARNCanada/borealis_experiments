@@ -7,6 +7,7 @@ of the HAARP instrument in Alaska.
 :copyright: 2025 SuperDARN Canada
 """
 
+import copy
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
@@ -18,7 +19,7 @@ class PgrHaarpscan(ExperimentPrototype):
         cpid = 3498
         super().__init__(cpid, comment_string="Scan of beams -4 to -1 at PGR, overlooking HAARP.")
 
-        self.add_slice({
+        slice_0 = {
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
@@ -32,4 +33,9 @@ class PgrHaarpscan(ExperimentPrototype):
             "acf": True,
             "xcf": True,
             "acfint": False,
-        })
+        }
+        slice_1 = copy.deepcopy(slice_0)
+        slice_1["freq"] = scf.COMMON_MODE_FREQ_2
+
+        self.add_slice(slice_0)
+        self.add_slice(slice_1, interfacing_dict={0: "SCAN"})
