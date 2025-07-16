@@ -17,7 +17,7 @@ class PgrHaarpscan(ExperimentPrototype):
         """
         """
         cpid = 3498
-        super().__init__(cpid, comment_string="Scan of beams -4 to -1 at PGR, overlooking HAARP.")
+        super().__init__(cpid, comment_string="Scan of beams -4 to 11 at PGR, overlooking HAARP.")
 
         slice_0 = {
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -26,9 +26,9 @@ class PgrHaarpscan(ExperimentPrototype):
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": scf.INTT_7P,
-            "beam_angle": [scf.STD_16_BEAM_ANGLE[0] + i * 3.24 for i in range(-4, 0)],  # 4 beams CCW of FOV
-            "rx_beam_order": [0, 1, 2, 3],
-            "tx_beam_order": [0, 1, 2, 3],
+            "beam_angle": [azm - (3.24 * 4) for azm in scf.STD_16_BEAM_ANGLE],  # 4 beams CCW of FOV plus 12 most westerly beams within FOV
+            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
             "freq" : scf.COMMON_MODE_FREQ_1,
             "acf": True,
             "xcf": True,
