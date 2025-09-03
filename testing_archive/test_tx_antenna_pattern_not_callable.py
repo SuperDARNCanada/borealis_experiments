@@ -8,7 +8,7 @@ Experiment fault:
 import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
-from pydantic.v1.error_wrappers import ValidationError
+from pydantic import ValidationError
 
 
 ### tx_antenna_pattern is not a callable function.
