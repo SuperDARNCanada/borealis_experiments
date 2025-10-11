@@ -6,7 +6,7 @@ Experiment fault:
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_utils.decimation_scheme import create_default_scheme
+from utils.decimation_scheme import create_default_scheme
 
 
 ### class TestExperiment(ExperimentPrototype):

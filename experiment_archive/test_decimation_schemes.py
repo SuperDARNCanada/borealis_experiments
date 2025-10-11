@@ -3,7 +3,7 @@
 import os
 import sys
 
-from experiment_prototype.experiment_utils.decimation_scheme import DecimationStage, DecimationScheme, \
+from utils.decimation_scheme import DecimationStage, DecimationScheme, \
     create_firwin_filter_by_num_taps, create_firwin_filter_by_attenuation
 
 
