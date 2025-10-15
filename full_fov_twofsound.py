@@ -60,14 +60,15 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_locations):
 
 
 class FullFOVTwoFSound(ExperimentPrototype):
+    cpid = 3809
+
     def __init__(self, **kwargs):
         """
         Supported kwargs:
         freq1: int, frequency of first slice, in kHz.
         freq2: int, frequency of second slice, in kHz.
         """
-        cpid = 3809
-        super().__init__(cpid)
+        super().__init__()
 
         freq1 = kwargs.get("freq1", scf.COMMON_MODE_FREQ_1)
         freq2 = kwargs.get("freq2", scf.COMMON_MODE_FREQ_2)

@@ -15,10 +15,10 @@ from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
-        super().__init__(cpid)
+        super().__init__()
 
         slice_1 = {  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

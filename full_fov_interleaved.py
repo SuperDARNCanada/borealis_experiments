@@ -55,6 +55,8 @@ def sixty_deg_widebeam(frequency_khz, tx_antennas, antenna_locations):
 
 
 class FullFOVInterleaved(ExperimentPrototype):
+    cpid = 3808
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -62,8 +64,7 @@ class FullFOVInterleaved(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3808
-        super().__init__(cpid)
+        super().__init__()
 
         # default frequency set here
         freq = kwargs.get('freq', scf.COMMON_MODE_FREQ_1)

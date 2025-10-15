@@ -45,13 +45,14 @@ def filter_15km_mode():
 
 
 class FullFOV15Km(ExperimentPrototype):
+    cpid = 3801
+
     def __init__(self, **kwargs):
         """
         The mode transmits with a pre-calculated phase progression across the array which illuminates
         the full FOV, and receives on all antennas. This mode uses 15-km range gates for high spatial resolution.
         """
-        cpid = 3801
-        super().__init__(cpid, comment_string='Full FOV 15km Resolution Experiment')
+        super().__init__(comment_string='Full FOV 15km Resolution Experiment')
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

@@ -5,10 +5,10 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class Interleavedscan(ExperimentPrototype):
+    cpid = 191
 
     def __init__(self):
-        cpid = 191
-        super(Interleavedscan, self).__init__(cpid)
+        super(Interleavedscan, self).__init__()
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "txantennas": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],

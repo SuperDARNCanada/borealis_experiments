@@ -15,6 +15,7 @@ from pydantic import ValidationError
 ### this will fail in check_slice() of ExperimentPrototype
 
 class TxAntennaPatternTest(ExperimentPrototype):
+    cpid = 12345
 
     def __init__(self, **kwargs):
         """
@@ -23,8 +24,7 @@ class TxAntennaPatternTest(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 12345
-        super().__init__(cpid)
+        super().__init__()
 
         beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
 

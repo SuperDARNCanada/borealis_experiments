@@ -18,9 +18,9 @@ def phase_encode(beam_iter, sequence_num, num_pulses):
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
 
         default_slice = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_8P,
@@ -37,7 +37,7 @@ class TestExperiment(ExperimentPrototype):
             "pulse_phase_offset": phase_encode
         }
 
-        super().__init__(cpid)
+        super().__init__()
 
         self.add_slice(default_slice)
 

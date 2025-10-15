@@ -10,9 +10,9 @@ from utils.decimation_scheme import create_default_scheme
 
 
 ### class TestExperiment(ExperimentPrototype):
+cpid = 1
 
 def __init__(self):
-    cpid = 1
     # super(TestExperiment, self).__init__(cpid)
 
     if scf.IS_FORWARD_RADAR:

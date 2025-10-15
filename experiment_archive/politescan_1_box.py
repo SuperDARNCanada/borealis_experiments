@@ -8,10 +8,10 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class Politescan(ExperimentPrototype):
+    cpid = 3380
 
     def __init__(self):
-        cpid = 3380
-        super(Politescan, self).__init__(cpid)
+        super(Politescan, self).__init__()
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             #"tx_antennas": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],

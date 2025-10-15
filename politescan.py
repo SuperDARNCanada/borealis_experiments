@@ -14,10 +14,10 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class Politescan(ExperimentPrototype):
+    cpid = 3380
 
     def __init__(self):
-        cpid = 3380
-        super().__init__(cpid)
+        super().__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

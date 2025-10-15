@@ -55,6 +55,8 @@ def sixty_deg_widebeam(frequency_khz, tx_antennas, antenna_locations):
 
 
 class FullFOV60Deg(ExperimentPrototype):
+    cpid = 3807
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -62,8 +64,7 @@ class FullFOV60Deg(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3807
-        super().__init__(cpid)
+        super().__init__()
 
         num_ranges = scf.STD_NUM_RANGES
 

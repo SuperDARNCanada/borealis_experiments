@@ -13,9 +13,9 @@ from utils.decimation_scheme import DecimationStage, DecimationScheme
 from borealis_experiments.test_decimation_schemes import *
 
 class Twofsound(ExperimentPrototype):
+    cpid = 3503
 
     def __init__(self):
-        cpid = 3503
         rxrate = 5.0e6
         output_rx_rate = 10.0e3/3
 
@@ -86,7 +86,7 @@ class Twofsound(ExperimentPrototype):
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
         
         
-        super(Twofsound, self).__init__(cpid, output_rx_rate=output_rx_rate, rx_bandwidth=rxrate,
+        super(Twofsound, self).__init__(output_rx_rate=output_rx_rate, rx_bandwidth=rxrate,
                 txctrfreq=txctrfreq, rxctrfreq=rxctrfreq, 
                 decimation_scheme=create_test_scheme_9(),
                 comment_string='Twofsound classic scan-by-scan')

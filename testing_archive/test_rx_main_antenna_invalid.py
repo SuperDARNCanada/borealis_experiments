@@ -12,10 +12,10 @@ from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
-        super().__init__(cpid)
+        super().__init__()
 
         beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
         num_ranges = scf.STD_NUM_RANGES

@@ -59,6 +59,8 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_locations):
 
 
 class FullFOV(ExperimentPrototype):
+    cpid = 3800
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -66,8 +68,7 @@ class FullFOV(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3800
-        super().__init__(cpid)
+        super().__init__()
 
         # default frequency set here
         freq = scf.COMMON_MODE_FREQ_1

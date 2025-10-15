@@ -30,6 +30,7 @@ def alternating_phase(tx_freq_khz, tx_antenna_count, antenna_spacing):
 
 
 class TxAntennaPatternTest(ExperimentPrototype):
+    cpid = 12345601
 
     def __init__(self, **kwargs):
         """
@@ -38,8 +39,7 @@ class TxAntennaPatternTest(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 12345601
-        super().__init__(cpid)
+        super().__init__()
 
         beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
         

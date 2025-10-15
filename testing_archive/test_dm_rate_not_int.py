@@ -12,9 +12,9 @@ from utils.decimation_scheme import \
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
         ### dm_rate is not an integer
         rates = [5.0e6, 500.0e3, 100.0e3, 50.0e3/3]
         dm_rates = [10.1, 5, 6, 5] ### 10.1 is not an integer, should fail
@@ -34,7 +34,7 @@ class TestExperiment(ExperimentPrototype):
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
         super(TestExperiment, self).__init__(
-            cpid, output_rx_rate=decimation_scheme.output_sample_rate,
+            output_rx_rate=decimation_scheme.output_sample_rate,
             decimation_scheme=decimation_scheme)
 
         if scf.IS_FORWARD_RADAR:

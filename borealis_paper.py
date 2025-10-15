@@ -22,9 +22,9 @@ def phase_encode(beam_iter, sequence_num, num_pulses):
 
 
 class BorealisPaper(ExperimentPrototype):
+    cpid = 10101
 
     def __init__(self):
-        cpid = 10101
 
         default_slice = {
             "pulse_sequence": scf.SEQUENCE_8P,
@@ -44,7 +44,7 @@ class BorealisPaper(ExperimentPrototype):
         slice2 = copy.deepcopy(default_slice)
         slice2['pulse_phase_offset'] = phase_encode
 
-        super().__init__(cpid, comment_string="Phase encoding test for borealis paper")
+        super().__init__(comment_string="Phase encoding test for borealis paper")
 
         self.add_slice(default_slice)
 

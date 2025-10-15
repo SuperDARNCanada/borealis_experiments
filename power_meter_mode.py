@@ -14,6 +14,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class PowerMeterMode(ExperimentPrototype):
+    cpid = 3580
 
     def __init__(self, **kwargs):
         """
@@ -22,8 +23,7 @@ class PowerMeterMode(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3580
-        super().__init__(cpid)
+        super().__init__()
 
         # default frequency set here
         freq = scf.COMMON_MODE_FREQ_1

@@ -15,8 +15,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class ThemisScan(ExperimentPrototype):
+    cpid = 3300
+
     def __init__(self,):
-        cpid = 3300
 
         forward_beams = [0, "camp", 1, "camp", 2,  "camp", 3, "camp", 4, "camp", 5, "camp", 6,
                          "camp", 7, "camp", 8, "camp", 9, "camp", 10, "camp", 11, "camp", 12,
@@ -69,6 +70,6 @@ class ThemisScan(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
         }
-        super().__init__(cpid)
+        super().__init__()
 
         self.add_slice(slice_1)

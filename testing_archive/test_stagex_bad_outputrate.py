@@ -12,10 +12,10 @@ from utils.decimation_scheme import \
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
-        
+
         ### decimate stage x doesn't have output_rate equal to stage x+1 input_rate
         rates = [5.0e6, 250.0e3, 100.0e3, 50.0e3/3] ### Changed second stage to 250.0e3 from 500.0e3, should fail
         dm_rates = [10, 5, 6, 5]
@@ -35,7 +35,7 @@ class TestExperiment(ExperimentPrototype):
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
         super(TestExperiment, self).__init__(
-            cpid, output_rx_rate=decimation_scheme.output_sample_rate,
+            output_rx_rate=decimation_scheme.output_sample_rate,
             decimation_scheme=decimation_scheme)
 
         if scf.IS_FORWARD_RADAR:

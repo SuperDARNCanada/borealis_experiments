@@ -13,11 +13,12 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class NormalscanBoresite(ExperimentPrototype):
+    cpid = 32000
+
     # with 7 PULSE sequence
     def __init__(self):
-        cpid = 32000
 
-        super().__init__(cpid)
+        super().__init__()
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

@@ -13,9 +13,9 @@ from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
 
         rates = [5.0e6, 500.0e3, 100.0e3, 50.0e3]  # 50kHz output rate to try for a 20us pulse length
         dm_rates = [10, 5, 2, 1]
@@ -34,7 +34,7 @@ class TestExperiment(ExperimentPrototype):
 
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
-        super(TestExperiment, self).__init__(cpid)
+        super(TestExperiment, self).__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

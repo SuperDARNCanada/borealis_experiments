@@ -21,6 +21,7 @@ def rx_antenna_pattern(beam_angle, freq, antenna_locations):
 
 
 class RxAntennaPatternTest(ExperimentPrototype):
+    cpid = 12345
 
     def __init__(self, **kwargs):
         """
@@ -29,8 +30,7 @@ class RxAntennaPatternTest(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 12345
-        super().__init__(cpid)
+        super().__init__()
 
         beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
 

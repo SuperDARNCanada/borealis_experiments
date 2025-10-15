@@ -17,10 +17,10 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class PulseInterfacingTest(ExperimentPrototype):
+    cpid = 3384
 
     def __init__(self):
-        cpid = 3384
-        super().__init__(cpid, comment_string='CONCURRENT interface testing')
+        super().__init__(comment_string='CONCURRENT interface testing')
 
         beams_to_use = [0]  # Camp on one beam (boresight)
         num_ranges = scf.STD_NUM_RANGES

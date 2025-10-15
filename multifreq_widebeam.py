@@ -21,6 +21,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class MultifreqWidebeam(ExperimentPrototype):
+    cpid = 3712
 
     def __init__(self, **kwargs):
         """
@@ -30,7 +31,6 @@ class MultifreqWidebeam(ExperimentPrototype):
         freq2: int, second transmit frequency - kHz
 
         """
-        cpid = 3712
 
         if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
@@ -71,7 +71,7 @@ class MultifreqWidebeam(ExperimentPrototype):
         slice_2['freq'] = tx_freq_2
         slice_2['tx_antennas'] = [8, 9]     # Use separate pair of antennas near middle of array
 
-        super().__init__(cpid, comment_string='Simultaneous multifrequency widebeam')
+        super().__init__(comment_string='Simultaneous multifrequency widebeam')
 
         self.add_slice(slice_1)
 

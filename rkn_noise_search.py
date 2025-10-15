@@ -13,9 +13,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class cfs_scan(ExperimentPrototype):
+    cpid = 3497
 
     def __init__(self, **kwargs):
-        cpid = 3497
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
@@ -46,7 +46,7 @@ class cfs_scan(ExperimentPrototype):
         slice_rx["rxonly"] = True
         slice_rx["comment"] = "RX mode"
 
-        super().__init__(cpid, comment_string="Scanning noise environment in tx and rx modes")
+        super().__init__(comment_string="Scanning noise environment in tx and rx modes")
 
         self.add_slice(slice_tx)
         self.add_slice(slice_rx, interfacing_dict={0: 'AVEPERIOD'})

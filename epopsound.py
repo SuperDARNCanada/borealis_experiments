@@ -22,9 +22,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class Epopsound(ExperimentPrototype):
+    cpid = 3371
 
     def __init__(self, **kwargs):
-        cpid = 3371
 
         # default values
         freqs = [scf.COMMON_MODE_FREQ_1]
@@ -106,7 +106,7 @@ class Epopsound(ExperimentPrototype):
                     })
                 slices.append(slice_1)
 
-        super().__init__(cpid=cpid, comment_string=Epopsound.__doc__)
+        super().__init__(comment_string=Epopsound.__doc__)
 
         self.add_slice(slices[0])
         if len(slices) > 1:

@@ -5,11 +5,12 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 from utils.decimation_scheme import DecimationStage, DecimationScheme
 from borealis_experiments.test_decimation_schemes import *
 
+
 class Normalscan(ExperimentPrototype):
+    cpid = 150
 
     def __init__(self):
-        cpid = 150
-        super(Normalscan, self).__init__(cpid, decimation_scheme=create_test_scheme_9())
+        super(Normalscan, self).__init__(decimation_scheme=create_test_scheme_9())
 
         tx_antennas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
         rx_main_antennas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]

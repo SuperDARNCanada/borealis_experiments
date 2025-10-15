@@ -12,12 +12,12 @@ from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
 
         ### should fail due to not being integer divisor of usrp master clock rate
-        super(TestExperiment, self).__init__(cpid, rx_bandwidth=3.14159e6)
+        super(TestExperiment, self).__init__(rx_bandwidth=3.14159e6)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

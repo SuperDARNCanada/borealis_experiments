@@ -44,9 +44,10 @@ def filter_15km_mode():
 
 
 class PgrHaarpscan(ExperimentPrototype):
+    cpid = 3498
+
     def __init__(self, **kwargs):
-        cpid = 3498
-        super().__init__(cpid, comment_string="Scan of beams extra westward beams at PGR, overlooking HAARP.")
+        super().__init__(comment_string="Scan of beams extra westward beams at PGR, overlooking HAARP.")
 
         slice_0 = {
             "pulse_sequence": scf.SEQUENCE_7P,

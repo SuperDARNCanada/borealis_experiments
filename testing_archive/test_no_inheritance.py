@@ -10,11 +10,11 @@ from utils.decimation_scheme import create_default_scheme
 from experiment_prototype.experiment_exception import ExperimentException
 
 
-class TestExperiment(): ### Doesn't inherit from ExperimentPrototype
+class TestExperiment: ### Doesn't inherit from ExperimentPrototype
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
-        super(TestExperiment, self).__init__(cpid)
+        super(TestExperiment, self).__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

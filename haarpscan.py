@@ -15,6 +15,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class HAARPScan(ExperimentPrototype):
+    cpid = 3530
 
     def __init__(self, **kwargs):
         """
@@ -23,8 +24,7 @@ class HAARPScan(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3530
-        super().__init__(cpid)
+        super().__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = [2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2]

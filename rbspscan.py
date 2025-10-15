@@ -45,8 +45,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class RBSPScan(ExperimentPrototype):
+    cpid = 200
+
     def __init__(self,):
-        cpid = 200
 
         forward_beams = [0, "westbm", 1, "meridonalbm", 2, "eastbm", 3, "westbm", 4, "meridonalbm",
                          5, "eastbm", 6, "westbm", 7, "meridonalbm", 8, "eastbm", 9, "westbm", 10,
@@ -102,6 +103,6 @@ class RBSPScan(ExperimentPrototype):
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
         }
-        super().__init__(cpid)
+        super().__init__()
 
         self.add_slice(slice_1)

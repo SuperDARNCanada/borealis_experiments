@@ -55,12 +55,13 @@ class ConcurrentBistatic(ExperimentPrototype):
     """
     Widebeam operating mode with optional concurrent bistatic listening.
     """
+    cpid = 3821
+
     def __init__(self, **kwargs):
         """
         kwargs:
             listen_to: str, one of the three-letter site codes. e.g. listen_to='cly'
         """
-        cpid = 3821
 
         common_freqs = {            # copied from superdarn_common_fields.py - March 2025
             'sas': [10800, 13000],
@@ -106,7 +107,7 @@ class ConcurrentBistatic(ExperimentPrototype):
                 slice_1["freq"] = common_freqs.get(listen_to)[0]
                 comment_str = 'Concurrent bistatic mode - listening to {}'.format(listen_to)
 
-        super().__init__(cpid, comment_string=comment_str)
+        super().__init__(comment_string=comment_str)
 
         self.add_slice(slice_0)
         if slice_1 is not None:

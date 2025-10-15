@@ -8,10 +8,10 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class OneBox(ExperimentPrototype):
+    cpid = 100000000
 
     def __init__(self):
-        cpid = 100000000
-        super(OneBox, self).__init__(cpid)
+        super(OneBox, self).__init__()
 
         pulse_sequence = [0, 14, 22, 24, 27, 31, 42, 43]
         #pulse_sequence = [0,3,15,41,66,95,97,106,142,152,220,221,225,242,295,330,338,354,382,388,402,415,486,504,523,546,553]

@@ -27,6 +27,8 @@ def widebeam_no_phase(frequency_khz, tx_antennas, antenna_spacing_m):
 
 
 class FullFOVComparison(ExperimentPrototype):
+    cpid = 3811
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -34,8 +36,7 @@ class FullFOVComparison(ExperimentPrototype):
         freq: int, kHz
 
         """
-        cpid = 3811
-        super().__init__(cpid)
+        super().__init__()
 
         num_ranges = scf.STD_NUM_RANGES
         if scf.options.site_id in ["cly", "rkn", "inv"]:

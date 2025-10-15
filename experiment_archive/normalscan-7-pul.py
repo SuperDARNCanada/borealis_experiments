@@ -8,11 +8,12 @@ class Normalscan(ExperimentPrototype):
     """
     7-pulse sequence 0, 9, 12, 20, 22, 26, 27
     """
+    cpid = 150
+
     def __init__(self):
-        cpid = 150
         output_rx_rate = 10.0e3/3
         rxrate = 5.0e6
-        super(Normalscan, self).__init__(cpid, output_rx_rate=output_rx_rate, rx_bandwidth=rxrate, decimation_scheme=create_test_scheme_9())
+        super(Normalscan, self).__init__(output_rx_rate=output_rx_rate, rx_bandwidth=rxrate, decimation_scheme=create_test_scheme_9())
 #        super(Normalscan, self).__init__(cpid)
 
         self.add_slice({  # slice_id = 0, there is only one slice.

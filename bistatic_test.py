@@ -58,6 +58,8 @@ class BistaticTest(ExperimentPrototype):
     bistatic systems with CLY. All sites run a widebeam mode that 
     receives (and transmits for some sites) the entire FOV simultaneously.
     """
+    cpid = 3820
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -65,7 +67,6 @@ class BistaticTest(ExperimentPrototype):
             beam_order: str, beam order for tx. Only used if listen_to not specified. Format as '1,3,5,6-10',
                 which will use beams [1, 3, 5, 6, 7, 8, 9, 10]
         """
-        cpid = 3820
 
         common_freqs = {            # copied from superdarn_common_fields.py - March 2025
             'sas': [10800, 13000],
@@ -131,7 +132,7 @@ class BistaticTest(ExperimentPrototype):
             slice_0['rx_beam_order'] = [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]]
             comment_str = 'Bistatic widebeam mode - listening to {}'.format(listen_to)
 
-        super().__init__(cpid, comment_string=comment_str)
+        super().__init__(comment_string=comment_str)
 
         self.add_slice(slice_0)
 

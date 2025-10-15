@@ -8,9 +8,9 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 from borealis_experiments.test_decimation_schemes import *
 
 class TwoMultifsound(ExperimentPrototype):
+    cpid = 350300
 
     def __init__(self):
-        cpid = 350300
         rxrate = 5.0e6
         output_rx_rate = 10.0e3/3
 
@@ -81,7 +81,7 @@ class TwoMultifsound(ExperimentPrototype):
         rxctrfreq = txctrfreq = int(sum_of_freq/len(list_of_slices))
         
         
-        super(TwoMultifsound, self).__init__(cpid, output_rx_rate=output_rx_rate, rx_bandwidth=rxrate,
+        super(TwoMultifsound, self).__init__(output_rx_rate=output_rx_rate, rx_bandwidth=rxrate,
                 txctrfreq=txctrfreq, rxctrfreq=rxctrfreq, 
                 decimation_scheme=create_test_scheme_9(),
                 comment_string='Twofsound simultaneous in-sequence')

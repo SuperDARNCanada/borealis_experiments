@@ -23,9 +23,9 @@ def phase_encode(beam_iter, sequence_num, num_pulses):
 
 
 class ImptTest(ExperimentPrototype):
+    cpid = 3313
 
     def __init__(self):
-        cpid = 3313
 
         default_slice = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_8P,
@@ -43,7 +43,7 @@ class ImptTest(ExperimentPrototype):
         impt_slice = copy.deepcopy(default_slice)
         impt_slice['pulse_phase_offset'] = phase_encode
 
-        super().__init__(cpid, comment_string="Reimer IMPT Experiment")
+        super().__init__(comment_string="Reimer IMPT Experiment")
 
         self.add_slice(default_slice)
 

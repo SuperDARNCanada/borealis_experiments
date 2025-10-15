@@ -52,6 +52,7 @@ def create_15km_scheme():
 
 
 class IBCollabMode(ExperimentPrototype):
+    cpid = 3700  # allocated by Marci Detwiller 20200609
 
     def __init__(self, **kwargs):
         """
@@ -60,7 +61,6 @@ class IBCollabMode(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3700  # allocated by Marci Detwiller 20200609
 
         # default frequency set here
         freq = 10800
@@ -103,7 +103,6 @@ class IBCollabMode(ExperimentPrototype):
         }
 
         super().__init__(
-            cpid,
             comment_string='ICEBEAR, 5 beam, 2s integration, 15 km'
         )
 

@@ -18,6 +18,7 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class Widebeam_2tx(ExperimentPrototype):
+    cpid = 3711
 
     def __init__(self, **kwargs):
         """
@@ -26,8 +27,7 @@ class Widebeam_2tx(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3711
-        super().__init__(cpid)
+        super().__init__()
 
         if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES

@@ -15,9 +15,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class Twofsound(ExperimentPrototype):
+    cpid = 3503
 
     def __init__(self, **kwargs):
-        cpid = 3503
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
@@ -63,7 +63,7 @@ class Twofsound(ExperimentPrototype):
         slice_2 = copy.deepcopy(slice_1)
         slice_2['freq'] = tx_freq_2
 
-        super().__init__(cpid, comment_string='Twofsound classic scan-by-scan')
+        super().__init__(comment_string='Twofsound classic scan-by-scan')
 
         self.add_slice(slice_1)
 

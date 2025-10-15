@@ -19,6 +19,8 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class FullFOV2Freq(ExperimentPrototype):
+    cpid = 3810
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -27,8 +29,7 @@ class FullFOV2Freq(ExperimentPrototype):
         freq2: int, kHz
 
         """
-        cpid = 3810
-        super().__init__(cpid)
+        super().__init__()
 
         num_ranges = scf.STD_NUM_RANGES
         if scf.options.site_id in ["cly", "rkn", "inv"]:

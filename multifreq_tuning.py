@@ -62,6 +62,8 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_locations):
 
 
 class FullFOV(ExperimentPrototype):
+    cpid = 3802
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -69,8 +71,7 @@ class FullFOV(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3802
-        super().__init__(cpid)
+        super().__init__()
 
         num_ranges = scf.STD_NUM_RANGES
         if scf.options.site_id in ["cly", "rkn", "inv"]:

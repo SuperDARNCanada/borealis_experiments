@@ -14,9 +14,9 @@ from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
         ### dm_rate is not an integer
         rates = [5.0e6, 500.0e3, 500.0e3/6, 50.0e3/3]
         dm_rates = [10, 6, 5, 5]    # default scheme is [10, 5, 6, 5]
@@ -35,7 +35,7 @@ class TestExperiment(ExperimentPrototype):
 
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
-        super(TestExperiment, self).__init__(cpid)
+        super(TestExperiment, self).__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

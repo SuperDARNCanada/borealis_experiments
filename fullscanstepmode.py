@@ -16,9 +16,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class FullScanStepMode(ExperimentPrototype):
+    cpid = 3561
 
     def __init__(self):
-        cpid = 3561
 
         top = 14000
         bottom = 11000
@@ -97,7 +97,7 @@ class FullScanStepMode(ExperimentPrototype):
             }
             slices.append(s)
 
-        super().__init__(cpid, comment_string=FullScanStepMode.__doc__)
+        super().__init__(comment_string=FullScanStepMode.__doc__)
 
 
         self.add_slice(slices[0])

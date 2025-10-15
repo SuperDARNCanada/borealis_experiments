@@ -10,12 +10,12 @@ from utils.decimation_scheme import DecimationStage, DecimationScheme
 from borealis_experiments.test_decimation_schemes import *
 
 class OneBox(ExperimentPrototype):
+    cpid = 100000000
 
     def __init__(self):
-        cpid = 100000000
         output_rx_rate = 10.0e3/3
         rxrate = 5.0e6
-        super(OneBox, self).__init__(cpid, output_rx_rate=output_rx_rate, rx_bandwidth=rxrate, decimation_scheme=create_test_scheme_9())
+        super(OneBox, self).__init__(output_rx_rate=output_rx_rate, rx_bandwidth=rxrate, decimation_scheme=create_test_scheme_9())
 
         pulse_sequence = [0, 14, 22, 24, 27, 31, 42, 43]
         rx_main_antennas = list(range(1,16))

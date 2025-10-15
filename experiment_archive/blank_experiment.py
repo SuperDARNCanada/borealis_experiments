@@ -4,10 +4,10 @@
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 class Blank(ExperimentPrototype):
+    cpid = 00000
 
     def __init__(self):
-        cpid = 00000
-        super(Blank, self).__init__(cpid)
+        super(Blank, self).__init__()
 
         # self.add_slice({  # slice_id = 0, the first slice
         #     "txantennas": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],

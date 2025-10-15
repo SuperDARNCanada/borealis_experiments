@@ -15,9 +15,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class cfs_scan(ExperimentPrototype):
+    cpid = 3499  # CHANGE THIS!!!
 
     def __init__(self, **kwargs):
-        cpid = 3499  # CHANGE THIS!!!
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
@@ -51,7 +51,7 @@ class cfs_scan(ExperimentPrototype):
         slice_2['cfs_range'] = [11500, 11700]
         slice_3['cfs_range'] = [11000, 11100]
 
-        super().__init__(cpid, comment_string='Test clear frequency search experiment')
+        super().__init__(comment_string='Test clear frequency search experiment')
 
         self.add_slice(slice_1)
         self.add_slice(slice_2, interfacing_dict={0: 'CONCURRENT'})

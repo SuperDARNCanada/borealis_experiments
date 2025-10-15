@@ -19,6 +19,7 @@ def phase_encode(beam_iter, sequence_num, num_pulses):
 
 
 class Normalscan_PPO_Test(ExperimentPrototype):
+    cpid = 10051
 
     def __init__(self, **kwargs):
         """
@@ -27,8 +28,7 @@ class Normalscan_PPO_Test(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 10051
-        super().__init__(cpid)
+        super().__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

@@ -13,9 +13,9 @@ from pydantic import ValidationError
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
         ### Number of decimation stages is greater than options.max_filtering_stages
         rates = [5.0e6, 1.0e6, 500.0e3, 250.0e3, 125.0e3, 62.5e3, 31.25e3 ] # 7 stages, greater than max of 6
         dm_rates = [5, 2, 2, 2, 2, 2, 2]
@@ -34,7 +34,7 @@ class TestExperiment(ExperimentPrototype):
 
         # changed from 10e3/3->10e3
         decimation_scheme = (DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages))
-        super(TestExperiment, self).__init__(cpid)
+        super(TestExperiment, self).__init__()
 
 
         if scf.IS_FORWARD_RADAR:

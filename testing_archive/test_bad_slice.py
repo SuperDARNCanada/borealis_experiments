@@ -9,10 +9,10 @@ from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
-        super(TestExperiment, self).__init__(cpid)
+        super(TestExperiment, self).__init__()
 
         # exp_slice is not a dictionary of slice parameters
         self.add_slice('garbage')

@@ -21,10 +21,10 @@ def tx_antenna_pattern(tx_freq_khz, tx_antennas, antenna_spacing):
     return pattern
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
-        super(TestExperiment, self).__init__(cpid)
+        super(TestExperiment, self).__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

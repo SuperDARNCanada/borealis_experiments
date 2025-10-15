@@ -19,8 +19,9 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class InterleavedScan(ExperimentPrototype):
+    cpid = 191
+
     def __init__(self):
-        cpid = 191
 
         forward_beams = [0, 4, 8, 12, 2, 6, 10, 14, 1, 5, 9, 13, 3, 7, 11, 15]
         reverse_beams = [15, 11, 7, 3, 13, 9, 5, 1, 14, 10, 6, 2, 12, 8, 4, 0]
@@ -48,6 +49,6 @@ class InterleavedScan(ExperimentPrototype):
             "acfint": True,  # interferometer acfs
             "lag_table": scf.STD_8P_LAG_TABLE, # lag table needed for 8P since not all lags used.
         }
-        super().__init__(cpid)
+        super().__init__()
 
         self.add_slice(slice_1)

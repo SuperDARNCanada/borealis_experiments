@@ -12,10 +12,10 @@ from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = "Not an integer" ### Should fail
 
     def __init__(self):
-        cpid = "Not an integer" ### Should fail
-        super(TestExperiment, self).__init__(cpid)
+        super(TestExperiment, self).__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

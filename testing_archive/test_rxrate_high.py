@@ -12,12 +12,12 @@ from experiment_prototype.experiment_exception import ExperimentException
 
 
 class TestExperiment(ExperimentPrototype):
+    cpid = 1
 
     def __init__(self):
-        cpid = 1
 
         ### Should fail due to being too large
-        super(TestExperiment, self).__init__(cpid, rx_bandwidth=scf.options.usrp_master_clock_rate/4)
+        super(TestExperiment, self).__init__(rx_bandwidth=scf.options.usrp_master_clock_rate/4)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

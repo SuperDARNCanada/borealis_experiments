@@ -18,10 +18,11 @@ import borealis_experiments.superdarn_common_fields as scf
 
 
 class Tauscan(ExperimentPrototype):
-    def __init__(self):
-        cpid = 503
+    cpid = 503
 
-        super().__init__(cpid, comment_string=Tauscan.__doc__)
+    def __init__(self):
+
+        super().__init__(comment_string=Tauscan.__doc__)
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

@@ -42,6 +42,8 @@ def filter_15km_mode():
 
 
 class Normalscan15km(ExperimentPrototype):
+    cpid = 3803
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -49,8 +51,7 @@ class Normalscan15km(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3803
-        super().__init__(cpid)
+        super().__init__()
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER

@@ -19,11 +19,12 @@ def phase_encode(beam_iter, sequence_num, num_pulses):
 
 
 class PulsePhaseOffsetDecodingTest(ExperimentPrototype):
+    cpid = 10001
+
     # with 7 PULSE sequence
     def __init__(self):
-        cpid = 10001
 
-        super().__init__(cpid, comment_string="Testing Pulse Phase Offset removal in ACF Generation")
+        super().__init__(comment_string="Testing Pulse Phase Offset removal in ACF Generation")
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,

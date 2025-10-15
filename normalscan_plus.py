@@ -12,6 +12,8 @@ from experiment_prototype.experiment_prototype import ExperimentPrototype
 
 
 class NormalscanPlus(ExperimentPrototype):
+    cpid = 3815
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -19,8 +21,7 @@ class NormalscanPlus(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3815
-        super().__init__(cpid, comment_string="Normalscan with extra concurrent listening")
+        super().__init__(comment_string="Normalscan with extra concurrent listening")
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
