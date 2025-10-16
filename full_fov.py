@@ -49,7 +49,7 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_locations):
                 2.2, 4.6, 8.4, 11.7, 14., 18.4, 21.6, 24.8],
     }
 
-    shift = get_phase_shift(adjusted_rx_beam_directions[int(freq_khz)], freq_khz, antenna_locations[:, 0]) * 0.9999999
+    shift = get_phase_shift(adjusted_rx_beam_directions[int(freq_khz)], [freq_khz], antenna_locations[:, 0])[0] * 0.9999999
 
     # Apply a window to the antenna data streams of the main array
     if antenna_locations.shape[0] == 16:

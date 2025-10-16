@@ -52,7 +52,7 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_locations):
                 2.12, 4.96, 7.6, 11.24, 14.48, 17.92, 23.06, 29.7],
         }
 
-    shift = get_phase_shift(xcf_directions[int(freq_khz)], freq_khz, antenna_locations[:, 0]) * 0.9999999
+    shift = get_phase_shift(xcf_directions[int(freq_khz)], [freq_khz], antenna_locations[:, 0])[0] * 0.9999999
 
     # Apply a Hamming window to the antenna data streams of the main array
     if antenna_locations.shape[0] == 16:
@@ -61,7 +61,7 @@ def rx_phase_pattern(beam_angle, freq_khz, antenna_locations):
     return shift
 
 
-class FullFOV(ExperimentPrototype):
+class MultifreqTuning(ExperimentPrototype):
     cpid = 3802
 
     def __init__(self, **kwargs):
