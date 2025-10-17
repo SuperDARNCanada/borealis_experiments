@@ -172,4 +172,8 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_locations):
             return phases.reshape(1, num_antennas) * 0.999999
     # If you get this far, the number of antennas or frequency is not supported for this function.
     raise ValueError(f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "
-                     f"frequency_khz: {frequency_khz}, main_antenna_count: {num_antennas}")
+                     f"frequency_khz: {frequency_khz}, main_antenna_count: {num_antennas}.\n"
+                     f"This could be accidental - if you have disconnected a TX channel in your config file, "
+                     f"this will reduce the number of transmitting antennas.\nWide transmission beam patterns "
+                     f"are very sensitive, so this function only accepts specific operating parameters to produce "
+                     f"predictable beam patterns.")
