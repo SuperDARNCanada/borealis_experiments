@@ -15,23 +15,28 @@ class TxBeamOrderMissing(ExperimentPrototype):
             pattern = np.array([1.0 for _ in range(len(tx_antennas))]).reshape((1, -1))
             return pattern
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [scf.STD_16_FORWARD_BEAM_ORDER],
-            "tx_antenna_pattern": tx_antenna_pattern,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": [scf.STD_16_FORWARD_BEAM_ORDER],
+                "tx_antenna_pattern": tx_antenna_pattern,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "1 validation error for ExperimentSlice\n.*Value error, tx_beam_order must be specified if tx_antenna_pattern specified."
+        return (
+            ValidationError,
+            "1 validation error for ExperimentSlice\n.*Value error, tx_beam_order must be specified if tx_antenna_pattern specified.",
+        )
 
 
 class TxBeamOrderNotInt(ExperimentPrototype):
@@ -39,19 +44,21 @@ class TxBeamOrderNotInt(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": ['0'],
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": ["0"],
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
@@ -63,23 +70,28 @@ class TxBeamOrderTooLarge(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [0, 1, 2],
-            "tx_beam_order": [0, 1, 22],
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": [0, 1, 2],
+                "tx_beam_order": [0, 1, 22],
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "tx_beam_order\n.*Value error, Slice 0 scan tx beam number 22 DNE"
+        return (
+            ValidationError,
+            "tx_beam_order\n.*Value error, Slice 0 scan tx beam number 22 DNE",
+        )
 
 
 class TxBeamOrderMismatchPattern(ExperimentPrototype):
@@ -92,24 +104,32 @@ class TxBeamOrderMismatchPattern(ExperimentPrototype):
             pattern = np.array([1.0 for _ in range(len(tx_antennas))]).reshape((1, -1))
             return pattern
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [scf.STD_16_FORWARD_BEAM_ORDER, scf.STD_16_FORWARD_BEAM_ORDER],
-            "tx_beam_order": [0, 1],
-            "tx_antenna_pattern": tx_antenna_pattern,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": [
+                    scf.STD_16_FORWARD_BEAM_ORDER,
+                    scf.STD_16_FORWARD_BEAM_ORDER,
+                ],
+                "tx_beam_order": [0, 1],
+                "tx_antenna_pattern": tx_antenna_pattern,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "tx_beam_order\n.*Value error, Slice 0 scan tx beam number 1 DNE"
+        return (
+            ValidationError,
+            "tx_beam_order\n.*Value error, Slice 0 scan tx beam number 1 DNE",
+        )
 
 
 class TxBeamOrderMismatchRx(ExperimentPrototype):
@@ -118,24 +138,28 @@ class TxBeamOrderMismatchRx(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": [0],
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": [0],
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "tx_beam_order does not have same length as rx_beam_order. Slice: 0"
-
+        return (
+            ValidationError,
+            "tx_beam_order does not have same length as rx_beam_order. Slice: 0",
+        )
 
 
 class TxBeamOrderNotList(ExperimentPrototype):
@@ -143,19 +167,21 @@ class TxBeamOrderNotList(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": "break_the-beam-order",
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": "break_the-beam-order",
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):

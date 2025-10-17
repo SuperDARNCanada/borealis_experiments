@@ -9,24 +9,29 @@ class RxctrfreqNotNum(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "rxctrfreq": "ten-thousand",
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "rxctrfreq": "ten-thousand",
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rxctrfreq\n.*Input should be a valid number, unable to parse string as a number"
+        return (
+            ValidationError,
+            "rxctrfreq\n.*Input should be a valid number, unable to parse string as a number",
+        )
 
 
 class RxctrfreqTooHigh(ExperimentPrototype):
@@ -35,24 +40,29 @@ class RxctrfreqTooHigh(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "rxctrfreq": scf.options.max_freq / 1000 + 1,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "rxctrfreq": scf.options.max_freq / 1000 + 1,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rxctrfreq\n.*Input should be less than or equal to 20000"
+        return (
+            ValidationError,
+            "rxctrfreq\n.*Input should be less than or equal to 20000",
+        )
 
 
 class RxctrfreqTooLow(ExperimentPrototype):
@@ -61,21 +71,26 @@ class RxctrfreqTooLow(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "rxctrfreq": scf.options.min_freq / 1000 - 1,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "rxctrfreq": scf.options.min_freq / 1000 - 1,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "rxctrfreq\n.*Input should be greater than or equal to 8000"
+        return (
+            ValidationError,
+            "rxctrfreq\n.*Input should be greater than or equal to 8000",
+        )

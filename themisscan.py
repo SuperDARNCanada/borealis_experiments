@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 
 """
-    themisscan
-    ~~~~~~~~~~
-    notes on ThemisScan purpose here TODO
+themisscan
+~~~~~~~~~~
+notes on ThemisScan purpose here TODO
 
-    last scheduled 2019-12-29
+last scheduled 2019-12-29
 
-    :copyright: 2019 SuperDARN Canada
+:copyright: 2019 SuperDARN Canada
 """
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -17,16 +17,89 @@ import borealis_experiments.superdarn_common_fields as scf
 class ThemisScan(ExperimentPrototype):
     cpid = 3300
 
-    def __init__(self,):
-
-        forward_beams = [0, "camp", 1, "camp", 2,  "camp", 3, "camp", 4, "camp", 5, "camp", 6,
-                         "camp", 7, "camp", 8, "camp", 9, "camp", 10, "camp", 11, "camp", 12,
-                         "camp", 13, "camp", 14, "camp", 15, "camp", "camp", "camp", "camp", "camp",
-                         "camp", "camp"]
-        reverse_beams = [15, "camp", 14, "camp", 13,  "camp", 12, "camp", 11, "camp", 10, "camp", 9,
-                         "camp", 8, "camp", 7, "camp", 6, "camp", 5, "camp", 4, "camp", 3, "camp",
-                         2, "camp", 1, "camp", 0, "camp", "camp", "camp", "camp", "camp", "camp",
-                         "camp"]
+    def __init__(
+        self,
+    ):
+        forward_beams = [
+            0,
+            "camp",
+            1,
+            "camp",
+            2,
+            "camp",
+            3,
+            "camp",
+            4,
+            "camp",
+            5,
+            "camp",
+            6,
+            "camp",
+            7,
+            "camp",
+            8,
+            "camp",
+            9,
+            "camp",
+            10,
+            "camp",
+            11,
+            "camp",
+            12,
+            "camp",
+            13,
+            "camp",
+            14,
+            "camp",
+            15,
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+        ]
+        reverse_beams = [
+            15,
+            "camp",
+            14,
+            "camp",
+            13,
+            "camp",
+            12,
+            "camp",
+            11,
+            "camp",
+            10,
+            "camp",
+            9,
+            "camp",
+            8,
+            "camp",
+            7,
+            "camp",
+            6,
+            "camp",
+            5,
+            "camp",
+            4,
+            "camp",
+            3,
+            "camp",
+            2,
+            "camp",
+            1,
+            "camp",
+            0,
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+            "camp",
+        ]
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = forward_beams
@@ -51,7 +124,10 @@ class ThemisScan(ExperimentPrototype):
 
         if scf.options.site_id in ["cly", "rkn", "inv"]:
             num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr",]:
+        if scf.options.site_id in [
+            "sas",
+            "pgr",
+        ]:
             num_ranges = scf.STD_NUM_RANGES
 
         slice_1 = {  # slice_id = 0, the first slice
@@ -64,8 +140,8 @@ class ThemisScan(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound" : [i * 3 for i in range(len(beams_to_use))],
-            "freq" : freq, #kHz
+            "scanbound": [i * 3 for i in range(len(beams_to_use))],
+            "freq": freq,  # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

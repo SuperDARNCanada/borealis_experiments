@@ -1,22 +1,25 @@
 #!/usr/bin/python
 
 """
-    IB_collab_mode
-    ~~~~~~~~~~~~~~
-    IB collab mode written by Devin Huyghebaert 20200609
+IB_collab_mode
+~~~~~~~~~~~~~~
+IB collab mode written by Devin Huyghebaert 20200609
 
-    Last scheduled 2020-08-10
+Last scheduled 2020-08-10
 
-    :copyright: 2020 SuperDARN Canada
-    :author: Devin Huyghebaert
+:copyright: 2020 SuperDARN Canada
+:author: Devin Huyghebaert
 """
 
 import datetime
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
-from utils.decimation_scheme import \
-    DecimationScheme, DecimationStage, create_firwin_filter_by_attenuation
+from utils.decimation_scheme import (
+    DecimationScheme,
+    DecimationStage,
+    create_firwin_filter_by_attenuation,
+)
 
 
 def create_15km_scheme():
@@ -40,15 +43,20 @@ def create_15km_scheme():
 
     for stage in range(0, len(rates)):
         filter_taps = list(
-            scaling_factors[stage] * create_firwin_filter_by_attenuation(
-                rates[stage], transition_widths[stage], cutoffs[stage],
-                ripple_dbs[stage]))
-        all_stages.append(DecimationStage(stage, rates[stage],
-                          dm_rates[stage], filter_taps))
+            scaling_factors[stage]
+            * create_firwin_filter_by_attenuation(
+                rates[stage],
+                transition_widths[stage],
+                cutoffs[stage],
+                ripple_dbs[stage],
+            )
+        )
+        all_stages.append(
+            DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps)
+        )
 
     # changed from 10e3/3->10e3
-    return (DecimationScheme(rates[0], rates[-1]/dm_rates[-1],
-                             stages=all_stages))
+    return DecimationScheme(rates[0], rates[-1] / dm_rates[-1], stages=all_stages)
 
 
 class IBCollabMode(ExperimentPrototype):
@@ -64,22 +72,64 @@ class IBCollabMode(ExperimentPrototype):
 
         # default frequency set here
         freq = 10800
-        
+
         if kwargs:
-            if 'freq' in kwargs.keys():
-                freq = int(kwargs['freq'])
-                print('Using frequency scheduled for {date}: {freq} kHz'    # TODO: Log
-                      .format(date=datetime.datetime.utcnow().strftime('%Y%m%d %H:%M'), freq=freq))
+            if "freq" in kwargs.keys():
+                freq = int(kwargs["freq"])
+                print(
+                    "Using frequency scheduled for {date}: {freq} kHz".format(  # TODO: Log
+                        date=datetime.datetime.utcnow().strftime("%Y%m%d %H:%M"),
+                        freq=freq,
+                    )
+                )
             else:
-                print('Frequency not found: using default frequency {freq} kHz'.format(freq=freq))  # TODO: Log
+                print(
+                    "Frequency not found: using default frequency {freq} kHz".format(
+                        freq=freq
+                    )
+                )  # TODO: Log
         else:
-            print('Frequency not found: using default frequency {freq} kHz'.format(freq=freq))  # TODO: Log
+            print(
+                "Frequency not found: using default frequency {freq} kHz".format(
+                    freq=freq
+                )
+            )  # TODO: Log
 
         decimation_scheme = create_15km_scheme()
 
         bangle = scf.STD_16_BEAM_ANGLE
-        beams_arr = [0, 2, 4, 6, 8, 0, 2, 4, 6, 8, 0, 2, 4, 6, 8, 0, 2,
-                     4, 6, 8, 0, 2, 4, 6, 8, 0, 2, 4, 6, 8]
+        beams_arr = [
+            0,
+            2,
+            4,
+            6,
+            8,
+            0,
+            2,
+            4,
+            6,
+            8,
+            0,
+            2,
+            4,
+            6,
+            8,
+            0,
+            2,
+            4,
+            6,
+            8,
+            0,
+            2,
+            4,
+            6,
+            8,
+            0,
+            2,
+            4,
+            6,
+            8,
+        ]
 
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -102,8 +152,6 @@ class IBCollabMode(ExperimentPrototype):
             "decimation_scheme": decimation_scheme,
         }
 
-        super().__init__(
-            comment_string='ICEBEAR, 5 beam, 2s integration, 15 km'
-        )
+        super().__init__(comment_string="ICEBEAR, 5 beam, 2s integration, 15 km")
 
         self.add_slice(slice_1)

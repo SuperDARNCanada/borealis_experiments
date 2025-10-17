@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 """
-    twofsound
-    ~~~~~~~~~
-    Standard operating Borealis experiment. Alternates transmitting in two different frequencies.
+twofsound
+~~~~~~~~~
+Standard operating Borealis experiment. Alternates transmitting in two different frequencies.
 
-    :copyright: 2023 SuperDARN Canada
+:copyright: 2023 SuperDARN Canada
 """
 
 import copy
@@ -18,7 +18,6 @@ class Twofsound(ExperimentPrototype):
     cpid = 3503
 
     def __init__(self, **kwargs):
-
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
         else:
@@ -33,11 +32,11 @@ class Twofsound(ExperimentPrototype):
         tx_freq_2 = scf.COMMON_MODE_FREQ_2
 
         if kwargs:
-            if 'freq1' in kwargs.keys():
-                tx_freq_1 = int(kwargs['freq1'])
+            if "freq1" in kwargs.keys():
+                tx_freq_1 = int(kwargs["freq1"])
 
-            if 'freq2' in kwargs.keys():
-                tx_freq_2 = int(kwargs['freq2'])
+            if "freq2" in kwargs.keys():
+                tx_freq_2 = int(kwargs["freq2"])
 
         rxctrfreq = txctrfreq = int((tx_freq_1 + tx_freq_2) / 2)
 
@@ -52,7 +51,7 @@ class Twofsound(ExperimentPrototype):
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),
-            "freq": tx_freq_1,     # kHz
+            "freq": tx_freq_1,  # kHz
             "txctrfreq": txctrfreq,
             "rxctrfreq": rxctrfreq,
             "acf": True,
@@ -61,11 +60,10 @@ class Twofsound(ExperimentPrototype):
         }
 
         slice_2 = copy.deepcopy(slice_1)
-        slice_2['freq'] = tx_freq_2
+        slice_2["freq"] = tx_freq_2
 
-        super().__init__(comment_string='Twofsound classic scan-by-scan')
+        super().__init__(comment_string="Twofsound classic scan-by-scan")
 
         self.add_slice(slice_1)
 
-        self.add_slice(slice_2, interfacing_dict={0: 'SCAN'})
-
+        self.add_slice(slice_2, interfacing_dict={0: "SCAN"})

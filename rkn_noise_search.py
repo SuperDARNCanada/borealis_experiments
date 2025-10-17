@@ -16,12 +16,10 @@ class cfs_scan(ExperimentPrototype):
     cpid = 3497
 
     def __init__(self, **kwargs):
-
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
         else:
             beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
-
 
         slice_tx = {
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -49,4 +47,4 @@ class cfs_scan(ExperimentPrototype):
         super().__init__(comment_string="Scanning noise environment in tx and rx modes")
 
         self.add_slice(slice_tx)
-        self.add_slice(slice_rx, interfacing_dict={0: 'AVEPERIOD'})
+        self.add_slice(slice_rx, interfacing_dict={0: "AVEPERIOD"})

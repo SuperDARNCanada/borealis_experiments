@@ -11,22 +11,27 @@ class IntnNorIntt(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Slice must specify either an intn \(unitless\) or intt in ms. Slice: 0"
+        return (
+            ValidationError,
+            "Slice must specify either an intn \(unitless\) or intt in ms. Slice: 0",
+        )
 
 
 class IntnInterfacingMismatch(ExperimentPrototype):
@@ -55,7 +60,10 @@ class IntnInterfacingMismatch(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, "Slices 0 and 1 are SEQUENCE or CONCURRENT interfaced and do not have the same NAVE goal intn"
+        return (
+            ExperimentException,
+            "Slices 0 and 1 are SEQUENCE or CONCURRENT interfaced and do not have the same NAVE goal intn",
+        )
 
 
 class InttInterfacingMismatch(ExperimentPrototype):
@@ -84,7 +92,10 @@ class InttInterfacingMismatch(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, "Slices 0 and 1 are SEQUENCE or CONCURRENT interfaced and do not have the same Averaging Period duration intt"
+        return (
+            ExperimentException,
+            "Slices 0 and 1 are SEQUENCE or CONCURRENT interfaced and do not have the same Averaging Period duration intt",
+        )
 
 
 class InttNotInt(ExperimentPrototype):
@@ -93,19 +104,21 @@ class InttNotInt(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": "3500",
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": "3500",
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
@@ -118,19 +131,21 @@ class IntnNotInt(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intn": "35",
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intn": "35",
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
@@ -143,23 +158,28 @@ class InttTooLow(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": (max(scf.SEQUENCE_7P) * scf.TAU_SPACING_7P * 1e-3) - 10,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": (max(scf.SEQUENCE_7P) * scf.TAU_SPACING_7P * 1e-3) - 10,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Value error, Slice 0: pulse sequence is too long for integration time given"
+        return (
+            ValidationError,
+            "Value error, Slice 0: pulse sequence is too long for integration time given",
+        )
 
 
 class InttNotNum(ExperimentPrototype):
@@ -168,19 +188,21 @@ class InttNotNum(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": "break",
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": "break",
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
@@ -193,21 +215,28 @@ class InttLongerThanScanbound(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3600,
-            "scanbound": [i * 3.5 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))],
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3600,
+                "scanbound": [
+                    i * 3.5 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))
+                ],
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "scanbound\n.*Value error, Slice 0 intt 3600.0ms longer than one of the scanbound times"
+        return (
+            ValidationError,
+            "scanbound\n.*Value error, Slice 0 intt 3600.0ms longer than one of the scanbound times",
+        )

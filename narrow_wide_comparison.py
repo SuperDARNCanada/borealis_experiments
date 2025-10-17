@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
 """
-    narrow_wide_comparison
-    ~~~~~~~~~~~~~~~~~~~~~~
-    This mode is a comparison between the transmission characteristics of full_fov.py and
-    normalscan.py, running on one frequency but interleaving the two transmissions each averaging
-    period. The first pulse in each sequence starts on the 0.1 second boundaries, to enable bistatic
-    listening on other radars.
+narrow_wide_comparison
+~~~~~~~~~~~~~~~~~~~~~~
+This mode is a comparison between the transmission characteristics of full_fov.py and
+normalscan.py, running on one frequency but interleaving the two transmissions each averaging
+period. The first pulse in each sequence starts on the 0.1 second boundaries, to enable bistatic
+listening on other radars.
 
-    :copyright: 2022 SuperDARN Canada
-    :author: Remington Rohel
+:copyright: 2022 SuperDARN Canada
+:author: Remington Rohel
 """
 
 import copy
@@ -48,10 +48,10 @@ class FullFOVComparison(ExperimentPrototype):
         freq = scf.COMMON_MODE_FREQ_1
 
         if kwargs:
-            if 'freq' in kwargs.keys():
-                freq = kwargs['freq']
+            if "freq" in kwargs.keys():
+                freq = kwargs["freq"]
 
-        print('Frequency set to {}'.format(freq))   # TODO: Log
+        print("Frequency set to {}".format(freq))  # TODO: Log
 
         slice_0 = {  # slice_id = 0
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -71,7 +71,7 @@ class FullFOVComparison(ExperimentPrototype):
         }
 
         slice_1 = copy.deepcopy(slice_0)
-        slice_1['tx_antenna_pattern'] = boresight
+        slice_1["tx_antenna_pattern"] = boresight
 
         self.add_slice(slice_0)
-        self.add_slice(slice_1, interfacing_dict={0: 'AVEPERIOD'})
+        self.add_slice(slice_1, interfacing_dict={0: "AVEPERIOD"})

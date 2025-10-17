@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
 """
-    concurrent_bistatic
-    ~~~~~~~~~~~~~~~~~~~
-    The mode transmits with a pre-calculated phase progression across the array which illuminates
-    the full FOV, and receives on all antennas. The first pulse in each sequence starts on the 0.1
-    second boundaries, to enable bistatic listening on other radars. This mode also optionally chooses a
-    frequency from another radar to listen in on, also across the entire FOV simultaneously.
+concurrent_bistatic
+~~~~~~~~~~~~~~~~~~~
+The mode transmits with a pre-calculated phase progression across the array which illuminates
+the full FOV, and receives on all antennas. The first pulse in each sequence starts on the 0.1
+second boundaries, to enable bistatic listening on other radars. This mode also optionally chooses a
+frequency from another radar to listen in on, also across the entire FOV simultaneously.
 
-    :copyright: 2025 SuperDARN Canada
-    :author: Remington Rohel
+:copyright: 2025 SuperDARN Canada
+:author: Remington Rohel
 """
 
 import copy
@@ -46,7 +46,9 @@ def two_stage_filter():
         stages.append(dm.DecimationStage(i, rate, dm_rate[i], taps.tolist()))
         dm_rate_so_far *= dm_rate[i]
 
-    scheme = dm.DecimationScheme(sample_rate, sample_rate / dm_rate_so_far, stages=stages)
+    scheme = dm.DecimationScheme(
+        sample_rate, sample_rate / dm_rate_so_far, stages=stages
+    )
 
     return scheme
 
@@ -55,6 +57,7 @@ class ConcurrentBistatic(ExperimentPrototype):
     """
     Widebeam operating mode with optional concurrent bistatic listening.
     """
+
     cpid = 3821
 
     def __init__(self, **kwargs):
@@ -63,18 +66,20 @@ class ConcurrentBistatic(ExperimentPrototype):
             listen_to: str, one of the three-letter site codes. e.g. listen_to='cly'
         """
 
-        common_freqs = {            # copied from superdarn_common_fields.py - March 2025
-            'sas': [10800, 13000],
-            'pgr': [10900, 13100],
-            'rkn': [10600, 12300],
-            'inv': [10500, 12200],
-            'cly': [10700, 12500]
+        common_freqs = {  # copied from superdarn_common_fields.py - March 2025
+            "sas": [10800, 13000],
+            "pgr": [10900, 13100],
+            "rkn": [10600, 12300],
+            "inv": [10500, 12200],
+            "cly": [10700, 12500],
         }
 
         # default frequency set here
-        listen_to = kwargs.get('listen_to', scf.options.site_id)   # If 'listen_to' specified, tune in to that radar
+        listen_to = kwargs.get(
+            "listen_to", scf.options.site_id
+        )  # If 'listen_to' specified, tune in to that radar
         if listen_to not in common_freqs.keys():
-            raise ValueError('Not a valid site ID: {}'.format(listen_to))
+            raise ValueError("Not a valid site ID: {}".format(listen_to))
 
         slice_0 = {
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -88,15 +93,17 @@ class ConcurrentBistatic(ExperimentPrototype):
             "tx_beam_order": [0],
             "rx_beam_order": [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]],
             "freq": common_freqs.get(scf.options.site_id)[0],
-            "scanbound": [i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))],  # align each aveperiod to 3.7s boundary
+            "scanbound": [
+                i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))
+            ],  # align each aveperiod to 3.7s boundary
             "wait_for_first_scanbound": False,
             "decimation_scheme": two_stage_filter(),
-            "align_sequences": True,     # align start of sequence to tenths of a second
+            "align_sequences": True,  # align start of sequence to tenths of a second
         }
         slice_1 = None
 
-        if 'listen_to' not in kwargs.keys():  # Not listening to another radar
-            comment_str = 'Monostatic widebeam'
+        if "listen_to" not in kwargs.keys():  # Not listening to another radar
+            comment_str = "Monostatic widebeam"
         else:
             if listen_to == scf.options.site_id:
                 raise ValueError("A radar can't listen to itself!")
@@ -105,11 +112,12 @@ class ConcurrentBistatic(ExperimentPrototype):
                 slice_1.pop("tx_beam_order")
                 slice_1["rxonly"] = True
                 slice_1["freq"] = common_freqs.get(listen_to)[0]
-                comment_str = 'Concurrent bistatic mode - listening to {}'.format(listen_to)
+                comment_str = "Concurrent bistatic mode - listening to {}".format(
+                    listen_to
+                )
 
         super().__init__(comment_string=comment_str)
 
         self.add_slice(slice_0)
         if slice_1 is not None:
-            self.add_slice(slice_1, interfacing_dict={0: 'CONCURRENT'})
-
+            self.add_slice(slice_1, interfacing_dict={0: "CONCURRENT"})

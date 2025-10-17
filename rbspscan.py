@@ -1,43 +1,43 @@
 #!/usr/bin/python3
 
 """
-    rbspscan
-    ~~~~~~~~
-    rbspscan was first run in 2012 to support the Van Allen probes satellite mission
-    (initially called the RBSP mission or Radiation Belt Storm Probes). It had a trigger mode
-    where the DST (Disturbance Storm Time) index would be checked every 30 minutes, and if it
-    went below a threshold, then rbspscan would trigger for at least 30 minutes. This was
-    implemented via a python script that would update the schedule file on the CDN radars. The
-    scheduler for qnx4 was upgraded to allow this to happen. Both duration and priority of a
-    particularly scheduled radar control program were capabilities added to the scheduler, so
-    that a PI group could prioritize any discretionary time modes over rbspscan if they wanted to
+rbspscan
+~~~~~~~~
+rbspscan was first run in 2012 to support the Van Allen probes satellite mission
+(initially called the RBSP mission or Radiation Belt Storm Probes). It had a trigger mode
+where the DST (Disturbance Storm Time) index would be checked every 30 minutes, and if it
+went below a threshold, then rbspscan would trigger for at least 30 minutes. This was
+implemented via a python script that would update the schedule file on the CDN radars. The
+scheduler for qnx4 was upgraded to allow this to happen. Both duration and priority of a
+particularly scheduled radar control program were capabilities added to the scheduler, so
+that a PI group could prioritize any discretionary time modes over rbspscan if they wanted to
 
 
-    Tim Yeoman - Fri Sept 21st, 2012
-    The proposed RBSP mode (in the first instance) is a follows:
+Tim Yeoman - Fri Sept 21st, 2012
+The proposed RBSP mode (in the first instance) is a follows:
 
-    CT-TRIG
-    An interleaved full scan and mini scan, giving 2 min full scan data for
-    convection, as was done in the old common time. So it is essentially the
-    Themis mode but with 3 camp beams, Standard lagfr and smsep, a 3 s dwell and
-    2 min scan boundaries.
+CT-TRIG
+An interleaved full scan and mini scan, giving 2 min full scan data for
+convection, as was done in the old common time. So it is essentially the
+Themis mode but with 3 camp beams, Standard lagfr and smsep, a 3 s dwell and
+2 min scan boundaries.
 
-    So a mono beam pattern would go as follows for a forward scanning radar,
-    where n is the meridional beam:
+So a mono beam pattern would go as follows for a forward scanning radar,
+where n is the meridional beam:
 
-    0,n-1,1, n,2, n+2,3,n-1,4,n,5,n+2,6,n-1,7,n,8,n+2,9, ...
+0,n-1,1, n,2, n+2,3,n-1,4,n,5,n+2,6,n-1,7,n,8,n+2,9, ...
 
-    A first suggestion for the mini-scan beam choices is attached, although
-    individual PIs can change this if, for example, there is a key piece of
-    other instrumentation in their f-o-v which they would like to cover.
+A first suggestion for the mini-scan beam choices is attached, although
+individual PIs can change this if, for example, there is a key piece of
+other instrumentation in their f-o-v which they would like to cover.
 
-    In the first instance, CT-TRIG and ST-APOG can be the same. The idea is
-    that ST-APOG can have its lag to first range and range gate size adjusted to
-    best match any apogee passes.
+In the first instance, CT-TRIG and ST-APOG can be the same. The idea is
+that ST-APOG can have its lag to first range and range gate size adjusted to
+best match any apogee passes.
 
-    Last scheduled 2019-12-24
+Last scheduled 2019-12-24
 
-    :copyright: 2019 SuperDARN Canada
+:copyright: 2019 SuperDARN Canada
 """
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -47,16 +47,75 @@ import borealis_experiments.superdarn_common_fields as scf
 class RBSPScan(ExperimentPrototype):
     cpid = 200
 
-    def __init__(self,):
-
-        forward_beams = [0, "westbm", 1, "meridonalbm", 2, "eastbm", 3, "westbm", 4, "meridonalbm",
-                         5, "eastbm", 6, "westbm", 7, "meridonalbm", 8, "eastbm", 9, "westbm", 10,
-                         "meridonalbm", 11, "eastbm", 12, "westbm", 13, "meridonalbm", 14, "eastbm",
-                         15]
-        reverse_beams = [15, "eastbm", 14, "meridonalbm", 13, "westbm", 12, "westbm", 11,
-                        "meridonalbm", 10, "westbm", 9, "eastbm", 8, "meridonalbm", 7, "westbm", 6,
-                        "eastbm", 5, "meridonalbm", 4, "westbm", 3, "eastbm", 2, "meridonalbm", 1,
-                        "westbm", 0]
+    def __init__(
+        self,
+    ):
+        forward_beams = [
+            0,
+            "westbm",
+            1,
+            "meridonalbm",
+            2,
+            "eastbm",
+            3,
+            "westbm",
+            4,
+            "meridonalbm",
+            5,
+            "eastbm",
+            6,
+            "westbm",
+            7,
+            "meridonalbm",
+            8,
+            "eastbm",
+            9,
+            "westbm",
+            10,
+            "meridonalbm",
+            11,
+            "eastbm",
+            12,
+            "westbm",
+            13,
+            "meridonalbm",
+            14,
+            "eastbm",
+            15,
+        ]
+        reverse_beams = [
+            15,
+            "eastbm",
+            14,
+            "meridonalbm",
+            13,
+            "westbm",
+            12,
+            "westbm",
+            11,
+            "meridonalbm",
+            10,
+            "westbm",
+            9,
+            "eastbm",
+            8,
+            "meridonalbm",
+            7,
+            "westbm",
+            6,
+            "eastbm",
+            5,
+            "meridonalbm",
+            4,
+            "westbm",
+            3,
+            "eastbm",
+            2,
+            "meridonalbm",
+            1,
+            "westbm",
+            0,
+        ]
 
         if scf.IS_FORWARD_RADAR:
             beams_to_use = forward_beams
@@ -84,7 +143,9 @@ class RBSPScan(ExperimentPrototype):
             freq = 12100
 
         beams_to_use = [westbm if bm == "westbm" else bm for bm in beams_to_use]
-        beams_to_use = [meridonalbm if bm == "meridonalbm" else bm for bm in beams_to_use]
+        beams_to_use = [
+            meridonalbm if bm == "meridonalbm" else bm for bm in beams_to_use
+        ]
         beams_to_use = [eastbm if bm == "eastbm" else bm for bm in beams_to_use]
 
         slice_1 = {  # slice_id = 0, the first slice
@@ -97,8 +158,10 @@ class RBSPScan(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "freq" : freq, #kHz
-            "scanbound" : scf.easy_scanbound(scf.INTT_7P, beams_to_use), #2 min scanbound
+            "freq": freq,  # kHz
+            "scanbound": scf.easy_scanbound(
+                scf.INTT_7P, beams_to_use
+            ),  # 2 min scanbound
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

@@ -39,10 +39,10 @@ class Epop2023(ExperimentPrototype):
         freq = scf.COMMON_MODE_FREQ_1
 
         if kwargs:
-            if 'freq' in kwargs.keys():
-                freq = int(kwargs['freq'])
+            if "freq" in kwargs.keys():
+                freq = int(kwargs["freq"])
 
-        print('Frequency set to {}'.format(freq))
+        print("Frequency set to {}".format(freq))
 
         slice_0 = {  # slice_id = 0
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -51,9 +51,9 @@ class Epop2023(ExperimentPrototype):
             "num_ranges": num_ranges,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
-            "beam_angle": [0.0],    # boresight only
-            "rx_beam_order": [0],   # boresight only
-            "tx_beam_order": [0],   # only one pattern
+            "beam_angle": [0.0],  # boresight only
+            "rx_beam_order": [0],  # boresight only
+            "tx_beam_order": [0],  # only one pattern
             "tx_antenna_pattern": boresight,
             "freq": freq,  # kHz
             "align_sequences": True,  # align start of sequence to tenths of a second

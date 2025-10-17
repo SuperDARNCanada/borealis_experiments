@@ -1,17 +1,16 @@
 #!/usr/bin/python
 
 """
-    tauscan
-    ~~~~~~~
-    A 11-pulse sequence that consists of a single pulse pulse followed by a back to back 5-pulse
-    Farley sequence. The analysis produces a 12-pulse ACF with no missing lags.
+tauscan
+~~~~~~~
+A 11-pulse sequence that consists of a single pulse pulse followed by a back to back 5-pulse
+Farley sequence. The analysis produces a 12-pulse ACF with no missing lags.
 
-    Last scheduled 2020-07-13
+Last scheduled 2020-07-13
 
-    :copyright: 2020 SuperDARN Canada
-    :author: Keith Kotyk
+:copyright: 2020 SuperDARN Canada
+:author: Keith Kotyk
 """
-
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
@@ -21,7 +20,6 @@ class Tauscan(ExperimentPrototype):
     cpid = 503
 
     def __init__(self):
-
         super().__init__(comment_string=Tauscan.__doc__)
 
         if scf.IS_FORWARD_RADAR:
@@ -46,13 +44,12 @@ class Tauscan(ExperimentPrototype):
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound" : [i * 7.0 for i in range(len(beams_to_use))],
-            "freq" : freq, #kHz
-            "acf" : True,
-            "xcf" : True,
-            "acfint" : True,
-            "comment" : Tauscan.__doc__,
+            "scanbound": [i * 7.0 for i in range(len(beams_to_use))],
+            "freq": freq,  # kHz
+            "acf": True,
+            "xcf": True,
+            "acfint": True,
+            "comment": Tauscan.__doc__,
         }
 
         self.add_slice(slice_1)
-

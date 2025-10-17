@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 """
-    normalscan_boresite
-    ~~~~~~~~~~~~~~~~~~~
-    normalscan but only looking boresite
+normalscan_boresite
+~~~~~~~~~~~~~~~~~~~
+normalscan but only looking boresite
 
-    :copyright: 2022 SuperDARN Canada
+:copyright: 2022 SuperDARN Canada
 """
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -17,21 +17,22 @@ class NormalscanBoresite(ExperimentPrototype):
 
     # with 7 PULSE sequence
     def __init__(self):
-
         super().__init__()
 
-        self.add_slice({  # slice_id = 0, there is only one slice.
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": [0.0],
-            "rx_beam_order": [0],
-            "tx_beam_order": [0],
-            "freq" : scf.COMMON_MODE_FREQ_1, #kHz
-            "acf": True,
-            "xcf": True,  # cross-correlation processing
-            "acfint": True,  # interferometer acfs
-        })
+        self.add_slice(
+            {  # slice_id = 0, there is only one slice.
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": scf.INTT_7P,  # duration of an integration, in ms
+                "beam_angle": [0.0],
+                "rx_beam_order": [0],
+                "tx_beam_order": [0],
+                "freq": scf.COMMON_MODE_FREQ_1,  # kHz
+                "acf": True,
+                "xcf": True,  # cross-correlation processing
+                "acfint": True,  # interferometer acfs
+            }
+        )

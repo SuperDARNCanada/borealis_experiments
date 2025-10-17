@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
 """
-    2multifsound
-    ~~~~~~~~~~~~
-    Twofsound but transmitting two frequencies concurrently instead of alternating.
+2multifsound
+~~~~~~~~~~~~
+Twofsound but transmitting two frequencies concurrently instead of alternating.
 
-    :copyright: 2019 SuperDARN Canada
-    :author: Keith Kotyk
+:copyright: 2019 SuperDARN Canada
+:author: Keith Kotyk
 """
 
 import copy
@@ -20,7 +20,7 @@ class TwoMultifsound(ExperimentPrototype):
 
     def __init__(self):
         super(TwoMultifsound, self).__init__()
-        
+
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
         else:
@@ -57,11 +57,10 @@ class TwoMultifsound(ExperimentPrototype):
         }
 
         slice_2 = copy.deepcopy(slice_1)
-        slice_2['freq'] = freqs[1]
+        slice_2["freq"] = freqs[1]
 
-        super().__init__(comment_string='Twofsound simultaneous in-sequence')
+        super().__init__(comment_string="Twofsound simultaneous in-sequence")
 
         self.add_slice(slice_1)
 
-        self.add_slice(slice_2, interfacing_dict={0: 'CONCURRENT'})
-
+        self.add_slice(slice_2, interfacing_dict={0: "CONCURRENT"})

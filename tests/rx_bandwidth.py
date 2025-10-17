@@ -11,17 +11,22 @@ class RxBandwidthNotDivisor(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, \
-            "Experiment's receive bandwidth 3141590.0 is not possible as it must be an integer divisor of USRP " \
-            "master clock rate 100000000.0"
+        return (
+            ExperimentException,
+            "Experiment's receive bandwidth 3141590.0 is not possible as it must be an integer divisor of USRP "
+            "master clock rate 100000000.0",
+        )
 
 
 class RxBandwidthTooHigh(ExperimentPrototype):
     cpid = 1
 
     def __init__(self):
-        super().__init__(rx_bandwidth=scf.options.usrp_master_clock_rate/4)
+        super().__init__(rx_bandwidth=scf.options.usrp_master_clock_rate / 4)
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, "Experiment's receive bandwidth is too large: 25000000.0 greater than max 5000000.0."
+        return (
+            ExperimentException,
+            "Experiment's receive bandwidth is too large: 25000000.0 greater than max 5000000.0.",
+        )

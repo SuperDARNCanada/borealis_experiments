@@ -2,7 +2,11 @@ import borealis_experiments.superdarn_common_fields as scf
 from experiment_prototype.experiment_prototype import ExperimentPrototype
 from pydantic import ValidationError
 
-from utils.decimation_scheme import create_firwin_filter_by_attenuation, DecimationStage, DecimationScheme
+from utils.decimation_scheme import (
+    create_firwin_filter_by_attenuation,
+    DecimationStage,
+    DecimationScheme,
+)
 
 
 class PulseLenNotCloseToRxRate(ExperimentPrototype):
@@ -10,24 +14,27 @@ class PulseLenNotCloseToRxRate(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM + 1,
-            "first_range": scf.STD_FIRST_RANGE,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM + 1,
+                "first_range": scf.STD_FIRST_RANGE,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
         return (
-            ValidationError, "For an experiment slice with real-time acfs, pulse length must be equal"
+            ValidationError,
+            "For an experiment slice with real-time acfs, pulse length must be equal",
         )
 
 
@@ -36,18 +43,20 @@ class PulseLenDNE(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "first_range": scf.STD_FIRST_RANGE,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "first_range": scf.STD_FIRST_RANGE,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
@@ -59,19 +68,21 @@ class PulseLenNotInt(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM + 0.01,
-            "first_range": scf.STD_FIRST_RANGE,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM + 0.01,
+                "first_range": scf.STD_FIRST_RANGE,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):
@@ -92,28 +103,38 @@ class PulseLenTooLong(ExperimentPrototype):
         all_stages = []
         for stage in range(0, len(rates)):
             filter_taps = list(
-                scaling_factors[stage] * create_firwin_filter_by_attenuation(
-                    rates[stage], transition_widths[stage], cutoffs[stage],
-                    ripple_dbs[stage]))
-            all_stages.append(DecimationStage(stage, rates[stage],
-                                              dm_rates[stage], filter_taps))
+                scaling_factors[stage]
+                * create_firwin_filter_by_attenuation(
+                    rates[stage],
+                    transition_widths[stage],
+                    cutoffs[stage],
+                    ripple_dbs[stage],
+                )
+            )
+            all_stages.append(
+                DecimationStage(stage, rates[stage], dm_rates[stage], filter_taps)
+            )
 
-        decimation_scheme = DecimationScheme(rates[0], rates[-1]/dm_rates[-1], stages=all_stages)
+        decimation_scheme = DecimationScheme(
+            rates[0], rates[-1] / dm_rates[-1], stages=all_stages
+        )
 
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": 600,
-            "pulse_len": 900,
-            "first_range": scf.STD_FIRST_RANGE,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-            "decimation_scheme": decimation_scheme,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": 600,
+                "pulse_len": 900,
+                "first_range": scf.STD_FIRST_RANGE,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+                "decimation_scheme": decimation_scheme,
+            }
+        )
 
     @classmethod
     def error_message(cls):
@@ -125,19 +146,21 @@ class PulseLenTooShort(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": 20,
-            "first_range": scf.STD_FIRST_RANGE,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": 20,
+                "first_range": scf.STD_FIRST_RANGE,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+            }
+        )
 
     @classmethod
     def error_message(cls):

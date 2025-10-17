@@ -18,10 +18,13 @@ class RxonlyDNE(ExperimentPrototype):
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": scf.STD_16_BEAM_ANGLE,
             "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "freq": scf.COMMON_MODE_FREQ_1,    # kHz
+            "freq": scf.COMMON_MODE_FREQ_1,  # kHz
         }
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Value error, rxonly specified as False but tx_beam_order not given"
+        return (
+            ValidationError,
+            "Value error, rxonly specified as False but tx_beam_order not given",
+        )

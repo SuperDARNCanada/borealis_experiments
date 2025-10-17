@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
 """
-    haarpscan
-    ~~~~~~~~~
-    A one-off experiment for a collaboration with HAARP ran June 2021 at CLY.
-    Run beams 2, 3, 4, 5, 6 at Clyde. Beam 4 range gate 72 overlaps with Gakona, AK
+haarpscan
+~~~~~~~~~
+A one-off experiment for a collaboration with HAARP ran June 2021 at CLY.
+Run beams 2, 3, 4, 5, 6 at Clyde. Beam 4 range gate 72 overlaps with Gakona, AK
 
-    :copyright: 2021 SuperDARN Canada
-    :author: Kevin Krieger
+:copyright: 2021 SuperDARN Canada
+:author: Kevin Krieger
 """
 
 import borealis_experiments.superdarn_common_fields as scf
@@ -38,26 +38,28 @@ class HAARPScan(ExperimentPrototype):
 
         # default frequency set here
         freq = scf.COMMON_MODE_FREQ_1
-        
-        if kwargs:
-            if 'freq' in kwargs.keys():
-                freq = kwargs['freq']
-        
-        print('Frequency set to {}'.format(freq))   # TODO: Log
 
-        self.add_slice({  # slice_id = 0, there is only one slice.
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": num_ranges,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "tx_beam_order": beams_to_use,
-            "rx_beam_order": beams_to_use,
-            "scanbound": [i * 3.5 for i in range(len(beams_to_use))],  # 1 min scan
-            "freq": freq,  # kHz
-            "acf": True,
-            "xcf": True,  # cross-correlation processing
-            "acfint": True,  # interferometer acfs
-        })
+        if kwargs:
+            if "freq" in kwargs.keys():
+                freq = kwargs["freq"]
+
+        print("Frequency set to {}".format(freq))  # TODO: Log
+
+        self.add_slice(
+            {  # slice_id = 0, there is only one slice.
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": num_ranges,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,  # duration of an integration, in ms
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "tx_beam_order": beams_to_use,
+                "rx_beam_order": beams_to_use,
+                "scanbound": [i * 3.5 for i in range(len(beams_to_use))],  # 1 min scan
+                "freq": freq,  # kHz
+                "acf": True,
+                "xcf": True,  # cross-correlation processing
+                "acfint": True,  # interferometer acfs
+            }
+        )

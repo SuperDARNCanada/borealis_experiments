@@ -25,15 +25,15 @@ class UnknownInterfaceType(ExperimentPrototype):
         }
         self.add_slice(params)
         slice_2 = copy.deepcopy(params)
-        slice_2['freq'] = scf.COMMON_MODE_FREQ_2
-        self.add_slice(slice_2, interfacing_dict={0: 'THISWILLBREAK'})
+        slice_2["freq"] = scf.COMMON_MODE_FREQ_2
+        self.add_slice(slice_2, interfacing_dict={0: "THISWILLBREAK"})
 
     @classmethod
     def error_message(cls):
         return (
             ExperimentException,
             "Interface value with slice 0: THISWILLBREAK not valid. Types available are: "
-            "\('SCAN', 'AVEPERIOD', 'SEQUENCE', 'CONCURRENT'\)"
+            "\('SCAN', 'AVEPERIOD', 'SEQUENCE', 'CONCURRENT'\)",
         )
 
 
@@ -59,19 +59,21 @@ class IncompatibleInterfacing(ExperimentPrototype):
 
         slice_2 = copy.deepcopy(params)
         slice_3 = copy.deepcopy(params)
-        slice_2['freq'] = scf.COMMON_MODE_FREQ_2
-        slice_3['freq'] = scf.COMMON_MODE_FREQ_2 + 1
+        slice_2["freq"] = scf.COMMON_MODE_FREQ_2
+        slice_3["freq"] = scf.COMMON_MODE_FREQ_2 + 1
 
         # Interfacing between slices is not internally consistent. Here we add slice_2 and slice_3,
         # with CONCURRENT interfacing to slice_1, but then try to interface 2 and 3 together as SCAN.
-        self.add_slice(slice_2, interfacing_dict={0: 'CONCURRENT'})
-        self.add_slice(slice_3, interfacing_dict={0: 'CONCURRENT', 1: 'SCAN'})
+        self.add_slice(slice_2, interfacing_dict={0: "CONCURRENT"})
+        self.add_slice(slice_3, interfacing_dict={0: "CONCURRENT", 1: "SCAN"})
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, \
-            "The interfacing values of new slice cannot be reconciled. Interfacing with slice 0: CONCURRENT and " \
-            "with slice 1: SCAN does not make sense with existing interface between slices of None: CONCURRENT"
+        return (
+            ExperimentException,
+            "The interfacing values of new slice cannot be reconciled. Interfacing with slice 0: CONCURRENT and "
+            "with slice 1: SCAN does not make sense with existing interface between slices of None: CONCURRENT",
+        )
 
 
 class InterfaceWithUnknownID(ExperimentPrototype):
@@ -94,11 +96,13 @@ class InterfaceWithUnknownID(ExperimentPrototype):
         }
         self.add_slice(params)
         slice_2 = copy.deepcopy(params)
-        slice_2['freq'] = scf.COMMON_MODE_FREQ_2
+        slice_2["freq"] = scf.COMMON_MODE_FREQ_2
         # Interfacing dict has interfacing set to an unknown sibling slice ID
-        self.add_slice(slice_2, interfacing_dict={99: 'SCAN'})
+        self.add_slice(slice_2, interfacing_dict={99: "SCAN"})
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, \
-            "Cannot add slice: the interfacing_dict set interfacing to an unknown slice 99 not in slice ids \[0\]"
+        return (
+            ExperimentException,
+            "Cannot add slice: the interfacing_dict set interfacing to an unknown slice 99 not in slice ids \[0\]",
+        )

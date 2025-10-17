@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
 """
-    cfs_scan
-    ~~~~~~~~~
-    Absolute Madness
+cfs_scan
+~~~~~~~~~
+Absolute Madness
 
-    :copyright: 2023 SuperDARN Canada
+:copyright: 2023 SuperDARN Canada
 """
 
 import copy
@@ -18,7 +18,6 @@ class cfs_scan(ExperimentPrototype):
     cpid = 3499  # CHANGE THIS!!!
 
     def __init__(self, **kwargs):
-
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
         else:
@@ -48,12 +47,11 @@ class cfs_scan(ExperimentPrototype):
 
         slice_2 = copy.deepcopy(slice_1)
         slice_3 = copy.deepcopy(slice_1)
-        slice_2['cfs_range'] = [11500, 11700]
-        slice_3['cfs_range'] = [11000, 11100]
+        slice_2["cfs_range"] = [11500, 11700]
+        slice_3["cfs_range"] = [11000, 11100]
 
-        super().__init__(comment_string='Test clear frequency search experiment')
+        super().__init__(comment_string="Test clear frequency search experiment")
 
         self.add_slice(slice_1)
-        self.add_slice(slice_2, interfacing_dict={0: 'CONCURRENT'})
-        self.add_slice(slice_3, interfacing_dict={0: 'CONCURRENT', 1: 'CONCURRENT'})
-
+        self.add_slice(slice_2, interfacing_dict={0: "CONCURRENT"})
+        self.add_slice(slice_3, interfacing_dict={0: "CONCURRENT", 1: "CONCURRENT"})

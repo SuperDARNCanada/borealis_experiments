@@ -8,22 +8,34 @@ class WaitForFirstScanboundType(ExperimentPrototype):
 
     def __init__(self):
         super().__init__()
-        self.add_slice({
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": scf.STD_NUM_RANGES,
-            "first_range": scf.STD_FIRST_RANGE,
-            "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "scanbound": [i * 3.5 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER,))], #1 min scan
-            "freq" : scf.COMMON_MODE_FREQ_1,
-            "acf": True,
-            "wait_for_first_scanbound": 0,
-        })
+        self.add_slice(
+            {
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_45KM,
+                "num_ranges": scf.STD_NUM_RANGES,
+                "first_range": scf.STD_FIRST_RANGE,
+                "intt": 3500,
+                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "scanbound": [
+                    i * 3.5
+                    for i in range(
+                        len(
+                            scf.STD_16_FORWARD_BEAM_ORDER,
+                        )
+                    )
+                ],  # 1 min scan
+                "freq": scf.COMMON_MODE_FREQ_1,
+                "acf": True,
+                "wait_for_first_scanbound": 0,
+            }
+        )
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "wait_for_first_scanbound\n.*Input should be a valid boolean"
+        return (
+            ValidationError,
+            "wait_for_first_scanbound\n.*Input should be a valid boolean",
+        )

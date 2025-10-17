@@ -25,16 +25,23 @@ class LagTablePulseDNE(ExperimentPrototype):
             "acf": True,
         }
 
-        lag_table = list(itertools.combinations(slice_1['pulse_sequence'], 2))
-        lag_table.append([slice_1['pulse_sequence'][0], slice_1['pulse_sequence'][0]])  # lag 0
+        lag_table = list(itertools.combinations(slice_1["pulse_sequence"], 2))
+        lag_table.append(
+            [slice_1["pulse_sequence"][0], slice_1["pulse_sequence"][0]]
+        )  # lag 0
         lag_table.append([0, 99])  # Should fail on this
         # sort by lag number
         lag_table = sorted(lag_table, key=lambda x: x[1] - x[0])
-        lag_table.append([slice_1['pulse_sequence'][-1], slice_1['pulse_sequence'][-1]])  # alternate lag 0
-        slice_1['lag_table'] = lag_table
-        
+        lag_table.append(
+            [slice_1["pulse_sequence"][-1], slice_1["pulse_sequence"][-1]]
+        )  # alternate lag 0
+        slice_1["lag_table"] = lag_table
+
         self.add_slice(slice_1)
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "Value error, Lag \[0, 99\] not valid; One of the pulses does not exist in the sequence"
+        return (
+            ValidationError,
+            "Value error, Lag \[0, 99\] not valid; One of the pulses does not exist in the sequence",
+        )

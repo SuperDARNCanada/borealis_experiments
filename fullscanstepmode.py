@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
 """
-    fullscanstepmode
-    ~~~~~~~~~~~~~~~~
-    Scan beam by beam while stepping in frequency within a band. If a step is within a restricted
-    band, it will be moved to the closest available unrestricted frequency. An averaging period of
-    each frequency is run on each beam before switching to the next beam.
+fullscanstepmode
+~~~~~~~~~~~~~~~~
+Scan beam by beam while stepping in frequency within a band. If a step is within a restricted
+band, it will be moved to the closest available unrestricted frequency. An averaging period of
+each frequency is run on each beam before switching to the next beam.
 
-    :copyright: 2020 SuperDARN Canada
-    :author: Keith Kotyk
+:copyright: 2020 SuperDARN Canada
+:author: Keith Kotyk
 """
 
 from experiment_prototype.experiment_prototype import ExperimentPrototype
@@ -19,7 +19,6 @@ class FullScanStepMode(ExperimentPrototype):
     cpid = 3561
 
     def __init__(self):
-
         top = 14000
         bottom = 11000
         step = 500
@@ -36,13 +35,18 @@ class FullScanStepMode(ExperimentPrototype):
 
             for i in range(len(all_steps)):
                 for restrict in scf.options.restricted_ranges:
-                    if all_steps[i] > (restrict[0] - 25) and all_steps[i] < (restrict[1] + 25):
+                    if all_steps[i] > (restrict[0] - 25) and all_steps[i] < (
+                        restrict[1] + 25
+                    ):
                         moved = False
                         while not moved:
                             if direction == "up":
                                 if all_steps[i] + 25 > top:
                                     break
-                                elif not((all_steps[i] + 25) > (restrict[0] - 25) and (all_steps[i] + 25) < (restrict[1] + 25)):
+                                elif not (
+                                    (all_steps[i] + 25) > (restrict[0] - 25)
+                                    and (all_steps[i] + 25) < (restrict[1] + 25)
+                                ):
                                     moved = True
                                     all_steps[i] += 25
                                 else:
@@ -51,7 +55,10 @@ class FullScanStepMode(ExperimentPrototype):
                             if direction == "down":
                                 if all_steps[i] - 25 < bottom:
                                     break
-                                elif not((all_steps[i] - 25) > (restrict[0] - 25) and (all_steps[i] - 25) < (restrict[1] + 25)):
+                                elif not (
+                                    (all_steps[i] - 25) > (restrict[0] - 25)
+                                    and (all_steps[i] - 25) < (restrict[1] + 25)
+                                ):
                                     moved = True
                                     all_steps[i] -= 25
                                 else:
@@ -61,7 +68,7 @@ class FullScanStepMode(ExperimentPrototype):
         move_freqs("up")
         move_freqs("down")
         all_steps = sorted(list(set(all_steps)))
-        
+
         if scf.IS_FORWARD_RADAR:
             beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
         else:
@@ -86,8 +93,10 @@ class FullScanStepMode(ExperimentPrototype):
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": beams_to_use,
                 "tx_beam_order": beams_to_use,
-                "scanbound": [i * (3.5 * len(all_steps)) for i in range(len(beams_to_use))],
-                "freq": step, #kHz
+                "scanbound": [
+                    i * (3.5 * len(all_steps)) for i in range(len(beams_to_use))
+                ],
+                "freq": step,  # kHz
                 "txctrfreq": txctrfreq,
                 "rxctrfreq": rxctrfreq,
                 "acf": True,
@@ -99,9 +108,8 @@ class FullScanStepMode(ExperimentPrototype):
 
         super().__init__(comment_string=FullScanStepMode.__doc__)
 
-
         self.add_slice(slices[0])
         interfacing_dict = {}
         for i in range(1, len(slices)):
-            interfacing_dict[i-1] = 'AVEPERIOD'
+            interfacing_dict[i - 1] = "AVEPERIOD"
             self.add_slice(slices[i], interfacing_dict=interfacing_dict)

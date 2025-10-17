@@ -11,17 +11,22 @@ class TxBandwidthNotDivisor(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, \
-            "Experiment's transmit bandwidth 3141590.0 is not possible as it must be an integer divisor of USRP " \
-            "master clock rate 100000000.0"
+        return (
+            ExperimentException,
+            "Experiment's transmit bandwidth 3141590.0 is not possible as it must be an integer divisor of USRP "
+            "master clock rate 100000000.0",
+        )
 
 
 class TxBandwidthTooHigh(ExperimentPrototype):
     cpid = 1
 
     def __init__(self):
-        super().__init__(tx_bandwidth=scf.options.usrp_master_clock_rate/4)
+        super().__init__(tx_bandwidth=scf.options.usrp_master_clock_rate / 4)
 
     @classmethod
     def error_message(cls):
-        return ExperimentException, "Experiment's transmit bandwidth is too large: 25000000.0 greater than max 5000000.0."
+        return (
+            ExperimentException,
+            "Experiment's transmit bandwidth is too large: 25000000.0 greater than max 5000000.0.",
+        )

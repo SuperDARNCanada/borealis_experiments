@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
 """
-    full_fov_2freq
-    ~~~~~~~~~~~~~~
-    This mode transmits two frequencies simultaneously across the entire FOV. The mode transmits
-    with a pre-calculated phase progression across half the array for each frequency, so each
-    antenna only transmits a single frequency, and receives on all antennas. The first pulse in each
-    sequence starts on the 0.1 second boundaries, to enable bistatic listening on other radars.
+full_fov_2freq
+~~~~~~~~~~~~~~
+This mode transmits two frequencies simultaneously across the entire FOV. The mode transmits
+with a pre-calculated phase progression across half the array for each frequency, so each
+antenna only transmits a single frequency, and receives on all antennas. The first pulse in each
+sequence starts on the 0.1 second boundaries, to enable bistatic listening on other radars.
 
-    :copyright: 2022 SuperDARN Canada
-    :author: Remington Rohel
+:copyright: 2022 SuperDARN Canada
+:author: Remington Rohel
 """
 
 import copy
@@ -39,11 +39,11 @@ class FullFOV2Freq(ExperimentPrototype):
         tx_freq_2 = scf.COMMON_MODE_FREQ_2
 
         if kwargs:
-            if 'freq1' in kwargs.keys():
-                tx_freq_1 = int(kwargs['freq1'])
+            if "freq1" in kwargs.keys():
+                tx_freq_1 = int(kwargs["freq1"])
 
-            if 'freq2' in kwargs.keys():
-                tx_freq_2 = int(kwargs['freq2'])
+            if "freq2" in kwargs.keys():
+                tx_freq_2 = int(kwargs["freq2"])
 
         num_antennas = scf.options.main_antenna_count
 
@@ -69,8 +69,10 @@ class FullFOV2Freq(ExperimentPrototype):
 
         # Transmit on the second frequency on the right half of the array
         slice_1 = copy.deepcopy(slice_0)
-        slice_1['freq'] = tx_freq_2
-        slice_1['tx_antennas'] = [i + (num_antennas // 2) for i in range(num_antennas // 2)]
+        slice_1["freq"] = tx_freq_2
+        slice_1["tx_antennas"] = [
+            i + (num_antennas // 2) for i in range(num_antennas // 2)
+        ]
 
         self.add_slice(slice_0)
-        self.add_slice(slice_1, interfacing_dict={0: 'CONCURRENT'})
+        self.add_slice(slice_1, interfacing_dict={0: "CONCURRENT"})

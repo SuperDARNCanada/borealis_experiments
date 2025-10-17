@@ -1,17 +1,17 @@
 #!/usr/bin/python
 
 """
-    multifreq_widebeam
-    ~~~~~~~~~~~~~~~~~~
-    A simultaneous multifrequency widebeam mode.
+multifreq_widebeam
+~~~~~~~~~~~~~~~~~~
+A simultaneous multifrequency widebeam mode.
 
-    This experiment uses two pairs of adjacent antennas for transmitting, with each pair operating
-    on its own frequency. The mode has zero phase (no beams) and receives on all antennas. There is
-    no scan boundary, it simply sounds for 3.5 seconds at a time. It does not generate correlations
-    and only produces antennas_iq data.
+This experiment uses two pairs of adjacent antennas for transmitting, with each pair operating
+on its own frequency. The mode has zero phase (no beams) and receives on all antennas. There is
+no scan boundary, it simply sounds for 3.5 seconds at a time. It does not generate correlations
+and only produces antennas_iq data.
 
-    :copyright: 2022 SuperDARN Canada
-    :author: Remington Rohel, on behalf of Dr. Pasha Ponomarenko
+:copyright: 2022 SuperDARN Canada
+:author: Remington Rohel, on behalf of Dr. Pasha Ponomarenko
 """
 
 import copy
@@ -41,11 +41,11 @@ class MultifreqWidebeam(ExperimentPrototype):
         tx_freq_2 = scf.COMMON_MODE_FREQ_2
 
         if kwargs:
-            if 'freq1' in kwargs.keys():
-                tx_freq_1 = int(kwargs['freq1'])
+            if "freq1" in kwargs.keys():
+                tx_freq_1 = int(kwargs["freq1"])
 
-            if 'freq2' in kwargs.keys():
-                tx_freq_2 = int(kwargs['freq2'])
+            if "freq2" in kwargs.keys():
+                tx_freq_2 = int(kwargs["freq2"])
 
         rxctrfreq = txctrfreq = int((tx_freq_1 + tx_freq_2) / 2)
 
@@ -64,15 +64,20 @@ class MultifreqWidebeam(ExperimentPrototype):
             "rxctrfreq": rxctrfreq,
             "tx_antennas": [6, 7],  # Using two tx antennas from the middle of array
             "align_sequences": True,
-            "scanbound": [i * scf.INTT_7P * 1e-3 for i in range(len(scf.STD_16_BEAM_ANGLE))],
+            "scanbound": [
+                i * scf.INTT_7P * 1e-3 for i in range(len(scf.STD_16_BEAM_ANGLE))
+            ],
         }
 
-        slice_2 = copy.deepcopy(slice_1)    # slice_id = 1, the second slice
-        slice_2['freq'] = tx_freq_2
-        slice_2['tx_antennas'] = [8, 9]     # Use separate pair of antennas near middle of array
+        slice_2 = copy.deepcopy(slice_1)  # slice_id = 1, the second slice
+        slice_2["freq"] = tx_freq_2
+        slice_2["tx_antennas"] = [
+            8,
+            9,
+        ]  # Use separate pair of antennas near middle of array
 
-        super().__init__(comment_string='Simultaneous multifrequency widebeam')
+        super().__init__(comment_string="Simultaneous multifrequency widebeam")
 
         self.add_slice(slice_1)
 
-        self.add_slice(slice_2, interfacing_dict={0: 'CONCURRENT'})
+        self.add_slice(slice_2, interfacing_dict={0: "CONCURRENT"})
