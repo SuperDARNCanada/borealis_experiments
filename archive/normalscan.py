@@ -1,29 +1,33 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
-# politescan
-# Marci Detwiller Jan 7/2019
-# Adapted from ROS politescan (Dieter Andre, Kevin Krieger)
+# write an experiment that creates a new control program.
+from utils.experiment_prototype import ExperimentPrototype
+from utils.decimation_scheme import DecimationStage, DecimationScheme
+from borealis_experiments.test_decimation_schemes import *
 
-from experiment_prototype.experiment_prototype import ExperimentPrototype
 
-
-class Politescan(ExperimentPrototype):
-    cpid = 3380
+class Normalscan(ExperimentPrototype):
+    cpid = 150
 
     def __init__(self):
-        super(Politescan, self).__init__()
+        super(Normalscan, self).__init__(decimation_scheme=create_test_scheme_9())
 
+        tx_antennas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        rx_main_antennas = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+        rx_int_antennas = [0, 1, 2, 3]
+        pulse_sequence = [0, 9, 12, 20, 22, 26, 27] #[0, 14, 22, 24, 27, 31, 42, 43]
+        tau_spacing = 2400 # 1500 # us
         self.add_slice({  # slice_id = 0, there is only one slice.
-            #"tx_antennas": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            "rx_main_antennas": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            "rx_int_antennas": [0, 1, 2, 3],
-            "pulse_sequence": [0, 14, 22, 24, 27, 31, 42, 43],
-            "pulse_shift": [0, 0, 0, 0, 0, 0, 0, 0],
-            "mpinc": 1500,  # us
+            "tx_antennas": tx_antennas,
+            "rx_main_antennas": rx_main_antennas,
+            "rx_int_antennas": rx_int_antennas,
+            "pulse_sequence": pulse_sequence,
+            "pulse_shift": [0, 0, 0, 0, 0, 0, 0],
+            "mpinc": tau_spacing,  # us
             "pulse_len": 300,  # us
             "nrang": 75,  # range gates
             "frang": 180,  # first range gate, in km
-            "intt": 3000,  # duration of an integration, in ms
+            "intt": 3500,  # duration of an integration, in ms
             #"intn": 21,  # number of averages if intt is None.
             "beam_angle": [-26.25, -22.75, -19.25, -15.75, -12.25, -8.75,
                            -5.25, -1.75, 1.75, 5.25, 8.75, 12.25, 15.75, 19.25, 22.75,
@@ -33,6 +37,7 @@ class Politescan(ExperimentPrototype):
             #"scanboundflag": True,  # there is a scan boundary
             #"scanbound": 60000,  # ms
             "freq": 10500,
+            "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
         })

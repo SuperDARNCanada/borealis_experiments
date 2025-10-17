@@ -13,7 +13,7 @@ Normalscan with a second slice for listening on the same frequency at the end of
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 
 
 class ListeningNormalscan1(ExperimentPrototype):

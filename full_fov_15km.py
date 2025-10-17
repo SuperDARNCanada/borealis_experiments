@@ -10,7 +10,7 @@ the full FOV, and receives on all antennas. This mode uses 15-km range gates for
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 import utils.decimation_scheme as dm
 
 

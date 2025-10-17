@@ -1,5 +1,5 @@
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-from experiment_prototype.experiment_exception import ExperimentException
+from utils.experiment_prototype import ExperimentPrototype
+from utils.exceptions import ExperimentException
 
 
 class NoSlices(ExperimentPrototype):

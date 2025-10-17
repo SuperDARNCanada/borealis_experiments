@@ -9,7 +9,7 @@ Modified version of normalscan with added frequency sounding
 """
 
 import itertools
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 

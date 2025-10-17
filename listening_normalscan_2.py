@@ -14,7 +14,7 @@ direction of the receive frequency is always offset from the transmit frequency
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 
 
 class ListeningNormalscan2(ExperimentPrototype):

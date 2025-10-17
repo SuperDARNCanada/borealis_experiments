@@ -13,7 +13,7 @@ Last scheduled 2020-08-10
 
 import datetime
 
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 from utils.decimation_scheme import (
     DecimationScheme,

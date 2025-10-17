@@ -14,7 +14,7 @@ Based on beam pattern analysis by Dr. Pasha Ponomarenko Nov 2021
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 
 
 class Widebeam_3tx(ExperimentPrototype):

@@ -1,5 +1,5 @@
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_exception import ExperimentException
+from utils.exceptions import ExperimentException
 
 
 class NoInheritance:

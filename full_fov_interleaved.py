@@ -16,7 +16,7 @@ import copy
 import numpy as np
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 
 
 def sixty_deg_widebeam(frequency_khz, tx_antennas, antenna_locations):

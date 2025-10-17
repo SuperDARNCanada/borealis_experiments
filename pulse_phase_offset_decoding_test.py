@@ -10,7 +10,7 @@ Testing Pulse Phase Offset removal in ACF Generation
 
 import numpy as np
 
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 

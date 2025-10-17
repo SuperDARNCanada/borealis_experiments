@@ -11,7 +11,7 @@ Last scheduled 2020-09-09
 :author: Marci Detwiller
 """
 
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 

@@ -15,7 +15,7 @@ frequency from another radar to listen in on, also across the entire FOV simulta
 import copy
 import borealis_experiments.superdarn_common_fields as scf
 from utils import decimation_scheme as dm
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 
 
 def two_stage_filter():

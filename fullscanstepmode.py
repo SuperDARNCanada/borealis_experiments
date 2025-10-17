@@ -11,7 +11,7 @@ each frequency is run on each beam before switching to the next beam.
 :author: Keith Kotyk
 """
 
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils.experiment_prototype import ExperimentPrototype
 import borealis_experiments.superdarn_common_fields as scf
 
 
