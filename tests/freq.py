@@ -1,6 +1,9 @@
 import borealis_experiments.superdarn_common_fields as scf
 from utils.experiment_prototype import ExperimentPrototype
 from pydantic import ValidationError
+from utils.options import Options
+
+opts = Options()
 
 
 class FreqAboveRxBand(ExperimentPrototype):
@@ -16,7 +19,7 @@ class FreqAboveRxBand(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -44,7 +47,7 @@ class FreqAboveTxBand(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -72,7 +75,7 @@ class FreqAtRxctrfreq(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -103,7 +106,7 @@ class FreqAtTxctrfreq(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -134,7 +137,7 @@ class FreqBelowRxBand(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -162,7 +165,7 @@ class FreqBelowTxBand(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -190,7 +193,7 @@ class FreqNotNum(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -213,6 +216,8 @@ class FreqRestricted(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
+        
+
         self.add_slice(
             {
                 "pulse_sequence": scf.SEQUENCE_7P,
@@ -220,11 +225,11 @@ class FreqRestricted(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-                "freq": 13400,  # This should be in a restricted range for the Saskatoon radar
+                "freq": opts.restricted_ranges[0][1] - 10,  # 10 kHz from top edge of first restricted band
                 "acf": True,
             }
         )
@@ -233,7 +238,7 @@ class FreqRestricted(ExperimentPrototype):
     def error_message(cls):
         return (
             ValidationError,
-            "freq is within a restricted frequency range \(13155, 13617\)",
+            f"freq is within a restricted frequency range \({opts.restricted_ranges[0][0]}, {opts.restricted_ranges[0][1]}\)",
         )
 
 
@@ -250,7 +255,7 @@ class FreqTooHigh(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -278,7 +283,7 @@ class FreqTooLow(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -305,7 +310,7 @@ class FreqDNE(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,

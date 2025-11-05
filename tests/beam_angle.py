@@ -15,7 +15,7 @@ class BeamAngleDNE(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "freq": scf.COMMON_MODE_FREQ_1,
@@ -40,7 +40,7 @@ class BeamAngleDuplicates(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": [
                     -26.25,
                     -26.25,
@@ -86,7 +86,7 @@ class BeamAngleUnordered(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": list(
                     reversed(
                         [
@@ -136,7 +136,7 @@ class BeamAngleNotList(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": 3.24,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
@@ -162,7 +162,7 @@ class BeamAngleNotNums(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": [
                     0,
                     1.0,

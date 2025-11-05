@@ -15,7 +15,7 @@ class FirstRangeDNE(ExperimentPrototype):
                 "tau_spacing": scf.TAU_SPACING_7P,
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
-                "intt": 3500,
+                "intt": scf.INTT_7P,
                 "beam_angle": scf.STD_16_BEAM_ANGLE,
                 "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
