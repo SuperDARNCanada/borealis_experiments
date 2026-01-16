@@ -52,11 +52,6 @@ class Epopsound(ExperimentPrototype):
             )
         )
 
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr", "lab"]:
-            num_ranges = scf.STD_NUM_RANGES
-
         basic_beams = list(range(startbeam, stopbeam + 1))
         if marker_period > 0:
             beams_to_use = basic_beams * (
@@ -78,11 +73,11 @@ class Epopsound(ExperimentPrototype):
             "pulse_sequence": scf.SEQUENCE_8P,
             "tau_spacing": scf.TAU_SPACING_8P,
             "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": num_ranges,
+            "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 1000,  # ms
             "scanbound": scanbound,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "beam_angle": scf.STD_BEAM_ANGLES,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "acf": True,

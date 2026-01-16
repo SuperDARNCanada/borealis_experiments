@@ -66,17 +66,13 @@ class ConcurrentBistatic(ExperimentPrototype):
             listen_to: str, one of the three-letter site codes. e.g. listen_to='cly'
         """
 
-        common_freqs = {  # copied from superdarn_common_fields.py - March 2025
-            "sas": [10800, 13000],
-            "pgr": [10900, 13100],
-            "rkn": [10600, 12300],
-            "inv": [10500, 12200],
-            "cly": [10700, 12500],
+        common_freqs = {
+            k: v["common"] for k, v in scf.__default_freqs__.items() if k != "default"
         }
 
         # default frequency set here
         listen_to = kwargs.get(
-            "listen_to", scf.options.site_id
+            "listen_to", scf.config.site_id
         )  # If 'listen_to' specified, tune in to that radar
         if listen_to not in common_freqs.keys():
             raise ValueError("Not a valid site ID: {}".format(listen_to))
@@ -87,15 +83,13 @@ class ConcurrentBistatic(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
             "tx_antenna_pattern": scf.easy_widebeam,
             "tx_beam_order": [0],
-            "rx_beam_order": [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]],
-            "freq": common_freqs.get(scf.options.site_id)[0],
-            "scanbound": [
-                i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))
-            ],  # align each aveperiod to 3.7s boundary
+            "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
+            "freq": common_freqs.get(scf.config.site_id)[0],
+            "scanbound": scf.STD_SCANBOUND,
             "wait_for_first_scanbound": False,
             "decimation_scheme": two_stage_filter(),
             "align_sequences": True,  # align start of sequence to tenths of a second
@@ -105,7 +99,7 @@ class ConcurrentBistatic(ExperimentPrototype):
         if "listen_to" not in kwargs.keys():  # Not listening to another radar
             comment_str = "Monostatic widebeam"
         else:
-            if listen_to == scf.options.site_id:
+            if listen_to == scf.config.site_id:
                 raise ValueError("A radar can't listen to itself!")
             else:
                 slice_1 = copy.deepcopy(slice_0)

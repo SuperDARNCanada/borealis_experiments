@@ -52,20 +52,15 @@ class Epopsound(ExperimentPrototype):
 
         center_freq = int(sum(freqs) / len(freqs))
 
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr", "lab"]:
-            num_ranges = scf.STD_NUM_RANGES
-
         slices = []
         base_slice = {
             "pulse_sequence": scf.SEQUENCE_8P,
             "tau_spacing": scf.TAU_SPACING_8P,
             "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": num_ranges,
+            "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intn": 10,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "beam_angle": scf.STD_BEAM_ANGLES,
             "acf": True,
             "xcf": True,
             "acfint": True,

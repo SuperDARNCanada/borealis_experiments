@@ -20,11 +20,11 @@ class ScanboundNoIntt(ExperimentPrototype):
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
                 "intn": 35,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": scf.STD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "scanbound": [
-                    i * 3.5 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))
+                    i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))
                 ],
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
@@ -50,11 +50,11 @@ class ScanboundInterfacingScan(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "scanbound": [i * 3.7 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))],
+            "intt": scf.INTT_MS,
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": scf.STD_BEAM_ORDER,
+            "tx_beam_order": scf.STD_BEAM_ORDER,
+            "scanbound": [i * 3.7 for i in range(len(scf.STD_BEAM_ORDER))],
             "freq": scf.COMMON_MODE_FREQ_1,
             "acf": True,
         }
@@ -83,17 +83,17 @@ class ScanboundInterfacingSequence(ExperimentPrototype):
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "scanbound": [i * 3.7 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))],
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": scf.STD_BEAM_ORDER,
+            "tx_beam_order": scf.STD_BEAM_ORDER,
+            "scanbound": [i * 3.7 for i in range(len(scf.STD_BEAM_ORDER))],
             "freq": scf.COMMON_MODE_FREQ_1,
             "acf": True,
         }
         self.add_slice(slice_0)
         slice_1 = copy.deepcopy(slice_0)
         slice_1["scanbound"] = [
-            i * 3.6 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))
+            i * 3.6 for i in range(len(scf.STD_BEAM_ORDER))
         ]
         self.add_slice(slice_1, {0: "SEQUENCE"})
 
@@ -118,12 +118,12 @@ class ScanboundNegative(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": scf.STD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "scanbound": [
-                    i * -3.5 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))
+                    i * -3.5 for i in range(len(scf.STD_BEAM_ORDER))
                 ],
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
@@ -151,13 +151,13 @@ class ScanboundNotIncreasing(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": scf.STD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "scanbound": list(
                     reversed(
-                        [i * 3.5 for i in range(len(scf.STD_16_FORWARD_BEAM_ORDER))]
+                        [i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))]
                     )
                 ),
                 "freq": scf.COMMON_MODE_FREQ_1,

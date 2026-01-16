@@ -26,34 +26,23 @@ class HAARPScan(ExperimentPrototype):
         """
         super().__init__()
 
-        if scf.IS_FORWARD_RADAR:
+        if scf.config.scan_direction == "forward":
             beams_to_use = [2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2]
         else:
             beams_to_use = [6, 5, 4, 3, 2, 6, 5, 4, 3, 2, 6, 5, 4, 3, 2, 6]
 
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr", "lab"]:
-            num_ranges = scf.STD_NUM_RANGES
-
         # default frequency set here
-        freq = scf.COMMON_MODE_FREQ_1
-
-        if kwargs:
-            if "freq" in kwargs.keys():
-                freq = kwargs["freq"]
-
-        print("Frequency set to {}".format(freq))  # TODO: Log
+        freq = kwargs.get("freq", scf.COMMON_MODE_FREQ_1)
 
         self.add_slice(
             {  # slice_id = 0, there is only one slice.
                 "pulse_sequence": scf.SEQUENCE_7P,
                 "tau_spacing": scf.TAU_SPACING_7P,
                 "pulse_len": scf.PULSE_LEN_45KM,
-                "num_ranges": num_ranges,
+                "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": 3500,  # duration of an integration, in ms
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "intt": 3500,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "tx_beam_order": beams_to_use,
                 "rx_beam_order": beams_to_use,
                 "scanbound": [i * 3.5 for i in range(len(beams_to_use))],  # 1 min scan

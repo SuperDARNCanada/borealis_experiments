@@ -15,9 +15,9 @@ class RxonlyDNE(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": scf.STD_BEAM_ORDER,
             "freq": scf.COMMON_MODE_FREQ_1,  # kHz
         }
         self.add_slice(slice_1)

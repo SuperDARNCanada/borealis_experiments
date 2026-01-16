@@ -15,15 +15,15 @@ class WaitForFirstScanboundType(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": scf.STD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "scanbound": [
                     i * 3.5
                     for i in range(
                         len(
-                            scf.STD_16_FORWARD_BEAM_ORDER,
+                            scf.STD_BEAM_ORDER,
                         )
                     )
                 ],  # 1 min scan

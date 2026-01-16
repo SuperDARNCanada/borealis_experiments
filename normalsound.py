@@ -24,20 +24,12 @@ class NormalSound(ExperimentPrototype):
             beam_nums.append(b)
             freq_nums.append(f)
 
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
-
         freqrange = (max(scf.SOUNDING_FREQS) - min(scf.SOUNDING_FREQS)) / 2
         centerfreq = min(scf.SOUNDING_FREQS) + freqrange
 
         slices = []
 
-        common_scanbound_spacing = 3.0  # seconds
-        common_intt_ms = (
-            common_scanbound_spacing * 1.0e3 - 100
-        )  # reduce by 100 ms for processing
+        common_intt_ms = 3000
 
         slices.append(
             {  # slice_id = 0, the first slice
@@ -46,14 +38,12 @@ class NormalSound(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": common_intt_ms,  # duration of an integration, in ms
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "tx_beam_order": beams_to_use,
-                "rx_beam_order": beams_to_use,
+                "intt": common_intt_ms,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
+                "rx_beam_order": scf.STD_BEAM_ORDER,
                 # this scanbound will be aligned because len(beam_order) = len(scanbound)
-                "scanbound": [
-                    i * common_scanbound_spacing for i in range(len(beams_to_use))
-                ],
+                "scanbound": scf.easy_scanbound(common_intt_ms, scf.STD_BEAM_ORDER),
                 "freq": scf.COMMON_MODE_FREQ_1,  # kHz
                 "txctrfreq": centerfreq,
                 "rxctrfreq": centerfreq,
@@ -65,7 +55,7 @@ class NormalSound(ExperimentPrototype):
         )
 
         sounding_scanbound_spacing = 1.5  # seconds
-        sounding_intt_ms = sounding_scanbound_spacing * 1.0e3 - 250
+        sounding_intt_ms = sounding_scanbound_spacing * 1.0e3 - 100
 
         sounding_scanbound = [48 + i * sounding_scanbound_spacing for i in range(8)]
         slices.append(
@@ -76,7 +66,7 @@ class NormalSound(ExperimentPrototype):
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
                 "intt": sounding_intt_ms,  # duration of an integration, in ms
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "tx_beam_order": beam_nums,
                 "rx_beam_order": beam_nums,
                 "scanbound": sounding_scanbound,

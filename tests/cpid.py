@@ -15,10 +15,10 @@ class CpidNegative(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
+                "intt": scf.INTT_MS,
                 "freq": scf.COMMON_MODE_FREQ_1,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "acf": True,
             }
         )
@@ -45,10 +45,10 @@ class CpidNotInt(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
+                "intt": scf.INTT_MS,
                 "freq": scf.COMMON_MODE_FREQ_1,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "acf": True,
             }
         )
@@ -70,10 +70,10 @@ class CpidNotUnique(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
+                "intt": scf.INTT_MS,
                 "freq": scf.COMMON_MODE_FREQ_1,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "acf": True,
             }
         )

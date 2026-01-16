@@ -26,13 +26,7 @@ class PowerMeterMode(ExperimentPrototype):
         super().__init__()
 
         # default frequency set here
-        freq = scf.COMMON_MODE_FREQ_1
-
-        if kwargs:
-            if "freq" in kwargs.keys():
-                freq = kwargs["freq"]
-
-        print("Frequency set to {}".format(freq))  # TODO: Log
+        freq = kwargs.get("freq", scf.COMMON_MODE_FREQ_1)
 
         self.add_slice(
             {  # slice_id = 0, there is only one slice.

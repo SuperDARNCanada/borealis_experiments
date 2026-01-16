@@ -61,10 +61,10 @@ class PgrHaarpscan(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_15KM,
             "num_ranges": 225,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,
+            "intt": scf.INTT_MS,
             "beam_angle": [
-                scf.STD_16_BEAM_ANGLE[0] - (3.24 * 3),
-                scf.STD_16_BEAM_ANGLE[0] - (3.24 * 2),
+                scf.STD_BEAM_ANGLES[0] - (3.24 * 3),
+                scf.STD_BEAM_ANGLES[0] - (3.24 * 2),
             ],  # 2 beams CCW of FOV, essentially beams -3 and -2
             "rx_beam_order": [0, 1],
             "tx_beam_order": [0, 1],

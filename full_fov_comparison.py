@@ -20,7 +20,7 @@ from utils.experiment_prototype import ExperimentPrototype
 
 def widebeam_no_phase(frequency_khz, tx_antennas, antenna_spacing_m):
     """tx_antenna_pattern function for widebeam transmission without phasing across antennas."""
-    num_antennas = scf.options.main_antenna_count
+    num_antennas = scf.config.main_antenna_count
     pattern = np.zeros((1, num_antennas), dtype=np.complex64)
     pattern[0, tx_antennas] = 1.0 + 0.0j
     return pattern
@@ -38,35 +38,25 @@ class FullFOVComparison(ExperimentPrototype):
         """
         super().__init__()
 
-        num_ranges = scf.STD_NUM_RANGES
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-
         # default frequency set here
-        freq = scf.COMMON_MODE_FREQ_1
+        freq = kwargs.get("freq", scf.COMMON_MODE_FREQ_1)
 
-        if kwargs:
-            if "freq" in kwargs.keys():
-                freq = kwargs["freq"]
-
-        print("Frequency set to {}".format(freq))  # TODO: Log
-
-        num_antennas = scf.options.main_antenna_count
+        num_antennas = scf.config.main_antenna_count
 
         slice_0 = {  # slice_id = 0
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": num_ranges,
+            "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]],
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
             "tx_beam_order": [0],  # only one pattern
             "tx_antenna_pattern": scf.easy_widebeam,
             "freq": freq,  # kHz
             "align_sequences": True,  # align start of sequence to tenths of a second
-            "scanbound": scf.easy_scanbound(scf.INTT_7P, scf.STD_16_BEAM_ANGLE),
+            "scanbound": scf.easy_scanbound(scf.INTT_MS, scf.STD_BEAM_ANGLES),
             "wait_for_first_scanbound": False,
         }
 

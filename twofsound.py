@@ -18,25 +18,9 @@ class Twofsound(ExperimentPrototype):
     cpid = 3503
 
     def __init__(self, **kwargs):
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
 
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-        if scf.options.site_id in ["sas", "pgr", "lab"]:
-            num_ranges = scf.STD_NUM_RANGES
-
-        tx_freq_1 = scf.COMMON_MODE_FREQ_1
-        tx_freq_2 = scf.COMMON_MODE_FREQ_2
-
-        if kwargs:
-            if "freq1" in kwargs.keys():
-                tx_freq_1 = int(kwargs["freq1"])
-
-            if "freq2" in kwargs.keys():
-                tx_freq_2 = int(kwargs["freq2"])
+        tx_freq_1 = int(kwargs.get("freq1", scf.COMMON_MODE_FREQ_1))
+        tx_freq_2 = int(kwargs.get("freq2", scf.COMMON_MODE_FREQ_2))
 
         rxctrfreq = txctrfreq = int((tx_freq_1 + tx_freq_2) / 2)
 
@@ -44,13 +28,13 @@ class Twofsound(ExperimentPrototype):
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": num_ranges,
+            "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": beams_to_use,
-            "tx_beam_order": beams_to_use,
-            "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": scf.STD_BEAM_ORDER,
+            "tx_beam_order": scf.STD_BEAM_ORDER,
+            "scanbound": scf.STD_SCANBOUND,
             "freq": tx_freq_1,  # kHz
             "txctrfreq": txctrfreq,
             "rxctrfreq": rxctrfreq,

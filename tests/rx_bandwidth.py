@@ -22,7 +22,7 @@ class RxBandwidthTooHigh(ExperimentPrototype):
     cpid = 1
 
     def __init__(self):
-        super().__init__(rx_bandwidth=scf.options.usrp_master_clock_rate / 4)
+        super().__init__(rx_bandwidth=scf.config.usrp_master_clock_rate / 4)
 
     @classmethod
     def error_message(cls):

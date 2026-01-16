@@ -18,9 +18,9 @@ class RxBeamOrderDNE(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -43,10 +43,10 @@ class RxBeamOrderValTooLarge(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 90],
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -72,10 +72,10 @@ class RxBeamOrderNestedValTooLarge(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "rx_beam_order": [[1, 2, 55], scf.STD_16_FORWARD_BEAM_ORDER],
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": [[1, 2, 55], scf.STD_BEAM_ORDER],
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -101,10 +101,10 @@ class RxBeamOrderNestedValNotInt(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": [["0", "1", "2"], ["hahaha"], ["blah"]],
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -127,10 +127,10 @@ class RxBeamOrderValsNotInt(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": ["0", "1", "2", "3"],
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -153,10 +153,10 @@ class RxBeamOrderNotList(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_45KM,
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": "break_the-beam-order",
-                "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -178,17 +178,17 @@ class RxBeamOrderInterfacing(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
-            "tx_beam_order": scf.STD_16_FORWARD_BEAM_ORDER,
+            "intt": scf.INTT_MS,
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": scf.STD_BEAM_ORDER,
+            "tx_beam_order": scf.STD_BEAM_ORDER,
             "freq": scf.COMMON_MODE_FREQ_1,
             "acf": True,
         }
         self.add_slice(slice_0)
         slice_1 = copy.deepcopy(slice_0)
-        slice_1["rx_beam_order"] = scf.STD_16_FORWARD_BEAM_ORDER[:8]
-        slice_1["tx_beam_order"] = scf.STD_16_FORWARD_BEAM_ORDER[:8]
+        slice_1["rx_beam_order"] = scf.STD_BEAM_ORDER[:8]
+        slice_1["tx_beam_order"] = scf.STD_BEAM_ORDER[:8]
         self.add_slice(slice_1, {0: "SEQUENCE"})
 
     @classmethod

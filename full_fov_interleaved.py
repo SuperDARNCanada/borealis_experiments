@@ -189,9 +189,9 @@ class FullFOVInterleaved(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [[i for i in range(scf.options.main_antenna_count)]],
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": [[i for i in range(scf.config.main_antenna_count)]],
             "tx_beam_order": [0],  # only one pattern
             "tx_antenna_pattern": sixty_deg_widebeam,
             "freq": freq,  # kHz
@@ -203,8 +203,8 @@ class FullFOVInterleaved(ExperimentPrototype):
 
         slice_1 = copy.deepcopy(slice_0)
         slice_1.pop("tx_antenna_pattern")
-        slice_1["rx_beam_order"] = [i for i in range(len(scf.STD_16_BEAM_ANGLE))]
-        slice_1["tx_beam_order"] = [i for i in range(len(scf.STD_16_BEAM_ANGLE))]
+        slice_1["rx_beam_order"] = [i for i in range(len(scf.STD_BEAM_ANGLES))]
+        slice_1["tx_beam_order"] = [i for i in range(len(scf.STD_BEAM_ANGLES))]
 
         self.add_slice(slice_0)
         self.add_slice(slice_1, interfacing_dict={0: "AVEPERIOD"})

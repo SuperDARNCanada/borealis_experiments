@@ -13,6 +13,7 @@ frequency from another radar to listen in on, also across the entire FOV simulta
 """
 
 import borealis_experiments.superdarn_common_fields as scf
+from borealis_experiments.superdarn_common_fields import STD_SCANBOUND
 from utils import decimation_scheme as dm
 from utils.experiment_prototype import ExperimentPrototype
 
@@ -71,17 +72,13 @@ class BistaticTest(ExperimentPrototype):
                 which will use beams [1, 3, 5, 6, 7, 8, 9, 10]
         """
 
-        common_freqs = {  # copied from superdarn_common_fields.py - March 2025
-            "sas": [10800, 13000],
-            "pgr": [10900, 13100],
-            "rkn": [10600, 12300],
-            "inv": [10500, 12200],
-            "cly": [10700, 12500],
+        common_freqs = {
+            k: v["common"] for k, v in scf.__default_freqs__.items() if k != "default"
         }
 
         # default frequency set here
         listen_to = kwargs.get(
-            "listen_to", scf.options.site_id
+            "listen_to", scf.config.site_id
         )  # If 'listen_to' specified, tune in to that radar
         if listen_to not in common_freqs.keys():
             raise ValueError("Not a valid site ID: {}".format(listen_to))
@@ -94,12 +91,10 @@ class BistaticTest(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "intt": scf.INTT_MS,
+            "beam_angle": scf.STD_BEAM_ANGLES,
             "freq": freq,  # kHz
-            "scanbound": [
-                i * 3.7 for i in range(len(scf.STD_16_BEAM_ANGLE))
-            ],  # align each aveperiod to 3.7s boundary
+            "scanbound": STD_SCANBOUND,
             "wait_for_first_scanbound": False,
             "decimation_scheme": two_stage_filter(),
             "align_sequences": True,  # align start of sequence to tenths of a second
@@ -131,20 +126,20 @@ class BistaticTest(ExperimentPrototype):
                 comment_str = "Widebeam transmission"
 
             slice_0["tx_beam_order"] = tx_beam_order
-            rx_beam_order = [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]] * len(
+            rx_beam_order = [[i for i in range(len(scf.STD_BEAM_ANGLES))]] * len(
                 tx_beam_order
             )
             slice_0["rx_beam_order"] = (
                 rx_beam_order  # Must have same first dimension as tx_beam_order
             )
 
-        elif listen_to == scf.options.site_id:
-            slice_0["rx_beam_order"] = [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]]
+        elif listen_to == scf.config.site_id:
+            slice_0["rx_beam_order"] = [[i for i in range(len(scf.STD_BEAM_ANGLES))]]
             print('Defaulting to rx_only mode, "listen_to" set to this radar')
             comment_str = "Widebeam listening mode"
 
         else:
-            slice_0["rx_beam_order"] = [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]]
+            slice_0["rx_beam_order"] = [[i for i in range(len(scf.STD_BEAM_ANGLES))]]
             comment_str = "Bistatic widebeam mode - listening to {}".format(listen_to)
 
         super().__init__(comment_string=comment_str)

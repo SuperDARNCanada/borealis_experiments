@@ -13,7 +13,7 @@ from utils.experiment_prototype import ExperimentPrototype
 
 def boresight(frequency_khz, tx_antennas, antenna_spacing_m):
     """tx_antenna_pattern function for boresight transmission."""
-    num_antennas = scf.options.main_antenna_count
+    num_antennas = scf.config.main_antenna_count
     pattern = np.zeros((1, num_antennas), dtype=np.complex64)
     pattern[0, tx_antennas] = 1.0 + 0.0j
     return pattern
@@ -31,24 +31,14 @@ class Epop2023(ExperimentPrototype):
         """
         super().__init__()
 
-        num_ranges = scf.STD_NUM_RANGES
-        if scf.options.site_id in ["cly", "rkn", "inv"]:
-            num_ranges = scf.POLARDARN_NUM_RANGES
-
         # default frequency set here
-        freq = scf.COMMON_MODE_FREQ_1
-
-        if kwargs:
-            if "freq" in kwargs.keys():
-                freq = int(kwargs["freq"])
-
-        print("Frequency set to {}".format(freq))
+        freq = int(kwargs.get("freq", scf.COMMON_MODE_FREQ_1))
 
         slice_0 = {  # slice_id = 0
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
             "pulse_len": scf.PULSE_LEN_45KM,
-            "num_ranges": num_ranges,
+            "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
             "intt": 3500,  # duration of an integration, in ms
             "beam_angle": [0.0],  # boresight only

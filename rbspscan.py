@@ -117,30 +117,36 @@ class RBSPScan(ExperimentPrototype):
             0,
         ]
 
-        if scf.IS_FORWARD_RADAR:
+        if scf.config.scan_direction == "forward":
             beams_to_use = forward_beams
         else:
             beams_to_use = reverse_beams
 
-        if scf.options.site_id in ["sas"]:
+        if scf.config.site_id in ["sas"]:
             westbm = 2
             meridonalbm = 3
             eastbm = 5
-        if scf.options.site_id in ["pgr"]:
+        elif scf.config.site_id in ["pgr"]:
             westbm = 12
             meridonalbm = 13
             eastbm = 15
-        if scf.options.site_id in ["inv", "rkn", "cly"]:
+        elif scf.config.site_id in ["inv", "rkn", "cly"]:
             westbm = 6
             meridonalbm = 7
             eastbm = 9
+        else:
+            westbm = 4
+            meridonalbm = 5
+            eastbm = 7
 
-        if scf.options.site_id in ["sas", "pgr", "cly"]:
+        if scf.config.site_id in ["sas", "pgr", "cly"]:
             freq = 10500
-        if scf.options.site_id in ["rkn"]:
+        elif scf.config.site_id in ["rkn"]:
             freq = 12200
-        if scf.options.site_id in ["inv"]:
+        elif scf.config.site_id in ["inv"]:
             freq = 12100
+        else:
+            freq = 12400
 
         beams_to_use = [westbm if bm == "westbm" else bm for bm in beams_to_use]
         beams_to_use = [
@@ -154,13 +160,13 @@ class RBSPScan(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
             "freq": freq,  # kHz
             "scanbound": scf.easy_scanbound(
-                scf.INTT_7P, beams_to_use
+                scf.INTT_MS, beams_to_use
             ),  # 2 min scanbound
             "acf": True,
             "xcf": True,  # cross-correlation processing

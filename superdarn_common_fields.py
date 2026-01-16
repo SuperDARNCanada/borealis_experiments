@@ -2,22 +2,16 @@ import numpy as np
 
 from utils.options import Options
 
-options = Options()
+config = Options()
 
 # TODO: We should protect these values from changing, I noticed during testing that I used a
 # TODO: call to reverse() on one and it affected the rest of the testing afterwards
 
-STD_RF_RX_RATE = 5.0e6
-RX_RATE_45KM = 10.0e3 / 3
-RX_RATE_15KM = 10.0e3
-
 SEQUENCE_7P = [0, 9, 12, 20, 22, 26, 27]
 TAU_SPACING_7P = 2400  # us
-INTT_7P = 3700
 
 SEQUENCE_8P = [0, 14, 22, 24, 27, 31, 42, 43]
 TAU_SPACING_8P = 1500  # us
-INTT_8P = 3700
 
 STD_8P_LAG_TABLE = [
     [0, 0],
@@ -49,44 +43,59 @@ STD_8P_LAG_TABLE = [
 PULSE_LEN_45KM = 300  # us
 PULSE_LEN_15KM = 100  # us
 
-STD_16_BEAM_ANGLE = [
-    (float(options.beam_sep) * (beam_dir - 15 / 2)) for beam_dir in range(0, 16)
-]
-
-STD_NUM_RANGES = 75
-POLARDARN_NUM_RANGES = 75
 STD_FIRST_RANGE = 180  # km
+STD_NUM_RANGES = config.num_ranges
 
-STD_16_FORWARD_BEAM_ORDER = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-STD_16_REVERSE_BEAM_ORDER = [15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+STD_BEAM_ANGLES = [
+    config.beam_sep * (beam_dir - (config.num_beams - 1) / 2) for beam_dir in range(config.num_beams)
+]
+if config.scan_direction == "forward":
+    STD_BEAM_ORDER = [i for i in range(config.num_beams)]
+elif config.scan_direction == "reverse":
+    STD_BEAM_ORDER = reversed([i for i in range(config.num_beams)])
+else:
+    raise ValueError("Unknown scan direction from config file: expected `forward` or `reverse`")
 
-# Scanning directions here for now.
-IS_FORWARD_RADAR = IS_REVERSE_RADAR = False
-if options.site_id in ["sas", "rkn", "inv"]:
-    IS_FORWARD_RADAR = True
-
-if options.site_id in ["cly", "pgr"]:
-    IS_REVERSE_RADAR = True
+# Calculate integration time per beam, rounded to nearest tenth of a second
+INTT_MS = int(600 // config.num_beams) * 100
+__integration_time_s__ = INTT_MS / 1000.0
 
 # set common mode operating frequencies with a slight offset.
-if options.site_id == "sas":
-    COMMON_MODE_FREQ_1 = 10800
-    COMMON_MODE_FREQ_2 = 13000
-elif options.site_id == "pgr":
-    COMMON_MODE_FREQ_1 = 10900
-    COMMON_MODE_FREQ_2 = 13100
-elif options.site_id == "rkn":
-    COMMON_MODE_FREQ_1 = 10600
-    COMMON_MODE_FREQ_2 = 12300
-elif options.site_id == "inv":
-    COMMON_MODE_FREQ_1 = 10500
-    COMMON_MODE_FREQ_2 = 12200
-elif options.site_id == "cly":
-    COMMON_MODE_FREQ_1 = 10700
-    COMMON_MODE_FREQ_2 = 12500
-else:
-    COMMON_MODE_FREQ_1 = 10400
-    COMMON_MODE_FREQ_2 = 13200
+__default_freqs__ = {
+    "sas": {
+        "common": [10800, 13000],
+        "sounding": [9690, 10500, 11000, 11700, 12400, 12900, 13150]
+    },
+    "pgr": {
+        "common": [10900, 13100],
+        "sounding": [9600, 10590, 11050, 11750, 13090, 12850, 12400]
+    },
+    "cly": {
+        "common": [10700, 12500],
+        "sounding": [11900, 12400, 11100, 10400, 9600, 12800, 13050]
+    },
+    "rkn": {
+        "common": [10600, 12300],
+        "sounding": [11100, 9600, 10500, 12350, 11800, 13090, 12850]
+    },
+    "inv": {
+        "common": [10500, 12200],
+        "sounding": [11150, 9690, 12400, 10590, 11850, 12800, 13100]
+    },
+    "lab": {
+        "common": [10400, 13200],
+        "sounding": [10600, 11250, 11950, 13150]
+    },
+    "default": {
+        "common": [10400, 13200],
+        "sounding": [10600, 11250, 11950, 13150]
+    },
+}
+
+__site_freqs__ = __default_freqs__.get(config.site_id, __default_freqs__["default"])
+COMMON_MODE_FREQ_1 = __site_freqs__["common"][0]
+COMMON_MODE_FREQ_2 = __site_freqs__["common"][1]
+SOUNDING_FREQS = __site_freqs__["sounding"]
 
 
 def easy_scanbound(intt, beams):
@@ -99,20 +108,10 @@ def easy_scanbound(intt, beams):
     return [i * (intt * 1e-3) for i in range(len(beams))]
 
 
-# set sounding frequencies
-if options.site_id == "sas":
-    SOUNDING_FREQS = [9690, 10500, 11000, 11700, 12400, 12900, 13150]
-elif options.site_id == "pgr":
-    SOUNDING_FREQS = [9600, 10590, 11050, 11750, 13090, 12850, 12400]
-elif options.site_id == "rkn":
-    SOUNDING_FREQS = [11100, 9600, 10500, 12350, 11800, 13090, 12850]
-elif options.site_id == "inv":
-    SOUNDING_FREQS = [11150, 9690, 12400, 10590, 11850, 12800, 13100]
-elif options.site_id == "cly":
-    SOUNDING_FREQS = [11900, 12400, 11100, 10400, 9600, 12800, 13050]
-else:
-    SOUNDING_FREQS = [10600, 11250, 11950, 13150]
-
+STD_SCANBOUND = easy_scanbound(
+    INTT_MS,
+    STD_BEAM_ANGLES
+)
 
 def easy_widebeam(frequency_khz, tx_antennas, antenna_locations):
     """
@@ -467,7 +466,7 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_locations):
             0.0,
         ],
     }
-    num_antennas = options.main_antenna_count
+    num_antennas = config.main_antenna_count
     phases = np.zeros(num_antennas, dtype=np.complex64)
     if len(tx_antennas) == 16:
         if frequency_khz in cached_values_16_antennas.keys():

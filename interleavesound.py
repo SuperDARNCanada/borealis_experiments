@@ -23,7 +23,7 @@ class InterleaveSound(ExperimentPrototype):
         reverse_beams = [15, 11, 7, 3, 13, 9, 5, 1, 14, 10, 6, 2, 12, 8, 4, 0]
         sounding_beams = [0, 2, 4, 6, 8, 10, 12, 14, 1, 3, 5, 7, 9, 11, 13, 15]
 
-        if scf.IS_FORWARD_RADAR:
+        if scf.config.scan_direction == "forward":
             beams_to_use = forward_beams
         else:
             beams_to_use = reverse_beams
@@ -48,7 +48,7 @@ class InterleaveSound(ExperimentPrototype):
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
                 "intt": common_intt_ms,  # duration of an integration, in ms
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": beams_to_use,
                 "tx_beam_order": beams_to_use,
                 # this scanbound will be aligned because len(beam_order) = len(scanbound)
@@ -78,7 +78,7 @@ class InterleaveSound(ExperimentPrototype):
                     "num_ranges": scf.STD_NUM_RANGES,
                     "first_range": scf.STD_FIRST_RANGE,
                     "intt": sounding_intt_ms,  # duration of an integration, in ms
-                    "beam_angle": scf.STD_16_BEAM_ANGLE,
+                    "beam_angle": scf.STD_BEAM_ANGLES,
                     "rx_beam_order": sounding_beams,
                     "tx_beam_order": sounding_beams,
                     "scanbound": sounding_scanbound,

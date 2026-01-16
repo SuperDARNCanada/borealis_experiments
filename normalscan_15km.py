@@ -57,11 +57,6 @@ class Normalscan15km(ExperimentPrototype):
         """
         super().__init__()
 
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
-
         self.add_slice(
             {  # slice_id = 0, there is only one slice.
                 "pulse_sequence": scf.SEQUENCE_7P,
@@ -69,13 +64,11 @@ class Normalscan15km(ExperimentPrototype):
                 "pulse_len": scf.PULSE_LEN_15KM,
                 "num_ranges": 225,
                 "first_range": 90,
-                "intt": scf.INTT_7P,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "rx_beam_order": beams_to_use,
-                "tx_beam_order": beams_to_use,
-                "scanbound": scf.easy_scanbound(
-                    scf.INTT_7P, beams_to_use
-                ),  # 1 min scan
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": scf.STD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
+                "scanbound": scf.STD_SCANBOUND,
                 "freq": scf.COMMON_MODE_FREQ_1,  # kHz
                 "acf": True,
                 "xcf": True,  # cross-correlation processing

@@ -66,9 +66,9 @@ class FullFOV15Km(ExperimentPrototype):
                 "num_ranges": scf.STD_NUM_RANGES
                 * 3,  # Each range is a third of the usual size, want same spatial extent
                 "first_range": 90,  # km from radar
-                "intt": scf.INTT_7P,  # duration of an integration, in ms
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
-                "rx_beam_order": [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]],
+                "intt": scf.INTT_MS,  # duration of an integration, in ms
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
                 "tx_beam_order": [0],  # only one pattern
                 "tx_antenna_pattern": scf.easy_widebeam,
                 "freq": scf.COMMON_MODE_FREQ_1,  # kHz

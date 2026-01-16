@@ -296,9 +296,9 @@ class FullFOVTwoFSound(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]],
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
             "tx_beam_order": [0],  # only one pattern
             "tx_antenna_pattern": scf.easy_widebeam,
             "rx_antenna_pattern": rx_phase_pattern,

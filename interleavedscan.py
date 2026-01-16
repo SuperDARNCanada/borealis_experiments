@@ -25,7 +25,7 @@ class InterleavedScan(ExperimentPrototype):
         forward_beams = [0, 4, 8, 12, 2, 6, 10, 14, 1, 5, 9, 13, 3, 7, 11, 15]
         reverse_beams = [15, 11, 7, 3, 13, 9, 5, 1, 14, 10, 6, 2, 12, 8, 4, 0]
 
-        if scf.IS_FORWARD_RADAR:
+        if scf.config.scan_direction == "forward":
             beams_to_use = forward_beams
         else:
             beams_to_use = reverse_beams
@@ -36,11 +36,11 @@ class InterleavedScan(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_45KM,
             "num_ranges": scf.STD_NUM_RANGES,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
             "rx_beam_order": beams_to_use,
             "tx_beam_order": beams_to_use,
-            "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),
+            "scanbound": scf.easy_scanbound(scf.INTT_MS, beams_to_use),
             "freq": scf.COMMON_MODE_FREQ_1,  # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing
