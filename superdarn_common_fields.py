@@ -49,12 +49,12 @@ STD_NUM_RANGES = config.num_ranges
 STD_BEAM_ANGLES = [
     config.beam_sep * (beam_dir - (config.num_beams - 1) / 2) for beam_dir in range(config.num_beams)
 ]
-if config.scan_direction == "forward":
+if config.scan_direction == "clockwise":
     STD_BEAM_ORDER = [i for i in range(config.num_beams)]
-elif config.scan_direction == "reverse":
+elif config.scan_direction == "counterclockwise":
     STD_BEAM_ORDER = reversed([i for i in range(config.num_beams)])
 else:
-    raise ValueError("Unknown scan direction from config file: expected `forward` or `reverse`")
+    raise ValueError("Unknown scan direction from config file: expected `clockwise` or `counterclockwise`")
 
 # Calculate integration time per beam, rounded to nearest tenth of a second
 INTT_MS = int(600 // config.num_beams) * 100
