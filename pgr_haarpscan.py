@@ -9,8 +9,8 @@ of the HAARP instrument in Alaska.
 
 import copy
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-import experiment_prototype.experiment_utils.decimation_scheme as dm
+from utils.experiment_prototype import ExperimentPrototype
+import utils.decimation_scheme as dm
 
 
 def filter_15km_mode():
@@ -32,8 +32,12 @@ def filter_15km_mode():
     dm_rate_so_far *= dm_rate[0]
 
     # Second stage Kaiser by num taps
-    taps = scaling_factors[1] * dm.create_firwin_filter_by_num_taps(sample_rate / dm_rate_so_far, cutoff_hz[1], 41)
-    stages.append(dm.DecimationStage(1, sample_rate / dm_rate_so_far, dm_rate[1], taps.tolist()))
+    taps = scaling_factors[1] * dm.create_firwin_filter_by_num_taps(
+        sample_rate / dm_rate_so_far, cutoff_hz[1], 41
+    )
+    stages.append(
+        dm.DecimationStage(1, sample_rate / dm_rate_so_far, dm_rate[1], taps.tolist())
+    )
     dm_rate_so_far *= dm_rate[1]
 
     scheme = dm.DecimationScheme(
@@ -44,9 +48,12 @@ def filter_15km_mode():
 
 
 class PgrHaarpscan(ExperimentPrototype):
+    cpid = 3498
+
     def __init__(self, **kwargs):
-        cpid = 3498
-        super().__init__(cpid, comment_string="Scan of beams extra westward beams at PGR, overlooking HAARP.")
+        super().__init__(
+            comment_string="Scan of beams extra westward beams at PGR, overlooking HAARP."
+        )
 
         slice_0 = {
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -54,11 +61,14 @@ class PgrHaarpscan(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_15KM,
             "num_ranges": 225,
             "first_range": scf.STD_FIRST_RANGE,
-            "intt": scf.INTT_7P,
-            "beam_angle": [scf.STD_16_BEAM_ANGLE[0] - (3.24 * 3), scf.STD_16_BEAM_ANGLE[0] - (3.24 * 2)], # 2 beams CCW of FOV, essentially beams -3 and -2
+            "intt": scf.INTT_MS,
+            "beam_angle": [
+                scf.STD_BEAM_ANGLES[0] - (3.24 * 3),
+                scf.STD_BEAM_ANGLES[0] - (3.24 * 2),
+            ],  # 2 beams CCW of FOV, essentially beams -3 and -2
             "rx_beam_order": [0, 1],
             "tx_beam_order": [0, 1],
-            "freq" : scf.COMMON_MODE_FREQ_1,
+            "freq": scf.COMMON_MODE_FREQ_1,
             "acf": True,
             "xcf": True,
             "acfint": False,

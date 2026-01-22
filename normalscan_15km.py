@@ -1,14 +1,14 @@
 """
-    normalscan_15km
-    ~~~~~~~~~~~~~~~
-    Standard radar operating experiment with 15km resolution. Transmits a single frequency signal.
+normalscan_15km
+~~~~~~~~~~~~~~~
+Standard radar operating experiment with 15km resolution. Transmits a single frequency signal.
 
-    :copyright: 2025 SuperDARN Canada
+:copyright: 2025 SuperDARN Canada
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_utils import decimation_scheme as dm
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils import decimation_scheme as dm
+from utils.experiment_prototype import ExperimentPrototype
 
 
 def filter_15km_mode():
@@ -30,8 +30,12 @@ def filter_15km_mode():
     dm_rate_so_far *= dm_rate[0]
 
     # Second stage Kaiser by num taps
-    taps = scaling_factors[1] * dm.create_firwin_filter_by_num_taps(sample_rate / dm_rate_so_far, cutoff_hz[1], 41)
-    stages.append(dm.DecimationStage(1, sample_rate / dm_rate_so_far, dm_rate[1], taps.tolist()))
+    taps = scaling_factors[1] * dm.create_firwin_filter_by_num_taps(
+        sample_rate / dm_rate_so_far, cutoff_hz[1], 41
+    )
+    stages.append(
+        dm.DecimationStage(1, sample_rate / dm_rate_so_far, dm_rate[1], taps.tolist())
+    )
     dm_rate_so_far *= dm_rate[1]
 
     scheme = dm.DecimationScheme(
@@ -42,6 +46,8 @@ def filter_15km_mode():
 
 
 class Normalscan15km(ExperimentPrototype):
+    cpid = 3803
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -49,30 +55,25 @@ class Normalscan15km(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3803
-        super().__init__(cpid)
+        super().__init__()
 
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
-
-        self.add_slice({  # slice_id = 0, there is only one slice.
-            "pulse_sequence": scf.SEQUENCE_7P,
-            "tau_spacing": scf.TAU_SPACING_7P,
-            "pulse_len": scf.PULSE_LEN_15KM,
-            "num_ranges": 225,
-            "first_range": 90,
-            "intt": scf.INTT_7P,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": beams_to_use,
-            "tx_beam_order": beams_to_use,
-            "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),  # 1 min scan
-            "freq": scf.COMMON_MODE_FREQ_1,  # kHz
-            "acf": True,
-            "xcf": True,  # cross-correlation processing
-            "acfint": True,  # interferometer acfs
-            "wait_for_first_scanbound": False,
-            "decimation_scheme": filter_15km_mode(),
-        })
-
+        self.add_slice(
+            {  # slice_id = 0, there is only one slice.
+                "pulse_sequence": scf.SEQUENCE_7P,
+                "tau_spacing": scf.TAU_SPACING_7P,
+                "pulse_len": scf.PULSE_LEN_15KM,
+                "num_ranges": 225,
+                "first_range": 90,
+                "intt": scf.INTT_MS,
+                "beam_angle": scf.STD_BEAM_ANGLES,
+                "rx_beam_order": scf.STD_BEAM_ORDER,
+                "tx_beam_order": scf.STD_BEAM_ORDER,
+                "scanbound": scf.STD_SCANBOUND,
+                "freq": scf.COMMON_MODE_FREQ_1,  # kHz
+                "acf": True,
+                "xcf": True,  # cross-correlation processing
+                "acfint": True,  # interferometer acfs
+                "wait_for_first_scanbound": False,
+                "decimation_scheme": filter_15km_mode(),
+            }
+        )
