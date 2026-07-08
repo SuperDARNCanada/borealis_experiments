@@ -64,8 +64,6 @@ class Epopsound(ExperimentPrototype):
             "acf": True,
             "xcf": True,
             "acfint": True,
-            "txctrfreq": center_freq + 100,
-            "rxctrfreq": center_freq + 100,
         }
 
         for num, freq in enumerate(freqs):

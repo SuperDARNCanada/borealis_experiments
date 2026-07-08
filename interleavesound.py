@@ -35,11 +35,6 @@ class InterleaveSound(ExperimentPrototype):
             common_scanbound_spacing * 1.0e3 - 100
         )  # reduce by 100 ms for processing
 
-        freq_list = [scf.COMMON_MODE_FREQ_1]
-        for freq in scf.SOUNDING_FREQS:
-            freq_list.append(freq)
-        rxctrfreq = txctrfreq = int((max(freq_list) + min(freq_list)) / 2)
-
         slices.append(
             {  # slice_id = 0, the first slice
                 "pulse_sequence": scf.SEQUENCE_8P,
@@ -56,8 +51,6 @@ class InterleaveSound(ExperimentPrototype):
                     i * common_scanbound_spacing for i in range(len(beams_to_use))
                 ],
                 "freq": scf.COMMON_MODE_FREQ_1,  # kHz
-                "txctrfreq": txctrfreq,
-                "rxctrfreq": rxctrfreq,
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
                 "acfint": True,  # interferometer acfs
@@ -83,8 +76,6 @@ class InterleaveSound(ExperimentPrototype):
                     "tx_beam_order": sounding_beams,
                     "scanbound": sounding_scanbound,
                     "freq": freq,
-                    "txctrfreq": txctrfreq,
-                    "rxctrfreq": rxctrfreq,
                     "acf": True,
                     "xcf": True,  # cross-correlation processing
                     "acfint": True,  # interferometer acfs

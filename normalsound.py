@@ -24,9 +24,6 @@ class NormalSound(ExperimentPrototype):
             beam_nums.append(b)
             freq_nums.append(f)
 
-        freqrange = (max(scf.SOUNDING_FREQS) - min(scf.SOUNDING_FREQS)) / 2
-        centerfreq = min(scf.SOUNDING_FREQS) + freqrange
-
         slices = []
 
         common_intt_ms = 3000
@@ -45,8 +42,6 @@ class NormalSound(ExperimentPrototype):
                 # this scanbound will be aligned because len(beam_order) = len(scanbound)
                 "scanbound": scf.easy_scanbound(common_intt_ms, scf.STD_BEAM_ORDER),
                 "freq": scf.COMMON_MODE_FREQ_1,  # kHz
-                "txctrfreq": centerfreq,
-                "rxctrfreq": centerfreq,
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
                 "acfint": True,  # interferometer acfs
@@ -72,8 +67,6 @@ class NormalSound(ExperimentPrototype):
                 "scanbound": sounding_scanbound,
                 "freq": scf.SOUNDING_FREQS,
                 "freq_order": freq_nums,
-                "txctrfreq": centerfreq,
-                "rxctrfreq": centerfreq,
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
                 "acfint": True,  # interferometer acfs
