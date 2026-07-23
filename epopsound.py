@@ -87,9 +87,7 @@ class Epopsound(ExperimentPrototype):
 
         for freq in freqs:
             # for each freq add
-            base_slice.update(
-                {"freq": freq, "txctrfreq": freq + 100, "rxctrfreq": freq + 100}
-            )
+            base_slice["freq"] = freq
             slices.append(base_slice)
 
             if marker_period > 0:

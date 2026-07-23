@@ -172,68 +172,6 @@ class CFSRangeNotInts(ExperimentPrototype):
         return (ValidationError, "cfs_range.0\n.*Input should be a valid integer")
 
 
-class CFSRangeOutsideRxBand(ExperimentPrototype):
-    cpid = 1
-
-    def __init__(self):
-        super().__init__()
-        self.add_slice(
-            {
-                "pulse_sequence": scf.SEQUENCE_7P,
-                "tau_spacing": scf.TAU_SPACING_7P,
-                "pulse_len": scf.PULSE_LEN_45KM,
-                "num_ranges": scf.STD_NUM_RANGES,
-                "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_MS,
-                "beam_angle": scf.STD_BEAM_ANGLES,
-                "rx_beam_order": scf.STD_BEAM_ORDER,
-                "tx_beam_order": scf.STD_BEAM_ORDER,
-                "cfs_range": [13451, 13751],
-                "rxctrfreq": 10000,
-                "acf": True,
-            }
-        )
-
-    @classmethod
-    def error_message(cls):
-        return (
-            ValidationError,
-            "Value error, Slice 0 cfs_range maximum value needs to be equal to or less than the tx and "
-            "rx maximum operating frequencies: 20000.0 and 11750.000009313226",
-        )
-
-
-class CFSRangeOutsideTxBand(ExperimentPrototype):
-    cpid = 1
-
-    def __init__(self):
-        super().__init__()
-        self.add_slice(
-            {
-                "pulse_sequence": scf.SEQUENCE_7P,
-                "tau_spacing": scf.TAU_SPACING_7P,
-                "pulse_len": scf.PULSE_LEN_45KM,
-                "num_ranges": scf.STD_NUM_RANGES,
-                "first_range": scf.STD_FIRST_RANGE,
-                "intt": scf.INTT_MS,
-                "beam_angle": scf.STD_BEAM_ANGLES,
-                "rx_beam_order": scf.STD_BEAM_ORDER,
-                "tx_beam_order": scf.STD_BEAM_ORDER,
-                "cfs_range": [11000, 11300],
-                "txctrfreq": 14000,
-                "acf": True,
-            }
-        )
-
-    @classmethod
-    def error_message(cls):
-        return (
-            ValidationError,
-            "Slice 0 cfs_range minimum value needs to be equal to or greater than the tx "
-            "and rx minimum operating frequencies: 12250.000013038516 and 8000",
-        )
-
-
 class CFSRangeTooHigh(ExperimentPrototype):
     cpid = 1
 

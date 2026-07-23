@@ -22,8 +22,6 @@ class Twofsound(ExperimentPrototype):
         tx_freq_1 = int(kwargs.get("freq1", scf.COMMON_MODE_FREQ_1))
         tx_freq_2 = int(kwargs.get("freq2", scf.COMMON_MODE_FREQ_2))
 
-        rxctrfreq = txctrfreq = int((tx_freq_1 + tx_freq_2) / 2)
-
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -36,8 +34,6 @@ class Twofsound(ExperimentPrototype):
             "tx_beam_order": scf.STD_BEAM_ORDER,
             "scanbound": scf.STD_SCANBOUND,
             "freq": tx_freq_1,  # kHz
-            "txctrfreq": txctrfreq,
-            "rxctrfreq": rxctrfreq,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs

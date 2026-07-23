@@ -23,11 +23,6 @@ class TwoMultifsound(ExperimentPrototype):
 
         freqs = (scf.COMMON_MODE_FREQ_1, scf.COMMON_MODE_FREQ_2)
 
-        sum_of_freqs = 0
-        for val in freqs:
-            sum_of_freqs += val
-        rxctrfreq = txctrfreq = int(sum_of_freqs / len(freqs))
-
         slice_1 = {  # slice_id = 0, the first slice
             "pulse_sequence": scf.SEQUENCE_7P,
             "tau_spacing": scf.TAU_SPACING_7P,
@@ -39,8 +34,6 @@ class TwoMultifsound(ExperimentPrototype):
             "rx_beam_order": scf.STD_BEAM_ORDER,
             "tx_beam_order": scf.STD_BEAM_ORDER,
             "freq": freqs[0],  # kHz
-            "txctrfreq": txctrfreq,
-            "rxctrfreq": rxctrfreq,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
