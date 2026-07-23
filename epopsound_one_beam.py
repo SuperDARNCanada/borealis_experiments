@@ -50,8 +50,6 @@ class Epopsound(ExperimentPrototype):
             )
         )  # TODO: Log
 
-        center_freq = int(sum(freqs) / len(freqs))
-
         slices = []
         base_slice = {
             "pulse_sequence": scf.SEQUENCE_8P,

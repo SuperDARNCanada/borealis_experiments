@@ -64,7 +64,7 @@ class FreqRestricted(ExperimentPrototype):
     def error_message(cls):
         return (
             ValidationError,
-            f"freq",
+            "freq",
         )
 
 
