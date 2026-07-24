@@ -70,7 +70,7 @@ class BeamAngleDuplicates(ExperimentPrototype):
     def error_message(cls):
         return (
             ValidationError,
-            "beam_angle\n" "  Value error, List must have increasing values",
+            "beam_angle\n  Value error, List must have increasing values",
         )
 
 
@@ -120,7 +120,7 @@ class BeamAngleUnordered(ExperimentPrototype):
     def error_message(cls):
         return (
             ValidationError,
-            "beam_angle\n" "  Value error, List must have increasing values",
+            "beam_angle\n  Value error, List must have increasing values",
         )
 
 
@@ -147,7 +147,7 @@ class BeamAngleNotList(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "beam_angle\n" "  Input should be a valid list"
+        return ValidationError, "beam_angle\n  Input should be a valid list"
 
 
 class BeamAngleNotNums(ExperimentPrototype):
@@ -190,4 +190,4 @@ class BeamAngleNotNums(ExperimentPrototype):
 
     @classmethod
     def error_message(cls):
-        return ValidationError, "beam_angle.2\n" "  Input should be a valid number"
+        return ValidationError, "beam_angle.2\n  Input should be a valid number"

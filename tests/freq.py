@@ -42,8 +42,6 @@ class FreqRestricted(ExperimentPrototype):
     def __init__(self):
         super().__init__()
 
-        
-
         self.add_slice(
             {
                 "pulse_sequence": scf.SEQUENCE_7P,
@@ -55,7 +53,8 @@ class FreqRestricted(ExperimentPrototype):
                 "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": scf.STD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_BEAM_ORDER,
-                "freq": opts.restricted_ranges[0][1] - 10,  # 10 kHz from top edge of first restricted band
+                "freq": opts.restricted_ranges[0][1]
+                - 10,  # 10 kHz from top edge of first restricted band
                 "acf": True,
             }
         )

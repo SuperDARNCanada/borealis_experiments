@@ -50,6 +50,7 @@ class AutoTuneFreqOrder(ExperimentPrototype):
             }
         )
 
+
 class AutoTuneCFS(ExperimentPrototype):
     cpid = 1
 
@@ -161,7 +162,10 @@ class AutoTuneCFSSequence(ExperimentPrototype):
             "acf": True,
         }
         self.add_slice(slice_template)
-        slice_template["cfs_range"] = [scf.COMMON_MODE_FREQ_2, scf.COMMON_MODE_FREQ_2 + 300]
+        slice_template["cfs_range"] = [
+            scf.COMMON_MODE_FREQ_2,
+            scf.COMMON_MODE_FREQ_2 + 300,
+        ]
         self.add_slice(slice_template, interfacing_dict={0: "SEQUENCE"})
 
 
@@ -185,7 +189,10 @@ class AutoTuneRegularAndCFS(ExperimentPrototype):
         }
         self.add_slice(slice_template)
         slice_template.pop("freq")
-        slice_template["cfs_range"] = [scf.COMMON_MODE_FREQ_2, scf.COMMON_MODE_FREQ_2 + 300]
+        slice_template["cfs_range"] = [
+            scf.COMMON_MODE_FREQ_2,
+            scf.COMMON_MODE_FREQ_2 + 300,
+        ]
         self.add_slice(slice_template, interfacing_dict={0: "SEQUENCE"})
 
 
@@ -255,7 +262,9 @@ class AutoTuneFail(ExperimentPrototype):
             "acf": True,
         }
         self.add_slice(slice_template)
-        slice_template["freq"] = scf.COMMON_MODE_FREQ_1 + 8000  # cannot fit in the band, requires retuning
+        slice_template["freq"] = (
+            scf.COMMON_MODE_FREQ_1 + 8000
+        )  # cannot fit in the band, requires retuning
         self.add_slice(slice_template, interfacing_dict={0: "CONCURRENT"})
 
     @classmethod

@@ -29,5 +29,5 @@ class AveMethodDNE(ExperimentPrototype):
     def error_message(cls):
         return (
             ValidationError,
-            "averaging_method\n" "  Input should be 'mean' or 'median'",
+            "averaging_method\n  Input should be 'mean' or 'median'",
         )

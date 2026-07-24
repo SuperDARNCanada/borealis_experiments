@@ -18,7 +18,6 @@ class Twofsound(ExperimentPrototype):
     cpid = 3503
 
     def __init__(self, **kwargs):
-
         tx_freq_1 = int(kwargs.get("freq1", scf.COMMON_MODE_FREQ_1))
         tx_freq_2 = int(kwargs.get("freq2", scf.COMMON_MODE_FREQ_2))
 

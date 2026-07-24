@@ -47,14 +47,17 @@ STD_FIRST_RANGE = 180  # km
 STD_NUM_RANGES = config.num_ranges
 
 STD_BEAM_ANGLES = [
-    config.beam_sep * (beam_dir - (config.num_beams - 1) / 2) for beam_dir in range(config.num_beams)
+    config.beam_sep * (beam_dir - (config.num_beams - 1) / 2)
+    for beam_dir in range(config.num_beams)
 ]
 if config.scan_direction == "clockwise":
     STD_BEAM_ORDER = [i for i in range(config.num_beams)]
 elif config.scan_direction == "counterclockwise":
     STD_BEAM_ORDER = list(reversed([i for i in range(config.num_beams)]))
 else:
-    raise ValueError("Unknown scan direction from config file: expected `clockwise` or `counterclockwise`")
+    raise ValueError(
+        "Unknown scan direction from config file: expected `clockwise` or `counterclockwise`"
+    )
 
 # Calculate integration time per beam, rounded to nearest tenth of a second
 INTT_MS = int(600 // config.num_beams) * 100
@@ -64,32 +67,26 @@ __integration_time_s__ = INTT_MS / 1000.0
 __default_freqs__ = {
     "sas": {
         "common": [10800, 13000],
-        "sounding": [9690, 10440, 11500, 12080, 13000, 14560, 15250, 16400]
+        "sounding": [9690, 10440, 11500, 12080, 13000, 14560, 15250, 16400],
     },
     "pgr": {
         "common": [10900, 13150],
-        "sounding": [9730, 10480, 11120, 12120, 13040, 14600, 15300, 16440]
+        "sounding": [9730, 10480, 11120, 12120, 13040, 14600, 15300, 16440],
     },
     "cly": {
         "common": [10700, 12500],
-        "sounding": [9850, 10560, 11240, 12240, 13200, 14720, 15550, 16150]
+        "sounding": [9850, 10560, 11240, 12240, 13200, 14720, 15550, 16150],
     },
     "rkn": {
         "common": [10600, 12300],
-        "sounding": [9810, 10230, 11160, 12160, 13080, 14640, 15400, 16480]
+        "sounding": [9810, 10230, 11160, 12160, 13080, 14640, 15400, 16480],
     },
     "inv": {
         "common": [10500, 12200],
-        "sounding": [9770, 10520, 11200, 12200, 13120, 14680, 15500, 16100]
+        "sounding": [9770, 10520, 11200, 12200, 13120, 14680, 15500, 16100],
     },
-    "lab": {
-        "common": [10400, 13200],
-        "sounding": [10600, 11250, 11950, 13150]
-    },
-    "default": {
-        "common": [10400, 13200],
-        "sounding": [10600, 11250, 11950, 13150]
-    },
+    "lab": {"common": [10400, 13200], "sounding": [10600, 11250, 11950, 13150]},
+    "default": {"common": [10400, 13200], "sounding": [10600, 11250, 11950, 13150]},
 }
 
 __site_freqs__ = __default_freqs__.get(config.site_id, __default_freqs__["default"])
@@ -108,10 +105,8 @@ def easy_scanbound(intt, beams):
     return [i * (intt * 1e-3) for i in range(len(beams))]
 
 
-STD_SCANBOUND = easy_scanbound(
-    INTT_MS,
-    STD_BEAM_ANGLES
-)
+STD_SCANBOUND = easy_scanbound(INTT_MS, STD_BEAM_ANGLES)
+
 
 def easy_widebeam(frequency_khz, tx_antennas, antenna_locations):
     """
@@ -481,9 +476,11 @@ def easy_widebeam(frequency_khz, tx_antennas, antenna_locations):
             )
             return phases.reshape(1, num_antennas) * 0.999999
     # If you get this far, the number of antennas or frequency is not supported for this function.
-    raise ValueError(f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "
-                     f"frequency_khz: {frequency_khz}, main_antenna_count: {num_antennas}.\n"
-                     f"This could be accidental - if you have disconnected a TX channel in your config file, "
-                     f"this will reduce the number of transmitting antennas.\nWide transmission beam patterns "
-                     f"are very sensitive, so this function only accepts specific operating parameters to produce "
-                     f"predictable beam patterns.")
+    raise ValueError(
+        f"Invalid parameters for easy_widebeam(): tx_antennas: {tx_antennas}, "
+        f"frequency_khz: {frequency_khz}, main_antenna_count: {num_antennas}.\n"
+        f"This could be accidental - if you have disconnected a TX channel in your config file, "
+        f"this will reduce the number of transmitting antennas.\nWide transmission beam patterns "
+        f"are very sensitive, so this function only accepts specific operating parameters to produce "
+        f"predictable beam patterns."
+    )

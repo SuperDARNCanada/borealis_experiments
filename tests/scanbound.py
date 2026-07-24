@@ -23,9 +23,7 @@ class ScanboundNoIntt(ExperimentPrototype):
                 "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": scf.STD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_BEAM_ORDER,
-                "scanbound": [
-                    i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))
-                ],
+                "scanbound": [i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))],
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -92,9 +90,7 @@ class ScanboundInterfacingSequence(ExperimentPrototype):
         }
         self.add_slice(slice_0)
         slice_1 = copy.deepcopy(slice_0)
-        slice_1["scanbound"] = [
-            i * 3.6 for i in range(len(scf.STD_BEAM_ORDER))
-        ]
+        slice_1["scanbound"] = [i * 3.6 for i in range(len(scf.STD_BEAM_ORDER))]
         self.add_slice(slice_1, {0: "SEQUENCE"})
 
     @classmethod
@@ -122,9 +118,7 @@ class ScanboundNegative(ExperimentPrototype):
                 "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": scf.STD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_BEAM_ORDER,
-                "scanbound": [
-                    i * -3.5 for i in range(len(scf.STD_BEAM_ORDER))
-                ],
+                "scanbound": [i * -3.5 for i in range(len(scf.STD_BEAM_ORDER))],
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,
             }
@@ -156,9 +150,7 @@ class ScanboundNotIncreasing(ExperimentPrototype):
                 "rx_beam_order": scf.STD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_BEAM_ORDER,
                 "scanbound": list(
-                    reversed(
-                        [i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))]
-                    )
+                    reversed([i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))])
                 ),
                 "freq": scf.COMMON_MODE_FREQ_1,
                 "acf": True,

@@ -223,9 +223,7 @@ class InttLongerThanScanbound(ExperimentPrototype):
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
                 "intt": 3600,
-                "scanbound": [
-                    i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))
-                ],
+                "scanbound": [i * 3.5 for i in range(len(scf.STD_BEAM_ORDER))],
                 "beam_angle": scf.STD_BEAM_ANGLES,
                 "rx_beam_order": scf.STD_BEAM_ORDER,
                 "tx_beam_order": scf.STD_BEAM_ORDER,
