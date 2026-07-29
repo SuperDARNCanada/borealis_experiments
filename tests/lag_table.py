@@ -1,0 +1,47 @@
+import itertools
+
+import borealis_experiments.superdarn_common_fields as scf
+from utils.experiment_prototype import ExperimentPrototype
+from pydantic import ValidationError
+
+
+class LagTablePulseDNE(ExperimentPrototype):
+    cpid = 1
+
+    def __init__(self):
+        super().__init__()
+
+        slice_1 = {  # slice_id = 0, there is only one slice.
+            "pulse_sequence": scf.SEQUENCE_7P,
+            "tau_spacing": scf.TAU_SPACING_7P,
+            "pulse_len": scf.PULSE_LEN_45KM,
+            "num_ranges": scf.STD_NUM_RANGES,
+            "first_range": scf.STD_FIRST_RANGE,
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": scf.STD_BEAM_ORDER,
+            "tx_beam_order": scf.STD_BEAM_ORDER,
+            "freq": scf.COMMON_MODE_FREQ_1,
+            "acf": True,
+        }
+
+        lag_table = list(itertools.combinations(slice_1["pulse_sequence"], 2))
+        lag_table.append(
+            [slice_1["pulse_sequence"][0], slice_1["pulse_sequence"][0]]
+        )  # lag 0
+        lag_table.append([0, 99])  # Should fail on this
+        # sort by lag number
+        lag_table = sorted(lag_table, key=lambda x: x[1] - x[0])
+        lag_table.append(
+            [slice_1["pulse_sequence"][-1], slice_1["pulse_sequence"][-1]]
+        )  # alternate lag 0
+        slice_1["lag_table"] = lag_table
+
+        self.add_slice(slice_1)
+
+    @classmethod
+    def error_message(cls):
+        return (
+            ValidationError,
+            "Value error, Lag \[0, 99\] not valid; One of the pulses does not exist in the sequence",
+        )
