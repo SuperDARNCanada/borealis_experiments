@@ -7,6 +7,8 @@
     while receiving at a high bandwidth, then listens for a single sequence while receiving at a high bandwidth.
     All slices are AVEPERIOD interfaced.
 
+    Used at Rankin Inlet during noise investigation in 2024
+
     :copyright: 2024 SuperDARN Canada
     :author: Remington Rohel
 """
