@@ -5,6 +5,8 @@ normalscan_ppo_test
 ~~~~~~~~~~~~~~~~~~~
 normalscan but pulse phase offset is modified
 
+Pulse Compression test ran at Inuvik in September 2023
+
 :copyright: 2022 SuperDARN Canada
 """
 
