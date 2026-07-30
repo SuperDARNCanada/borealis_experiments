@@ -8,8 +8,8 @@
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_utils import decimation_scheme as dm
-from experiment_prototype.experiment_prototype import ExperimentPrototype
+from utils import decimation_scheme as dm
+from utils.experiment_prototype import ExperimentPrototype
 
 
 def filter_15km_mode():
@@ -43,6 +43,8 @@ def filter_15km_mode():
 
 
 class Normalscan15kmRange0(ExperimentPrototype):
+    cpid = 3822
+
     def __init__(self, **kwargs):
         """
         kwargs:
@@ -50,13 +52,7 @@ class Normalscan15kmRange0(ExperimentPrototype):
         freq: int
 
         """
-        cpid = 3822
-        super().__init__(cpid)
-
-        if scf.IS_FORWARD_RADAR:
-            beams_to_use = scf.STD_16_FORWARD_BEAM_ORDER
-        else:
-            beams_to_use = scf.STD_16_REVERSE_BEAM_ORDER
+        super().__init__()
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -64,11 +60,11 @@ class Normalscan15kmRange0(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_15KM,
             "num_ranges": 225,
             "first_range": 0,
-            "intt": scf.INTT_7P,
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": beams_to_use,
-            "tx_beam_order": beams_to_use,
-            "scanbound": scf.easy_scanbound(scf.INTT_7P, beams_to_use),  # 1 min scan
+            "intt": scf.INTT_MS,
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": scf.STD_BEAM_ORDER,
+            "tx_beam_order": scf.STD_BEAM_ORDER,
+            "scanbound": scf.STD_SCANBOUND,  # 1 min scan
             "freq": scf.COMMON_MODE_FREQ_1,  # kHz
             "acf": True,
             "xcf": True,  # cross-correlation processing

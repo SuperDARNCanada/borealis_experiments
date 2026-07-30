@@ -10,8 +10,8 @@ resolution, starting at range gate 0.
 """
 
 import borealis_experiments.superdarn_common_fields as scf
-from experiment_prototype.experiment_prototype import ExperimentPrototype
-import experiment_prototype.experiment_utils.decimation_scheme as dm
+from utils.experiment_prototype import ExperimentPrototype
+import utils.decimation_scheme as dm
 
 
 def filter_15km_mode():
@@ -45,13 +45,14 @@ def filter_15km_mode():
 
 
 class FullFOV15KmRange0(ExperimentPrototype):
+    cpid = 3823
+
     def __init__(self, **kwargs):
         """
         The mode transmits with a pre-calculated phase progression across the array which illuminates
         the full FOV, and receives on all antennas. This mode uses 15-km range gates for high spatial resolution.
         """
-        cpid = 3823
-        super().__init__(cpid, comment_string='Full FOV 15km Resolution Experiment, First Range 0')
+        super().__init__(comment_string='Full FOV 15km Resolution Experiment, First Range 0')
 
         self.add_slice({  # slice_id = 0, there is only one slice.
             "pulse_sequence": scf.SEQUENCE_7P,
@@ -59,9 +60,9 @@ class FullFOV15KmRange0(ExperimentPrototype):
             "pulse_len": scf.PULSE_LEN_15KM,
             "num_ranges": scf.STD_NUM_RANGES * 3,  # Each range is a third of the usual size, want same spatial extent
             "first_range": 0,  # km from radar
-            "intt": scf.INTT_7P,  # duration of an integration, in ms
-            "beam_angle": scf.STD_16_BEAM_ANGLE,
-            "rx_beam_order": [[i for i in range(len(scf.STD_16_BEAM_ANGLE))]],
+            "intt": scf.INTT_MS,  # duration of an integration, in ms
+            "beam_angle": scf.STD_BEAM_ANGLES,
+            "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
             "tx_beam_order": [0],   # only one pattern
             "tx_antenna_pattern": scf.easy_widebeam,
             "freq": scf.COMMON_MODE_FREQ_1,  # kHz
