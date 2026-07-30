@@ -28,7 +28,7 @@ class EclipseSound(ExperimentPrototype):
 
         slices = []
 
-        common_intt_ms = 2000
+        common_intt_ms = 2000   # Shortened from typical 3000 ms. Will 16 beam slice at 32 s
 
         slices.append(
             {  # slice_id = 0, the first slice
@@ -54,6 +54,7 @@ class EclipseSound(ExperimentPrototype):
         sounding_scanbound_spacing = 1.8  # seconds
         sounding_intt_ms = sounding_scanbound_spacing * 1.0e3 - 100
 
+        # Starts at 32 s, after 16 beam slice finishes
         sounding_scanbound = [32 + i * sounding_scanbound_spacing for i in range(14)]
         slices.append(
             {
