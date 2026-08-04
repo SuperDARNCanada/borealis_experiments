@@ -18,20 +18,25 @@ class EclipseSound(ExperimentPrototype):
     cpid = 1103
 
     def __init__(self):
-        sounding_beams = [0, 7]
+        SOUNDING_BEAMS = {
+            "cly": [0, 15],
+            "inv": [0, 10],
+            "pgr": [7, 15],
+            "rkn": [2, 15],
+            "sas": [2, 15],
+        }
+
+        sounding_beams = SOUNDING_BEAMS.get(scf.options.site_id)
         sounding_freqs = scf.SOUNDING_FREQS[:7]
-        beam_nums = list()
-        freq_nums = list()
+        beam_nums = []
+        freq_nums = []
         for b, f in itertools.product(sounding_beams, range(len(sounding_freqs))):
             beam_nums.append(b)
             freq_nums.append(f)
 
-        slices = []
+        common_intt_ms = 2000   # Shortened from typical 3000 ms. Will finish 16 beam slice at 32 s
 
-        common_intt_ms = 2000   # Shortened from typical 3000 ms. Will 16 beam slice at 32 s
-
-        slices.append(
-            {  # slice_id = 0, the first slice
+        common_slice = {
                 "pulse_sequence": scf.SEQUENCE_8P,
                 "tau_spacing": scf.TAU_SPACING_8P,
                 "pulse_len": scf.PULSE_LEN_45KM,
@@ -49,15 +54,14 @@ class EclipseSound(ExperimentPrototype):
                 "acfint": False,  # interferometer acfs
                 "lag_table": scf.STD_8P_LAG_TABLE,  # lag table needed for 8P since not all lags used.
             }
-        )
 
         sounding_scanbound_spacing = 1.8  # seconds
         sounding_intt_ms = sounding_scanbound_spacing * 1.0e3 - 100
 
         # Starts at 32 s, after 16 beam slice finishes
         sounding_scanbound = [32 + i * sounding_scanbound_spacing for i in range(14)]
-        slices.append(
-            {
+
+        sounding_slice = {
                 "pulse_sequence": scf.SEQUENCE_8P,
                 "tau_spacing": scf.TAU_SPACING_8P,
                 "pulse_len": scf.PULSE_LEN_45KM,
@@ -75,9 +79,8 @@ class EclipseSound(ExperimentPrototype):
                 "acfint": False,  # interferometer acfs
                 "lag_table": scf.STD_8P_LAG_TABLE,  # lag table needed for 8P since not all lags used.
             }
-        )
 
         super().__init__(comment_string="August 2026 total solar eclipse experiment")
 
-        self.add_slice(slices[0])
-        self.add_slice(slices[1], {0: "SCAN"})
+        self.add_slice(common_slice)
+        self.add_slice(sounding_slice, {0: "SCAN"})
