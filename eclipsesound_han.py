@@ -84,7 +84,7 @@ class EclipseSound(ExperimentPrototype):
                 "lag_table": scf.STD_8P_LAG_TABLE,  # lag table needed for 8P since not all lags used.
             }
 
-        super().__init__(self.cpid, comment_string='August 2026 total solar eclipse experiment')
+        super().__init__(comment_string='August 2026 total solar eclipse experiment')
 
         self.add_slice(common_slice)
         self.add_slice(sounding_slice, {0: "SCAN"})
