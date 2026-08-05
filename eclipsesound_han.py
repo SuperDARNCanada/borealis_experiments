@@ -46,7 +46,7 @@ class EclipseSound(ExperimentPrototype):
                 "num_ranges": scf.STD_NUM_RANGES,
                 "first_range": scf.STD_FIRST_RANGE,
                 "intt": common_intt_ms,
-                "beam_angle": scf.STD_16_BEAM_ANGLE,
+                "beam_angle": scf.STD_BEAM_ANGLES,
                 "tx_beam_order": scf.STD_BEAM_ORDER,
                 "rx_beam_order": scf.STD_BEAM_ORDER,
                 # this scanbound will be aligned because len(beam_order) = len(scanbound)
