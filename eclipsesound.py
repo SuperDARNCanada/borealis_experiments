@@ -26,7 +26,7 @@ class EclipseSound(ExperimentPrototype):
             "sas": [2, 15],
         }
 
-        sounding_beams = SOUNDING_BEAMS.get(scf.options.site_id)
+        sounding_beams = SOUNDING_BEAMS.get(scf.config.site_id)
         sounding_freqs = scf.SOUNDING_FREQS[:7]
         beam_nums = []
         freq_nums = []
