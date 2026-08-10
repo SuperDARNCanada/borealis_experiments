@@ -45,8 +45,8 @@ class NormalSound(ExperimentPrototype):
             # this scanbound will be aligned because len(beam_order) = len(scanbound)
             "scanbound" : [i * common_scanbound_spacing for i in range(len(beams_to_use))],
             "freq": scf.COMMON_MODE_FREQ_1, #kHz
-            "txctrfreq": centerfreq,
-            "rxctrfreq": centerfreq,
+            #"txctrfreq": centerfreq,
+            #"rxctrfreq": centerfreq,
             "acf": True,
             "xcf": True,  # cross-correlation processing
             "acfint": True,  # interferometer acfs
@@ -70,8 +70,8 @@ class NormalSound(ExperimentPrototype):
                 "rx_beam_order": sounding_beams,
                 "scanbound": sounding_scanbound,
                 "freq": freq,
-                "txctrfreq": centerfreq,
-                "rxctrfreq": centerfreq,
+                #"txctrfreq": centerfreq,
+                #"rxctrfreq": centerfreq,
                 "acf": True,
                 "xcf": True,  # cross-correlation processing
                 "acfint": True,  # interferometer acfs
