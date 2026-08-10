@@ -66,24 +66,35 @@ if options.site_id in ["cly", "pgr"]:
     IS_REVERSE_RADAR = True
 
 # set common mode operating frequencies with a slight offset.
-if options.site_id == "sas":
-    COMMON_MODE_FREQ_1 = 10800
-    COMMON_MODE_FREQ_2 = 13000
-elif options.site_id == "pgr":
-    COMMON_MODE_FREQ_1 = 10900
-    COMMON_MODE_FREQ_2 = 13100
-elif options.site_id == "rkn":
-    COMMON_MODE_FREQ_1 = 10600
-    COMMON_MODE_FREQ_2 = 12300
-elif options.site_id == "inv":
-    COMMON_MODE_FREQ_1 = 10500
-    COMMON_MODE_FREQ_2 = 12200
-elif options.site_id == "cly":
-    COMMON_MODE_FREQ_1 = 10700
-    COMMON_MODE_FREQ_2 = 12500
-else:
-    COMMON_MODE_FREQ_1 = 10400
-    COMMON_MODE_FREQ_2 = 13200
+__default_freqs__ = {
+    "sas": {
+        "common": [10800, 13000],
+        "sounding": [9690, 10440, 11500, 12080, 13000, 14560, 15250, 16400],
+    },
+    "pgr": {
+        "common": [10900, 13150],
+        "sounding": [9730, 10480, 11120, 12120, 13040, 14600, 15300, 16440],
+    },
+    "cly": {
+        "common": [10700, 12500],
+        "sounding": [9850, 10560, 11240, 12240, 13200, 14720, 15550, 16150],
+    },
+    "rkn": {
+        "common": [10600, 12300],
+        "sounding": [9810, 10230, 11160, 12160, 13080, 14640, 15400, 16480],
+    },
+    "inv": {
+        "common": [10500, 12200],
+        "sounding": [9770, 10520, 11200, 12200, 13120, 14680, 15500, 16100],
+    },
+    "lab": {"common": [10400, 13200], "sounding": [10600, 11250, 11950, 13150]},
+    "default": {"common": [10400, 13200], "sounding": [10600, 11250, 11950, 13150]},
+}
+
+__site_freqs__ = __default_freqs__.get(options.site_id, __default_freqs__["default"])
+COMMON_MODE_FREQ_1 = __site_freqs__["common"][0]
+COMMON_MODE_FREQ_2 = __site_freqs__["common"][1]
+SOUNDING_FREQS = __site_freqs__["sounding"]
 
 
 def easy_scanbound(intt, beams):
@@ -94,21 +105,6 @@ def easy_scanbound(intt, beams):
     minute mark to reduce delay in waiting for the next scanbound.
     """
     return [i * (intt * 1e-3) for i in range(len(beams))]
-
-
-# set sounding frequencies
-if options.site_id == "sas":
-    SOUNDING_FREQS = [9690, 10500, 11000, 11700, 12400, 12900, 13150]
-elif options.site_id == "pgr":
-    SOUNDING_FREQS = [9600, 10590, 11050, 11750, 13090, 12850, 12400]
-elif options.site_id == "rkn":
-    SOUNDING_FREQS = [11100, 9600, 10500, 12350, 11800, 13090, 12850]
-elif options.site_id == "inv":
-    SOUNDING_FREQS = [11150, 9690, 12400, 10590, 11850, 12800, 13100]
-elif options.site_id == "cly":
-    SOUNDING_FREQS = [11900, 12400, 11100, 10400, 9600, 12800, 13050]
-else:
-    SOUNDING_FREQS = [10600, 11250, 11950, 13150]
 
 
 def easy_widebeam(frequency_khz, tx_antennas, antenna_locations):
