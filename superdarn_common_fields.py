@@ -66,14 +66,10 @@ INTT_MS = int(600 // config.num_beams) * 100
 __integration_time_s__ = INTT_MS / 1000.0
 
 # Set common mode operating frequencies with a slight offset.
-__site_freqs__ = config.default_freqs.get(config.site_id)
+__site_freqs__ = config.default_freqs
 if __site_freqs__ is None:
     raise ValueError(
-           f"No 'default_freqs' entry found for site_id '{config.site_id}' in config file \n"
-           )
-elif not isinstance(__site_freqs__, list):
-    raise ValueError(
-           f"'default_freqs' entry found for site_id '{config.site_id}' in config file is not a list type \n"
+           f"No 'default_freqs' entry found in config file \n"
            )
 
 COMMON_MODE_FREQ_1 = __site_freqs__["common"][0]
