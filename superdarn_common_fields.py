@@ -111,7 +111,7 @@ def easy_scanbound(intt, beams):
 STD_SCANBOUND = easy_scanbound(INTT_MS, STD_BEAM_ANGLES)
 
 _WIDEBEAM_CACHE_PATH = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "widebeam_cached_phase.json"
+        os.path.dirname(os.path.abspath(__file__)), "widebeam_cached_phases.json"
         )
 
 def _load_widebeam_cache(path):
