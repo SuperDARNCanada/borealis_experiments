@@ -65,12 +65,10 @@ class ConcurrentBistatic(ExperimentPrototype):
         kwargs:
             listen_to: str, one of the three-letter site codes. e.g. listen_to='cly'
         """
-
         common_freqs = {
-            k: v["common"] for k, v in scf.__default_freqs__.items() if k != "default"
+            k: v["common"] for k, v in scf.__default_freqs__.items()
         }
-
-        # default frequency set here
+        
         listen_to = kwargs.get(
             "listen_to", scf.config.site_id
         )  # If 'listen_to' specified, tune in to that radar

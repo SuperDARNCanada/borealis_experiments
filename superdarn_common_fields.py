@@ -65,17 +65,38 @@ else:
 INTT_MS = int(600 // config.num_beams) * 100
 __integration_time_s__ = INTT_MS / 1000.0
 
+def _load_default_freqs():
+    """
+    Load the default common-mode and sounding frequencies
+    for all configured radar sites. Searches each site 
+    configuration file in the Borealis config directory
+    and builds a dictionary, mapping each site ID.
+    """
+    config_dir = os.path.join(os.environ["BOREALISPATH"], "config")
+    default_freqs = {}
+    for site_id in os.listdir(config_dir):
+        config_path = os.path.join(
+            config_dir,
+            site_id,
+            f"{site_id}_config.ini",
+        )
+        if not os.path.isfile(config_path):
+            continue
+        with open(config_path, "r") as f:
+            site_config = json.load(f)
+        if "default_freqs" not in site_config:
+            continue
+        default_freqs[site_config["site_id"]] = site_config["default_freqs"]
+    return default_freqs
+
+__default_freqs__ = _load_default_freqs()
+
 # Set common mode operating frequencies with a slight offset.
-__site_freqs__ = config.default_freqs
-if __site_freqs__ is None:
-    raise ValueError(
-           f"No 'default_freqs' entry found in config file \n"
-           )
+__site_freqs__ = __default_freqs__[config.site_id]
 
 COMMON_MODE_FREQ_1 = __site_freqs__["common"][0]
 COMMON_MODE_FREQ_2 = __site_freqs__["common"][1]
 SOUNDING_FREQS = __site_freqs__["sounding"]
-
 
 def easy_scanbound(intt, beams):
     """
@@ -95,7 +116,8 @@ _WIDEBEAM_CACHE_PATH = os.path.join(
 
 def _load_widebeam_cache(path):
     """
-    Load the cached widebeam phase values from JSON and freeze them into immutable structures.
+    Load the cached widebeam phase values from JSON
+    and freeze them into immutable structures.
     """
     with open(path, "r") as f:
         raw = json.load(f)
