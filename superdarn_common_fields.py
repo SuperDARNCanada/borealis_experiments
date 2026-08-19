@@ -89,6 +89,7 @@ def _load_default_freqs():
         default_freqs[site_config["site_id"]] = site_config["default_freqs"]
     return default_freqs
 
+# Get common mode frequencies for all configured radars. Useful for bistatic experiments.
 __default_freqs__ = _load_default_freqs()
 
 # Get common mode frequencies for the currently operating radar
