@@ -91,7 +91,7 @@ def _load_default_freqs():
 
 __default_freqs__ = _load_default_freqs()
 
-# Set common mode operating frequencies with a slight offset.
+# Get common mode frequencies for the currently operating radar
 __site_freqs__ = __default_freqs__[config.site_id]
 
 COMMON_MODE_FREQ_1 = __site_freqs__["common"][0]
