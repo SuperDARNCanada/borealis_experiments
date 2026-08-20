@@ -2,45 +2,43 @@ import numpy as np
 import json
 import os
 
+from types import MappingProxyType
 from utils.options import Options
 
 config = Options()
 
-# TODO: We should protect these values from changing, I noticed during testing that I used a
-# TODO: call to reverse() on one and it affected the rest of the testing afterwards
-
-SEQUENCE_7P = [0, 9, 12, 20, 22, 26, 27]
+SEQUENCE_7P = (0, 9, 12, 20, 22, 26, 27)
 TAU_SPACING_7P = 2400  # us
 
-SEQUENCE_8P = [0, 14, 22, 24, 27, 31, 42, 43]
+SEQUENCE_8P = (0, 14, 22, 24, 27, 31, 42, 43)
 TAU_SPACING_8P = 1500  # us
 
-STD_8P_LAG_TABLE = [
-    [0, 0],
-    [42, 43],
-    [22, 24],
-    [24, 27],
-    [27, 31],
-    [22, 27],
-    [24, 31],
-    [14, 22],
-    [22, 31],
-    [14, 24],
-    [31, 42],
-    [31, 43],
-    [14, 27],
-    [0, 14],
-    [27, 42],
-    [27, 43],
-    [14, 31],
-    [24, 42],
-    [24, 43],
-    [22, 42],
-    [22, 43],
-    [0, 22],
-    [0, 24],
-    [43, 43],
-]
+STD_8P_LAG_TABLE = (
+    (0, 0),
+    (42, 43),
+    (22, 24),
+    (24, 27),
+    (27, 31),
+    (22, 27),
+    (24, 31),
+    (14, 22),
+    (22, 31),
+    (14, 24),
+    (31, 42),
+    (31, 43),
+    (14, 27),
+    (0, 14),
+    (27, 42),
+    (27, 43),
+    (14, 31),
+    (24, 42),
+    (24, 43),
+    (22, 42),
+    (22, 43),
+    (0, 22),
+    (0, 24),
+    (43, 43),
+    )
 
 PULSE_LEN_45KM = 300  # us
 PULSE_LEN_15KM = 100  # us
@@ -48,14 +46,14 @@ PULSE_LEN_15KM = 100  # us
 STD_FIRST_RANGE = 180  # km
 STD_NUM_RANGES = config.num_ranges
 
-STD_BEAM_ANGLES = [
+STD_BEAM_ANGLES = tuple(
     config.beam_sep * (beam_dir - (config.num_beams - 1) / 2)
     for beam_dir in range(config.num_beams)
-]
+    )
 if config.scan_direction == "clockwise":
-    STD_BEAM_ORDER = [i for i in range(config.num_beams)]
+    STD_BEAM_ORDER = tuple(range(config.num_beams))
 elif config.scan_direction == "counterclockwise":
-    STD_BEAM_ORDER = list(reversed([i for i in range(config.num_beams)]))
+    STD_BEAM_ORDER = tuple(reversed(range(config.num_beams)))
 else:
     raise ValueError(
         "Unknown scan direction from config file: expected `clockwise` or `counterclockwise`"
@@ -86,8 +84,13 @@ def _load_default_freqs():
             site_config = json.load(f)
         if "default_freqs" not in site_config:
             continue
-        default_freqs[site_config["site_id"]] = site_config["default_freqs"]
-    return default_freqs
+        default_freqs[site_config["site_id"]] = MappingProxyType(
+                {
+                    mode: tuple(freqs)
+                    for mode, freqs in site_config["default_freqs"].items()
+                }
+        )
+    return MappingProxyType(default_freqs)
 
 # Get common mode frequencies for all configured radars. Useful for bistatic experiments.
 __default_freqs__ = _load_default_freqs()
@@ -106,7 +109,7 @@ def easy_scanbound(intt, beams):
     may wish to ensure that your intt * len(beams) approaches a
     minute mark to reduce delay in waiting for the next scanbound.
     """
-    return [i * (intt * 1e-3) for i in range(len(beams))]
+    return tuple(i * (intt * 1e-3) for i in range(len(beams)))
 
 
 STD_SCANBOUND = easy_scanbound(INTT_MS, STD_BEAM_ANGLES)
@@ -122,12 +125,17 @@ def _load_widebeam_cache(path):
     """
     with open(path, "r") as f:
         raw = json.load(f)
-    return {
-            int(num_antennas): {
-                int(freq_khz): tuple(phases) for freq_khz, phases in freq_map.items()
+    return MappingProxyType(
+            {
+            int(num_antennas): MappingProxyType(
+                {
+                int(freq_khz): tuple(phases)
+                for freq_khz, phases in freq_map.items()
                 }
+            )
             for num_antennas, freq_map in raw.items()
             }
+    )
 
 WIDEBEAM_CACHED_PHASES = _load_widebeam_cache(_WIDEBEAM_CACHE_PATH)
 
