@@ -98,6 +98,12 @@ __default_freqs__ = _load_default_freqs()
 # Get common mode frequencies for the currently operating radar
 __site_freqs__ = __default_freqs__[config.site_id]
 
+if len(__site_freqs__["common"]) < 2:
+    raise ValueError(
+        f"Site '{config.site_id}' must define at least two common-mode "
+        f"frequencies in 'default_freqs'. Found: {__site_freqs__['common']}"
+    )
+
 COMMON_MODE_FREQ_1 = __site_freqs__["common"][0]
 COMMON_MODE_FREQ_2 = __site_freqs__["common"][1]
 SOUNDING_FREQS = __site_freqs__["sounding"]
