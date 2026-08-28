@@ -73,7 +73,7 @@ class BistaticTest(ExperimentPrototype):
         """
 
         common_freqs = {
-            k: v["common"] for k, v in scf.__default_freqs__.items() if k != "default"
+            k: v["common"] for k, v in scf.__default_freqs__.items()
         }
 
         # default frequency set here
@@ -81,7 +81,13 @@ class BistaticTest(ExperimentPrototype):
             "listen_to", scf.config.site_id
         )  # If 'listen_to' specified, tune in to that radar
         if listen_to not in common_freqs.keys():
-            raise ValueError("Not a valid site ID: {}".format(listen_to))
+            raise ValueError(
+                f"No default frequencies available for site '{listen_to}'. "
+                f"Sites currently loaded: {sorted(common_freqs.keys())}.\n"
+                f"Frequencies are now read from each site's config file at "
+                f"$BOREALISPATH/config/<site_id>/<site_id>_config.ini, so the target site's "
+                f"config must be present on this machine and must contain a 'default_freqs' key."
+            )
 
         freq = common_freqs.get(listen_to)[0]
 
