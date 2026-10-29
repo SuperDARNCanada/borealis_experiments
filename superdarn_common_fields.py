@@ -86,6 +86,10 @@ __default_freqs__ = {
         "common": [10400, 13200],
         "sounding": [10600, 11250, 11950, 13150]
     },
+    "cyp": {
+        "common": [13680, 15820, 17500],
+        "sounding": [13750, 15350, 15750, 17500]
+    },
     "default": {
         "common": [10400, 13200],
         "sounding": [10600, 11250, 11950, 13150]
@@ -95,6 +99,7 @@ __default_freqs__ = {
 __site_freqs__ = __default_freqs__.get(config.site_id, __default_freqs__["default"])
 COMMON_MODE_FREQ_1 = __site_freqs__["common"][0]
 COMMON_MODE_FREQ_2 = __site_freqs__["common"][1]
+COMMON_MODE_FREQ_3 = __site_freqs__["common"][2]
 SOUNDING_FREQS = __site_freqs__["sounding"]
 
 
