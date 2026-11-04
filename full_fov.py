@@ -301,6 +301,7 @@ class FullFOV(ExperimentPrototype):
                 "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
                 "tx_beam_order": [0],  # only one pattern
                 "tx_antenna_pattern": scf.easy_widebeam,
+                "widetx": True,
                 "rx_antenna_pattern": rx_phase_pattern,
                 "freq": freq,  # kHz
                 "acf": True,

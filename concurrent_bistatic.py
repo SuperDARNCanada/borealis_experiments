@@ -90,6 +90,7 @@ class ConcurrentBistatic(ExperimentPrototype):
             "intt": scf.INTT_MS,  # duration of an integration, in ms
             "beam_angle": scf.STD_BEAM_ANGLES,
             "tx_antenna_pattern": scf.easy_widebeam,
+            "widetx": True,
             "tx_beam_order": [0],
             "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
             "freq": common_freqs.get(scf.config.site_id)[0],
