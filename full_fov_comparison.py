@@ -54,6 +54,7 @@ class FullFOVComparison(ExperimentPrototype):
             "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
             "tx_beam_order": [0],  # only one pattern
             "tx_antenna_pattern": scf.easy_widebeam,
+            "widetx": True,
             "freq": freq,  # kHz
             "align_sequences": True,  # align start of sequence to tenths of a second
             "scanbound": scf.easy_scanbound(scf.INTT_MS, scf.STD_BEAM_ANGLES),

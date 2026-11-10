@@ -65,6 +65,7 @@ class FullFOV15KmRange0(ExperimentPrototype):
             "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
             "tx_beam_order": [0],   # only one pattern
             "tx_antenna_pattern": scf.easy_widebeam,
+            "widetx": True,
             "freq": scf.COMMON_MODE_FREQ_1,  # kHz
             "decimation_scheme": filter_15km_mode(),
             "acf": True,

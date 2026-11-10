@@ -55,6 +55,7 @@ class FullFOVComparison(ExperimentPrototype):
             "rx_beam_order": [[i for i in range(len(scf.STD_BEAM_ANGLES))]],
             "tx_beam_order": [0],  # only one pattern
             "tx_antenna_pattern": scf.easy_widebeam,
+            "widetx": True,
             "freq": freq,  # kHz
             "align_sequences": True,  # align start of sequence to tenths of a second
             "scanbound": STD_SCANBOUND,
@@ -63,6 +64,7 @@ class FullFOVComparison(ExperimentPrototype):
 
         slice_1 = copy.deepcopy(slice_0)
         slice_1["tx_antenna_pattern"] = boresight
+        slice_1["widetx"] = False  # boresight is a narrow beam
 
         self.add_slice(slice_0)
         self.add_slice(slice_1, interfacing_dict={0: "AVEPERIOD"})

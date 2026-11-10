@@ -129,6 +129,7 @@ class BistaticTest(ExperimentPrototype):
             else:
                 tx_beam_order = [0]
                 slice_0["tx_antenna_pattern"] = scf.easy_widebeam
+                slice_0["widetx"] = True
                 comment_str = "Widebeam transmission"
 
             slice_0["tx_beam_order"] = tx_beam_order
@@ -146,6 +147,7 @@ class BistaticTest(ExperimentPrototype):
 
         else:
             slice_0["rx_beam_order"] = [[i for i in range(len(scf.STD_BEAM_ANGLES))]]
+            slice_0["widetx"] = True
             comment_str = "Bistatic widebeam mode - listening to {}".format(listen_to)
 
         super().__init__(comment_string=comment_str)
